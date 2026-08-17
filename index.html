@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第十三届中国教育创新年会 · 预览版</title>
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-deep:#EFEAE0;
+    --ink:#17160F;
+    --ink-soft:#4A4739;
+    --line:rgba(23,22,15,.12);
+    --blue:#2743E0;
+    --blue-deep:#1B30AC;
+    --coral:#FF4B2A;
+    --gold:#C99B3F;
+    --green:#1F9D66;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+    background:var(--paper);color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .serif{font-family:"Songti SC","STSong","Noto Serif SC",serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  section{padding:96px 0;}
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:.18em;font-weight:600;color:var(--blue);
+    text-transform:uppercase;margin-bottom:18px;
+  }
+  .kicker::before{content:"";width:26px;height:2px;background:var(--blue);}
+  h2.sec-title{font-size:clamp(30px,4vw,44px);line-height:1.2;font-weight:800;letter-spacing:-.01em;margin-bottom:14px;}
+  .sec-desc{color:var(--ink-soft);font-size:16px;line-height:1.8;max-width:640px;}
+  .badge-preview{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:var(--ink);color:#F6F3EC;text-align:center;
+    font-size:12px;letter-spacing:.08em;padding:7px 12px;
+  }
+  .badge-preview b{color:var(--gold);font-weight:600;}
+
+  /* ===== Nav ===== */
+  nav{
+    position:sticky;top:30px;z-index:100;
+    background:rgba(246,243,236,.86);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:1180px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:26px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;white-space:nowrap;}
+  .logo-mark{width:30px;height:30px;border-radius:9px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;}
+  .nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+  .nav-links a{
+    color:var(--ink-soft);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:10px;
+    transition:.2s;
+  }
+  .nav-links a:hover{background:rgba(39,67,224,.08);color:var(--blue);}
+  .nav-cta{
+    background:var(--ink);color:#fff !important;border-radius:999px !important;
+    padding:9px 20px !important;font-weight:600;
+  }
+  .nav-cta:hover{background:var(--blue) !important;}
+  @media(max-width:900px){.nav-links a:not(.nav-cta){display:none;}}
+
+  /* ===== Hero ===== */
+  .hero{
+    background:var(--ink);color:#F6F3EC;
+    padding:120px 0 90px;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(620px 420px at 82% 8%, rgba(39,67,224,.5), transparent 65%),
+      radial-gradient(520px 380px at 8% 88%, rgba(255,75,42,.32), transparent 65%);
+  }
+  .hero-grid-lines{
+    position:absolute;inset:0;opacity:.14;
+    background-image:linear-gradient(rgba(246,243,236,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(246,243,236,.25) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse at 50% 40%,black 30%,transparent 75%);
+  }
+  .hero .wrap{position:relative;}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.22em;
+    color:rgba(246,243,236,.75);border:1px solid rgba(246,243,236,.25);
+    padding:8px 18px;border-radius:999px;margin-bottom:34px;
+  }
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .hero h1{
+    font-size:clamp(42px,7.2vw,86px);line-height:1.08;font-weight:900;letter-spacing:-.02em;
+  }
+  .hero h1 .no{color:var(--gold);}
+  .hero-theme{
+    margin-top:22px;font-size:clamp(18px,2.4vw,26px);color:rgba(246,243,236,.82);
+    font-weight:400;
+  }
+  .hero-theme em{font-style:normal;color:#fff;border-bottom:2px solid var(--coral);padding-bottom:2px;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;}
+  .hero-meta .chip{
+    border:1px solid rgba(246,243,236,.28);border-radius:12px;padding:12px 20px;
+    font-size:14px;color:rgba(246,243,236,.85);display:flex;align-items:center;gap:9px;
+  }
+  .hero-meta .chip svg{flex:none;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    font-size:15px;font-weight:600;padding:15px 32px;border-radius:999px;transition:.22s;border:none;cursor:pointer;
+  }
+  .btn-primary{background:var(--coral);color:#fff;}
+  .btn-primary:hover{background:#e03c1e;transform:translateY(-2px);}
+  .btn-ghost{border:1px solid rgba(246,243,236,.4);color:#F6F3EC;background:transparent;}
+  .btn-ghost:hover{border-color:#fff;background:rgba(246,243,236,.08);}
+  .btn-dark{background:var(--ink);color:#fff;}
+  .btn-dark:hover{background:var(--blue);}
+  .countdown{display:flex;gap:12px;margin-top:52px;flex-wrap:wrap;}
+  .cd-cell{
+    min-width:88px;text-align:center;border:1px solid rgba(246,243,236,.2);
+    border-radius:14px;padding:14px 10px;background:rgba(246,243,236,.05);
+  }
+  .cd-cell b{display:block;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;}
+  .cd-cell span{font-size:12px;color:rgba(246,243,236,.6);letter-spacing:.12em;}
+
+  .marquee{
+    background:var(--blue);color:#fff;overflow:hidden;padding:14px 0;
+    white-space:nowrap;
+  }
+  .marquee-track{display:inline-flex;gap:56px;animation:scroll 28s linear infinite;font-size:14px;letter-spacing:.14em;font-weight:600;}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ===== Stats ===== */
+  .stats{background:var(--paper-deep);padding:64px 0;}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .stat b{font-size:clamp(30px,3.6vw,44px);font-weight:900;display:block;letter-spacing:-.02em;}
+  .stat b i{font-style:normal;color:var(--blue);}
+  .stat span{color:var(--ink-soft);font-size:14px;margin-top:6px;display:block;}
+  @media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* ===== About ===== */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{color:var(--ink-soft);line-height:2;font-size:16px;margin-bottom:18px;}
+  .about-text p b{color:var(--ink);}
+  .feature-list{display:grid;gap:14px;}
+  .feature-item{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .feature-item .ico{
+    width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;
+    background:rgba(39,67,224,.1);color:var(--blue);
+  }
+  .feature-item h4{font-size:16px;margin-bottom:4px;}
+  .feature-item p{font-size:13.5px;color:var(--ink-soft);line-height:1.7;}
+
+  /* ===== Tickets ===== */
+  .tickets{background:var(--ink);color:#F6F3EC;}
+  .tickets .kicker{color:var(--gold);}
+  .tickets .kicker::before{background:var(--gold);}
+  .tickets .sec-desc{color:rgba(246,243,236,.66);}
+  .ticket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;}
+  @media(max-width:900px){.ticket-grid{grid-template-columns:1fr;}}
+  .ticket{
+    border:1px solid rgba(246,243,236,.16);border-radius:22px;padding:34px 30px;
+    background:rgba(246,243,236,.045);position:relative;display:flex;flex-direction:column;
+    transition:.25s;
+  }
+  .ticket:hover{transform:translateY(-6px);border-color:rgba(246,243,236,.4);}
+  .ticket.hot{background:linear-gradient(160deg,rgba(39,67,224,.35),rgba(39,67,224,.12));border-color:rgba(120,145,255,.55);}
+  .ticket .tag{
+    position:absolute;top:-13px;left:28px;background:var(--coral);color:#fff;
+    font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;letter-spacing:.06em;
+  }
+  .ticket h3{font-size:21px;margin-bottom:6px;}
+  .ticket .price{font-size:40px;font-weight:900;margin:14px 0 4px;letter-spacing:-.02em;}
+  .ticket .price small{font-size:15px;font-weight:500;color:rgba(246,243,236,.6);}
+  .ticket ul{list-style:none;margin:22px 0 28px;display:grid;gap:11px;flex:1;}
+  .ticket li{display:flex;gap:9px;font-size:14px;color:rgba(246,243,236,.85);line-height:1.55;}
+  .ticket li svg{flex:none;margin-top:3px;}
+  .ticket li.no{color:rgba(246,243,236,.42);}
+  .ticket .btn{justify-content:center;}
+  .ticket-note{margin-top:26px;font-size:13px;color:rgba(246,243,236,.5);line-height:1.8;}
+  .access-strip{
+    margin-top:46px;border:1px dashed rgba(246,243,236,.3);border-radius:16px;
+    padding:22px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+    font-size:14px;color:rgba(246,243,236,.78);
+  }
+  .access-strip .pill{
+    border-radius:999px;padding:6px 16px;font-size:13px;font-weight:600;
+  }
+  .pill-a{background:rgba(255,75,42,.2);color:#FF8A70;}
+  .pill-b{background:rgba(39,67,224,.3);color:#9AABFF;}
+  .pill-c{background:rgba(201,155,63,.22);color:#E4C782;}
+
+  /* ===== Agenda ===== */
+  .tabs{display:flex;gap:10px;margin:40px 0 30px;flex-wrap:wrap;}
+  .tab{
+    border:1px solid var(--line);background:#fff;border-radius:999px;padding:11px 24px;
+    font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.2s;
+  }
+  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .agenda-panel{display:none;}
+  .agenda-panel.active{display:block;animation:fade .35s;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .agenda-item{
+    display:grid;grid-template-columns:130px 1fr;gap:26px;padding:26px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .agenda-item .time{font-weight:800;font-size:15px;color:var(--blue);font-variant-numeric:tabular-nums;}
+  .agenda-item h4{font-size:18px;margin-bottom:6px;}
+  .agenda-item p{font-size:14px;color:var(--ink-soft);line-height:1.7;}
+  .agenda-item .label{
+    display:inline-block;font-size:12px;font-weight:600;border-radius:6px;padding:3px 10px;
+    margin-right:8px;margin-bottom:8px;
+  }
+  .label-main{background:rgba(39,67,224,.1);color:var(--blue);}
+  .label-deep{background:rgba(255,75,42,.12);color:var(--coral);}
+  .label-expo{background:rgba(31,157,102,.12);color:var(--green);}
+  .agenda-hint{
+    margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:18px 24px;font-size:14px;color:var(--ink-soft);display:flex;gap:12px;align-items:center;
+  }
+  @media(max-width:640px){.agenda-item{grid-template-columns:1fr;gap:8px;}}
+
+  /* ===== Guests ===== */
+  .guests{background:var(--paper-deep);}
+  .guest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px;}
+  @media(max-width:900px){.guest-grid{grid-template-columns:repeat(2,1fr);}}
+  .guest-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    transition:.25s;
+  }
+  .guest-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(23,22,15,.1);}
+  .guest-avatar{
+    aspect-ratio:1/1;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 100%);color:#fff;
+    font-size:40px;font-weight:800;
+  }
+  .guest-card:nth-child(2n) .guest-avatar{background:linear-gradient(135deg,#FF4B2A,#C93317);}
+  .guest-card:nth-child(3n) .guest-avatar{background:linear-gradient(135deg,#C99B3F,#9A7524);}
+  .guest-info{padding:16px 18px;}
+  .guest-info h4{font-size:16px;}
+  .guest-info p{font-size:12.5px;color:var(--ink-soft);margin-top:4px;line-height:1.6;}
+  .guests-more{
+    margin-top:34px;text-align:center;color:var(--ink-soft);font-size:14px;
+  }
+
+  /* ===== Deep courses ===== */
+  .deep-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:48px;}
+  @media(max-width:860px){.deep-grid{grid-template-columns:1fr;}}
+  .deep-card{
+    border-radius:22px;padding:36px 32px;color:#fff;position:relative;overflow:hidden;
+  }
+  .deep-card.in{background:linear-gradient(150deg,#2743E0,#16236e);}
+  .deep-card.out{background:linear-gradient(150deg,#FF4B2A,#8f1f0a);}
+  .deep-card h3{font-size:24px;margin-bottom:8px;}
+  .deep-card .sub{font-size:14px;opacity:.8;margin-bottom:22px;}
+  .deep-card ul{list-style:none;display:grid;gap:10px;font-size:14px;}
+  .deep-card li{display:flex;gap:9px;line-height:1.6;opacity:.92;}
+  .deep-card li svg{flex:none;margin-top:3px;}
+  .rules{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:860px){.rules{grid-template-columns:1fr;}}
+  .rule{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;
+  }
+  .rule b{display:block;font-size:15px;margin-bottom:8px;}
+  .rule p{font-size:13.5px;color:var(--ink-soft);line-height:1.75;}
+  .rule .num{
+    font-size:13px;font-weight:800;color:var(--coral);letter-spacing:.1em;display:block;margin-bottom:10px;
+  }
+
+  /* ===== Learning map ===== */
+  .lmap{background:var(--ink);color:#F6F3EC;}
+  .lmap .kicker{color:var(--gold);}.lmap .kicker::before{background:var(--gold);}
+  .lmap .sec-desc{color:rgba(246,243,236,.66);}
+  .lmap-toggle{display:flex;gap:12px;margin:44px 0 34px;flex-wrap:wrap;}
+  .lmap-btn{
+    border:1px solid rgba(246,243,236,.3);background:transparent;color:rgba(246,243,236,.8);
+    border-radius:999px;padding:12px 26px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.2s;
+  }
+  .lmap-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
+  .route-panel{display:none;}
+  .route-panel.active{display:block;animation:fade .35s;}
+  .route-line{position:relative;padding-left:34px;display:grid;gap:26px;}
+  .route-line::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:rgba(246,243,236,.2);}
+  .route-stop{position:relative;}
+  .route-stop::before{
+    content:"";position:absolute;left:-32px;top:4px;width:14px;height:14px;border-radius:50%;
+    background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold);
+  }
+  .route-stop h4{font-size:17px;margin-bottom:5px;}
+  .route-stop h4 .lab{
+    font-size:11.5px;background:rgba(246,243,236,.14);border-radius:6px;padding:2.5px 9px;
+    margin-right:9px;font-weight:600;vertical-align:2px;
+  }
+  .route-stop p{font-size:13.5px;color:rgba(246,243,236,.62);line-height:1.7;}
+  .route-why{
+    margin-top:36px;border:1px solid rgba(246,243,236,.18);border-radius:14px;padding:18px 24px;
+    font-size:13.5px;color:rgba(246,243,236,.66);line-height:1.8;background:rgba(246,243,236,.04);
+  }
+  .route-why b{color:var(--gold);}
+
+  /* ===== Passport ===== */
+  .passport-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;}
+  @media(max-width:900px){.passport-grid{grid-template-columns:1fr;}}
+  .phone{
+    width:300px;margin:0 auto;background:var(--ink);border-radius:38px;padding:12px;
+    box-shadow:0 30px 70px rgba(23,22,15,.25);
+  }
+  .phone-screen{background:#fff;border-radius:28px;overflow:hidden;min-height:520px;}
+  .ph-head{background:linear-gradient(140deg,var(--blue),var(--blue-deep));color:#fff;padding:26px 22px 20px;}
+  .ph-head .t{font-size:12px;opacity:.75;letter-spacing:.14em;}
+  .ph-head h4{font-size:19px;margin-top:5px;}
+  .ph-head .coins{margin-top:14px;background:rgba(255,255,255,.14);border-radius:12px;padding:10px 14px;font-size:13px;display:flex;justify-content:space-between;align-items:center;}
+  .ph-head .coins b{font-size:19px;}
+  .ph-body{padding:18px 20px;display:grid;gap:12px;}
+  .ph-task{
+    border:1px solid var(--line);border-radius:14px;padding:13px 15px;display:flex;gap:12px;align-items:center;
+  }
+  .ph-task .badge{
+    width:38px;height:38px;flex:none;border-radius:11px;display:grid;place-items:center;
+    font-size:13px;font-weight:800;color:#fff;
+  }
+  .b-si{background:#2743E0;}.b-de{background:#FF4B2A;}.b-yu{background:#C99B3F;}.b-po{background:#1F9D66;}
+  .ph-task h5{font-size:14px;}
+  .ph-task p{font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+  .ph-task .coin{margin-left:auto;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap;}
+  .ph-record{display:flex;gap:8px;}
+  .ph-record span{
+    flex:1;text-align:center;font-size:11.5px;border:1px dashed var(--line);border-radius:10px;
+    padding:9px 4px;color:var(--ink-soft);
+  }
+  .passport-feats{display:grid;gap:18px;margin-top:36px;}
+  .pf{display:flex;gap:16px;align-items:flex-start;}
+  .pf .n{
+    width:34px;height:34px;flex:none;border-radius:10px;background:var(--ink);color:#fff;
+    display:grid;place-items:center;font-size:14px;font-weight:800;
+  }
+  .pf h4{font-size:16.5px;margin-bottom:5px;}
+  .pf p{font-size:14px;color:var(--ink-soft);line-height:1.75;}
+
+  /* ===== Expo ===== */
+  .expo{background:var(--paper-deep);}
+  .expo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+  @media(max-width:860px){.expo-grid{grid-template-columns:1fr;}}
+  .expo-card{
+    background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 28px;
+  }
+  .expo-card .ico{
+    width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+    background:rgba(255,75,42,.1);color:var(--coral);
+  }
+  .expo-card h4{font-size:18px;margin-bottom:8px;}
+  .expo-card p{font-size:14px;color:var(--ink-soft);line-height:1.8;}
+  .expo-card .mini{margin-top:16px;font-size:12.5px;color:var(--blue);font-weight:600;}
+
+  /* ===== Account / one-key ===== */
+  .acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+  @media(max-width:900px){.acct-grid{grid-template-columns:1fr;}}
+  .query-panel{
+    background:var(--ink);border-radius:24px;padding:30px;color:#F6F3EC;
+  }
+  .query-panel .qp-head{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .query-panel .qp-head .ava{
+    width:44px;height:44px;border-radius:50%;background:var(--blue);display:grid;place-items:center;
+    font-weight:800;
+  }
+  .query-panel .qp-head p{font-size:12.5px;color:rgba(246,243,236,.6);}
+  .query-item{
+    display:flex;align-items:center;gap:13px;padding:15px 4px;
+    border-bottom:1px solid rgba(246,243,236,.12);font-size:14.5px;
+  }
+  .query-item:last-child{border-bottom:none;}
+  .query-item svg{color:var(--gold);flex:none;}
+  .query-item .st{margin-left:auto;font-size:12px;color:rgba(246,243,236,.55);}
+  .acct-feats{display:grid;gap:14px;}
+  .swap-box{
+    margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .swap-box h4{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+  .swap-box ul{list-style:none;display:grid;gap:9px;font-size:13.5px;color:var(--ink-soft);}
+  .swap-box li{display:flex;gap:9px;line-height:1.65;}
+  .swap-box li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);flex:none;margin-top:8px;}
+
+  /* ===== History ===== */
+  .history{background:var(--ink);color:#F6F3EC;}
+  .history .kicker{color:var(--gold);}.history .kicker::before{background:var(--gold);}
+  .history .sec-desc{color:rgba(246,243,236,.6);}
+  .hist-cities{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;}
+  .hist-cities span{
+    border:1px solid rgba(246,243,236,.25);border-radius:999px;padding:9px 20px;font-size:13.5px;
+    color:rgba(246,243,236,.8);
+  }
+  .hist-quote{
+    margin-top:44px;font-size:clamp(19px,2.6vw,27px);line-height:1.6;font-weight:600;
+    max-width:760px;
+  }
+  .hist-quote i{font-style:normal;color:var(--gold);}
+
+  /* ===== Footer ===== */
+  footer{background:#0d0c07;color:rgba(246,243,236,.65);padding:64px 0 40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;}}
+  footer h4{color:#F6F3EC;font-size:15px;margin-bottom:16px;}
+  footer p,footer a{font-size:13.5px;line-height:2;color:rgba(246,243,236,.6);text-decoration:none;display:block;}
+  footer a:hover{color:#fff;}
+  .foot-logo{display:flex;align-items:center;gap:10px;color:#F6F3EC;font-weight:800;font-size:16px;margin-bottom:14px;}
+  .copyright{margin-top:48px;padding-top:22px;border-top:1px solid rgba(246,243,236,.12);font-size:12.5px;text-align:center;color:rgba(246,243,236,.4);}
+</style>
+</head>
+<body>
+
+<div class="badge-preview"><b>预览版</b> · 本页面为第十三届年会官网设计预览，议程、嘉宾、票价等信息以最终官宣及业务配置为准</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-mark">13</span>中国教育创新年会</div>
+    <div class="nav-links">
+      <a href="#about">大会概况</a>
+      <a href="#tickets">票种权益</a>
+      <a href="#agenda">大会议程</a>
+      <a href="#guests">嘉宾</a>
+      <a href="#deep">深研课</a>
+      <a href="#map">学习地图</a>
+      <a href="#passport">学习护照</a>
+      <a href="#expo">方案展</a>
+      <a href="#account">个人中心</a>
+      <a href="#tickets" class="nav-cta">立即报名</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-grid-lines"></div>
+  <div class="wrap">
+    <div class="hero-eyebrow"><span class="dot"></span>报名通道现已开启 · 中国基础教育年度风向标</div>
+    <h1 class="serif">第<span class="no">十三</span>届<br>中国教育创新年会</h1>
+    <p class="hero-theme">一年一度，与<em>5000+</em>教育人共同回答：下一代学校，何去何从</p>
+    <div class="hero-meta">
+      <div class="chip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        2026年12月1日 开幕
+      </div>
+      <div class="chip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        举办城市 · 待官宣
+      </div>
+      <div class="chip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        主办 · 蒲公英教育智库
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#tickets">立即报名参会
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#map">查看我的学习地图</a>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="cd-cell"><b id="cd-d">--</b><span>天</span></div>
+      <div class="cd-cell"><b id="cd-h">--</b><span>时</span></div>
+      <div class="cd-cell"><b id="cd-m">--</b><span>分</span></div>
+      <div class="cd-cell"><b id="cd-s">--</b><span>秒</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>主论坛 MAIN FORUM</span><span>深研课 DEEP COURSES</span><span>方案展 EXPO</span><span>学习地图 LEARNING MAP</span><span>学习护照 PASSPORT</span><span>AI 共创站 AI STUDIO</span><span>未来币 FUTURE COIN</span>
+    <span>主论坛 MAIN FORUM</span><span>深研课 DEEP COURSES</span><span>方案展 EXPO</span><span>学习地图 LEARNING MAP</span><span>学习护照 PASSPORT</span><span>AI 共创站 AI STUDIO</span><span>未来币 FUTURE COIN</span>
+  </div>
+</div>
+
+<!-- ================= STATS ================= -->
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat"><b>2014<i>年</i></b><span>年会起始，连续举办十二届</span></div>
+    <div class="stat"><b>5000<i>+</i></b><span>每年现场参会人数</span></div>
+    <div class="stat"><b>200<i>+</i></b><span>覆盖城市</span></div>
+    <div class="stat"><b>200万<i>+</i></b><span>在线观看人数</span></div>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <div class="kicker">ABOUT · 大会概况</div>
+      <h2 class="sec-title">一届年会，<br>一次完整的“入学”体验</h2>
+      <p>由蒲公英教育智库发起的中国教育创新年会，被誉为<b>“中国基础教育年度风向标”</b>。自2014年起，分别在重庆、上海、杭州、南京、成都、深圳、厦门等城市连续举办十二届。</p>
+      <p>今年，年会完成一次重要升级：你拿到的不只是一张门票，而是<b>一个贯穿会前、现场与会后的统一账号</b>——报名、自评、学习地图、走班选课、现场打卡、方案展消费、会后学习报告，全部在一个平台完成。</p>
+      <p>参加年会的对象，从国内外中小学书记/校长、管理团队、教研骨干，到全球教育创新先锋及不同特质的教育人。第十三届，我们继续把中国基础教育界最具现场感的年度盛会，办成<b>一次真正“学有所得”的深度学习旅程</b>。</p>
+    </div>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></div>
+        <div><h4>一个账号，全程通用</h4><p>手机号即唯一身份。登录后自动关联你的学校信息、发票信息、酒店信息和全部订单，无需重复填写。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.5-5.5a2.1 2.1 0 0 1 3-3L9 14l8.5-8.5a2.1 2.1 0 0 1 3 3L9 20z"/></svg></div>
+        <div><h4>先自评，再生成学习地图</h4><p>报名缴费后完成自评问卷，系统依据你的画像生成个性化参会线路；未自评也能按官方推荐线路逛会。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
+        <div><h4>学习护照，记录沉淀为报告</h4><p>现场用文字、照片、语音随时记录，完成“所思、所得、所遇、所破”四维打卡任务，会后自动生成个人学习报告。</p></div>
+      </div>
+      <div class="feature-item">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div><h4>未来币，现场学习的硬通货</h4><p>打卡、逛展赚未来币，在方案展市集兑换教育产品与方案，让学习成果直接“可带走”。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TICKETS ================= -->
+<section id="tickets" class="tickets">
+  <div class="wrap">
+    <div class="kicker">TICKETS · 票种权益</div>
+    <h2 class="sec-title">三类票种，权益一目了然</h2>
+    <p class="sec-desc">本届年会实行票种分级与展厅门禁联动：你的参会牌颜色即通行权限。购票前请确认各票种可进入的区域。</p>
+
+    <div class="ticket-grid">
+      <div class="ticket">
+        <h3>独立方案展票</h3>
+        <div class="price">¥300<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展展厅通行（1号展厅）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含深研课选课资格</li>
+        </ul>
+        <a class="btn btn-ghost" href="#account">购买方案展票</a>
+      </div>
+
+      <div class="ticket hot">
+        <div class="tag">大多数参会者选择</div>
+        <h3>主论坛票</h3>
+        <div class="price">¥2800<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛全程参会（含选座）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展通行权益（1号展厅）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场内深研课选课资格（随票自动获得）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习地图 + 学习护照全部功能</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报场外深研课</li>
+        </ul>
+        <a class="btn btn-primary" href="#account">报名主论坛</a>
+      </div>
+
+      <div class="ticket">
+        <h3>主论坛＋深研课票</h3>
+        <div class="price">¥2900<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛票全部权益</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课权益一份（直接选课，无需重复付款）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛结束后一天的小场域深度学习</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>付费后支持一次换课</li>
+        </ul>
+        <a class="btn btn-ghost" href="#deep">了解组合票</a>
+      </div>
+    </div>
+
+    <div class="access-strip">
+      <b>门禁对照</b>
+      <span class="pill pill-a">独立方案展票 → 1号展厅</span>
+      <span class="pill pill-b">主论坛票 / 组合票 → 1号 + 2号展厅</span>
+      <span class="pill pill-c">参会牌颜色即权限 · 两道门禁现场核验</span>
+    </div>
+    <p class="ticket-note">* 各票种价格、退款规则、参会牌及门禁识别方式以最终业务配置为准。主论坛票及组合票均包含方案展通行权益；仅购买独立方案展票的参会人不可进入主论坛。</p>
+  </div>
+</section>
+
+<!-- ================= AGENDA ================= -->
+<section id="agenda">
+  <div class="wrap">
+    <div class="kicker">AGENDA · 大会议程</div>
+    <h2 class="sec-title">四天，从主论坛到深度研学</h2>
+    <p class="sec-desc">完整议程陆续发布中。以下为日程框架预览，具体场次、嘉宾与时间以官网最终公布为准。</p>
+
+    <div class="tabs">
+      <button class="tab active" data-day="d0">11月30日 · 报到</button>
+      <button class="tab" data-day="d1">12月1日 · 主论坛</button>
+      <button class="tab" data-day="d2">12月2日 · 主论坛</button>
+      <button class="tab" data-day="d3">12月3日 · 主论坛</button>
+      <button class="tab" data-day="d4">12月4日 · 场外深研课</button>
+    </div>
+
+    <div class="agenda-panel active" id="d0">
+      <div class="agenda-item"><div class="time">10:00–20:00</div><div><span class="label label-main">报到</span><h4>参会签到 · 领取参会牌与学习手册</h4><p>现场完成签到。符合本届赠送条件的特定参会人，签到成功后将自动获得未来币，可在个人中心查看明细。</p></div></div>
+      <div class="agenda-item"><div class="time">全天</div><div><span class="label label-expo">方案展</span><h4>方案展预展开放</h4><p>提前逛展，扫码收藏感兴趣的方案，完成打卡任务赢取未来币。</p></div></div>
+    </div>
+    <div class="agenda-panel" id="d1">
+      <div class="agenda-item"><div class="time">09:00–12:00</div><div><span class="label label-main">主论坛</span><h4>开幕式 · 年度主题演讲</h4><p>年度教育风向标发布，外籍嘉宾演讲配 AI 实时字幕（覆盖现场三个大屏）。</p></div></div>
+      <div class="agenda-item"><div class="time">14:00–17:30</div><div><span class="label label-main">主论坛</span><h4>主题报告 · 嘉宾对话</h4><p>每位嘉宾演讲结束页展示二维码，扫码即可投票与追问，每日筛选高频问题现场回应。</p></div></div>
+      <div class="agenda-item"><div class="time">全天</div><div><span class="label label-expo">方案展</span><span class="label label-deep">场内深研课</span><h4>方案展全天开放 · 场内深研课穿插进行</h4><p>持主论坛票可按学习地图推荐路径走班学习，展位扫码进入 AI 共创站体验。</p></div></div>
+    </div>
+    <div class="agenda-panel" id="d2">
+      <div class="agenda-item"><div class="time">09:00–17:30</div><div><span class="label label-main">主论坛</span><h4>分主题论坛日</h4><p>围绕自评问卷中校长们最关心的真实问题设置议题，“问题接力”征集中的高频痛点将在这里被集中回应。</p></div></div>
+      <div class="agenda-item"><div class="time">全天</div><div><span class="label label-expo">方案展</span><h4>方案展 · 数据大屏实时呈现</h4><p>展位扫码热力值、问题墙上屏展示，跟着全场热度找到最值得看的方案。</p></div></div>
+    </div>
+    <div class="agenda-panel" id="d3">
+      <div class="agenda-item"><div class="time">09:00–12:00</div><div><span class="label label-main">主论坛</span><h4>闭幕论坛 · 下一代学校画像发布</h4><p>基于嘉宾对话观点与会前素材，经审核的“下一代学校画像”视觉内容现场发布。</p></div></div>
+      <div class="agenda-item"><div class="time">14:00–16:00</div><div><span class="label label-main">主论坛</span><h4>100天行动计划启动</h4><p>带着你的学习记录与学校问题，在 AI 共创站生成可持续跟进的100天行动计划。</p></div></div>
+    </div>
+    <div class="agenda-panel" id="d4">
+      <div class="agenda-item"><div class="time">全天</div><div><span class="label label-deep">场外深研课</span><h4>场外深研课 · 小场域深度交流</h4><p>持“主论坛＋深研课”票或单独购买场外深研课的参会人，前往所选深研课学校/场地参加全天深度学习。</p></div></div>
+    </div>
+
+    <div class="agenda-hint">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2743E0" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg>
+      以上为框架性日程预览，具体日期段与场次安排以最终官宣为准。
+    </div>
+  </div>
+</section>
+
+<!-- ================= GUESTS ================= -->
+<section id="guests" class="guests">
+  <div class="wrap">
+    <div class="kicker">SPEAKERS · 大会嘉宾</div>
+    <h2 class="sec-title">嘉宾阵容，陆续揭晓</h2>
+    <p class="sec-desc">全球教育创新先锋、一线中小学书记/校长、跨界思想者——第十三届嘉宾名单正在确认中。</p>
+    <div class="guest-grid">
+      <div class="guest-card"><div class="guest-avatar serif">?</div><div class="guest-info"><h4>年度主题演讲嘉宾</h4><p>教育思想引领者 · 待官宣</p></div></div>
+      <div class="guest-card"><div class="guest-avatar serif">?</div><div class="guest-info"><h4>国际创新教育嘉宾</h4><p>海外学校变革实践者 · 待官宣</p></div></div>
+      <div class="guest-card"><div class="guest-avatar serif">?</div><div class="guest-info"><h4>一线校长代表</h4><p>中小学书记/校长 · 待官宣</p></div></div>
+      <div class="guest-card"><div class="guest-avatar serif">?</div><div class="guest-info"><h4>跨界对话嘉宾</h4><p>科技 / 人文 / 设计领域 · 待官宣</p></div></div>
+    </div>
+    <p class="guests-more">往届嘉宾视频与精彩回顾可在「历届回顾」中查看 —— 嘉宾阵容公布后，本页将支持按日期、场次检索并关联学习护照记录。</p>
+  </div>
+</section>
+
+<!-- ================= DEEP COURSES ================= -->
+<section id="deep">
+  <div class="wrap">
+    <div class="kicker">DEEP COURSES · 深研课</div>
+    <h2 class="sec-title">走班选课，把学习做到深处</h2>
+    <p class="sec-desc">深研课是年会的延伸学习板块，分「场内」与「场外」两类。每位参会人最多选择一门课程，一人一课。</p>
+
+    <div class="deep-grid">
+      <div class="deep-card in">
+        <h3>场内深研课</h3>
+        <p class="sub">主论坛期间 · 小场域深度交流</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>主论坛订单付款成功后，自动获得一份场内选课资格，无需另外付费</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>付费前可随时更改所选课程；付费后取消须另选一门，不限重选次数</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>围绕主论坛议题展开小组深度研讨</li>
+        </ul>
+      </div>
+      <div class="deep-card out">
+        <h3>场外深研课</h3>
+        <p class="sub">主论坛结束后一天 · 走进学校/机构深度学习</p>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>组合票参会人直接获得一份权益，选定课程即占名额</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>仅报名主论坛的参会人，可单独选购一门课程</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>付费后支持换课一次：须先选定有名额的新课程，原课程名额自动释放</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rules">
+      <div class="rule">
+        <span class="num">RULE 01</span>
+        <b>开放提醒，不错过选课</b>
+        <p>深研课“走班选课”通道预计11月初开放（晚于主论坛报名）。报名完成页与个人中心均保留入口，开放后系统内通知 + 短信提醒已报名参会人。</p>
+      </div>
+      <div class="rule">
+        <span class="num">RULE 02</span>
+        <b>下单人可代选课</b>
+        <p>下单人用本人手机号登录，可为订单中的每位参会人逐人代选课程、代为购买；参会人登录后也可自行查看与调整，以最后一次操作为准。</p>
+      </div>
+      <div class="rule">
+        <span class="num">RULE 03</span>
+        <b>7天无理由退款</b>
+        <p>选课缴费后7天内（且在选课通道关闭截止日前）可在个人中心申请退款；超过期限不予退还，可选择更换参会人。发票信息默认沿用年会报名信息。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEARNING MAP ================= -->
+<section id="map" class="lmap">
+  <div class="wrap">
+    <div class="kicker">LEARNING MAP · 学习地图</div>
+    <h2 class="sec-title">5000人的年会，你的线路只属于你</h2>
+    <p class="sec-desc">报名缴费并登录后即可查看学习地图。完成自评问卷，系统依据你的学校画像与核心问题生成个性化线路；未自评也能按官方推荐线路出发。线路内容自动匹配你的票种权限。</p>
+
+    <div class="lmap-toggle">
+      <button class="lmap-btn" data-route="official">我还没自评 · 看官方推荐线路</button>
+      <button class="lmap-btn active" data-route="personal">我已完成自评 · 看个性化线路</button>
+    </div>
+
+    <div class="route-panel" id="official">
+      <div class="route-line">
+        <div class="route-stop"><h4><span class="lab">DAY 1</span>开幕式 · 年度主题演讲</h4><p>全员必修：把握年度基础教育风向标。</p></div>
+        <div class="route-stop"><h4><span class="lab">DAY 1</span>主论坛主题报告（推荐场次）</h4><p>官方精选的高密度思想场，适合首次参会的教育人。</p></div>
+        <div class="route-stop"><h4><span class="lab">DAY 2</span>方案展经典动线</h4><p>沿数据大屏热力值从高到低逛展，打卡 TOP 展位赚未来币。</p></div>
+        <div class="route-stop"><h4><span class="lab">DAY 3</span>闭幕论坛 · 100天行动计划</h4><p>在 AI 共创站把三天的学习记录转化为可执行的行动方案。</p></div>
+      </div>
+      <div class="route-why"><b>提示：</b>完成自评问卷后，本页将切换为按你的画像生成的个性化推荐线路；自评入口在登录后的弹窗与个人中心均可找到。</div>
+    </div>
+
+    <div class="route-panel active" id="personal">
+      <div class="route-line">
+        <div class="route-stop"><h4><span class="lab">自评画像</span>九年一贯制学校 · 关注课程重构</h4><p>基于你的自评结果与提交的“最痛的一个问题”生成（示例数据）。</p></div>
+        <div class="route-stop"><h4><span class="lab">DAY 1</span>主题报告：课程重构专场（推荐度 96%）</h4><p>与你画像标签匹配的嘉宾场次，附推荐理由与预习资料。</p></div>
+        <div class="route-stop"><h4><span class="lab">DAY 2</span>方案展定向动线：课程类产品 6 站</h4><p>按内容标签筛选的展位路线，含 2 个可未来币兑换的课程方案。</p></div>
+        <div class="route-stop"><h4><span class="lab">DAY 4</span>场外深研课推荐：课程领导力深研班</h4><p>结合你的票种权益推荐可报课程，一键跳转选课。</p></div>
+      </div>
+      <div class="route-why"><b>生成依据：</b>自评结果 + 核心问题 + 内容标签 + 票种权限。未覆盖的内容你仍可自由浏览——地图是建议，不是限制。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PASSPORT ================= -->
+<section id="passport">
+  <div class="wrap passport-grid">
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="ph-head">
+          <div class="t">LEARNING PASSPORT</div>
+          <h4>我的学习护照 · 第2天</h4>
+          <div class="coins"><span>未来币余额</span><b>1,280</b></div>
+        </div>
+        <div class="ph-body">
+          <div class="ph-task"><div class="badge b-si">思</div><div><h5>所思 · 记录今天最受触动的一个观点</h5><p>关联：主论坛 · 年度主题演讲</p></div><span class="coin">+50币</span></div>
+          <div class="ph-task"><div class="badge b-de">得</div><div><h5>所得 · 带走一个可落地的方法</h5><p>关联：方案展 · 展位 B12</p></div><span class="coin">+50币</span></div>
+          <div class="ph-task"><div class="badge b-yu">遇</div><div><h5>所遇 · 认识一位同频的教育人</h5><p>关联：场内深研课 · 第3场</p></div><span class="coin">+30币</span></div>
+          <div class="ph-task"><div class="badge b-po">破</div><div><h5>所破 · 写下一个被打破了认知</h5><p>关联：嘉宾对话 · 下午场</p></div><span class="coin">+30币</span></div>
+          <div class="ph-record"><span>文字记录</span><span>照片记录</span><span>语音记录</span><span>扫码进入</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="kicker">PASSPORT · 学习护照</div>
+      <h2 class="sec-title">把三天的学习，<br>沉淀成一份带得走的报告</h2>
+      <p class="sec-desc">学习护照是实体学习手册的数字版。按日期、嘉宾、场次、展位进入内容页，随时记录；完成四维打卡任务赚未来币；会后自动生成个人学习报告。</p>
+      <div class="passport-feats">
+        <div class="pf"><div class="n">1</div><div><h4>多种方式进入</h4><p>护照首页、学习地图、实体手册二维码、嘉宾/场次二维码、展位二维码，扫哪进哪。</p></div></div>
+        <div class="pf"><div class="n">2</div><div><h4>文字 / 照片 / 语音自由记录</h4><p>每条记录自动关联日期与内容节点，不怕回去之后对不上号。</p></div></div>
+        <div class="pf"><div class="n">3</div><div><h4>四维打卡赚未来币</h4><p>按“所思、所得、所遇、所破”完成每日任务，奖励自动入账，任务规则按日配置。</p></div></div>
+        <div class="pf"><div class="n">4</div><div><h4>会后个人学习报告</h4><p>基于真实记录与打卡汇总生成——只算你实际参与的，不把“推荐了没去”算作完成。</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPO ================= -->
+<section id="expo" class="expo">
+  <div class="wrap">
+    <div class="kicker">EXPO & AI STUDIO · 方案展与AI共创站</div>
+    <h2 class="sec-title">看好方案，当场带走</h2>
+    <p class="sec-desc">学校、组委会的优质方案与产品集中展陈。扫码看详情、用未来币下单、在 AI 共创站把学校问题变成可执行方案。</p>
+    <div class="expo-grid">
+      <div class="expo-card">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h4>扫码看方案</h4>
+        <p>每个展位配置专属二维码，扫码进入数字化方案页：规格、价格、案例一目了然，可收藏、追问、带走资料。</p>
+        <div class="mini">支持独立方案展票进入</div>
+      </div>
+      <div class="expo-card">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M8.5 9.5c0-1.4 1.6-2.5 3.5-2.5s3.5 1.1 3.5 2.5-1.6 2.5-3.5 2.5-3.5 1.1-3.5 2.5 1.6 2.5 3.5 2.5 3.5-1.1 3.5-2.5"/></svg></div>
+        <h4>未来币市集</h4>
+        <p>方案展售卖的全部产品仅支持未来币支付。打卡、逛展赚币，现场下单，订单与物流在个人中心可查。</p>
+        <div class="mini">未来币账户 · 独立入口 · 支持手机号验证直达</div>
+      </div>
+      <div class="expo-card">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.2-2.6 5.6-.9.9-1.4 2-1.4 3.4H9c0-1.4-.5-2.5-1.4-3.4C6.2 13.2 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg></div>
+        <h4>AI 共创站</h4>
+        <p>扫码选择场景、输入你的学校问题，调用蒲公英教育智库的专业智能体现场生成方案建议；离会前生成你的「100天行动计划」。</p>
+        <div class="mini">结果可保存、可带走、会后持续跟进</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACCOUNT ================= -->
+<section id="account">
+  <div class="wrap acct-grid">
+    <div>
+      <div class="kicker">MY CENTER · 个人中心</div>
+      <h2 class="sec-title">一个手机号，<br>管住你在年会的所有事</h2>
+      <p class="sec-desc">以手机号为唯一身份，登录即自动关联你填写过的学校信息、发票信息、酒店信息与全部订单。换人参会时，新参会人登录后一键确认继承信息。</p>
+      <div class="acct-feats" style="margin-top:30px;">
+        <div class="feature-item">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+          <div><h4>一键查询</h4><p>主论坛订单、深研课订单、酒店住宿、发票、产品市集订单及物流，一页查全。</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+          <div><h4>发票信息保存复用</h4><p>填写过的发票信息自动保存。充值未来币、加报深研课，默认沿用历史发票，确认即可。</p></div>
+        </div>
+      </div>
+      <div class="swap-box">
+        <h4><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF4B2A" stroke-width="2"><path d="M17 3l4 4-4 4"/><path d="M21 7H9a4 4 0 0 0-4 4"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h12a4 4 0 0 0 4-4"/></svg>换人规则</h4>
+        <ul>
+          <li>最晚更换时间为11月30日，12月1日0点起不可更换；仅可自行更换一次</li>
+          <li>主论坛换人后，关联深研课自动同步给新参会人，并先继承原选课场次</li>
+          <li>新参会人可重新选课：须先选新课，再释放原场次</li>
+          <li>下单人、订单号、支付与发票信息不变，全程留痕可追溯</li>
+        </ul>
+      </div>
+    </div>
+    <div class="query-panel">
+      <div class="qp-head">
+        <div class="ava">王</div>
+        <div><b style="color:#F6F3EC;">王老师 · 一键查询</b><p>138****6666 · 已关联全部年会信息</p></div>
+      </div>
+      <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>主论坛订单（主论坛＋深研课票 ×2）<span class="st">已付款</span></div>
+      <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/></svg>场外深研课 · 课程领导力深研班<span class="st">选课成功</span></div>
+      <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>酒店住宿 · 协议酒店大床房 3晚<span class="st">已确认</span></div>
+      <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>发票 · 增值税普通发票（沿用历史信息）<span class="st">已开具</span></div>
+      <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg>产品市集订单 · 游戏节实践手册 ×1<span class="st">已发货</span></div>
+      <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M8.5 9.5c0-1.4 1.6-2.5 3.5-2.5s3.5 1.1 3.5 2.5-1.6 2.5-3.5 2.5-3.5 1.1-3.5 2.5 1.6 2.5 3.5 2.5 3.5-1.1 3.5-2.5"/></svg>未来币账户 · 余额 1,280<span class="st">查看明细</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HISTORY ================= -->
+<section class="history">
+  <div class="wrap">
+    <div class="kicker">SINCE 2014 · 历届回顾</div>
+    <h2 class="sec-title">十二届沉淀，一座城市的教育记忆</h2>
+    <p class="sec-desc">从重庆到厦门，年会走过的每一站，都是中国基础教育创新的一次集体作答。</p>
+    <div class="hist-cities">
+      <span>重庆</span><span>上海</span><span>杭州</span><span>南京</span><span>成都</span><span>深圳</span><span>厦门</span><span style="border-color:var(--gold);color:var(--gold);">2026 · 待官宣</span>
+    </div>
+    <p class="hist-quote serif">“参加年会对象从国内外中小学书记/校长、管理团队、教研骨干，到全球教育创新先锋——<i>中国教育创新年会已成为中国基础教育界现象级的年度盛会。</i>”</p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-logo"><span class="logo-mark">13</span>第十三届中国教育创新年会</div>
+      <p>由蒲公英教育智库发起，被誉为“中国基础教育年度风向标”。一个账号贯穿报名、现场与会后，让每一次参会都成为完整的深度学习旅程。</p>
+    </div>
+    <div>
+      <h4>快速入口</h4>
+      <a href="#tickets">报名参会</a>
+      <a href="#deep">深研课选课</a>
+      <a href="#map">学习地图</a>
+      <a href="#account">一键查询</a>
+    </div>
+    <div>
+      <h4>联系我们</h4>
+      <p>主办：蒲公英教育智库</p>
+      <p>商务合作与参展咨询：见官方渠道</p>
+      <p>客服时间：工作日 9:00–18:00</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 蒲公英教育智库 · 中国教育创新年会组委会（本页面为设计预览版，非正式官网）</div>
+</footer>
+
+<script>
+  // Countdown to 2026-12-01 09:00
+  var target = new Date('2026-12-01T09:00:00+08:00').getTime();
+  function tick(){
+    var now = Date.now(), diff = Math.max(0, target - now);
+    var d = Math.floor(diff/86400000),
+        h = Math.floor(diff%86400000/3600000),
+        m = Math.floor(diff%3600000/60000),
+        s = Math.floor(diff%60000/1000);
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Agenda tabs
+  document.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active');});
+      document.querySelectorAll('.agenda-panel').forEach(function(p){p.classList.remove('active');});
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.day).classList.add('active');
+    });
+  });
+
+  // Learning map toggle
+  document.querySelectorAll('.lmap-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.lmap-btn').forEach(function(b){b.classList.remove('active');});
+      document.querySelectorAll('.route-panel').forEach(function(p){p.classList.remove('active');});
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.route).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
