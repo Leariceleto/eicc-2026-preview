@@ -76,23 +76,21 @@
   .nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
   .nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
   .mobile-menu{
-    display:none;flex-direction:column;padding:10px 20px 22px;gap:2px;
+    display:none;flex-direction:column;padding:8px 10px;gap:0;
+    position:absolute;top:100%;right:0;z-index:99;
+    width:200px;
     background:rgba(246,243,236,.98);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);
-    max-height:calc(100dvh - 94px);overflow-y:auto;-webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);border-top:none;border-radius:0 0 16px 16px;
+    box-shadow:0 18px 40px rgba(23,22,15,.14);
+    max-height:calc(100dvh - 140px);overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
   .mobile-menu a{
-    color:var(--ink);text-decoration:none;font-size:16px;font-weight:700;
-    padding:14px 10px;border-radius:12px;
+    color:var(--ink);text-decoration:none;font-size:15px;font-weight:700;
+    padding:12px 14px;border-radius:10px;
   }
   .mobile-menu a:active{background:rgba(39,67,224,.08);}
   .mobile-menu.is-open{display:flex;}
   .mobile-menu .mm-cta{color:var(--blue);}
-  .mobile-menu .mm-reg{
-    margin-top:10px;text-align:center;background:var(--coral);color:#fff !important;
-    border-radius:999px;padding:14px 10px;font-size:16px;
-  }
-  body.menu-open{overflow:hidden;}
 
 
 
@@ -893,7 +891,6 @@
     <a href="#map">学习地图</a>
     <a href="#passport">学习护照</a>
     <a href="#expo">方案展</a>
-    <a href="#tickets" class="mm-reg" data-open-registration>立即报名参会</a>
   </div>
 </nav>
 
@@ -1946,20 +1943,23 @@
     function close(){
       burger.setAttribute('aria-expanded','false');
       menu.classList.remove('is-open');
-      document.body.classList.remove('menu-open');
     }
-    burger.addEventListener('click', function(){
+    burger.addEventListener('click', function(e){
+      e.stopPropagation();
       var open = burger.getAttribute('aria-expanded') === 'true';
       if(open){ close(); }
       else{
         burger.setAttribute('aria-expanded','true');
         menu.classList.add('is-open');
-        document.body.classList.add('menu-open');
       }
     });
     // 点菜单里任意链接：先收起菜单，再让锚点正常跳转
     menu.addEventListener('click', function(e){
       if(e.target.closest('a')) close();
+    });
+    // 点菜单和按钮以外的区域自动收起（不锁主页面滚动）
+    document.addEventListener('click', function(e){
+      if(menu.classList.contains('is-open') && !menu.contains(e.target) && !burger.contains(e.target)) close();
     });
     // 切到独立页或从独立页回来时收起
     window.addEventListener('hashchange', close);
