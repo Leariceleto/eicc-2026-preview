@@ -37,16 +37,10 @@
   .kicker::before{content:"";width:26px;height:2px;background:var(--blue);}
   h2.sec-title{font-size:clamp(30px,4vw,44px);line-height:1.2;font-weight:800;letter-spacing:-.01em;margin-bottom:14px;}
   .sec-desc{color:var(--ink-soft);font-size:16px;line-height:1.8;max-width:640px;}
-  .badge-preview{
-    position:fixed;top:0;left:0;right:0;z-index:200;
-    background:var(--ink);color:#F6F3EC;text-align:center;
-    font-size:12px;letter-spacing:.08em;padding:7px 12px;
-  }
-  .badge-preview b{color:var(--gold);font-weight:600;}
 
   /* ===== Nav ===== */
   nav{
-    position:sticky;top:30px;z-index:100;
+    position:sticky;top:0;z-index:100;
     background:rgba(246,243,236,.86);backdrop-filter:blur(14px);
     border-bottom:1px solid var(--line);
   }
@@ -68,8 +62,39 @@
   .nav-cta:hover{background:var(--blue) !important;}
   .nav-cta.acct{background:var(--blue);color:#fff !important;margin-right:24px;}
   .nav-cta.acct:hover{background:var(--blue-deep) !important;}
-  .nav-cta:last-child{margin-right:-48px;}
+  .nav-cta[data-open-registration]{margin-right:-48px;}
   @media(max-width:900px){.nav-links a:not(.nav-cta){display:none;}.nav-gap{display:none;}}
+
+  /* ===== Mobile nav (burger + drawer) ===== */
+  .nav-burger{
+    display:none;width:42px;height:42px;flex:none;margin-left:10px;
+    border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;
+    flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;
+  }
+  .nav-burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:.25s;}
+  .nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{
+    display:none;flex-direction:column;padding:10px 20px 22px;gap:2px;
+    background:rgba(246,243,236,.98);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    max-height:calc(100dvh - 94px);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  }
+  .mobile-menu a{
+    color:var(--ink);text-decoration:none;font-size:16px;font-weight:700;
+    padding:14px 10px;border-radius:12px;
+  }
+  .mobile-menu a:active{background:rgba(39,67,224,.08);}
+  .mobile-menu.is-open{display:flex;}
+  .mobile-menu .mm-cta{color:var(--blue);}
+  .mobile-menu .mm-reg{
+    margin-top:10px;text-align:center;background:var(--coral);color:#fff !important;
+    border-radius:999px;padding:14px 10px;font-size:16px;
+  }
+  body.menu-open{overflow:hidden;}
+
+
 
   /* ===== Hero ===== */
   .hero{
@@ -155,6 +180,7 @@
   .annual-year-link{position:absolute;left:var(--x);top:var(--hit-y);width:var(--hit-w);height:var(--hit-h);transform:translateX(-50%);outline:none;box-shadow:none;}
   .annual-year-link:hover,.annual-year-link:focus,.annual-year-link:focus-visible{outline:none;box-shadow:none;}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .annual-timeline-hint{display:none;}
   @media(max-width:860px){
     .about-preface{background-position:56% center;}
     .about-preface::before{background:linear-gradient(180deg,rgba(12,21,52,.9),rgba(4,7,16,.8));}
@@ -621,11 +647,121 @@
     .demo-console{right:12px;top:86px;width:calc(100vw - 24px);max-height:calc(100dvh - 104px);padding:18px;border-radius:18px;}
     .demo-fab{right:14px;bottom:14px;padding:11px 15px;}
   }
+  /* ===== Mobile deep adaptation (≤760px), desktop untouched ===== */
+  @media(max-width:760px){
+    /* --- 导航：logo + 缩小双按钮 + 最右菜单图标 --- */
+    nav{top:0;}
+    .nav-inner{height:56px;padding:0 12px;gap:8px;}
+    .logo-title-img{height:16px;}
+    .nav-links{gap:6px;flex-wrap:nowrap;margin-left:auto;}
+    .nav-links a:not(.nav-cta){display:none;}
+    .nav-gap{display:none;}
+    .nav-cta{padding:6px 11px !important;font-size:12px !important;font-weight:600 !important;white-space:nowrap;border-radius:999px !important;}
+    .nav-cta.acct{margin-right:0;}
+    .nav-cta[data-open-registration]{margin-right:0;}
+    .nav-burger{display:flex;}
+
+    /* --- 全局节奏 --- */
+    .wrap{padding:0 20px;}
+    section{padding:64px 0;}
+    .kicker{font-size:12px;margin-bottom:14px;}
+    h2.sec-title{font-size:26px;margin-bottom:10px;}
+    .sec-desc{font-size:14.5px;line-height:1.75;}
+
+    /* --- Hero --- */
+    .hero{padding:64px 0 60px;}
+    .hero-eyebrow{font-size:11px;letter-spacing:.14em;padding:7px 14px;margin-bottom:24px;}
+    .hero h1{font-size:clamp(34px,10.5vw,44px);}
+    .hero-theme{margin-top:18px !important;}
+    .hero-meta{gap:9px;margin-top:28px;}
+    .hero-meta .chip{padding:10px 14px;font-size:12.5px;width:100%;}
+    .hero-actions{margin-top:30px;}
+    .hero-actions .btn{width:100%;justify-content:center;padding:15px 20px;}
+    .countdown{margin-top:34px;gap:8px;}
+    .cd-cell{min-width:0;flex:1;max-width:96px;padding:12px 6px;}
+    .cd-cell b{font-size:24px;}
+
+    /* --- 大会概况：前言 --- */
+    .about-preface{background-position:60% center;}
+    .preface-main{padding:48px 0 52px;}
+    .preface-stats{gap:0;}
+    .preface-stat strong{font-size:clamp(26px,8.5vw,36px);}
+    .preface-right{margin-top:2px;}
+    .history-video-placeholder .play-label{font-size:12.5px;}
+
+    /* --- 大会概况：历程图（横向滑动 + 滑动提示） --- */
+    .about-history{padding:52px 0 40px;}
+    .annual-timeline-scroll{
+      margin:0 -20px;padding:0 20px 6px;
+      -webkit-overflow-scrolling:touch;
+      position:relative;
+    }
+    .annual-timeline-map{min-width:720px;}
+    .annual-timeline-hint{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      margin-top:12px;font-size:12px;color:var(--ink-soft);letter-spacing:.06em;
+    }
+    .annual-timeline-hint::before{content:"";width:26px;height:1px;background:var(--line);}
+
+    /* --- 票种 --- */
+    .ticket{padding:26px 22px;}
+    .ticket .price{font-size:34px !important;}
+    .ticket .btn{width:100%;justify-content:center;}
+
+    /* --- 议程 tabs 横滑 --- */
+    .tabs{
+      flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      margin:28px -20px 24px;padding:2px 20px 8px;
+      scrollbar-width:none;
+    }
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab{white-space:nowrap;flex:none;padding:10px 18px;font-size:13.5px;}
+    .agenda-item{gap:10px;padding:20px 0;}
+    .agenda-item .time{font-size:13.5px;}
+    .agenda-item h4{font-size:16.5px;}
+    .day-theme{padding:15px 18px;}
+    .day-theme b{font-size:17px;}
+
+    /* --- 深研课 --- */
+    .deep-card{padding:26px 22px;}
+    .deep-card h3{font-size:21px;}
+    .rule{padding:20px;}
+    .course{padding:16px 18px;}
+    .course h5{font-size:14px;}
+
+    /* --- 学习地图 --- */
+    .lmap-toggle{margin:30px 0 26px;gap:9px;}
+    .lmap-btn{flex:1;min-width:0;padding:12px 10px;font-size:13px;text-align:center;white-space:normal;line-height:1.4;}
+
+    /* --- 护照手机样机缩放 --- */
+    .phone{width:min(280px,86vw);}
+    .phone-screen{min-height:470px;}
+
+    /* --- 方案展 --- */
+    .expo-card{padding:24px 20px;}
+    .access-strip{flex-wrap:wrap;gap:8px !important;padding:16px 18px !important;}
+
+    /* --- 个人中心 --- */
+    .query-panel{padding:22px 18px;}
+    .query-item{font-size:13.5px;gap:10px;padding:13px 2px;}
+    .swap-box{padding:20px 18px;}
+    .service-hub{margin-top:34px;padding-top:28px;}
+    .service-hub h3{font-size:19px;}
+
+    /* --- 报名弹窗微调（已是全屏，补充细节） --- */
+    .signup-top{padding:14px 16px;}
+    .signup-crumb{font-size:12px;}
+    .signup-close{padding:8px 10px;font-size:12.5px;}
+
+    /* --- 页脚 --- */
+    footer{padding:52px 0 32px;}
+    .foot-logo{font-size:14.5px;}
+    .copyright{margin-top:34px;padding:18px 16px 0;font-size:12px;line-height:1.7;}
+  }
+
 </style>
 </head>
 <body>
-
-<div class="badge-preview"><b>预览版</b> · 本页面为第十三届年会官网设计预览，议程、嘉宾、票价等信息以最终官宣及业务配置为准</div>
 
 <div class="signup-layer" data-signup-layer aria-hidden="true">
   <div class="signup-dialog" role="dialog" aria-modal="true" aria-labelledby="signup-title">
@@ -745,7 +881,19 @@
       <span class="nav-gap" aria-hidden="true"></span>
       <a href="#account" class="nav-cta acct">个人中心</a>
       <a href="#tickets" class="nav-cta" data-open-registration>立即报名</a>
+      <button class="nav-burger" type="button" aria-label="打开菜单" aria-expanded="false" data-nav-burger><span></span><span></span><span></span></button>
     </div>
+  </div>
+  <div class="mobile-menu" data-mobile-menu>
+    <a href="#account" class="mm-cta">个人中心</a>
+    <a href="#about">大会概况</a>
+    <a href="#tickets">票种权益</a>
+    <a href="#agenda">大会议程</a>
+    <a href="#deep">深研课</a>
+    <a href="#map">学习地图</a>
+    <a href="#passport">学习护照</a>
+    <a href="#expo">方案展</a>
+    <a href="#tickets" class="mm-reg" data-open-registration>立即报名参会</a>
   </div>
 </nav>
 
@@ -839,6 +987,7 @@
           </div>
         </div>
       </figure>
+      <p class="annual-timeline-hint" aria-hidden="true">左右滑动查看历届年会</p>
       <div class="state-surface" aria-live="polite">
         <div class="state-overview">
           <div class="state-label">当前预览</div>
@@ -1058,7 +1207,7 @@
 </section>
 
 <!-- ================= GUESTS（暂时隐藏，恢复时改回 display 或删除下面 style 属性，并把导航里的 #guests 链接加回来） ================= -->
-<section id="guests" class="guests" style="display:none;" data-page="home">
+<section id="guests" class="guests" style="display:none;" data-page="home" data-force-hidden>
   <div class="wrap">
     <div class="kicker">SPEAKERS · 大会嘉宾</div>
     <h2 class="sec-title">60+ 位嘉宾，与下一代学校的建设者同行</h2>
@@ -1777,6 +1926,8 @@
     function render(){
       var page = currentPage();
       document.querySelectorAll('[data-page]').forEach(function(node){
+        // 手动隐藏的板块（如嘉宾）带 data-force-hidden，路由不得覆盖其 display
+        if(node.dataset.forceHidden !== undefined) return;
         node.style.display = (node.dataset.page === page) ? '' : 'none';
       });
       // 窗口回到顶部，避免从长页面切过去时停留位置奇怪
@@ -1785,6 +1936,33 @@
     }
     window.addEventListener('hashchange', render);
     render();
+  })();
+
+  // ===== Mobile burger menu =====
+  (function(){
+    var burger = document.querySelector('[data-nav-burger]');
+    var menu = document.querySelector('[data-mobile-menu]');
+    if(!burger || !menu) return;
+    function close(){
+      burger.setAttribute('aria-expanded','false');
+      menu.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+    }
+    burger.addEventListener('click', function(){
+      var open = burger.getAttribute('aria-expanded') === 'true';
+      if(open){ close(); }
+      else{
+        burger.setAttribute('aria-expanded','true');
+        menu.classList.add('is-open');
+        document.body.classList.add('menu-open');
+      }
+    });
+    // 点菜单里任意链接：先收起菜单，再让锚点正常跳转
+    menu.addEventListener('click', function(e){
+      if(e.target.closest('a')) close();
+    });
+    // 切到独立页或从独立页回来时收起
+    window.addEventListener('hashchange', close);
   })();
 </script>
 </body>
