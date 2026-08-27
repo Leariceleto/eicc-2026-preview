@@ -52,19 +52,24 @@
   }
   .nav-inner{max-width:1180px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:26px;}
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;white-space:nowrap;}
+  .logo-title-img{height:22px;width:auto;display:block;}
   .logo-mark{width:30px;height:30px;border-radius:9px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;}
-  .nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+  .nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;align-items:center;}
   .nav-links a{
-    color:var(--ink-soft);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:10px;
+    color:var(--ink-soft);text-decoration:none;font-size:16px;font-weight:700;padding:8px 12px;border-radius:10px;
     transition:.2s;
   }
   .nav-links a:hover{background:rgba(39,67,224,.08);color:var(--blue);}
+  .nav-gap{width:14px;flex:none;}
   .nav-cta{
     background:var(--ink);color:#fff !important;border-radius:999px !important;
     padding:9px 20px !important;font-weight:600;
   }
   .nav-cta:hover{background:var(--blue) !important;}
-  @media(max-width:900px){.nav-links a:not(.nav-cta){display:none;}}
+  .nav-cta.acct{background:var(--blue);color:#fff !important;margin-right:24px;}
+  .nav-cta.acct:hover{background:var(--blue-deep) !important;}
+  .nav-cta:last-child{margin-right:-48px;}
+  @media(max-width:900px){.nav-links a:not(.nav-cta){display:none;}.nav-gap{display:none;}}
 
   /* ===== Hero ===== */
   .hero{
@@ -125,45 +130,79 @@
   .cd-cell b{display:block;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;}
   .cd-cell span{font-size:12px;color:rgba(246,243,236,.6);letter-spacing:.12em;}
 
-  .marquee{
-    background:var(--blue);color:#fff;overflow:hidden;padding:14px 0;
-    white-space:nowrap;
-  }
-  .marquee-track{display:inline-flex;gap:56px;animation:scroll 28s linear infinite;font-size:14px;letter-spacing:.14em;font-weight:600;}
-  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-  /* ===== Stats ===== */
-  .stats{background:var(--paper-deep);padding:64px 0;}
-  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .stat b{font-size:clamp(30px,3.6vw,44px);font-weight:900;display:block;letter-spacing:-.02em;}
-  .stat b i{font-style:normal;color:var(--blue);}
-  .stat span{color:var(--ink-soft);font-size:14px;margin-top:6px;display:block;}
-  @media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
-
   /* ===== About ===== */
-  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
-  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
-  .about-text p{color:var(--ink-soft);line-height:2;font-size:16px;margin-bottom:18px;}
-  .about-text p b{color:var(--ink);}
-  .feature-list{display:grid;gap:14px;}
-  .feature-item{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:20px 22px;display:flex;gap:16px;align-items:flex-start;
+  #about{padding:0;background:var(--paper);scroll-margin-top:96px;}
+  .about-preface{position:relative;isolation:isolate;overflow:hidden;background:#0c1534 url("assets/about-preface-bg.jpg") center/cover no-repeat;color:#f6f3ec;}
+  .about-preface::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,21,52,.93),rgba(4,7,16,.74));}
+  .about-preface-grid{display:block;}
+  .preface-main{min-width:0;padding:76px 0 80px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:center;}
+  .preface-left{display:flex;flex-direction:column;gap:42px;min-width:0;}
+  .preface-copy{max-width:none;display:grid;gap:20px;}
+  .preface-copy p{font-size:15px;line-height:1.95;color:rgba(246,243,236,.88);text-align:justify;}
+  .preface-copy p:first-of-type{font-size:17px;color:#fff;font-weight:600;}
+  .preface-stats{display:grid;grid-template-columns:repeat(3,1fr);}
+  .preface-stat{position:relative;text-align:center;padding:0 14px;}
+  .preface-stat:not(:first-child)::before{content:"";position:absolute;left:0;top:10px;bottom:8px;width:1px;background:rgba(246,243,236,.24);}
+  .preface-stat strong{display:flex;justify-content:center;align-items:baseline;gap:5px;color:#e8c36a;font-size:clamp(32px,3.6vw,48px);line-height:1;font-weight:900;letter-spacing:-.035em;}
+  .preface-stat strong small{font-size:.4em;letter-spacing:0;}
+  .preface-stat span{display:block;margin-top:12px;color:rgba(246,243,236,.72);font-size:13px;}
+  .preface-right{min-width:0;}
+  .about-history{padding:84px 0 64px;background:var(--paper);}
+  .annual-timeline{margin:0;}
+  .annual-timeline-scroll{overflow-x:auto;padding-bottom:4px;}
+  .annual-timeline-map{position:relative;min-width:880px;}
+  .annual-timeline-map img{display:block;width:100%;height:auto;mix-blend-mode:multiply;}
+  .annual-year-link{position:absolute;left:var(--x);top:var(--hit-y);width:var(--hit-w);height:var(--hit-h);transform:translateX(-50%);outline:none;box-shadow:none;}
+  .annual-year-link:hover,.annual-year-link:focus,.annual-year-link:focus-visible{outline:none;box-shadow:none;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  @media(max-width:860px){
+    .about-preface{background-position:56% center;}
+    .about-preface::before{background:linear-gradient(180deg,rgba(12,21,52,.9),rgba(4,7,16,.8));}
+    .preface-main{padding:48px 0 52px;gap:40px;grid-template-columns:1fr;}
+    .preface-left{gap:34px;}
+    .preface-copy{gap:16px;}
+    .preface-copy p{font-size:14.5px;line-height:1.85;text-align:left;}
+    .preface-copy p:first-of-type{font-size:16px;}
+    .preface-stat{padding:0 8px;}
+    .preface-stat strong{font-size:clamp(30px,9vw,44px);}
+    .preface-stat span{font-size:12px;line-height:1.5;}
+    .about-history{padding:64px 0 48px;}
+    .annual-timeline-scroll{margin-right:-28px;}
   }
-  .feature-item .ico{
-    width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;
-    background:rgba(39,67,224,.1);color:var(--blue);
-  }
+  .feature-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
+  .feature-item .ico{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:rgba(39,67,224,.1);color:var(--blue);}
   .feature-item h4{font-size:16px;margin-bottom:4px;}
   .feature-item p{font-size:13.5px;color:var(--ink-soft);line-height:1.7;}
+  .state-surface{display:none;margin-top:64px;border-top:1px solid var(--line);padding-top:38px;}
+  body.is-demo .state-surface{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;}
+  .state-overview,.state-next{border:1px solid var(--line);border-radius:18px;padding:26px;background:#fff;}
+  .state-overview{background:linear-gradient(135deg,rgba(39,67,224,.09),rgba(255,255,255,.9));}
+  .state-overview .state-label{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--blue);}
+  .state-overview h3{font-size:clamp(23px,3vw,32px);line-height:1.3;margin:9px 0 10px;}
+  .state-overview p{font-size:14px;line-height:1.8;color:var(--ink-soft);}
+  .state-permissions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+  .state-permissions span{padding:6px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);}
+  .state-next b{font-size:15px;display:block;margin-bottom:12px;}
+  .state-next ul{list-style:none;display:grid;gap:10px;}
+  .state-next li{font-size:13.5px;line-height:1.65;color:var(--ink-soft);display:flex;gap:9px;}
+  .state-next li::before{content:"";width:6px;height:6px;flex:none;border-radius:50%;background:var(--coral);margin-top:8px;}
+  .demo-context-note{display:none;margin-top:20px;border-radius:12px;padding:13px 16px;font-size:13.5px;line-height:1.7;}
+  body.is-demo .demo-context-note{display:block;}
+  .lmap .demo-context-note{border:1px solid rgba(246,243,236,.18);background:rgba(246,243,236,.06);color:rgba(246,243,236,.76);}
+  .demo-context-note.light{background:#fff;border:1px solid var(--line);color:var(--ink-soft);}
+  .ticket.is-active-ticket{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,155,63,.25);}
+  .ticket-state{display:none;margin-left:9px;color:var(--gold);font-size:12px;font-weight:700;}
+  .ticket.is-active-ticket .ticket-state{display:inline;}
+  @media(max-width:860px){body.is-demo .state-surface{grid-template-columns:1fr;}}
 
   /* ===== Tickets ===== */
   .tickets{background:var(--ink);color:#F6F3EC;}
   .tickets .kicker{color:var(--gold);}
   .tickets .kicker::before{background:var(--gold);}
   .tickets .sec-desc{color:rgba(246,243,236,.66);}
-  .ticket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;}
-  @media(max-width:900px){.ticket-grid{grid-template-columns:1fr;}}
+  .ticket-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:52px;}
+  @media(max-width:1100px){.ticket-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:640px){.ticket-grid{grid-template-columns:1fr;}}
   .ticket{
     border:1px solid rgba(246,243,236,.16);border-radius:22px;padding:34px 30px;
     background:rgba(246,243,236,.045);position:relative;display:flex;flex-direction:column;
@@ -189,13 +228,6 @@
     padding:22px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;
     font-size:14px;color:rgba(246,243,236,.78);
   }
-  .access-strip .pill{
-    border-radius:999px;padding:6px 16px;font-size:13px;font-weight:600;
-  }
-  .pill-a{background:rgba(255,75,42,.2);color:#FF8A70;}
-  .pill-b{background:rgba(39,67,224,.3);color:#9AABFF;}
-  .pill-c{background:rgba(201,155,63,.22);color:#E4C782;}
-
   /* ===== Agenda ===== */
   .tabs{display:flex;gap:10px;margin:40px 0 30px;flex-wrap:wrap;}
   .tab{
@@ -371,6 +403,12 @@
   }
   .pf h4{font-size:16.5px;margin-bottom:5px;}
   .pf p{font-size:14px;color:var(--ink-soft);line-height:1.75;}
+  .after-meeting{
+    margin-top:28px;background:var(--paper-deep);border:1px solid var(--line);border-radius:18px;padding:22px 24px;
+  }
+  .after-meeting h4{font-size:15px;margin-bottom:13px;}
+  .after-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .after-grid span{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--ink-soft);}
 
   /* ===== Expo ===== */
   .expo{background:var(--paper-deep);}
@@ -415,21 +453,131 @@
   .swap-box ul{list-style:none;display:grid;gap:9px;font-size:13.5px;color:var(--ink-soft);}
   .swap-box li{display:flex;gap:9px;line-height:1.65;}
   .swap-box li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);flex:none;margin-top:8px;}
+  .service-hub{margin-top:46px;padding-top:38px;border-top:1px solid var(--line);}
+  .service-hub h3{font-size:22px;margin-bottom:8px;}
+  .service-hub>p{font-size:14px;color:var(--ink-soft);line-height:1.75;}
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px;}
+  .service-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;}
+  .service-card b{display:block;font-size:15px;margin-bottom:7px;}
+  .service-card p{font-size:13px;color:var(--ink-soft);line-height:1.65;}
+  @media(max-width:820px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.service-grid{grid-template-columns:1fr;}}
 
-  /* ===== History ===== */
-  .history{background:var(--ink);color:#F6F3EC;}
-  .history .kicker{color:var(--gold);}.history .kicker::before{background:var(--gold);}
-  .history .sec-desc{color:rgba(246,243,236,.6);}
-  .hist-cities{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;}
-  .hist-cities span{
-    border:1px solid rgba(246,243,236,.25);border-radius:999px;padding:9px 20px;font-size:13.5px;
-    color:rgba(246,243,236,.8);
+  /* ===== Registration flow ===== */
+  body.signup-open{overflow:hidden;}
+  .signup-layer{display:none;position:fixed;inset:0;z-index:500;padding:28px;overflow:auto;background:rgba(23,22,15,.68);}
+  .signup-layer.is-open{display:block;}
+  .signup-dialog{width:min(980px,100%);margin:30px auto;background:#f7f6f1;color:var(--ink);border-radius:24px;box-shadow:0 28px 86px rgba(0,0,0,.32);overflow:hidden;}
+  .signup-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 30px;border-bottom:1px solid var(--line);background:#fff;}
+  .signup-crumb{font-size:13px;color:var(--ink-soft);}
+  .signup-close{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:inherit;font-size:13px;font-weight:700;padding:8px 12px;cursor:pointer;}
+  .signup-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:26px 30px 22px;background:#fff;}
+  .signup-progress-item{position:relative;display:flex;align-items:center;gap:9px;color:#b3b2ad;font-size:13px;font-weight:700;white-space:nowrap;}
+  .signup-progress-item:not(:last-child)::after{content:"";height:1px;flex:1;margin-left:3px;background:var(--line);}
+  .signup-progress-item span{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);font-size:12px;background:#fff;flex:none;}
+  .signup-progress-item.active,.signup-progress-item.done{color:var(--ink);}
+  .signup-progress-item.active span{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .signup-progress-item.done span{background:var(--green);border-color:var(--green);color:#fff;font-size:0;}
+  .signup-progress-item.done span::after{content:"✓";font-size:13px;}
+  .signup-body{padding:10px 30px 32px;}
+  .signup-step{display:none;}
+  .signup-step.active{display:block;}
+  .signup-step h3{font-size:23px;margin:18px 0 20px;}
+  .signup-session-list{display:grid;gap:12px;}
+  .signup-session{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;width:100%;text-align:left;padding:20px 22px;border:1px solid var(--line);border-radius:13px;background:#fff;cursor:pointer;font:inherit;color:var(--ink);}
+  .signup-session:hover{border-color:rgba(39,67,224,.52);}
+  .signup-session.active{border-color:var(--green);box-shadow:0 0 0 1px var(--green);background:rgba(31,157,102,.04);}
+  .signup-radio{width:17px;height:17px;border-radius:50%;border:1px solid #c9c9c3;position:relative;}
+  .signup-session.active .signup-radio{border:5px solid var(--green);}
+  .signup-session strong{font-size:16px;display:block;margin-bottom:6px;}
+  .signup-session p{font-size:13px;color:var(--ink-soft);line-height:1.65;}
+  .signup-price{font-size:18px;font-weight:800;color:var(--green);white-space:nowrap;}
+  .signup-price.pending{font-size:14px;}
+  .signup-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:26px;}
+  .signup-actions .btn{border:0;cursor:pointer;font:inherit;}
+  .signup-actions .btn-ghost{border:1px solid var(--line);}
+  .signup-form-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:22px;font-size:14px;color:var(--ink-soft);}
+  .signup-form-meta b{color:var(--ink);font-size:15px;}
+  .signup-form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .signup-field{display:grid;gap:7px;}
+  .signup-field.wide{grid-column:1/-1;}
+  .signup-field label{font-size:13px;font-weight:700;}
+  .signup-field label em{color:var(--coral);font-style:normal;}
+  .signup-field input,.signup-field select{width:100%;appearance:none;border:1px solid #cfcfc8;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:14px;padding:12px 13px;outline:none;}
+  .signup-field input:focus,.signup-field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(39,67,224,.12);}
+  .signup-field input.invalid,.signup-field select.invalid{border-color:var(--coral);}
+  .signup-error{min-height:18px;color:#c73b24;font-size:12px;line-height:1.45;}
+  .signup-order{display:grid;grid-template-columns:1fr 230px;gap:22px;align-items:start;}
+  .signup-order-card,.signup-pay-panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .signup-order-card h4{font-size:16px;margin-bottom:14px;}
+  .signup-order-card .order-brand{font-size:12px;letter-spacing:.08em;color:var(--blue);font-weight:800;}
+  .signup-order-card h5{font-size:22px;margin:8px 0 5px;}
+  .signup-order-card p{font-size:13px;line-height:1.65;color:var(--ink-soft);}
+  .signup-order-price{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:19px;font-weight:800;color:var(--green);}
+  .signup-choice-label{font-size:13px;font-weight:800;margin:18px 0 9px;}
+  .signup-choice-row{display:flex;gap:9px;flex-wrap:wrap;}
+  .signup-choice{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink-soft);font:inherit;font-size:13px;padding:9px 12px;cursor:pointer;}
+  .signup-choice.active{border-color:var(--blue);background:rgba(39,67,224,.08);color:var(--blue);font-weight:700;}
+  .signup-invoice-fields{display:none;margin-top:16px;}
+  .signup-invoice-fields.is-visible{display:grid;}
+  .signup-total{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:16px;font-weight:800;display:flex;justify-content:space-between;gap:12px;}
+  .signup-total b{color:var(--green);font-size:21px;}
+  .signup-success{padding:22px 0 12px;text-align:center;}
+  .signup-success-mark{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-size:29px;margin:0 auto 18px;}
+  .signup-success h3{margin:0 0 10px;}
+  .signup-success p{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:460px;margin:0 auto;}
+  .signup-success-actions{display:grid;gap:12px;max-width:440px;margin:26px auto 0;}
+  .signup-hotel{border:1px solid var(--line);border-radius:12px;background:#fff;padding:17px 18px;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:16px;font:inherit;color:var(--ink);cursor:pointer;}
+  .signup-hotel b{display:block;font-size:15px;margin-bottom:4px;}
+  .signup-hotel span{font-size:13px;color:var(--ink-soft);}
+  .signup-hotel i{font-style:normal;color:var(--blue);font-size:22px;}
+  @media(max-width:720px){
+    .signup-layer{padding:0;}
+    .signup-dialog{width:100%;min-height:100dvh;margin:0;border-radius:0;}
+    .signup-top{padding:18px 20px;}
+    .signup-progress{padding:18px 20px;grid-template-columns:1fr 1fr;row-gap:14px;}
+    .signup-progress-item{font-size:12px;}
+    .signup-progress-item:not(:last-child)::after{display:none;}
+    .signup-body{padding:8px 20px 28px;}
+    .signup-session{grid-template-columns:auto 1fr;padding:17px;gap:12px;}
+    .signup-price{grid-column:2;}
+    .signup-form-grid,.signup-order{grid-template-columns:1fr;}
+    .signup-field.wide{grid-column:auto;}
   }
-  .hist-quote{
-    margin-top:44px;font-size:clamp(19px,2.6vw,27px);line-height:1.6;font-weight:600;
-    max-width:760px;
+
+  /* ===== About: 历程延续条 ===== */
+  .annual-next{
+    margin:30px 0 0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px;
+    font-size:14.5px;color:var(--ink-soft);text-align:center;
   }
-  .hist-quote i{font-style:normal;color:var(--gold);}
+  .annual-next b{color:var(--ink);font-weight:700;}
+  .annual-next .gold{color:var(--gold);font-weight:700;letter-spacing:.02em;}
+  .annual-next-sep{width:26px;height:1px;background:rgba(201,155,63,.6);flex:none;}
+  .history-video-slot{
+    position:relative;aspect-ratio:16/9;min-width:0;overflow:hidden;border:1px solid rgba(246,243,236,.2);
+    border-radius:var(--radius);background:#101009;box-shadow:0 18px 44px rgba(0,0,0,.2);
+  }
+  .history-video-player{display:block;width:100%;height:100%;background:#101009;object-fit:cover;}
+  .history-video-placeholder{
+    position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:13px;
+    background:radial-gradient(circle at 50% 40%,rgba(201,155,63,.14),transparent 42%),#101009;
+    color:rgba(246,243,236,.92);pointer-events:none;text-align:center;
+  }
+  .history-video-placeholder::before{content:"";position:absolute;inset:16px;border:1px solid rgba(246,243,236,.1);border-radius:12px;}
+  .history-video-play{
+    position:relative;z-index:1;width:58px;height:58px;border:1px solid var(--gold);border-radius:50%;
+    background:rgba(201,155,63,.12);
+  }
+  .history-video-play::after{
+    content:"";position:absolute;top:18px;left:23px;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:15px solid var(--gold);
+  }
+  .history-video-placeholder strong{position:relative;z-index:1;font-size:17px;}
+  .history-video-placeholder span:last-child{position:relative;z-index:1;font-size:13px;color:rgba(246,243,236,.55);}
+  .history-video-slot.is-ready .history-video-placeholder{display:none;}
+  @media(max-width:900px){
+    .history-video-slot{max-width:720px;}
+  }
+  @media(max-width:520px){.history-video-placeholder::before{inset:10px;}}
 
   /* ===== Footer ===== */
   footer{background:#0d0c07;color:rgba(246,243,236,.65);padding:64px 0 40px;}
@@ -440,38 +588,175 @@
   footer a:hover{color:#fff;}
   .foot-logo{display:flex;align-items:center;gap:10px;color:#F6F3EC;font-weight:800;font-size:16px;margin-bottom:14px;}
   .copyright{margin-top:48px;padding-top:22px;border-top:1px solid rgba(246,243,236,.12);font-size:12.5px;text-align:center;color:rgba(246,243,236,.4);}
+
+  /* ===== Demo state controller ===== */
+  .demo-fab,.demo-console{display:none;}
+  body.is-demo .demo-fab,body.is-demo .demo-console{display:block;}
+  .demo-fab{
+    position:fixed;right:22px;bottom:22px;z-index:310;border:0;border-radius:999px;
+    padding:12px 18px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer;
+    box-shadow:0 14px 34px rgba(23,22,15,.2);
+  }
+  .demo-console{
+    position:fixed;right:22px;top:92px;z-index:320;width:min(420px,calc(100vw - 44px));max-height:calc(100dvh - 116px);
+    overflow:auto;border:1px solid rgba(246,243,236,.18);border-radius:22px;padding:22px;background:rgba(23,22,15,.97);
+    color:#F6F3EC;box-shadow:0 24px 60px rgba(23,22,15,.34);
+  }
+  body.demo-collapsed .demo-console{display:none;}
+  body:not(.demo-collapsed) .demo-fab{display:none;}
+  .demo-head{display:flex;align-items:start;justify-content:space-between;gap:18px;padding-bottom:16px;border-bottom:1px solid rgba(246,243,236,.14);}
+  .demo-head b{font-size:18px;display:block;}
+  .demo-head p{font-size:12.5px;line-height:1.65;color:rgba(246,243,236,.6);margin-top:5px;}
+  .demo-close{border:0;border-radius:999px;background:#F6F3EC;color:var(--ink);padding:8px 12px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .demo-group{margin-top:18px;}
+  .demo-group h4{font-size:13px;color:rgba(246,243,236,.62);font-weight:600;margin-bottom:10px;}
+  .demo-options{display:flex;gap:8px;flex-wrap:wrap;}
+  .demo-option{border:1px solid rgba(246,243,236,.22);background:transparent;color:#F6F3EC;border-radius:999px;padding:8px 12px;font-size:13px;line-height:1.2;cursor:pointer;transition:.18s;}
+  .demo-option:hover{border-color:rgba(246,243,236,.65);}
+  .demo-option.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:700;}
+  .demo-option:disabled{cursor:not-allowed;opacity:.35;text-decoration:line-through;}
+  .demo-summary{margin-top:18px;padding:13px 15px;border-radius:12px;background:rgba(246,243,236,.08);font-size:12.5px;line-height:1.75;color:rgba(246,243,236,.74);}
+  .demo-summary b{color:var(--gold);}
+  @media(max-width:640px){
+    .demo-console{right:12px;top:86px;width:calc(100vw - 24px);max-height:calc(100dvh - 104px);padding:18px;border-radius:18px;}
+    .demo-fab{right:14px;bottom:14px;padding:11px 15px;}
+  }
 </style>
 </head>
 <body>
 
 <div class="badge-preview"><b>预览版</b> · 本页面为第十三届年会官网设计预览，议程、嘉宾、票价等信息以最终官宣及业务配置为准</div>
 
+<div class="signup-layer" data-signup-layer aria-hidden="true">
+  <div class="signup-dialog" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+    <div class="signup-top">
+      <div class="signup-crumb">中国教育创新年会 &gt; 第十三届中国教育创新年会</div>
+      <button class="signup-close" type="button" data-signup-close>返回官网 ×</button>
+    </div>
+    <div class="signup-progress" aria-label="报名进度">
+      <div class="signup-progress-item active" data-signup-progress="1"><span>1</span>选择场次</div>
+      <div class="signup-progress-item" data-signup-progress="2"><span>2</span>填写参会人信息</div>
+      <div class="signup-progress-item" data-signup-progress="3"><span>3</span>收到报名信息</div>
+      <div class="signup-progress-item" data-signup-progress="4"><span>4</span>完成报名</div>
+    </div>
+    <div class="signup-body">
+      <section class="signup-step active" data-signup-step="1">
+        <h3 id="signup-title">选择场次</h3>
+        <div class="signup-session-list" data-signup-sessions>
+          <button class="signup-session active" type="button" data-signup-session="main">
+            <span class="signup-radio"></span><span><strong>（现场参会）主论坛</strong><p>含主论坛大会与方案展通行；付款后自动获得 1 门场内深研课选课资格，场外深研课需单独购买。</p></span><span class="signup-price">¥2800</span>
+          </button>
+          <button class="signup-session" type="button" data-signup-session="combo">
+            <span class="signup-radio"></span><span><strong>（现场参会）主论坛 ＋ 深研课</strong><p>在主论坛权益基础上已包含场外深研课权益，付款后可直接选课，无需重复付款。</p></span><span class="signup-price">¥2900</span>
+          </button>
+          <button class="signup-session" type="button" data-signup-session="expo">
+            <span class="signup-radio"></span><span><strong>（现场参会）独立方案展</strong><p>含方案展通行、方案展学习地图、学习护照与学习报告；不可进入主论坛，不含深研课与回放。</p></span><span class="signup-price">¥300</span>
+          </button>
+          <button class="signup-session" type="button" data-signup-session="online">
+            <span class="signup-radio"></span><span><strong>（线上参会）年会线上学习</strong><p>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容；回看截止至 2027 年 12 月 4 日。</p></span><span class="signup-price">¥1560</span>
+          </button>
+        </div>
+        <div class="signup-actions"><button class="btn btn-ghost" type="button" data-signup-close>返回</button><button class="btn btn-primary" type="button" data-signup-next>下一步</button></div>
+      </section>
+
+      <section class="signup-step" data-signup-step="2">
+        <h3>填写参会人信息</h3>
+        <div class="signup-form-meta"><span data-signup-session-name>（现场参会）主论坛</span><b>1号参会人</b></div>
+        <div class="signup-form-grid" novalidate>
+          <div class="signup-field wide"><label for="signup-name">姓名<em>*</em></label><input id="signup-name" data-signup-field="name" type="text" autocomplete="name"><span class="signup-error" data-signup-error="name"></span></div>
+          <div class="signup-field"><label for="signup-phone">手机号<em>*</em></label><input id="signup-phone" data-signup-field="phone" type="tel" inputmode="numeric" autocomplete="tel"><span class="signup-error" data-signup-error="phone"></span></div>
+          <div class="signup-field"><label for="signup-school">单位<em>*</em></label><input id="signup-school" data-signup-field="school" type="text" autocomplete="organization"><span class="signup-error" data-signup-error="school"></span></div>
+          <div class="signup-field"><label for="signup-title-field">职务<em>*</em></label><input id="signup-title-field" data-signup-field="title" type="text"><span class="signup-error" data-signup-error="title"></span></div>
+          <div class="signup-field"><label for="signup-region">省份/地区<em>*</em></label><select id="signup-region" data-signup-field="region"><option value="">请选择省份/地区</option><option>北京市/西城区</option><option>重庆市/渝北区</option><option>四川省/成都市</option><option>广东省/深圳市</option></select><span class="signup-error" data-signup-error="region"></span></div>
+          <div class="signup-field wide"><label for="signup-channel">请选择渠道来源：<em>*</em></label><select id="signup-channel" data-signup-field="channel"><option value="">请选择渠道来源</option><option>自媒体平台</option><option>朋友推荐</option><option>学校组织</option><option>往届参会</option><option>其他</option></select><span class="signup-error" data-signup-error="channel"></span></div>
+        </div>
+        <div class="signup-actions"><button class="btn btn-ghost" type="button" data-signup-prev>上一步</button><button class="btn btn-primary" type="button" data-signup-next>下一步</button></div>
+      </section>
+
+      <section class="signup-step" data-signup-step="3">
+        <div class="signup-order">
+          <div class="signup-order-card"><h4>已选场次</h4><div class="order-brand">2026 第十三届</div><h5>中国教育创新年会</h5><p>CHINA EDUCATION INNOVATION</p><div class="signup-order-price"><span data-signup-order-name>（现场参会）主论坛</span><br><span data-signup-order-price>¥2800</span> × 1</div></div>
+          <div class="signup-pay-panel"><b>场次：<span data-signup-order-session>（现场参会）主论坛</span></b><div class="signup-choice-label">支付方式</div><div class="signup-choice-row"><button class="signup-choice active" type="button" data-signup-payment="online">微信/支付宝支付 ✓</button><button class="signup-choice" type="button" data-signup-payment="bank">对公转账/银行支付</button></div><div class="signup-choice-label">发票信息</div><div class="signup-choice-row"><button class="signup-choice active" type="button" data-signup-invoice="none">不需要发票 ✓</button><button class="signup-choice" type="button" data-signup-invoice="electronic">电子发票</button></div></div>
+        </div>
+        <div class="signup-invoice-fields signup-form-grid" data-signup-invoice-fields>
+          <div class="signup-field"><label for="signup-invoice-title">发票抬头<em>*</em></label><input id="signup-invoice-title" data-signup-field="invoiceTitle" type="text" placeholder="可复用历史发票信息"><span class="signup-error" data-signup-error="invoiceTitle"></span></div>
+          <div class="signup-field"><label for="signup-tax">纳税识别号<em>*</em></label><input id="signup-tax" data-signup-field="taxNo" type="text"><span class="signup-error" data-signup-error="taxNo"></span></div>
+          <div class="signup-field wide"><label for="signup-email">收票邮箱<em>*</em></label><input id="signup-email" data-signup-field="email" type="email" autocomplete="email" placeholder="用于接收电子发票"><span class="signup-error" data-signup-error="email"></span></div>
+        </div>
+        <div class="signup-total"><span>应付金额：</span><b data-signup-total>¥2800</b></div>
+        <div class="signup-actions"><button class="btn btn-ghost" type="button" data-signup-prev>上一步</button><button class="btn btn-primary" type="button" data-signup-submit>提交订单</button></div>
+      </section>
+
+      <section class="signup-step" data-signup-step="4">
+        <div class="signup-success"><div class="signup-success-mark">✓</div><h3>报名成功</h3><p>已完成「<span data-signup-success-name>（现场参会）主论坛</span>」报名，可继续完成会前准备。</p><div class="signup-success-actions"><button class="signup-hotel" type="button"><span><b>预定酒店</b><span>为参会提供就近住宿预订</span></span><i>›</i></button><button class="btn btn-primary" type="button" data-signup-view>查看我的报名</button><button class="btn btn-ghost" type="button" data-signup-close>返回年会首页</button></div></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<button class="demo-fab" type="button" data-demo-open>演示状态</button>
+<aside class="demo-console" aria-label="年会状态演示控制器">
+  <div class="demo-head">
+    <div><b>页面状态预览</b><p>切换周期、票种与完成状态，查看同一官网在不同用户视角下的完整页面。</p></div>
+    <button class="demo-close" type="button" data-demo-close>收起 ×</button>
+  </div>
+  <div class="demo-group">
+    <h4>年会周期</h4>
+    <div class="demo-options">
+      <button class="demo-option" type="button" data-demo-phase="registration">报名期</button>
+      <button class="demo-option" type="button" data-demo-phase="prep">会前准备</button>
+      <button class="demo-option" type="button" data-demo-phase="live">会议进行</button>
+      <button class="demo-option" type="button" data-demo-phase="post">会后</button>
+    </div>
+  </div>
+  <div class="demo-group">
+    <h4>用户身份与票种</h4>
+    <div class="demo-options">
+      <button class="demo-option" type="button" data-demo-identity="anonymous">未登录</button>
+      <button class="demo-option" type="button" data-demo-identity="guest">已登录未报名</button>
+      <button class="demo-option" type="button" data-demo-identity="main">主论坛</button>
+      <button class="demo-option" type="button" data-demo-identity="combo">主论坛＋深研课</button>
+      <button class="demo-option" type="button" data-demo-identity="expo">独立方案展</button>
+      <button class="demo-option" type="button" data-demo-identity="online">线上参会</button>
+    </div>
+  </div>
+  <div class="demo-group">
+    <h4>用户状态</h4>
+    <div class="demo-options">
+      <button class="demo-option" type="button" data-demo-flag="course">已选深研课</button>
+      <button class="demo-option" type="button" data-demo-flag="assessment">已完成自评</button>
+      <button class="demo-option" type="button" data-demo-flag="checkin">已签到</button>
+    </div>
+  </div>
+  <p class="demo-summary" data-demo-summary></p>
+</aside>
+
 <nav>
   <div class="nav-inner">
-    <div class="logo"><span class="logo-mark">13</span>中国教育创新年会</div>
+    <div class="logo"><img class="logo-title-img" src="assets/brand-title-gold.png" alt="中国教育创新年会"></div>
     <div class="nav-links">
       <a href="#about">大会概况</a>
       <a href="#tickets">票种权益</a>
       <a href="#agenda">大会议程</a>
-      <a href="#guests">嘉宾</a>
       <a href="#deep">深研课</a>
       <a href="#map">学习地图</a>
       <a href="#passport">学习护照</a>
       <a href="#expo">方案展</a>
-      <a href="#account">个人中心</a>
-      <a href="#tickets" class="nav-cta">立即报名</a>
+      <span class="nav-gap" aria-hidden="true"></span>
+      <a href="#account" class="nav-cta acct">个人中心</a>
+      <a href="#tickets" class="nav-cta" data-open-registration>立即报名</a>
     </div>
   </div>
 </nav>
 
 <!-- ================= HERO ================= -->
-<header class="hero">
+<header class="hero" data-page="home">
   <div class="hero-grid-lines"></div>
   <div class="wrap">
-    <div class="hero-eyebrow"><span class="dot"></span>报名通道现已开启 · 中国基础教育年度风向标</div>
+    <div class="hero-eyebrow"><span class="dot"></span><span data-state-eyebrow>报名通道现已开启 · 中国基础教育年度风向标</span></div>
     <h1 class="serif">第<span class="no">十三</span>届<br>中国教育创新年会</h1>
-    <p class="hero-theme serif" style="font-size:clamp(24px,3.4vw,36px);color:#fff;font-weight:800;margin-top:26px;">无限游戏｜下一代学校</p>
-    <p class="hero-theme" style="margin-top:14px;font-size:clamp(15px,1.8vw,18px);">以思考的纵深与行动的具体，与<em>5000+</em>教育人共同临摹下一代学校全新的样子</p>
+    <p class="hero-theme serif" data-state-theme style="font-size:clamp(24px,3.4vw,36px);color:#fff;font-weight:800;margin-top:26px;">无限游戏｜下一代学校</p>
+    <p class="hero-theme" data-state-copy style="margin-top:14px;font-size:clamp(15px,1.8vw,18px);">以思考的纵深与行动的具体，与<em>5000+</em>教育人共同临摹下一代学校全新的样子</p>
     <div class="hero-meta">
       <div class="chip">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -487,10 +772,10 @@
       </div>
     </div>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#tickets">立即报名参会
+      <a class="btn btn-primary" data-state-primary data-open-registration href="#tickets"><span data-state-primary-label>立即报名参会</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="btn btn-ghost" href="#map">查看我的学习地图</a>
+      <a class="btn btn-ghost" data-state-secondary href="#map" data-state-secondary-label>查看我的学习地图</a>
     </div>
     <div class="countdown" id="countdown">
       <div class="cd-cell"><b id="cd-d">--</b><span>天</span></div>
@@ -501,78 +786,83 @@
   </div>
 </header>
 
-<div class="marquee">
-  <div class="marquee-track">
-    <span>主论坛 MAIN FORUM</span><span>深研课 DEEP COURSES</span><span>方案展 EXPO</span><span>学习地图 LEARNING MAP</span><span>学习护照 PASSPORT</span><span>AI 共创站 AI STUDIO</span><span>未来币 FUTURE COIN</span>
-    <span>主论坛 MAIN FORUM</span><span>深研课 DEEP COURSES</span><span>方案展 EXPO</span><span>学习地图 LEARNING MAP</span><span>学习护照 PASSPORT</span><span>AI 共创站 AI STUDIO</span><span>未来币 FUTURE COIN</span>
-  </div>
-</div>
-
-<!-- ================= STATS ================= -->
-<div class="stats">
-  <div class="wrap stats-grid">
-    <div class="stat"><b>2014<i>年</i></b><span>年会起始，连续举办十二届</span></div>
-    <div class="stat"><b>5000<i>+</i></b><span>每年现场参会人数</span></div>
-    <div class="stat"><b>200<i>+</i></b><span>覆盖城市</span></div>
-    <div class="stat"><b>200万<i>+</i></b><span>在线观看人数</span></div>
-  </div>
-</div>
-
 <!-- ================= ABOUT ================= -->
-<section id="about">
-  <div class="wrap about-grid">
-    <div class="about-text">
-      <div class="kicker">ABOUT · 大会概况</div>
-      <h2 class="sec-title">一届年会，<br>一次完整的“入学”体验</h2>
-      <p>由蒲公英教育智库、新校长传媒主办的中国教育创新年会，被誉为<b>“中国基础教育年度风向标”</b>。自2014年起，分别在重庆、上海、杭州、南京、成都、深圳、厦门等城市连续举办十二届。第十三届将于<b>2026年12月1日–4日在广州</b>举办，年度主题为<b>「无限游戏｜下一代学校」</b>。</p>
-      <p>今年，年会完成一次重要升级：你拿到的不只是一张门票，而是<b>一个贯穿会前、现场与会后的统一账号</b>——报名、自评、学习地图、走班选课、现场打卡、方案展消费、会后学习报告，全部在一个平台完成。</p>
-      <p>参加年会的对象，从国内外中小学书记/校长、管理团队、教研骨干，到全球教育创新先锋及不同特质的教育人。第十三届，我们继续把中国基础教育界最具现场感的年度盛会，办成<b>一次真正“学有所得”的深度学习旅程</b>。</p>
+<section id="about" data-page="home">
+  <div class="about-preface">
+    <div class="wrap about-preface-grid">
+      <div class="preface-main">
+        <div class="preface-left">
+          <div class="preface-copy">
+            <h2 class="sr-only">关于中国教育创新年会</h2>
+            <p>由蒲公英教育智库策划主办，中国基础教育界共创发起的中国教育创新年会，被誉为“中国基础教育年度风向标”。</p>
+            <p>自2014年起，分别在重庆、深圳、上海、杭州、南京、成都、厦门等城市连续举办十二届。每年现场参会者5000人左右，200多万人次在线观看，参加对象从中小学管理团队、教研骨干到全球教育创新先锋及不同特质的教育人。迄今为止，中国教育创新年会已成为中国基础教育界最具专业影响力的年度盛会。</p>
+            <p>2014年至今，中国教育创新年会已邀请国内外最具研发与生产能力的一流供应商，包括微软、苹果、科大讯飞、翼欧教育、希沃、上海东方等企业参与会议布展营销，对全国教育局长、中小学校长产生了极深的社群影响，也为参会企业搭建了直通学校课程与教学场景的快车道。</p>
+          </div>
+          <div class="preface-stats" aria-label="年会影响力数据">
+            <div class="preface-stat"><strong>12<small>届</small></strong><span>连续成功举办</span></div>
+            <div class="preface-stat"><strong>5,000<small>+</small></strong><span>线下参会者</span></div>
+            <div class="preface-stat"><strong>200<small>万+</small></strong><span>线上观看人次</span></div>
+          </div>
+        </div>
+        <div class="preface-right">
+          <div class="history-video-slot" data-history-video-slot>
+            <!-- 将 data-video-src 替换为 MP4 地址，播放器会自动启用。 -->
+            <video class="history-video-player" controls preload="metadata" playsinline data-video-src="" aria-label="历届中国教育创新年会回顾视频"></video>
+            <div class="history-video-placeholder" aria-hidden="true">
+              <span class="history-video-play"></span>
+              <strong>历届年会回顾视频</strong>
+              <span>视频素材待接入</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="feature-list">
-      <div class="feature-item">
-        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></div>
-        <div><h4>一个账号，全程通用</h4><p>手机号即唯一身份。登录后自动关联你的学校信息、发票信息、酒店信息和全部订单，无需重复填写。</p></div>
-      </div>
-      <div class="feature-item">
-        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.5-5.5a2.1 2.1 0 0 1 3-3L9 14l8.5-8.5a2.1 2.1 0 0 1 3 3L9 20z"/></svg></div>
-        <div><h4>先自评，再生成学习地图</h4><p>报名缴费后完成自评问卷，系统依据你的画像生成个性化参会线路；未自评也能按官方推荐线路逛会。</p></div>
-      </div>
-      <div class="feature-item">
-        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
-        <div><h4>学习护照，记录沉淀为报告</h4><p>现场用文字、照片、语音随时记录，完成“所思、所得、所遇、所破”四维打卡任务，会后自动生成个人学习报告。</p></div>
-      </div>
-      <div class="feature-item">
-        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div><h4>未来币，现场学习的硬通货</h4><p>打卡、逛展赚未来币，在方案展市集兑换教育产品与方案，让学习成果直接“可带走”。</p></div>
+  </div>
+  <div class="about-history">
+    <div class="wrap">
+      <figure class="annual-timeline" aria-label="中国教育创新年会历届回顾，点击各届图标查看回顾">
+        <div class="annual-timeline-scroll">
+          <div class="annual-timeline-map">
+            <img src="assets/annual-history.jpg?v=2" alt="2014年至2025年中国教育创新年会历程图">
+            <a class="annual-year-link" style="--x:6.35%;--hit-y:19.5%;--hit-w:8%;--hit-h:18%;" href="https://mp.weixin.qq.com/s/Q6Akyi-wHAEqoWXp6me0tg" target="_blank" rel="noopener noreferrer" title="查看2014年重庆年会回顾"><span class="sr-only">查看2014年重庆年会回顾</span></a>
+            <a class="annual-year-link" style="--x:13.18%;--hit-y:18.9%;--hit-w:8%;--hit-h:19%;" href="https://mp.weixin.qq.com/s/1tilXwX3XlrOq_O1vrSELQ" target="_blank" rel="noopener noreferrer" title="查看2015年深圳年会回顾"><span class="sr-only">查看2015年深圳年会回顾</span></a>
+            <a class="annual-year-link" style="--x:23.29%;--hit-y:19.4%;--hit-w:8%;--hit-h:20%;" href="https://mp.weixin.qq.com/s/jb_bV6o3ydKjrxivi1Urvg" target="_blank" rel="noopener noreferrer" title="查看2016年上海年会回顾"><span class="sr-only">查看2016年上海年会回顾</span></a>
+            <a class="annual-year-link" style="--x:17.5%;--hit-y:31.7%;--hit-w:9%;--hit-h:21%;" href="https://mp.weixin.qq.com/s/V_53HIuihhUnTsXvLj1Xjg" target="_blank" rel="noopener noreferrer" title="查看2017年杭州年会回顾"><span class="sr-only">查看2017年杭州年会回顾</span></a>
+            <a class="annual-year-link" style="--x:28.46%;--hit-y:29.7%;--hit-w:9%;--hit-h:22%;" href="https://mp.weixin.qq.com/s/px-tugScN3ufHIXttWE4bg" target="_blank" rel="noopener noreferrer" title="查看2018年南京年会回顾"><span class="sr-only">查看2018年南京年会回顾</span></a>
+            <a class="annual-year-link" style="--x:38.18%;--hit-y:27.8%;--hit-w:10%;--hit-h:23%;" href="https://mp.weixin.qq.com/s/YESj_IBDx-JTCmfE-5UTCQ" target="_blank" rel="noopener noreferrer" title="查看2019年成都年会回顾"><span class="sr-only">查看2019年成都年会回顾</span></a>
+            <a class="annual-year-link" style="--x:47.61%;--hit-y:32%;--hit-w:10%;--hit-h:26%;" href="https://mp.weixin.qq.com/s/NtgfN4vlyYm44cCe-iVGOA" target="_blank" rel="noopener noreferrer" title="查看2020年重庆年会回顾"><span class="sr-only">查看2020年重庆年会回顾</span></a>
+            <a class="annual-year-link" style="--x:25.39%;--hit-y:46.5%;--hit-w:12%;--hit-h:28%;" href="https://mp.weixin.qq.com/s/G1qzru5ZR8eaaGp5qrEjqQ" target="_blank" rel="noopener noreferrer" title="查看2021年重庆年会回顾"><span class="sr-only">查看2021年重庆年会回顾</span></a>
+            <a class="annual-year-link" style="--x:40.52%;--hit-y:54.2%;--hit-w:13%;--hit-h:30%;" href="https://mp.weixin.qq.com/s/lgBuVIw3dazq3r7QPKTwPw" target="_blank" rel="noopener noreferrer" title="查看2022年重庆年会回顾"><span class="sr-only">查看2022年重庆年会回顾</span></a>
+            <a class="annual-year-link" style="--x:55.46%;--hit-y:53.8%;--hit-w:14%;--hit-h:31%;" href="https://mp.weixin.qq.com/s/H4rQMG_7pOZKKqX22yVvYg" target="_blank" rel="noopener noreferrer" title="查看2023年深圳年会回顾"><span class="sr-only">查看2023年深圳年会回顾</span></a>
+            <a class="annual-year-link" style="--x:72.37%;--hit-y:53.7%;--hit-w:15%;--hit-h:34%;" href="https://mp.weixin.qq.com/s/wKJK432nhufPL-MM4nRVrg" target="_blank" rel="noopener noreferrer" title="查看2024年厦门年会回顾"><span class="sr-only">查看2024年厦门年会回顾</span></a>
+            <a class="annual-year-link" style="--x:88.38%;--hit-y:51.2%;--hit-w:16%;--hit-h:39%;" href="https://mp.weixin.qq.com/s/BHA5yXVPcV8guAF4p_fR9w" target="_blank" rel="noopener noreferrer" title="查看2025年杭州年会回顾"><span class="sr-only">查看2025年杭州年会回顾</span></a>
+          </div>
+        </div>
+      </figure>
+      <div class="state-surface" aria-live="polite">
+        <div class="state-overview">
+          <div class="state-label">当前预览</div>
+          <h3 data-state-title>主论坛＋深研课 · 会前准备</h3>
+          <p data-state-description>已报名参会人正在完成选课、自评与学习地图的会前准备。</p>
+          <div class="state-permissions" data-state-permissions></div>
+        </div>
+        <div class="state-next"><b data-state-next-title>下一步</b><ul data-state-next-list></ul></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= TICKETS ================= -->
-<section id="tickets" class="tickets">
+<section id="tickets" class="tickets" data-page="home">
   <div class="wrap">
     <div class="kicker">TICKETS · 票种权益</div>
-    <h2 class="sec-title">三类票种，权益一目了然</h2>
+    <h2 class="sec-title">四类票种，权益一目了然</h2>
     <p class="sec-desc">本届年会实行票种分级与展厅门禁联动：你的参会牌颜色即通行权限。购票前请确认各票种可进入的区域。</p>
 
     <div class="ticket-grid">
-      <div class="ticket">
-        <h3>独立方案展票</h3>
-        <div class="price">¥300<small> /人</small></div>
-        <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展展厅通行（1号展厅）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
-          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
-          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含深研课选课资格</li>
-        </ul>
-        <a class="btn btn-ghost" href="#account">购买方案展票</a>
-      </div>
-
-      <div class="ticket hot">
+      <div class="ticket hot" data-ticket-card="main">
         <div class="tag">大多数参会者选择</div>
-        <h3>主论坛票</h3>
+        <h3>主论坛<span class="ticket-state">当前选择</span></h3>
         <div class="price">¥2800<small> /人</small></div>
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛全程参会（含选座）</li>
@@ -581,34 +871,50 @@
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习地图 + 学习护照全部功能</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报场外深研课</li>
         </ul>
-        <a class="btn btn-primary" href="#account">报名主论坛</a>
+        <a class="btn btn-primary" href="#account" data-open-registration="main">报名主论坛</a>
       </div>
 
-      <div class="ticket">
-        <h3>主论坛＋深研课票</h3>
+      <div class="ticket" data-ticket-card="combo">
+        <h3>主论坛＋深研课<span class="ticket-state">当前选择</span></h3>
         <div class="price">¥2900<small> /人</small></div>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛票全部权益</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛全部权益</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课权益一份（直接选课，无需重复付款）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛结束后一天的小场域深度学习</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>付费后支持一次换课</li>
         </ul>
-        <a class="btn btn-ghost" href="#deep">了解组合票</a>
+        <a class="btn btn-ghost" href="#deep" data-open-registration="combo">报名主论坛＋深研课</a>
+      </div>
+      <div class="ticket" data-ticket-card="online">
+        <h3>线上参会<span class="ticket-state">当前选择</span></h3>
+        <div class="price">¥1560<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>第十三届中国教育创新年会主论坛直播及回看、各分论坛及场外深研课分享内容录播及回看；回看截止至 2027 年 12 月 4 日</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>团队报名：满 10 人赠 1人，满 20 人享 8 折，满 50 人享 7 折</li>
+        </ul>
+        <a class="btn btn-ghost" href="#account" data-open-registration="online">报名线上参会</a>
+      </div>
+      <div class="ticket" data-ticket-card="expo">
+        <h3>独立方案展<span class="ticket-state">当前选择</span></h3>
+        <div class="price">¥300<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展展厅通行（1号展厅）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含深研课选课资格</li>
+        </ul>
+        <a class="btn btn-ghost" href="#account" data-open-registration="expo">购买方案展</a>
       </div>
     </div>
 
-    <div class="access-strip">
-      <b>门禁对照</b>
-      <span class="pill pill-a">独立方案展票 → 1号展厅</span>
-      <span class="pill pill-b">主论坛票 / 组合票 → 1号 + 2号展厅</span>
-      <span class="pill pill-c">参会牌颜色即权限 · 两道门禁现场核验</span>
-    </div>
     <p class="ticket-note">* 各票种价格、退款规则、参会牌及门禁识别方式以最终业务配置为准。主论坛票及组合票均包含方案展通行权益；仅购买独立方案展票的参会人不可进入主论坛。</p>
   </div>
 </section>
 
 <!-- ================= AGENDA ================= -->
-<section id="agenda">
+<section id="agenda" data-page="home">
   <div class="wrap">
     <div class="kicker">AGENDA · 大会议程</div>
     <h2 class="sec-title">四天主论坛 + 一天场外深研，每天一个核心追问</h2>
@@ -748,16 +1054,11 @@
       <div class="agenda-item"><div class="time">全天</div><div><span class="label label-deep">场外深研课</span><h4>东莞松山湖清澜山学校</h4><p>全天沉浸式访学深研。持「主论坛＋深研课」票直接获得权益；仅报主论坛的参会人可单独选购。</p></div></div>
       <div class="agenda-item"><div class="time">全天</div><div><span class="label label-deep">场外深研课</span><h4>香港科技大学（广州）</h4><p>全天沉浸式访学深研。每人限选一门，付费后支持换课一次。</p></div></div>
     </div>
-
-    <div class="agenda-hint">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2743E0" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg>
-      议程内容以组委会每周更新为准，个别场次嘉宾仍在确认中；外籍嘉宾演讲配 AI 实时字幕。
-    </div>
   </div>
 </section>
 
-<!-- ================= GUESTS ================= -->
-<section id="guests" class="guests">
+<!-- ================= GUESTS（暂时隐藏，恢复时改回 display 或删除下面 style 属性，并把导航里的 #guests 链接加回来） ================= -->
+<section id="guests" class="guests" style="display:none;" data-page="home">
   <div class="wrap">
     <div class="kicker">SPEAKERS · 大会嘉宾</div>
     <h2 class="sec-title">60+ 位嘉宾，与下一代学校的建设者同行</h2>
@@ -777,7 +1078,7 @@
 </section>
 
 <!-- ================= DEEP COURSES ================= -->
-<section id="deep">
+<section id="deep" data-page="home">
   <div class="wrap">
     <div class="kicker">DEEP COURSES · 深研课</div>
     <h2 class="sec-title">静水深流：走班选课，把学习做到深处</h2>
@@ -851,11 +1152,12 @@
 </section>
 
 <!-- ================= LEARNING MAP ================= -->
-<section id="map" class="lmap">
+<section id="map" class="lmap" data-page="home">
   <div class="wrap">
     <div class="kicker">LEARNING MAP · 学习地图</div>
     <h2 class="sec-title">5000人的年会，你的线路只属于你</h2>
     <p class="sec-desc">报名缴费并登录后即可查看学习地图。完成自评问卷，系统依据你的学校画像与核心问题生成个性化线路；未自评也能按官方推荐线路出发。线路内容自动匹配你的票种权限。</p>
+    <p class="demo-context-note" data-state-map></p>
 
     <div class="lmap-toggle">
       <button class="lmap-btn" data-route="official">我还没自评 · 看官方推荐线路</button>
@@ -885,7 +1187,7 @@
 </section>
 
 <!-- ================= PASSPORT ================= -->
-<section id="passport">
+<section id="passport" data-page="home">
   <div class="wrap passport-grid">
     <div class="phone">
       <div class="phone-screen">
@@ -907,22 +1209,33 @@
       <div class="kicker">PASSPORT · 学习护照</div>
       <h2 class="sec-title">把三天的学习，<br>沉淀成一份带得走的报告</h2>
       <p class="sec-desc">学习护照是实体学习手册的数字版。按日期、嘉宾、场次、展位进入内容页，随时记录；完成四维打卡任务赚未来币；会后自动生成个人学习报告。</p>
+      <p class="demo-context-note light" data-state-passport></p>
       <div class="passport-feats">
         <div class="pf"><div class="n">1</div><div><h4>多种方式进入</h4><p>护照首页、学习地图、实体手册二维码、嘉宾/场次二维码、展位二维码，扫哪进哪。</p></div></div>
         <div class="pf"><div class="n">2</div><div><h4>文字 / 照片 / 语音自由记录</h4><p>每条记录自动关联日期与内容节点，不怕回去之后对不上号。</p></div></div>
         <div class="pf"><div class="n">3</div><div><h4>四维打卡赚未来币</h4><p>按“所思、所得、所遇、所破”完成每日任务，奖励自动入账，任务规则按日配置。</p></div></div>
         <div class="pf"><div class="n">4</div><div><h4>会后个人学习报告</h4><p>基于真实记录与打卡汇总生成——只算你实际参与的，不把“推荐了没去”算作完成。</p></div></div>
       </div>
+      <div class="after-meeting">
+        <h4>会后仍可继续使用</h4>
+        <div class="after-grid">
+          <span>个人学习报告</span>
+          <span>课程回放与资料</span>
+          <span>学习地图回顾</span>
+          <span>参会与打卡记录</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ================= EXPO ================= -->
-<section id="expo" class="expo">
+<section id="expo" class="expo" data-page="home">
   <div class="wrap">
     <div class="kicker">EXPO & AI STUDIO · 方案展与AI共创站</div>
     <h2 class="sec-title">云涌集：看好方案，当场带走</h2>
     <p class="sec-desc">今年方案展正式定名「云涌集——下一代学校重难点、关键卡点创新解决方案展」，围绕学生、学习、课程、教师、评价、技术、校园、组织等真实卡点征集创新方案。扫码看详情、用未来币下单、在 AI 共创站把学校问题变成可执行方案。</p>
+    <p class="demo-context-note light" data-state-expo></p>
     <div class="expo-grid">
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
@@ -954,12 +1267,13 @@
 </section>
 
 <!-- ================= ACCOUNT ================= -->
-<section id="account">
+<section id="account" data-page="account">
   <div class="wrap acct-grid">
     <div>
       <div class="kicker">MY CENTER · 个人中心</div>
       <h2 class="sec-title">一个手机号，<br>管住你在年会的所有事</h2>
       <p class="sec-desc">以手机号为唯一身份，登录即自动关联你填写过的学校信息、发票信息、酒店信息与全部订单。换人参会时，新参会人登录后一键确认继承信息。</p>
+      <p class="demo-context-note light" data-state-account></p>
       <div class="acct-feats" style="margin-top:30px;">
         <div class="feature-item">
           <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
@@ -992,19 +1306,16 @@
       <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg>产品市集订单 · 游戏节实践手册 ×1<span class="st">已发货</span></div>
       <div class="query-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M8.5 9.5c0-1.4 1.6-2.5 3.5-2.5s3.5 1.1 3.5 2.5-1.6 2.5-3.5 2.5-3.5 1.1-3.5 2.5 1.6 2.5 3.5 2.5 3.5-1.1 3.5-2.5"/></svg>未来币账户 · 余额 1,280<span class="st">查看明细</span></div>
     </div>
-  </div>
-</section>
-
-<!-- ================= HISTORY ================= -->
-<section class="history">
-  <div class="wrap">
-    <div class="kicker">SINCE 2014 · 历届回顾</div>
-    <h2 class="sec-title">十二届沉淀，一座城市的教育记忆</h2>
-    <p class="sec-desc">从重庆到厦门，年会走过的每一站，都是中国基础教育创新的一次集体作答。</p>
-    <div class="hist-cities">
-      <span>重庆</span><span>上海</span><span>杭州</span><span>南京</span><span>成都</span><span>深圳</span><span>厦门</span><span style="border-color:var(--gold);color:var(--gold);">2026 · 广州</span>
+    <div class="service-hub" style="grid-column:1/-1;">
+      <h3>四个常用入口，覆盖参会全程</h3>
+      <p>不需要记住功能藏在哪里。平台会根据报名、会前、会中和会后阶段，把当前最常用的服务放到前面。</p>
+      <div class="service-grid">
+        <div class="service-card"><b>一键查询</b><p>集中查看订单、选课、发票、酒店、未来币和产品物流。</p></div>
+        <div class="service-card"><b>酒店住宿</b><p>查看协议酒店、住宿订单、入住信息及与参会人关联状态。</p></div>
+        <div class="service-card"><b>参会须知</b><p>会场地址、交通、签到、门禁、选课与每日参会提醒一页查阅。</p></div>
+        <div class="service-card"><b>会议服务</b><p>遇到报名、换人、发票或现场问题时，进入对应服务入口处理。</p></div>
+      </div>
     </div>
-    <p class="hist-quote serif">“参加年会对象从国内外中小学书记/校长、管理团队、教研骨干，到全球教育创新先锋——<i>中国教育创新年会已成为中国基础教育界现象级的年度盛会。</i>”</p>
   </div>
 </section>
 
@@ -1068,6 +1379,413 @@
       document.getElementById(btn.dataset.route).classList.add('active');
     });
   });
+
+  // Demo state controller — only active when the preview is opened with ?demo=1.
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    if(params.get('demo') !== '1') return;
+
+    var phaseNames = {registration:'报名期', prep:'会前准备', live:'会议进行', post:'会后'};
+    var identityNames = {anonymous:'未登录', guest:'已登录未报名', main:'主论坛', combo:'主论坛＋深研课', expo:'独立方案展', online:'线上参会'};
+    var phases = Object.keys(phaseNames);
+    var identities = Object.keys(identityNames);
+    var state = {
+      phase: phases.indexOf(params.get('phase')) > -1 ? params.get('phase') : 'prep',
+      identity: identities.indexOf(params.get('identity')) > -1 ? params.get('identity') : 'combo',
+      course: params.get('course') === '1',
+      assessment: params.get('assessment') === '1',
+      checkin: params.get('checkin') === '1'
+    };
+    var phaseCopy = {
+      registration:{
+        eyebrow:'报名进行中 · 选择你的参会方式',
+        copy:'从现场参会到线上学习，选择适合自己的路径，提前完成报名与服务信息。',
+        agenda:'报名期可先浏览完整议程，具体场次以组委会最终公布为准。'
+      },
+      prep:{
+        eyebrow:'会前准备 · 把四天学习安排明白',
+        copy:'选课、自评、学习地图会依次开放，平台会根据你的权益提示最需要完成的一步。',
+        agenda:'会前可先浏览并收藏议程；深研课资格会在选课入口按票种显示。'
+      },
+      live:{
+        eyebrow:'大会进行中 · 按今天的节奏入场学习',
+        copy:'现场签到、当日议程、学习地图、学习护照与方案展服务已按参会权益开放。',
+        agenda:'当天议程已开放，请根据票种和现场提醒安排参会。'
+      },
+      post:{
+        eyebrow:'会后学习 · 把现场沉淀成下一步行动',
+        copy:'回放、资料、参会记录与学习报告陆续开放，让四天的现场继续发挥作用。',
+        agenda:'会后可回看已开放内容，沉淀个人学习记录与行动计划。'
+      }
+    };
+
+    function isRegistered(){
+      return ['main','combo','expo','online'].indexOf(state.identity) > -1;
+    }
+    function hasCourseRight(){
+      return ['main','combo'].indexOf(state.identity) > -1;
+    }
+    function isOnsite(){
+      return ['main','combo','expo'].indexOf(state.identity) > -1;
+    }
+    function normalize(){
+      if(!isRegistered()){
+        state.course = false;
+        state.assessment = false;
+        state.checkin = false;
+      }
+      if(!hasCourseRight()) state.course = false;
+      if(!(isOnsite() && ['live','post'].indexOf(state.phase) > -1)) state.checkin = false;
+    }
+    function setText(selector, value){
+      var node = document.querySelector(selector);
+      if(node) node.textContent = value;
+    }
+    function setLink(selector, label, href){
+      var node = document.querySelector(selector);
+      if(node){
+        node.href = href;
+        var labelNode = node.querySelector('[data-state-primary-label]');
+        if(labelNode) labelNode.textContent = label;
+        else node.textContent = label;
+      }
+    }
+    function ticketRights(){
+      if(state.identity === 'main') return ['主论坛', '场内深研课', '方案展', '学习地图', '学习护照', '会后回放'];
+      if(state.identity === 'combo') return ['主论坛', '场内深研课', '场外深研课', '方案展', '学习地图', '学习护照', '会后回放'];
+      if(state.identity === 'expo') return ['方案展', '学习地图', '学习护照'];
+      if(state.identity === 'online') return ['线上直播', '会后回放'];
+      if(state.identity === 'guest') return ['继续报名', '查看服务说明'];
+      return ['浏览大会内容', '查看票种权益'];
+    }
+    function getAction(){
+      if(!isRegistered()){
+        if(state.phase === 'post') return {primary:'购买线上学习', primaryHref:'#tickets', secondary:'查看大会回顾', secondaryHref:'#passport'};
+        if(state.phase === 'live') return {primary:'线上参会', primaryHref:'#tickets', secondary:'查看现场议程', secondaryHref:'#agenda'};
+        return {primary:state.identity === 'guest' ? '完成报名' : '查看票种权益', primaryHref:'#tickets', secondary:state.identity === 'guest' ? '查看个人中心' : '登录后继续报名', secondaryHref:'#account'};
+      }
+      if(state.phase === 'registration') return {primary:'查看参会订单', primaryHref:'#account', secondary:'查看票种权益', secondaryHref:'#tickets'};
+      if(state.phase === 'prep'){
+        if(hasCourseRight() && !state.course) return {primary:'去选深研课', primaryHref:'#deep', secondary:'完成自评', secondaryHref:'#map'};
+        if(!state.assessment) return {primary:'完成自评', primaryHref:'#map', secondary:'查看选课信息', secondaryHref:'#deep'};
+        return {primary:'查看学习地图', primaryHref:'#map', secondary:'查看参会服务', secondaryHref:'#account'};
+      }
+      if(state.phase === 'live'){
+        if(state.identity === 'online') return {primary:'观看线上直播', primaryHref:'#agenda', secondary:'查看会后回放', secondaryHref:'#passport'};
+        if(!state.checkin) return {primary:'现场签到', primaryHref:'#account', secondary:'查看今日议程', secondaryHref:'#agenda'};
+        return {primary:'查看今日议程', primaryHref:'#agenda', secondary:'打开学习护照', secondaryHref:'#passport'};
+      }
+      return {primary:state.identity === 'online' ? '查看课程回放' : '查看学习报告', primaryHref:'#passport', secondary:'回看学习地图', secondaryHref:'#map'};
+    }
+    function getTasks(){
+      if(state.identity === 'anonymous') return ['登录后可保存报名信息，并继续进入后续服务。', '先浏览票种与议程，选择适合自己的参会方式。'];
+      if(state.identity === 'guest') return ['完成报名与参会人信息填写，才会解锁对应服务。', '报名成功后，可在个人中心查询订单、酒店与发票。'];
+      if(state.phase === 'registration') return ['确认参会人、订单与服务信息。', '会前准备开启后，平台将提示选课与自评入口。'];
+      if(state.phase === 'prep'){
+        if(hasCourseRight() && !state.course) return ['先选择一门深研课，系统会保留你的票种权益。', '完成自评后，学习地图会切换为个性化线路。'];
+        if(!state.assessment) return ['完成自评，生成与你的学校画像匹配的学习地图。', '在个人中心确认酒店、发票和参会提醒。'];
+        return ['学习地图已可使用，可按推荐路线预习和收藏场次。', '在个人中心核对会前服务与参会人信息。'];
+      }
+      if(state.phase === 'live'){
+        if(state.identity === 'online') return ['进入直播间观看当天内容，结束后可在会后回放。', '将感兴趣的主题加入个人学习清单。'];
+        if(!state.checkin) return ['先完成现场核验签到，再按今日议程进入会场。', '打开学习地图，规划主论坛与方案展的路线。'];
+        return ['按今日议程参会，并用学习护照记录所思所得。', '在方案展完成打卡任务，积累未来币。'];
+      }
+      return ['查看已开放的回放、资料与个人参会记录。', state.identity === 'online' ? '继续完成线上课程学习。' : '把学习报告沉淀为下一步行动计划。'];
+    }
+    function contextNotes(){
+      var map = '完成报名并登录后，学习地图会按票种开放。';
+      var passport = '报名后，学习护照会在大会期间按日期、场次与展位开放。';
+      var expo = '方案展票与主论坛票均可进入云涌集，具体以现场门禁为准。';
+      var account = '登录后可查询订单、酒店、发票与参会服务进度。';
+      if(isRegistered() && !state.assessment && state.identity !== 'online') map = '完成自评后，学习地图会切换为你的个性化线路；当前仍可浏览官方推荐。';
+      if(state.assessment) map = '已完成自评。当前示例展示你的个性化学习线路，仍可手动切回官方推荐。';
+      if(state.identity === 'online'){
+        map = '线上参会以直播与会后回放为主，不显示现场学习动线。';
+        expo = '线上参会不含现场方案展；会后可查看已开放的线上资料。';
+      }
+      if(state.phase === 'live' && isOnsite()) passport = state.checkin ? '现场签到已完成，学习护照已开放：可按场次记录、打卡并积累未来币。' : '完成现场核验签到后，即可开始使用学习护照与现场打卡。';
+      if(state.phase === 'post') passport = '会后将按真实参会与记录生成学习报告，并开放对应的回放与资料。';
+      if(state.identity === 'guest') account = '当前账号尚未报名：完成报名后才能查看订单、酒店、发票与参会服务。';
+      if(state.identity === 'anonymous') account = '未登录状态仅展示公开内容；登录后可继续报名或查询已有订单。';
+      return {map:map, passport:passport, expo:expo, account:account};
+    }
+    function updateUrl(){
+      var url = new URL(window.location.href);
+      url.search = '';
+      url.searchParams.set('demo', '1');
+      url.searchParams.set('phase', state.phase);
+      url.searchParams.set('identity', state.identity);
+      if(state.course) url.searchParams.set('course', '1');
+      if(state.assessment) url.searchParams.set('assessment', '1');
+      if(state.checkin) url.searchParams.set('checkin', '1');
+      window.history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString() + url.hash);
+    }
+    function render(){
+      normalize();
+      var copy = phaseCopy[state.phase];
+      var action = getAction();
+      var notes = contextNotes();
+      var status = [];
+      if(state.course) status.push('已选深研课');
+      if(state.assessment) status.push('已完成自评');
+      if(state.checkin) status.push('已签到');
+
+      document.body.classList.add('is-demo');
+      setText('[data-state-eyebrow]', copy.eyebrow);
+      setText('[data-state-theme]', state.phase === 'post' ? '无限游戏仍在继续' : '无限游戏｜下一代学校');
+      setText('[data-state-copy]', copy.copy);
+      setLink('[data-state-primary]', action.primary, action.primaryHref);
+      setLink('[data-state-secondary]', action.secondary, action.secondaryHref);
+      var dynamicPrimary = document.querySelector('[data-state-primary]');
+      if(dynamicPrimary){
+        if(action.primaryHref === '#tickets' && /报名|参会|购买|票种/.test(action.primary)) dynamicPrimary.setAttribute('data-open-registration', '');
+        else dynamicPrimary.removeAttribute('data-open-registration');
+      }
+      setText('[data-state-title]', phaseNames[state.phase] + ' · ' + identityNames[state.identity]);
+      setText('[data-state-description]', isRegistered() ? '你当前拥有的参会权益与完成状态，正在决定本页最优先呈现的内容与下一步入口。' : '当前以公开浏览和报名转化为主；完成登录、报名后，页面会自动切换到对应的参会服务。');
+      setText('[data-state-next-title]', state.phase === 'live' ? '现在就做' : '下一步');
+      setText('[data-state-agenda]', copy.agenda);
+      setText('[data-state-map]', notes.map);
+      setText('[data-state-passport]', notes.passport);
+      setText('[data-state-expo]', notes.expo);
+      setText('[data-state-account]', notes.account);
+
+      var permissions = document.querySelector('[data-state-permissions]');
+      if(permissions) permissions.innerHTML = ticketRights().concat(status).map(function(item){return '<span>' + item + '</span>';}).join('');
+      var tasks = document.querySelector('[data-state-next-list]');
+      if(tasks) tasks.innerHTML = getTasks().map(function(item){return '<li>' + item + '</li>';}).join('');
+
+      document.querySelectorAll('[data-ticket-card]').forEach(function(card){
+        card.classList.toggle('is-active-ticket', card.dataset.ticketCard === state.identity);
+      });
+      document.querySelectorAll('[data-demo-phase]').forEach(function(button){
+        var active = button.dataset.demoPhase === state.phase;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-demo-identity]').forEach(function(button){
+        var active = button.dataset.demoIdentity === state.identity;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-demo-flag]').forEach(function(button){
+        var flag = button.dataset.demoFlag;
+        var disabled = (flag === 'course' && !hasCourseRight()) || (flag === 'assessment' && !isRegistered()) || (flag === 'checkin' && !(isOnsite() && ['live','post'].indexOf(state.phase) > -1));
+        button.disabled = disabled;
+        button.classList.toggle('active', !!state[flag]);
+        button.setAttribute('aria-pressed', state[flag] ? 'true' : 'false');
+      });
+      setText('[data-demo-summary]', '当前：' + phaseNames[state.phase] + ' · ' + identityNames[state.identity] + (status.length ? ' · ' + status.join('、') : ' · 尚无完成状态'));
+
+      var mapRoute = state.assessment && state.identity !== 'online' ? 'personal' : 'official';
+      var routeButton = document.querySelector('[data-route="' + mapRoute + '"]');
+      var routePanel = document.getElementById(mapRoute);
+      if(routeButton && routePanel){
+        document.querySelectorAll('.lmap-btn,.route-panel').forEach(function(node){node.classList.remove('active');});
+        routeButton.classList.add('active');
+        routePanel.classList.add('active');
+      }
+      updateUrl();
+    }
+
+    document.querySelectorAll('[data-demo-phase]').forEach(function(button){
+      button.addEventListener('click', function(){state.phase = button.dataset.demoPhase; render();});
+    });
+    document.querySelectorAll('[data-demo-identity]').forEach(function(button){
+      button.addEventListener('click', function(){state.identity = button.dataset.demoIdentity; render();});
+    });
+    document.querySelectorAll('[data-demo-flag]').forEach(function(button){
+      button.addEventListener('click', function(){
+        if(button.disabled) return;
+        var flag = button.dataset.demoFlag;
+        state[flag] = !state[flag];
+        render();
+      });
+    });
+    document.querySelector('[data-demo-close]').addEventListener('click', function(){document.body.classList.add('demo-collapsed');});
+    document.querySelector('[data-demo-open]').addEventListener('click', function(){document.body.classList.remove('demo-collapsed');});
+    render();
+  }());
+
+  // Registration flow adapted from the reference annual-meeting journey.
+  (function(){
+    var layer = document.querySelector('[data-signup-layer]');
+    var signup = {step:1, session:'main', payment:'online', invoice:'none'};
+    var sessions = {
+      main:{name:'（现场参会）主论坛', price:'¥2800'},
+      combo:{name:'（现场参会）主论坛 ＋ 深研课', price:'¥2900'},
+      expo:{name:'（现场参会）独立方案展', price:'¥300'},
+      online:{name:'（线上参会）年会线上学习', price:'¥1560'}
+    };
+    function setSignupText(selector, value){
+      document.querySelectorAll(selector).forEach(function(node){node.textContent = value;});
+    }
+    function currentSession(){return sessions[signup.session];}
+    function clearError(key){
+      var field = document.querySelector('[data-signup-field="' + key + '"]');
+      var error = document.querySelector('[data-signup-error="' + key + '"]');
+      if(field) field.classList.remove('invalid');
+      if(error) error.textContent = '';
+    }
+    function setError(key, message){
+      var field = document.querySelector('[data-signup-field="' + key + '"]');
+      var error = document.querySelector('[data-signup-error="' + key + '"]');
+      if(field) field.classList.add('invalid');
+      if(error) error.textContent = message;
+      return false;
+    }
+    function renderSignup(){
+      var info = currentSession();
+      document.querySelectorAll('[data-signup-step]').forEach(function(step){step.classList.toggle('active', Number(step.dataset.signupStep) === signup.step);});
+      document.querySelectorAll('[data-signup-progress]').forEach(function(item){
+        var number = Number(item.dataset.signupProgress);
+        item.classList.toggle('active', number === signup.step);
+        item.classList.toggle('done', number < signup.step);
+      });
+      document.querySelectorAll('[data-signup-session]').forEach(function(button){
+        var active = button.dataset.signupSession === signup.session;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      setSignupText('[data-signup-session-name]', info.name);
+      setSignupText('[data-signup-order-name]', info.name);
+      setSignupText('[data-signup-order-session]', info.name);
+      setSignupText('[data-signup-order-price]', info.price);
+      setSignupText('[data-signup-total]', info.price);
+      setSignupText('[data-signup-success-name]', info.name);
+      document.querySelectorAll('[data-signup-payment]').forEach(function(button){
+        var active = button.dataset.signupPayment === signup.payment;
+        button.classList.toggle('active', active);
+        button.textContent = button.dataset.signupPayment === 'online' ? '微信/支付宝支付' + (active ? ' ✓' : '') : '对公转账/银行支付' + (active ? ' ✓' : '');
+      });
+      document.querySelectorAll('[data-signup-invoice]').forEach(function(button){
+        var active = button.dataset.signupInvoice === signup.invoice;
+        button.classList.toggle('active', active);
+        button.textContent = button.dataset.signupInvoice === 'none' ? '不需要发票' + (active ? ' ✓' : '') : '电子发票' + (active ? ' ✓' : '');
+      });
+      document.querySelector('[data-signup-invoice-fields]').classList.toggle('is-visible', signup.invoice === 'electronic');
+    }
+    function openSignup(session){
+      signup.step = 1;
+      signup.session = sessions[session] ? session : 'main';
+      layer.classList.add('is-open');
+      layer.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('signup-open');
+      renderSignup();
+      layer.scrollTop = 0;
+      document.querySelector('[data-signup-close]').focus();
+    }
+    function closeSignup(){
+      layer.classList.remove('is-open');
+      layer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('signup-open');
+    }
+    function validateAttendee(){
+      var valid = true;
+      var values = {};
+      ['name','phone','school','title','region','channel'].forEach(function(key){
+        var field = document.querySelector('[data-signup-field="' + key + '"]');
+        values[key] = field.value.trim();
+        clearError(key);
+      });
+      if(!values.name) valid = setError('name', '请填写参会人姓名') && valid;
+      if(!/^1\d{10}$/.test(values.phone)) valid = setError('phone', '请填写 11 位手机号') && valid;
+      if(!values.school) valid = setError('school', '请填写单位') && valid;
+      if(!values.title) valid = setError('title', '请填写职务') && valid;
+      if(!values.region) valid = setError('region', '请选择省份/地区') && valid;
+      if(!values.channel) valid = setError('channel', '请选择渠道来源') && valid;
+      return valid;
+    }
+    function validateInvoice(){
+      if(signup.invoice !== 'electronic') return true;
+      var valid = true;
+      var values = {};
+      ['invoiceTitle','taxNo','email'].forEach(function(key){
+        var field = document.querySelector('[data-signup-field="' + key + '"]');
+        values[key] = field.value.trim();
+        clearError(key);
+      });
+      if(!values.invoiceTitle) valid = setError('invoiceTitle', '请填写发票抬头') && valid;
+      if(!values.taxNo) valid = setError('taxNo', '请填写纳税识别号') && valid;
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) valid = setError('email', '请填写有效的收票邮箱') && valid;
+      return valid;
+    }
+
+    document.addEventListener('click', function(event){
+      var trigger = event.target.closest('[data-open-registration]');
+      if(trigger){
+        event.preventDefault();
+        openSignup(trigger.dataset.openRegistration || 'main');
+      }
+    });
+    document.querySelectorAll('[data-signup-close]').forEach(function(button){button.addEventListener('click', closeSignup);});
+    layer.addEventListener('click', function(event){if(event.target === layer) closeSignup();});
+    document.addEventListener('keydown', function(event){if(event.key === 'Escape' && layer.classList.contains('is-open')) closeSignup();});
+    document.querySelectorAll('[data-signup-session]').forEach(function(button){
+      button.addEventListener('click', function(){signup.session = button.dataset.signupSession;renderSignup();});
+    });
+    document.querySelectorAll('[data-signup-payment]').forEach(function(button){
+      button.addEventListener('click', function(){signup.payment = button.dataset.signupPayment;renderSignup();});
+    });
+    document.querySelectorAll('[data-signup-invoice]').forEach(function(button){
+      button.addEventListener('click', function(){signup.invoice = button.dataset.signupInvoice;renderSignup();});
+    });
+    document.querySelectorAll('[data-signup-field]').forEach(function(field){
+      field.addEventListener('input', function(){clearError(field.dataset.signupField);});
+      field.addEventListener('change', function(){clearError(field.dataset.signupField);});
+    });
+    document.querySelectorAll('[data-signup-next]').forEach(function(button){
+      button.addEventListener('click', function(){
+        if(signup.step === 1) signup.step = 2;
+        else if(signup.step === 2 && validateAttendee()) signup.step = 3;
+        renderSignup();
+      });
+    });
+    document.querySelectorAll('[data-signup-prev]').forEach(function(button){
+      button.addEventListener('click', function(){signup.step = Math.max(1, signup.step - 1);renderSignup();});
+    });
+    document.querySelector('[data-signup-submit]').addEventListener('click', function(){
+      if(validateInvoice()){
+        signup.step = 4;
+        renderSignup();
+        document.querySelector('[data-signup-step="4"] h3').focus();
+      }
+    });
+    document.querySelector('[data-signup-view]').addEventListener('click', function(){
+      closeSignup();
+      location.hash = '#account';
+    });
+    document.querySelectorAll('[data-video-src]').forEach(function(player){
+      var src = player.dataset.videoSrc;
+      if(src){
+        player.src = src;
+        player.closest('[data-history-video-slot]').classList.add('is-ready');
+      }
+    });
+    renderSignup();
+  }());
+
+  // ===== Hash router: #account 是独立页，其余锚点属于首页 =====
+  (function(){
+    var PAGES = ['home', 'account'];
+    function currentPage(){
+      var h = location.hash || '';
+      if(h.indexOf('#account') === 0) return 'account';
+      return 'home';
+    }
+    function render(){
+      var page = currentPage();
+      document.querySelectorAll('[data-page]').forEach(function(node){
+        node.style.display = (node.dataset.page === page) ? '' : 'none';
+      });
+      // 窗口回到顶部，避免从长页面切过去时停留位置奇怪
+      if(page === 'account') window.scrollTo(0, 0);
+      document.body.classList.toggle('on-account-page', page === 'account');
+    }
+    window.addEventListener('hashchange', render);
+    render();
+  })();
 </script>
 </body>
 </html>
