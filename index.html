@@ -396,7 +396,7 @@
     width:300px;margin:0 auto;background:var(--ink);border-radius:38px;padding:12px;
     box-shadow:0 30px 70px rgba(23,22,15,.25);
   }
-  .phone-screen{background:#fff;border-radius:28px;overflow:hidden;min-height:520px;}
+  .phone-screen{background:#fff;border-radius:28px;overflow:hidden;aspect-ratio:1320/2868;}
   .ph-head{background:linear-gradient(140deg,var(--blue),var(--blue-deep));color:#fff;padding:26px 22px 20px;}
   .ph-head .t{font-size:12px;opacity:.75;letter-spacing:.14em;}
   .ph-head h4{font-size:19px;margin-top:5px;}
@@ -731,9 +731,8 @@
     .lmap-toggle{margin:30px 0 26px;gap:9px;}
     .lmap-btn{flex:1;min-width:0;padding:12px 10px;font-size:13px;text-align:center;white-space:normal;line-height:1.4;}
 
-    /* --- 护照手机样机缩放 --- */
+    /* --- 护照手机样机缩放（比例已随桌面端改为 iPhone 17 Pro Max 长宽比，无需额外高度） --- */
     .phone{width:min(280px,86vw);}
-    .phone-screen{min-height:470px;}
 
     /* --- 方案展 --- */
     .expo-card{padding:24px 20px;}
