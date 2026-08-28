@@ -507,6 +507,13 @@
   .signup-step{display:none;}
   .signup-step.active{display:block;}
   .signup-step h3{font-size:23px;margin:18px 0 20px;}
+  .signup-notes{margin:2px 0 18px;border:1px solid var(--line);border-radius:13px;background:#fff;padding:16px 18px;}
+  .signup-notes-panel{display:none;}
+  .signup-notes-panel.is-visible{display:block;}
+  .signup-notes-panel h4{font-size:14.5px;margin-bottom:8px;color:var(--blue);}
+  .signup-notes-panel ol{margin-left:18px;display:grid;gap:5px;}
+  .signup-notes-panel li{font-size:12.5px;line-height:1.7;color:var(--ink-soft);}
+  .signup-notes-panel li em{font-style:normal;font-size:12px;color:rgba(23,22,15,.55);}
   .signup-session-list{display:grid;gap:12px;}
   .signup-session{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;width:100%;text-align:left;padding:20px 22px;border:1px solid var(--line);border-radius:13px;background:#fff;cursor:pointer;font:inherit;color:var(--ink);}
   .signup-session:hover{border-color:rgba(39,67,224,.52);}
@@ -775,6 +782,29 @@
     <div class="signup-body">
       <section class="signup-step active" data-signup-step="1">
         <h3 id="signup-title">选择场次</h3>
+        <aside class="signup-notes" data-signup-notes aria-label="报名须知">
+          <div class="signup-notes-panel" data-signup-notes-panel="onsite">
+            <h4>现场参会报名提示</h4>
+            <ol>
+              <li>现场参会包含4天线下学习和28课时线上学习。会议结束后，可通过“新学习”APP手机端回看，回看有效期为2025年12月8日至2026年12月7日。</li>
+              <li>此票仅限单人使用，会务费不含交通、食宿等费用。</li>
+              <li>缴费成功视为报名成功。</li>
+              <li>12月2日（含）会议开始前，可更换参会人，每人可修改次数为1次。</li>
+              <li>付款后7天内支持无理由退款，7天后可更换参会人员。<br><em>注：“7天无理由退款”仅适用于11月25日（含）前提交申请。自11月25日起，鉴于会议开幕仅剩一周，席位安排已无法调整，此前已缴纳的相关费用将不支持退还。感谢您的理解与配合。</em></li>
+              <li>如有疑问或需求，可联系现场参会专属咨询老师：19122459494（林老师），19196310527（罗老师）。</li>
+            </ol>
+          </div>
+          <div class="signup-notes-panel" data-signup-notes-panel="online">
+            <h4>线上参会报名提示</h4>
+            <ol>
+              <li>线上参会包含：1个学习账号，登录“中国教育创新年会官网”电脑网页端 ( http://eicc.dett.cn/ ) 或“新学习”APP 手机端可同步观看会议内容；回看截止至2026年12月7日。</li>
+              <li>线上参会内容包括：第十二届中国教育创新年会主论坛直播及回看、各分论坛及场外深研课分享内容录播及回看。</li>
+              <li>线上参会报名团队折扣：满10人赠1人，满20人可享8折，满50人可享7折。团队报名请联系专属客服：李老师17783144578（微信同号）。</li>
+              <li>线上会议为虚拟内容服务，一经购买成功，概不退换，敬请谅解。</li>
+              <li>缴费成功视为报名成功。</li>
+            </ol>
+          </div>
+        </aside>
         <div class="signup-session-list" data-signup-sessions>
           <button class="signup-session active" type="button" data-signup-session="main">
             <span class="signup-radio"></span><span><strong>（现场参会）主论坛</strong><p>含主论坛大会与方案展通行；付款后自动获得 1 门场内深研课选课资格，场外深研课需单独购买。</p></span><span class="signup-price">¥2800</span>
@@ -1774,6 +1804,11 @@
         var active = button.dataset.signupSession === signup.session;
         button.classList.toggle('active', active);
         button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      // 报名须知跟随场次类型切换：线上参会看线上提示，其余看现场提示
+      var notesKind = signup.session === 'online' ? 'online' : 'onsite';
+      document.querySelectorAll('[data-signup-notes-panel]').forEach(function(panel){
+        panel.classList.toggle('is-visible', panel.dataset.signupNotesPanel === notesKind);
       });
       setSignupText('[data-signup-session-name]', info.name);
       setSignupText('[data-signup-order-name]', info.name);
