@@ -47,11 +47,11 @@ python3 -m http.server 4174
 7. `#expo`：方案展（位于深研课之后、学习地图之前，这是 Lear 指定的顺序）
 8. `#map`：学习地图状态切换
 9. `#passport`：学习护照
-10. `#account`：个人中心（独立「页」，通过 hash 路由切换显示）
+10. `#account`：一键查询（独立「页」，通过 hash 路由切换显示）
 11. `.history`：历届回顾文字与 16:9 视频位
 12. Footer
 
-顶部导航锚点顺序与上述一致：大会概况、票种权益、大会议程、深研课、方案展、学习地图、学习护照 + 个人中心/立即报名按钮。手机端（≤760px）个人中心和立即报名按钮缩小保留，内容导航收进右侧下拉面板（汉堡按钮触发，宽 200px，不锁主页面滚动）。
+顶部导航锚点顺序与上述一致：大会概况、票种权益、大会议程、深研课、方案展、学习地图、学习护照 + 一键查询/立即报名按钮。手机端（≤760px）一键查询和立即报名按钮缩小保留，内容导航收进右侧下拉面板（汉堡按钮触发，宽 200px，不锁主页面滚动）。
 
 导航锚点、板块顺序和已有交互方式默认不要改。当前任务是继续调整文字表述和视觉，不是重新设计信息架构。
 
@@ -105,7 +105,7 @@ python3 -m http.server 4174
 
 - 年会周期：报名期、会前准备、会议进行、会后
 - 用户身份：未登录、已登录未报名、主论坛、主论坛＋深研课、独立方案展、线上参会
-- 用户状态：已选深研课、已完成自评、已签到
+- 用户状态：已完成选课、已完成自评、已签到
 
 完整状态会写回 URL，例如：
 
@@ -138,7 +138,7 @@ http://127.0.0.1:4174/?demo=1&phase=prep&identity=combo&course=1&assessment=1
 3. **语义色组件复用**：`.btn-ghost` 的米白文字是为深色 Hero 设计的，复用到浅色背景（如报名弹窗）时必须覆写 `color`，否则文字隐形。
 4. **全局 `section{padding:96px 0}` 污染**：弹窗步骤等内嵌结构如果用 `<section>` 标签会意外继承 96px padding，已有 `.signup-body section{padding:0}` 覆写，新增类似结构注意同样处理。
 5. **hash 路由清 inline style**：路由切换会对所有 `[data-page]` 执行 `style.display=''` 或 `none`，手动隐藏的元素必须加 `data-force-hidden` 豁免。
-6. `.feature-item` 不只属于 About，个人中心仍在复用，不要因改 About 删除它。
+6. `.feature-item` 不只属于 About，一键查询仍在复用，不要因改 About 删除它。
 7. `data-state-*`、`data-demo-*`、`data-signup-*`、`data-ticket-card`、`data-open-registration`、`data-nav-burger`、`data-mobile-menu` 都是 JavaScript 钩子，改类名可以，改这些属性前必须同步修改脚本。
 8. 历届回顾历程图上覆盖 12 个透明热区（`.annual-year-link`，2014-2025），`--x`/`--hit-y`/`--hit-w`/`--hit-h` 是相对原图的坐标。换图、裁切或改留白后必须重新校准，且不要给图片加 `object-fit: cover`。用户明确要求热区不要显示悬停/点击的蓝色圆圈。
 9. 学习护照样机内容以 `scrollHeight ≤ clientHeight` 为准验证是否溢出屏内，不要靠目测。

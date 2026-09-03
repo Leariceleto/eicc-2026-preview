@@ -179,7 +179,7 @@
   .annual-year-link{position:absolute;left:var(--x);top:var(--hit-y);width:var(--hit-w);height:var(--hit-h);transform:translateX(-50%);outline:none;box-shadow:none;}
   .annual-year-link:hover,.annual-year-link:focus,.annual-year-link:focus-visible{outline:none;box-shadow:none;}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
-  .annual-timeline-hint{display:none;}
+  .annual-timeline-mobile{display:none;}
   @media(max-width:860px){
     .about-preface{background-position:56% center;}
     .about-preface::before{background:linear-gradient(180deg,rgba(12,21,52,.9),rgba(4,7,16,.8));}
@@ -248,11 +248,6 @@
   .ticket li.no{color:rgba(246,243,236,.42);}
   .ticket .btn{justify-content:center;}
   .ticket-note{margin-top:26px;font-size:13px;color:rgba(246,243,236,.5);line-height:1.8;}
-  .access-strip{
-    margin-top:46px;border:1px dashed rgba(246,243,236,.3);border-radius:16px;
-    padding:22px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;
-    font-size:14px;color:rgba(246,243,236,.78);
-  }
   /* ===== Agenda ===== */
   .tabs{display:flex;gap:10px;margin:40px 0 30px;flex-wrap:wrap;}
   .tab{
@@ -359,81 +354,101 @@
   .course p{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
   .course p b{color:var(--blue);font-weight:600;}
 
-  /* ===== Learning map ===== */
-  .lmap{background:var(--ink);color:#F6F3EC;}
-  .lmap .kicker{color:var(--gold);}.lmap .kicker::before{background:var(--gold);}
-  .lmap .sec-desc{color:rgba(246,243,236,.66);}
-  .lmap-toggle{display:flex;gap:12px;margin:44px 0 34px;flex-wrap:wrap;}
-  .lmap-btn{
-    border:1px solid rgba(246,243,236,.3);background:transparent;color:rgba(246,243,236,.8);
-    border-radius:999px;padding:12px 26px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.2s;
+  /* ===== Learning journey + passport ===== */
+  .anchor-proxy{position:absolute;top:-72px;}
+  .learning-system{position:relative;background:var(--ink);color:#F6F3EC;overflow:hidden;}
+  .learning-system .kicker{color:var(--gold);}
+  .learning-system .kicker::before{background:var(--gold);}
+  .learning-system .sec-desc{color:rgba(246,243,236,.72);max-width:760px;}
+  .learning-system .demo-context-note{border:1px solid rgba(246,243,236,.18);background:rgba(246,243,236,.06);color:rgba(246,243,236,.78);}
+  .learning-principles{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:1px solid rgba(246,243,236,.2);border-bottom:1px solid rgba(246,243,236,.2);}
+  .learning-principle{padding:24px 26px 26px 0;}
+  .learning-principle:not(:first-child){border-left:1px solid rgba(246,243,236,.2);padding-left:26px;}
+  .learning-principle b{display:block;color:var(--gold);font-size:15px;margin-bottom:8px;}
+  .learning-principle p{font-size:13.5px;line-height:1.75;color:rgba(246,243,236,.66);}
+  .learning-journey{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:58px 0 46px;counter-reset:journey;}
+  .journey-node{position:relative;padding:44px 20px 0 0;counter-increment:journey;}
+  .journey-node::before{content:counter(journey,decimal-leading-zero);position:absolute;top:0;left:0;color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.12em;}
+  .journey-node::after{content:"";position:absolute;top:10px;left:34px;right:16px;height:1px;background:rgba(246,243,236,.24);}
+  .journey-node:last-child::after{display:none;}
+  .journey-node h3{font-size:16px;line-height:1.45;margin-bottom:7px;}
+  .journey-node p{font-size:12.8px;line-height:1.7;color:rgba(246,243,236,.62);}
+  .passport-stage{background:var(--paper);color:var(--ink);border-radius:26px;padding:34px;border:1px solid rgba(246,243,236,.2);box-shadow:0 32px 74px rgba(0,0,0,.22);}
+  .passport-stage-head{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:end;padding-bottom:26px;border-bottom:1px solid var(--line);}
+  .passport-stage-head .eyebrow{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--blue);}
+  .passport-stage-head h3{font-size:clamp(25px,3.6vw,38px);line-height:1.25;margin-top:8px;}
+  .passport-stage-head p{max-width:660px;margin-top:9px;font-size:14px;line-height:1.75;color:var(--ink-soft);}
+  .passport-account{min-width:180px;border-left:1px solid var(--line);padding-left:24px;}
+  .passport-account span{display:block;font-size:12px;color:var(--ink-soft);}
+  .passport-account b{display:block;margin-top:6px;font-size:15px;}
+  .passport-tabs{display:flex;gap:8px;overflow-x:auto;padding:24px 0 18px;scrollbar-width:none;}
+  .passport-tabs::-webkit-scrollbar{display:none;}
+  .passport-tab{flex:none;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink-soft);padding:10px 17px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:.2s;}
+  .passport-tab:hover{border-color:var(--blue);color:var(--blue);}
+  .passport-tab:focus-visible,.org-tab:focus-visible{outline:3px solid rgba(39,67,224,.24);outline-offset:2px;}
+  .passport-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .passport-panel{display:none;animation:fade .3s;}
+  .passport-panel.active{display:block;}
+  .path-status{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 20px;border-radius:14px;background:rgba(39,67,224,.08);border:1px solid rgba(39,67,224,.16);margin-bottom:22px;}
+  .path-status b{font-size:14.5px;color:var(--blue);}
+  .path-status span{font-size:12.5px;color:var(--ink-soft);text-align:right;}
+  .path-layout{display:grid;grid-template-columns:1.45fr .75fr;gap:22px;}
+  .main-path{border:1px solid var(--line);border-radius:18px;background:#fff;padding:24px;}
+  .main-path h4,.free-learning h4,.record-workspace h4,.organization-copy h4,.outcome-block h4{font-size:17px;margin-bottom:6px;}
+  .main-path > p,.free-learning > p,.record-workspace > p,.organization-copy > p,.outcome-block > p{font-size:13px;line-height:1.7;color:var(--ink-soft);}
+  .path-line{display:grid;gap:16px;margin-top:22px;padding-left:25px;position:relative;}
+  .path-line::before{content:"";position:absolute;left:5px;top:7px;bottom:8px;width:1px;background:rgba(39,67,224,.28);}
+  .path-stop{position:relative;}
+  .path-stop::before{content:"";position:absolute;left:-24px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 1px var(--blue);}
+  .path-stop b{display:block;font-size:14px;line-height:1.55;}
+  .path-stop span{display:block;margin-top:3px;font-size:12px;line-height:1.55;color:var(--ink-soft);}
+  .free-learning{border-radius:18px;background:var(--blue);color:#fff;padding:24px;align-self:stretch;}
+  .free-learning > p{color:rgba(255,255,255,.78);}
+  .free-records{display:grid;gap:10px;margin-top:22px;}
+  .free-record{padding:12px 13px;border-radius:11px;background:rgba(255,255,255,.11);font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.9);}
+  .free-record b{display:block;color:#fff;margin-bottom:2px;}
+  .records-layout{display:grid;grid-template-columns:1.3fr .7fr;gap:22px;}
+  .record-workspace{border:1px solid var(--line);border-radius:18px;background:#fff;padding:24px;}
+  .record-list{display:grid;gap:10px;margin-top:20px;}
+  .record-item{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line);}
+  .record-item:last-child{border-bottom:0;padding-bottom:0;}
+  .record-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--ink);color:#fff;font-size:11px;font-weight:800;}
+  .record-item b{font-size:13.5px;line-height:1.5;}
+  .record-item p{font-size:12px;line-height:1.6;color:var(--ink-soft);margin-top:3px;}
+  .record-item time{font-size:11.5px;color:var(--ink-soft);white-space:nowrap;}
+  .record-tools{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;align-content:start;}
+  .record-tool{min-height:92px;border:1px dashed rgba(23,22,15,.22);border-radius:14px;padding:16px;background:var(--paper-deep);}
+  .record-tool b{display:block;font-size:13.5px;}
+  .record-tool span{display:block;margin-top:6px;font-size:11.5px;line-height:1.55;color:var(--ink-soft);}
+  .organization-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;align-items:start;}
+  .organization-copy{padding:8px 2px;}
+  .org-choice-note{margin-top:18px;padding:14px 16px;border-left:3px solid var(--coral);background:rgba(255,75,42,.06);font-size:12.8px;line-height:1.7;color:var(--ink-soft);}
+  .org-tabs{display:flex;gap:8px;margin-top:22px;}
+  .org-tab{border:1px solid var(--line);border-radius:999px;padding:9px 15px;background:#fff;color:var(--ink-soft);font:inherit;font-size:13px;font-weight:700;cursor:pointer;}
+  .org-tab.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .org-panels{border:1px solid var(--line);border-radius:18px;background:#fff;padding:26px;min-height:260px;}
+  .org-panel{display:none;animation:fade .3s;}
+  .org-panel.active{display:block;}
+  .org-panel .org-label{font-size:12px;color:var(--blue);font-weight:800;}
+  .org-panel h4{font-size:22px;margin:8px 0 15px;}
+  .org-panel ul{list-style:none;display:grid;gap:11px;}
+  .org-panel li{font-size:13.5px;line-height:1.65;color:var(--ink-soft);padding-left:18px;position:relative;}
+  .org-panel li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--gold);}
+  .outcomes-layout{display:grid;grid-template-columns:.78fr 1.22fr;gap:22px;}
+  .outcome-block{border:1px solid var(--line);border-radius:18px;background:#fff;padding:25px;}
+  .outcome-block.school{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .outcome-block.school > p{color:rgba(246,243,236,.68);}
+  .outcome-list{display:grid;gap:10px;margin-top:20px;}
+  .outcome-list span{display:block;border-radius:11px;background:var(--paper-deep);padding:11px 13px;font-size:12.8px;color:var(--ink-soft);}
+  .outcome-block.school .outcome-list span{background:rgba(246,243,236,.08);color:rgba(246,243,236,.84);}
+  @media(max-width:900px){
+    .learning-principles{grid-template-columns:repeat(2,1fr);}
+    .learning-principle:nth-child(3){border-left:0;border-top:1px solid rgba(246,243,236,.16);padding-left:0;}
+    .learning-principle:nth-child(4){border-top:1px solid rgba(246,243,236,.16);}
+    .learning-journey{grid-template-columns:repeat(2,1fr);gap:28px 20px;}
+    .journey-node::after{display:none;}
+    .path-layout,.records-layout,.organization-shell,.outcomes-layout{grid-template-columns:1fr;}
   }
-  .lmap-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink);}
-  .route-panel{display:none;}
-  .route-panel.active{display:block;animation:fade .35s;}
-  .route-line{position:relative;padding-left:34px;display:grid;gap:26px;}
-  .route-line::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:rgba(246,243,236,.2);}
-  .route-stop{position:relative;}
-  .route-stop::before{
-    content:"";position:absolute;left:-32px;top:4px;width:14px;height:14px;border-radius:50%;
-    background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold);
-  }
-  .route-stop h4{font-size:17px;margin-bottom:5px;}
-  .route-stop h4 .lab{
-    font-size:11.5px;background:rgba(246,243,236,.14);border-radius:6px;padding:2.5px 9px;
-    margin-right:9px;font-weight:600;vertical-align:2px;
-  }
-  .route-stop p{font-size:13.5px;color:rgba(246,243,236,.62);line-height:1.7;}
-  .route-why{
-    margin-top:36px;border:1px solid rgba(246,243,236,.18);border-radius:14px;padding:18px 24px;
-    font-size:13.5px;color:rgba(246,243,236,.66);line-height:1.8;background:rgba(246,243,236,.04);
-  }
-  .route-why b{color:var(--gold);}
-
-  /* ===== Passport ===== */
-  .passport-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;}
-  @media(max-width:900px){.passport-grid{grid-template-columns:1fr;}}
-  .phone{
-    width:300px;margin:0 auto;background:var(--ink);border-radius:38px;padding:12px;
-    box-shadow:0 30px 70px rgba(23,22,15,.25);
-  }
-  .phone-screen{background:#fff;border-radius:28px;overflow:hidden;aspect-ratio:1320/2868;}
-  .ph-head{background:linear-gradient(140deg,var(--blue),var(--blue-deep));color:#fff;padding:22px 20px 16px;}
-  .ph-head .t{font-size:11px;opacity:.75;letter-spacing:.14em;}
-  .ph-head h4{font-size:17px;margin-top:5px;}
-  .ph-head .coins{margin-top:12px;background:rgba(255,255,255,.14);border-radius:12px;padding:9px 13px;font-size:12px;display:flex;justify-content:space-between;align-items:center;}
-  .ph-head .coins b{font-size:17px;}
-  .ph-body{padding:14px 17px;display:grid;gap:9px;}
-  .ph-task{
-    border:1px solid var(--line);border-radius:13px;padding:11px 13px;display:flex;gap:10px;align-items:center;
-  }
-  .ph-task .badge{
-    width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;
-    font-size:12px;font-weight:800;color:#fff;
-  }
-  .b-si{background:#2743E0;}.b-de{background:#FF4B2A;}.b-yu{background:#C99B3F;}.b-po{background:#1F9D66;}
-  .ph-task h5{font-size:13px;}
-  .ph-task p{font-size:10.5px;color:var(--ink-soft);margin-top:2px;}
-  .ph-task .coin{margin-left:auto;font-size:11px;font-weight:700;color:var(--gold);white-space:nowrap;}
-  .ph-record{display:flex;gap:7px;}
-  .ph-record span{
-    flex:1;text-align:center;font-size:10.5px;border:1px dashed var(--line);border-radius:9px;
-    padding:8px 4px;color:var(--ink-soft);
-  }
-  .passport-feats{display:grid;gap:18px;margin-top:36px;}
-  .pf{display:flex;gap:16px;align-items:flex-start;}
-  .pf .n{
-    width:34px;height:34px;flex:none;border-radius:10px;background:var(--ink);color:#fff;
-    display:grid;place-items:center;font-size:14px;font-weight:800;
-  }
-  .pf h4{font-size:16.5px;margin-bottom:5px;}
-  .pf p{font-size:14px;color:var(--ink-soft);line-height:1.75;}
-  .after-meeting{
-    margin-top:28px;background:var(--paper-deep);border:1px solid var(--line);border-radius:18px;padding:22px 24px;
-  }
-  .after-meeting h4{font-size:15px;margin-bottom:13px;}
-  .after-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-  .after-grid span{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--ink-soft);}
 
   /* ===== Expo ===== */
   .expo{background:var(--paper-deep);}
@@ -448,7 +463,6 @@
   }
   .expo-card h4{font-size:18px;margin-bottom:8px;}
   .expo-card p{font-size:14px;color:var(--ink-soft);line-height:1.8;}
-  .expo-card .mini{margin-top:16px;font-size:12.5px;color:var(--blue);font-weight:600;}
 
   /* ===== Account / one-key ===== */
   .acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
@@ -695,19 +709,17 @@
     .preface-right{margin-top:2px;}
     .history-video-placeholder .play-label{font-size:12.5px;}
 
-    /* --- 大会概况：历程图（横向滑动 + 滑动提示） --- */
+    /* --- 大会概况：历程图（移动端单屏路线图） --- */
     .about-history{padding:52px 0 40px;}
-    .annual-timeline-scroll{
-      margin:0 -20px;padding:0 20px 6px;
-      -webkit-overflow-scrolling:touch;
-      position:relative;
+    .annual-timeline-scroll{display:none;}
+    .annual-timeline-mobile{display:block;position:relative;width:100%;max-width:420px;margin:0 auto;overflow:hidden;}
+    .annual-timeline-mobile > img{display:block;width:100%;height:auto;mix-blend-mode:multiply;}
+    .annual-mobile-year{
+      position:absolute;left:var(--x);top:var(--y);width:20%;height:10%;transform:translate(-50%,-50%);
+      border-radius:50%;outline:none;box-shadow:none;
     }
-    .annual-timeline-map{min-width:720px;}
-    .annual-timeline-hint{
-      display:flex;align-items:center;justify-content:center;gap:8px;
-      margin-top:12px;font-size:12px;color:var(--ink-soft);letter-spacing:.06em;
-    }
-    .annual-timeline-hint::before{content:"";width:26px;height:1px;background:var(--line);}
+    .annual-mobile-year:hover,.annual-mobile-year:focus,.annual-mobile-year:focus-visible{outline:none;box-shadow:none;}
+    .annual-mobile-year:active{transform:translate(-50%,-50%) scale(.97);}
 
     /* --- 票种 --- */
     .ticket{padding:26px 22px;}
@@ -735,18 +747,25 @@
     .course{padding:16px 18px;}
     .course h5{font-size:14px;}
 
-    /* --- 学习地图 --- */
-    .lmap-toggle{margin:30px 0 26px;gap:9px;}
-    .lmap-btn{flex:1;min-width:0;padding:12px 10px;font-size:13px;text-align:center;white-space:normal;line-height:1.4;}
-
-    /* --- 护照手机样机缩放（比例已随桌面端改为 iPhone 17 Pro Max 长宽比，无需额外高度） --- */
-    .phone{width:min(280px,86vw);}
-
+    /* --- 学习方式与学习护照 --- */
+    .learning-principles{grid-template-columns:1fr;margin-top:32px;}
+    .learning-principle{padding:18px 0;}
+    .learning-principle:not(:first-child){border-left:0;border-top:1px solid rgba(246,243,236,.16);padding-left:0;}
+    .learning-journey{grid-template-columns:1fr;margin:38px 0 32px;gap:20px;}
+    .journey-node{padding:34px 0 0;}
+    .passport-stage{margin:0 -8px;padding:22px 16px;border-radius:20px;}
+    .passport-stage-head{grid-template-columns:1fr;gap:18px;}
+    .passport-account{border-left:0;border-top:1px solid var(--line);padding:16px 0 0;}
+    .passport-tabs{margin-right:-16px;padding-right:16px;}
+    .path-status{align-items:flex-start;flex-direction:column;gap:5px;}
+    .path-status span{text-align:left;}
+    .main-path,.free-learning,.record-workspace,.org-panels,.outcome-block{padding:20px;}
+    .record-tools{grid-template-columns:1fr 1fr;}
+    .organization-shell{gap:18px;}
+    .org-tabs{flex-wrap:wrap;}
     /* --- 方案展 --- */
     .expo-card{padding:24px 20px;}
-    .access-strip{flex-wrap:wrap;gap:8px !important;padding:16px 18px !important;}
-
-    /* --- 个人中心 --- */
+    /* --- 一键查询 --- */
     .query-panel{padding:22px 18px;}
     .query-item{font-size:13.5px;gap:10px;padding:13px 2px;}
     .swap-box{padding:20px 18px;}
@@ -762,6 +781,13 @@
     footer{padding:52px 0 32px;}
     .foot-logo{font-size:14.5px;}
     .copyright{margin-top:34px;padding:18px 16px 0;font-size:12px;line-height:1.7;}
+  }
+  @media(max-width:360px){
+    .nav-inner{padding:0 8px;gap:4px;}
+    .logo-title-img{height:13px;}
+    .nav-links{gap:3px;}
+    .nav-cta{padding:5px 8px !important;font-size:11px !important;}
+    .nav-burger{width:36px;height:36px;margin-left:3px;border-radius:10px;}
   }
 
 </style>
@@ -808,13 +834,13 @@
         </aside>
         <div class="signup-session-list" data-signup-sessions>
           <button class="signup-session active" type="button" data-signup-session="main">
-            <span class="signup-radio"></span><span><strong>（现场参会）主论坛</strong><p>含主论坛大会与方案展通行；付款后自动获得 1 门场内深研课选课资格，场外深研课需单独购买。</p></span><span class="signup-price">¥2800</span>
+            <span class="signup-radio"></span><span><strong>（现场参会）主论坛</strong><p>含主论坛、分论坛与方案展通行；分论坛每天每人最多选择一个参加，场外深研课需单独购买。</p></span><span class="signup-price">¥2800</span>
           </button>
           <button class="signup-session" type="button" data-signup-session="combo">
-            <span class="signup-radio"></span><span><strong>（现场参会）主论坛 ＋ 深研课</strong><p>在主论坛权益基础上已包含场外深研课权益，付款后可直接选课，无需重复付款。</p></span><span class="signup-price">¥2900</span>
+            <span class="signup-radio"></span><span><strong>（现场参会）主论坛 ＋ 深研课</strong><p>在主论坛权益基础上包含 1 个场外深研课权益；分论坛每天每人最多选择一个，场外深研课每人最多选择一个。</p></span><span class="signup-price">¥2900</span>
           </button>
           <button class="signup-session" type="button" data-signup-session="expo">
-            <span class="signup-radio"></span><span><strong>（现场参会）独立方案展</strong><p>含方案展通行、方案展学习地图、学习护照与学习报告；不可进入主论坛，不含深研课与回放。</p></span><span class="signup-price">¥300</span>
+            <span class="signup-radio"></span><span><strong>（现场参会）独立方案展</strong><p>含方案展通行、学习护照中的方案展学习路线与学习报告；不可进入主论坛，不含分论坛、场外深研课与回放。</p></span><span class="signup-price">¥300</span>
           </button>
           <button class="signup-session" type="button" data-signup-session="online">
             <span class="signup-radio"></span><span><strong>（线上参会）年会线上学习</strong><p>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容；回看截止至 2027 年 12 月 4 日。</p></span><span class="signup-price">¥1560</span>
@@ -887,7 +913,7 @@
   <div class="demo-group">
     <h4>用户状态</h4>
     <div class="demo-options">
-      <button class="demo-option" type="button" data-demo-flag="course">已选深研课</button>
+      <button class="demo-option" type="button" data-demo-flag="course">已完成选课</button>
       <button class="demo-option" type="button" data-demo-flag="assessment">已完成自评</button>
       <button class="demo-option" type="button" data-demo-flag="checkin">已签到</button>
     </div>
@@ -904,23 +930,21 @@
       <a href="#agenda">主论坛</a>
       <a href="#deep">深研课</a>
       <a href="#expo">方案展</a>
-      <a href="#map">学习地图</a>
-      <a href="#passport">学习护照</a>
+      <a href="#passport">学习方式</a>
       <span class="nav-gap" aria-hidden="true"></span>
-      <a href="#account" class="nav-cta acct">个人中心</a>
+      <a href="#account" class="nav-cta acct">一键查询</a>
       <a href="#tickets" class="nav-cta" data-open-registration>立即报名</a>
       <button class="nav-burger" type="button" aria-label="打开菜单" aria-expanded="false" data-nav-burger><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mobile-menu" data-mobile-menu>
-    <a href="#account" class="mm-cta">个人中心</a>
+    <a href="#account" class="mm-cta">一键查询</a>
     <a href="#about">大会概况</a>
     <a href="#tickets">票种权益</a>
     <a href="#agenda">主论坛</a>
     <a href="#deep">深研课</a>
     <a href="#expo">方案展</a>
-    <a href="#map">学习地图</a>
-    <a href="#passport">学习护照</a>
+    <a href="#passport">学习方式</a>
   </div>
 </nav>
 
@@ -950,7 +974,7 @@
       <a class="btn btn-primary" data-state-primary data-open-registration href="#tickets"><span data-state-primary-label>立即报名参会</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="btn btn-ghost" data-state-secondary href="#map" data-state-secondary-label>查看我的学习地图</a>
+      <a class="btn btn-ghost" data-state-secondary href="#passport" data-state-secondary-label>了解学习方式</a>
     </div>
     <div class="countdown" id="countdown">
       <div class="cd-cell"><b id="cd-d">--</b><span>天</span></div>
@@ -1012,13 +1036,27 @@
             <a class="annual-year-link" style="--x:88.38%;--hit-y:51.2%;--hit-w:16%;--hit-h:39%;" href="https://mp.weixin.qq.com/s/BHA5yXVPcV8guAF4p_fR9w" target="_blank" rel="noopener noreferrer" title="查看2025年杭州年会回顾"><span class="sr-only">查看2025年杭州年会回顾</span></a>
           </div>
         </div>
+        <div class="annual-timeline-mobile" aria-label="2014年至2025年中国教育创新年会历程">
+          <img src="assets/annual-history-mobile-v3.png" alt="2014年至2025年中国教育创新年会手机端历程图">
+          <a class="annual-mobile-year" style="--x:19.5%;--y:7.2%;" href="https://mp.weixin.qq.com/s/Q6Akyi-wHAEqoWXp6me0tg" target="_blank" rel="noopener noreferrer" title="查看2014年重庆年会回顾"><span class="sr-only">查看2014年重庆年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:47.4%;--y:9.5%;" href="https://mp.weixin.qq.com/s/1tilXwX3XlrOq_O1vrSELQ" target="_blank" rel="noopener noreferrer" title="查看2015年深圳年会回顾"><span class="sr-only">查看2015年深圳年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:68.8%;--y:17.8%;" href="https://mp.weixin.qq.com/s/jb_bV6o3ydKjrxivi1Urvg" target="_blank" rel="noopener noreferrer" title="查看2016年上海年会回顾"><span class="sr-only">查看2016年上海年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:30.8%;--y:26%;" href="https://mp.weixin.qq.com/s/V_53HIuihhUnTsXvLj1Xjg" target="_blank" rel="noopener noreferrer" title="查看2017年杭州年会回顾"><span class="sr-only">查看2017年杭州年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:63.3%;--y:32%;" href="https://mp.weixin.qq.com/s/px-tugScN3ufHIXttWE4bg" target="_blank" rel="noopener noreferrer" title="查看2018年南京年会回顾"><span class="sr-only">查看2018年南京年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:44.7%;--y:41%;" href="https://mp.weixin.qq.com/s/YESj_IBDx-JTCmfE-5UTCQ" target="_blank" rel="noopener noreferrer" title="查看2019年成都年会回顾"><span class="sr-only">查看2019年成都年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:69%;--y:48.5%;" href="https://mp.weixin.qq.com/s/NtgfN4vlyYm44cCe-iVGOA" target="_blank" rel="noopener noreferrer" title="查看2020年重庆年会回顾"><span class="sr-only">查看2020年重庆年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:29.7%;--y:57%;" href="https://mp.weixin.qq.com/s/G1qzru5ZR8eaaGp5qrEjqQ" target="_blank" rel="noopener noreferrer" title="查看2021年重庆年会回顾"><span class="sr-only">查看2021年重庆年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:60.8%;--y:66%;" href="https://mp.weixin.qq.com/s/lgBuVIw3dazq3r7QPKTwPw" target="_blank" rel="noopener noreferrer" title="查看2022年重庆年会回顾"><span class="sr-only">查看2022年重庆年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:30.7%;--y:75.9%;" href="https://mp.weixin.qq.com/s/JdYlhU5uPtksZl-2hpl15Q" target="_blank" rel="noopener noreferrer" title="查看2023年深圳年会回顾"><span class="sr-only">查看2023年深圳年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:63.8%;--y:82%;" href="https://mp.weixin.qq.com/s/wKJK432nhufPL-MM4nRVrg" target="_blank" rel="noopener noreferrer" title="查看2024年厦门年会回顾"><span class="sr-only">查看2024年厦门年会回顾</span></a>
+          <a class="annual-mobile-year" style="--x:40%;--y:91.2%;" href="https://mp.weixin.qq.com/s/BHA5yXVPcV8guAF4p_fR9w" target="_blank" rel="noopener noreferrer" title="查看2025年杭州年会回顾"><span class="sr-only">查看2025年杭州年会回顾</span></a>
+        </div>
       </figure>
-      <p class="annual-timeline-hint" aria-hidden="true">左右滑动查看历届年会</p>
       <div class="state-surface" aria-live="polite">
         <div class="state-overview">
           <div class="state-label">当前预览</div>
           <h3 data-state-title>主论坛＋深研课 · 会前准备</h3>
-          <p data-state-description>已报名参会人正在完成选课、自评与学习地图的会前准备。</p>
+          <p data-state-description>已报名参会人正在完成选课、自评与个人学习路径的会前准备。</p>
           <div class="state-permissions" data-state-permissions></div>
         </div>
         <div class="state-next"><b data-state-next-title>下一步</b><ul data-state-next-list></ul></div>
@@ -1032,7 +1070,6 @@
   <div class="wrap">
     <div class="kicker">TICKETS · 票种权益</div>
     <h2 class="sec-title">四类票种，权益一目了然</h2>
-    <p class="sec-desc">本届年会实行票种分级与展厅门禁联动：你的参会牌颜色即通行权限。购票前请确认各票种可进入的区域。</p>
 
     <div class="ticket-grid">
       <div class="ticket hot" data-ticket-card="main">
@@ -1042,9 +1079,9 @@
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛全程参会（含选座）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展通行权益（1号展厅）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场内深研课选课资格（随票自动获得）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习地图 + 学习护照全部功能</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报场外深研课</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛选课资格（每天每人最多选择 1 个）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习护照与个性化学习路径</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报 1 个场外深研课</li>
         </ul>
         <a class="btn btn-primary" href="#account" data-open-registration="main">报名主论坛</a>
       </div>
@@ -1054,9 +1091,10 @@
         <div class="price">¥2900<small> /人</small></div>
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛全部权益</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课权益一份（直接选课，无需重复付款）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含 1 个场外深研课权益（每人最多选择 1 个）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛每天每人最多选择 1 个</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛结束后一天的小场域深度学习</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>付费后支持一次换课</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课付费后支持一次换课</li>
         </ul>
         <a class="btn btn-ghost" href="#deep" data-open-registration="combo">报名主论坛＋深研课</a>
       </div>
@@ -1078,7 +1116,7 @@
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
           <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
-          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含深研课选课资格</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含分论坛及场外深研课选课资格</li>
         </ul>
         <a class="btn btn-ghost" href="#account" data-open-registration="expo">购买方案展</a>
       </div>
@@ -1209,7 +1247,7 @@
         <ul class="talks">
           <li>特别报告《重新发明学校——能力是如何生成的？》——<span class="who">李希贵</span>（北京第一实验学校校长、中国新学校研究会会长）</li>
           <li>年度风向标《下一代学校的心力觉醒、认知纵深与方法自由》——<span class="who">李斌</span>（蒲公英教育智库理事长、新校长传媒总编辑）</li>
-          <li><b>100天行动计划发布仪式</b></li>
+          <li><b>学校 100 天行动启动</b></li>
         </ul></div></div>
     </div>
   </div>
@@ -1239,24 +1277,22 @@
 <section id="deep" data-page="home">
   <div class="wrap">
     <div class="kicker">DEEP COURSES · 深研课</div>
-    <h2 class="sec-title">静水深流丨走班选课，让学习走向深处</h2>
-    <p class="sec-desc">深研课分「场内」与「场外」两类。场内课在主论坛期间小场域开班，场外课于12月5日走进学校现场。每位参会人最多选择一门课程，一人一课。</p>
+    <h2 class="sec-title">静水深流丨分论坛与场外深研课</h2>
 
     <div class="deep-grid">
       <div class="deep-card in">
-        <h3>场内深研课</h3>
+        <h3>分论坛</h3>
         <p class="sub">主论坛期间 · 小场域交流式深研</p>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>主论坛订单付款成功后，自动获得一份场内选课资格，无需另外付费</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>付费前可随时更改所选课程；付费后取消须另选一门，不限重选次数</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>主论坛订单付款成功后，自动获得分论坛选课资格，无需另外付费</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>每位参会人每天最多选择一个分论坛参加，可按不同日期分别选择</li>
         </ul>
       </div>
       <div class="deep-card out">
         <h3>场外深研课</h3>
         <p class="sub">12月5日 · 走进学校现场全天访学</p>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>两所深研基地：东莞松山湖清澜山学校 / 香港科技大学（广州）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>组合票参会人直接获得一份权益，选定课程即占名额；仅报主论坛可单独选购</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>每位参会人最多选择一个参加；组合票已含 1 个权益，仅报主论坛可单独选购</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>付费后支持换课一次：须先选定有名额的新课程，原课程名额自动释放</li>
         </ul>
       </div>
@@ -1270,139 +1306,193 @@
   <div class="wrap">
     <div class="kicker">EXPO & AI STUDIO · 方案展与AI共创站</div>
     <h2 class="sec-title">云涌集丨下一代学校创新解决方案展</h2>
-    <p class="sec-desc">今年方案展正式定名「云涌集——下一代学校重难点、关键卡点创新解决方案展」，围绕学生、学习、课程、教师、评价、技术、校园、组织等真实卡点征集创新方案。扫码看详情、用未来币下单、在 AI 共创站把学校问题变成可执行方案。</p>
     <p class="demo-context-note light" data-state-expo></p>
     <div class="expo-grid">
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-        <h4>扫码看方案</h4>
-        <p>每个展位配置专属二维码，扫码进入数字化方案页：规格、价格、案例一目了然，可收藏、追问、带走资料。</p>
-        <div class="mini">支持独立方案展票进入</div>
+        <h4>扫码连接方案</h4>
+        <p>每个展位配置专属二维码。查看方案详情、收藏资料、记录问题，也可以把现场交流和待跟进事项同步进学习护照。</p>
       </div>
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M8.5 9.5c0-1.4 1.6-2.5 3.5-2.5s3.5 1.1 3.5 2.5-1.6 2.5-3.5 2.5-3.5 1.1-3.5 2.5 1.6 2.5 3.5 2.5 3.5-1.1 3.5-2.5"/></svg></div>
-        <h4>未来币市集</h4>
-        <p>方案展售卖的全部产品仅支持未来币支付。打卡、逛展赚币，现场下单，订单与物流在个人中心可查。</p>
-        <div class="mini">未来币账户 · 独立入口 · 支持手机号验证直达</div>
+        <h4>道具集市</h4>
+        <p>在学习任务和现场互动中获得未来币，用于兑换开放的学习道具与部分产品。具体规则以现场公布为准。</p>
       </div>
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.2-2.6 5.6-.9.9-1.4 2-1.4 3.4H9c0-1.4-.5-2.5-1.4-3.4C6.2 13.2 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg></div>
         <h4>AI 共创站</h4>
-        <p>扫码选择场景、输入你的学校问题，调用蒲公英教育智库的专业智能体现场生成方案建议；离会前生成你的「100天行动计划」。</p>
-        <div class="mini">结果可保存、可带走、会后持续跟进</div>
+        <p>现场体验蒲公英教育智库一体化平台。围绕学校真实问题调用专业智能体，形成可保存、可继续追问的方案建议。</p>
       </div>
-    </div>
-    <div class="access-strip" style="border-color:var(--line);color:var(--ink-soft);margin-top:34px;">
-      <b style="color:var(--ink);">同期展览</b>
-      <span>2026当代教育设计展 · 未来学习中心的十种样态</span>
-      <span>儿童艺术展</span>
-      <span>学生课程节</span>
-      <span>教育影像展</span>
     </div>
   </div>
 </section>
 
-<!-- ================= ACCOUNT ================= -->
-<!-- ================= LEARNING MAP ================= -->
-<section id="map" class="lmap" data-page="home">
+<!-- ================= LEARNING JOURNEY + PASSPORT ================= -->
+<section id="passport" class="learning-system" data-page="home">
+  <span id="map" class="anchor-proxy" aria-hidden="true"></span>
   <div class="wrap">
-    <div class="kicker">LEARNING MAP · 学习地图</div>
-    <h2 class="sec-title">5000人的年会，你的线路只属于你</h2>
-    <p class="sec-desc">报名缴费并登录后即可查看学习地图。完成自评问卷，系统依据你的学校画像与核心问题生成个性化线路；未自评也能按官方推荐线路出发。线路内容自动匹配你的票种权限。</p>
-    <p class="demo-context-note" data-state-map></p>
+    <div class="kicker">LEARNING JOURNEY · 学习方式</div>
+    <h2 class="sec-title">5000人的年会，每个人都有自己的学习路径</h2>
+    <p class="demo-context-note" data-state-learning></p>
 
-    <div class="lmap-toggle">
-      <button class="lmap-btn" data-route="official">我还没自评 · 看官方推荐线路</button>
-      <button class="lmap-btn active" data-route="personal">我已完成自评 · 看个性化线路</button>
+    <div class="learning-principles" aria-label="年会学习原则">
+      <div class="learning-principle"><b>没有标准路线，只有自己的路径</b><p>同一场年会，不同问题、不同身份和不同票种，将得到不同的学习安排。</p></div>
+      <div class="learning-principle"><b>带着问题来，带着更好的问题走</b><p>年会不替你交出标准答案，四天学习帮助你看见问题、校准判断并找到同行者。</p></div>
+      <div class="learning-principle"><b>知识接力</b><p>每个人带来的经验都会进入交流，个人所得也会回到班级、社区和学校团队。</p></div>
+      <div class="learning-principle"><b>主路径生成后保持不变</b><p>自由学习另列记录，不改变自评后生成的个性化学习路径。</p></div>
     </div>
 
-    <div class="route-panel" id="official">
-      <div class="route-line">
-        <div class="route-stop"><h4><span class="lab">DAY 1</span>开幕式 · 年度主题演讲</h4><p>全员必修：把握年度基础教育风向标。</p></div>
-        <div class="route-stop"><h4><span class="lab">DAY 1</span>主论坛主题报告（推荐场次）</h4><p>官方精选的高密度思想场，适合首次参会的教育人。</p></div>
-        <div class="route-stop"><h4><span class="lab">DAY 2</span>方案展经典动线</h4><p>沿数据大屏热力值从高到低逛展，打卡 TOP 展位赚未来币。</p></div>
-        <div class="route-stop"><h4><span class="lab">DAY 4</span>游戏继续 · 100天行动计划发布仪式</h4><p>在 AI 共创站把四天的学习记录转化为可执行的行动方案。</p></div>
-      </div>
-      <div class="route-why"><b>提示：</b>完成自评问卷后，本页将切换为按你的画像生成的个性化推荐线路；自评入口在登录后的弹窗与个人中心均可找到。</div>
+    <div class="learning-journey" aria-label="完整学习过程">
+      <div class="journey-node"><h3>带来一个真实问题</h3><p>报名后写下学校当前最需要解决的一件事，作为学习起点。</p></div>
+      <div class="journey-node"><h3>完成 5 分钟自评</h3><p>不超过 10 个问题，帮助系统理解你的关注方向和学习需要。</p></div>
+      <div class="journey-node"><h3>生成个人学习路径</h3><p>结合自评、问题、内容标签与票种权益形成主路径，生成后不再更改。</p></div>
+      <div class="journey-node"><h3>在现场学习与记录</h3><p>沿主路径参与内容，也可自由学习。文字、照片、语音和扫码记录进入护照。</p></div>
+      <div class="journey-node"><h3>形成个人与学校行动</h3><p>会后获得个人学习报告，并与本校同行者共同生成学校 100 天行动。</p></div>
     </div>
 
-    <div class="route-panel active" id="personal">
-      <div class="route-line">
-        <div class="route-stop"><h4><span class="lab">自评画像</span>九年一贯制学校 · 关注课程重构</h4><p>基于你的自评结果与提交的“最痛的一个问题”生成（示例数据）。</p></div>
-        <div class="route-stop"><h4><span class="lab">DAY 2</span>下一代课程单元：从"有什么课"到"走过什么学程"（推荐度 96%）</h4><p>与你画像标签匹配的嘉宾场次，附推荐理由与预习资料。</p></div>
-        <div class="route-stop"><h4><span class="lab">DAY 3</span>方案展定向动线：课程类产品 6 站</h4><p>按内容标签筛选的展位路线，含 2 个可未来币兑换的课程方案。</p></div>
-        <div class="route-stop"><h4><span class="lab">DAY 5</span>场外深研课推荐：东莞松山湖清澜山学校访学</h4><p>结合你的票种权益推荐可报课程，一键跳转选课。</p></div>
-      </div>
-      <div class="route-why"><b>生成依据：</b>自评结果 + 核心问题 + 内容标签 + 票种权限。未覆盖的内容你仍可自由浏览——地图是建议，不是限制。</div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PASSPORT ================= -->
-<section id="passport" data-page="home">
-  <div class="wrap passport-grid">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="ph-head">
-          <div class="t">LEARNING PASSPORT</div>
-          <h4>我的学习护照 · 第2天</h4>
-          <div class="coins"><span>未来币余额</span><b>1,280</b></div>
+    <div class="passport-stage" aria-label="学习护照交互预览">
+      <div class="passport-stage-head">
+        <div>
+          <div class="eyebrow">学习护照</div>
+          <h3>一份贯穿会前、现场与会后的学习载体</h3>
         </div>
-        <div class="ph-body">
-          <div class="ph-task"><div class="badge b-si">思</div><div><h5>所思 · 记录今天最受触动的一个观点</h5><p>关联：主论坛 · 年度主题演讲</p></div><span class="coin">+50币</span></div>
-          <div class="ph-task"><div class="badge b-de">得</div><div><h5>所得 · 带走一个可落地的方法</h5><p>关联：方案展 · 展位 B12</p></div><span class="coin">+50币</span></div>
-          <div class="ph-task"><div class="badge b-yu">遇</div><div><h5>所遇 · 认识一位同频的教育人</h5><p>关联：场内深研课 · 第3场</p></div><span class="coin">+30币</span></div>
-          <div class="ph-task"><div class="badge b-po">破</div><div><h5>所破 · 写下一个被打破了认知</h5><p>关联：嘉宾对话 · 下午场</p></div><span class="coin">+30币</span></div>
-          <div class="ph-record"><span>文字记录</span><span>照片记录</span><span>语音记录</span><span>扫码进入</span></div>
-        </div>
+        <div class="passport-account"><span>示例参会人</span><b>王老师 · 广州未来学校</b></div>
       </div>
-    </div>
-    <div>
-      <div class="kicker">PASSPORT · 学习护照</div>
-      <h2 class="sec-title">把三天的学习，<br>沉淀成一份带得走的报告</h2>
-      <p class="sec-desc">学习护照是实体学习手册的数字版。按日期、嘉宾、场次、展位进入内容页，随时记录；完成四维打卡任务赚未来币；会后自动生成个人学习报告。</p>
-      <p class="demo-context-note light" data-state-passport></p>
-      <div class="passport-feats">
-        <div class="pf"><div class="n">1</div><div><h4>多种方式进入</h4><p>护照首页、学习地图、实体手册二维码、嘉宾/场次二维码、展位二维码，扫哪进哪。</p></div></div>
-        <div class="pf"><div class="n">2</div><div><h4>文字 / 照片 / 语音自由记录</h4><p>每条记录自动关联日期与内容节点，不怕回去之后对不上号。</p></div></div>
-        <div class="pf"><div class="n">3</div><div><h4>四维打卡赚未来币</h4><p>按“所思、所得、所遇、所破”完成每日任务，奖励自动入账，任务规则按日配置。</p></div></div>
-        <div class="pf"><div class="n">4</div><div><h4>会后个人学习报告</h4><p>基于真实记录与打卡汇总生成——只算你实际参与的，不把“推荐了没去”算作完成。</p></div></div>
+
+      <div class="passport-tabs" role="tablist" aria-label="学习护照内容">
+        <button class="passport-tab active" type="button" role="tab" aria-selected="true" data-learning-view="path">我的学习路径</button>
+        <button class="passport-tab" type="button" role="tab" aria-selected="false" data-learning-view="records">学习任务与记录</button>
+        <button class="passport-tab" type="button" role="tab" aria-selected="false" data-learning-view="organization">我的学习组织</button>
+        <button class="passport-tab" type="button" role="tab" aria-selected="false" data-learning-view="outcomes">学习成果</button>
       </div>
-      <div class="after-meeting">
-        <h4>会后仍可继续使用</h4>
-        <div class="after-grid">
-          <span>个人学习报告</span>
-          <span>课程回放与资料</span>
-          <span>学习地图回顾</span>
-          <span>参会与打卡记录</span>
+
+      <div class="passport-panel active" role="tabpanel" data-learning-panel="path">
+        <div class="path-status"><b data-learning-path-status>个性化主路径已生成，现已固定</b><span>自由学习不会改变这条主路径</span></div>
+        <div class="path-layout">
+          <div class="main-path">
+            <h4>我的主路径</h4>
+            <p>依据自评结果、核心问题、内容标签和票种权益生成。</p>
+            <div class="path-line">
+              <div class="path-stop"><b>主论坛：与我的问题建立共同坐标</b><span>全体共同学习内容</span></div>
+              <div class="path-stop"><b>分论坛与场外深研课：围绕关键问题深入讨论</b><span>按个人关注方向推荐，并按选课规则参加</span></div>
+              <div class="path-stop"><b>云涌集：寻找学校问题的解决方案</b><span>按问题与内容标签生成逛展建议</span></div>
+              <div class="path-stop"><b>回到学校：与团队共创 100 天行动</b><span>个人学习汇入学校共同任务</span></div>
+            </div>
+          </div>
+          <aside class="free-learning">
+            <h4>自由学习记录</h4>
+            <p>主路径之外，你仍可进入其他开放内容。它们会单独记录，不改写原有路径。</p>
+            <div class="free-records">
+              <div class="free-record"><b>临时加入</b>一场同伴发起的鱼缸对话</div>
+              <div class="free-record"><b>扫码收藏</b>一个与校园空间有关的方案</div>
+            </div>
+          </aside>
         </div>
       </div>
+
+      <div class="passport-panel" role="tabpanel" data-learning-panel="records" hidden>
+        <div class="records-layout">
+          <div class="record-workspace">
+            <h4>今天的学习任务与记录</h4>
+            <p>任务和记录在同一个入口完成，每条内容自动关联时间、场次或展位。</p>
+            <div class="record-list">
+              <div class="record-item"><span class="record-mark">问</span><div><b>记录今天被重新打开的一个问题</b><p>关联：主论坛上午场</p></div><time>09:40</time></div>
+              <div class="record-item"><span class="record-mark">接</span><div><b>把一个方法带回班级，完成一次知识接力</b><p>关联：普通班级或主题学习社区</p></div><time>14:20</time></div>
+              <div class="record-item"><span class="record-mark">展</span><div><b>记录一次方案交流和待跟进问题</b><p>关联：云涌集展位</p></div><time>16:10</time></div>
+            </div>
+          </div>
+          <div class="record-tools" aria-label="记录方式">
+            <div class="record-tool"><b>文字</b><span>写下判断、问题和下一步</span></div>
+            <div class="record-tool"><b>照片</b><span>保存现场材料与关键画面</span></div>
+            <div class="record-tool"><b>语音</b><span>快速记录来不及写下的想法</span></div>
+            <div class="record-tool"><b>扫码</b><span>从场次、嘉宾或展位直接进入</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passport-panel" role="tabpanel" data-learning-panel="organization" hidden>
+        <div class="organization-shell">
+          <div class="organization-copy">
+            <h4>每位参会者只进入一种学习组织</h4>
+            <p>你会属于一个普通班级，或进入一个主题学习社区。两者处在同一层级，不重复归属。</p>
+            <div class="org-tabs" role="tablist" aria-label="学习组织示例">
+              <button class="org-tab active" type="button" role="tab" aria-selected="true" data-org-view="class">普通班级</button>
+              <button class="org-tab" type="button" role="tab" aria-selected="false" data-org-view="community">主题学习社区</button>
+            </div>
+            <div class="org-choice-note">系统根据报名信息与学习安排完成归属。这里的切换仅用于预览两种页面状态。</div>
+          </div>
+          <div class="org-panels">
+            <div class="org-panel active" role="tabpanel" data-org-panel="class">
+              <div class="org-label">普通班级示例</div>
+              <h4>广州 07 班</h4>
+              <ul>
+                <li>在固定班级中完成每日集合、交流和知识接力</li>
+                <li>查看班级通知、同伴记录与共同任务</li>
+                <li>把个人学习所得带回班级，也从同伴经验中补充自己的理解</li>
+              </ul>
+            </div>
+            <div class="org-panel" role="tabpanel" data-org-panel="community" hidden>
+              <div class="org-label">主题学习社区示例</div>
+              <h4>围绕共同问题持续深研</h4>
+              <ul>
+                <li>以共同关注的问题聚集跨学校学习者</li>
+                <li>在年会期间完成主题任务、讨论和阶段性报告</li>
+                <li>社区成员不再重复进入普通班级</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passport-panel" role="tabpanel" data-learning-panel="outcomes" hidden>
+        <div class="outcomes-layout">
+          <div class="outcome-block">
+            <h4>个人学习报告</h4>
+            <p>只基于真实参与、主动记录与完成的任务生成，不把推荐但未参加的内容计入成果。</p>
+            <div class="outcome-list">
+              <span>我的学习路径与参与记录</span>
+              <span>重要问题、方法与同行者</span>
+              <span>会后仍可查看的资料与回放</span>
+            </div>
+          </div>
+          <div class="outcome-block school">
+            <h4>学校 100 天行动</h4>
+            <p>每位参会者都代表一所学校。来自同一所学校的伙伴把个人学习汇总起来，共同生成本校的 100 天行动，而不是各自提交一份个人计划。</p>
+            <div class="outcome-list">
+              <span>大会提供行动模板，学校团队共同确认问题、目标与分工</span>
+              <span>会后持续推进，在 100 天节点形成阶段性成果并公开展示</span>
+              <span>个人学习护照保留自己在学校行动中的任务与进展</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
 <section id="account" data-page="account">
   <div class="wrap acct-grid">
     <div>
-      <div class="kicker">MY CENTER · 个人中心</div>
+      <div class="kicker">ONE-CLICK QUERY · 一键查询</div>
       <h2 class="sec-title">一个手机号，<br>管住你在年会的所有事</h2>
       <p class="sec-desc">以手机号为唯一身份，登录即自动关联你填写过的学校信息、发票信息、酒店信息与全部订单。换人参会时，新参会人登录后一键确认继承信息。</p>
       <p class="demo-context-note light" data-state-account></p>
       <div class="acct-feats" style="margin-top:30px;">
         <div class="feature-item">
           <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
-          <div><h4>一键查询</h4><p>主论坛订单、深研课订单、酒店住宿、发票、产品市集订单及物流，一页查全。</p></div>
+          <div><h4>一键查询</h4><p>主论坛订单、场外深研课订单、酒店住宿、发票、产品市集订单及物流，一页查全。</p></div>
         </div>
         <div class="feature-item">
           <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
-          <div><h4>发票信息保存复用</h4><p>填写过的发票信息自动保存。充值未来币、加报深研课，默认沿用历史发票，确认即可。</p></div>
+          <div><h4>发票信息保存复用</h4><p>填写过的发票信息自动保存。充值未来币、加报场外深研课，默认沿用历史发票，确认即可。</p></div>
         </div>
       </div>
       <div class="swap-box">
         <h4><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF4B2A" stroke-width="2"><path d="M17 3l4 4-4 4"/><path d="M21 7H9a4 4 0 0 0-4 4"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h12a4 4 0 0 0 4-4"/></svg>换人规则</h4>
         <ul>
           <li>最晚更换时间为11月30日，12月1日0点起不可更换；仅可自行更换一次</li>
-          <li>主论坛换人后，关联深研课自动同步给新参会人，并先继承原选课场次</li>
+          <li>主论坛换人后，关联的分论坛与场外深研课选课信息同步给新参会人</li>
           <li>新参会人可重新选课：须先选新课，再释放原场次</li>
           <li>下单人、订单号、支付与发票信息不变，全程留痕可追溯</li>
         </ul>
@@ -1443,8 +1533,8 @@
     <div>
       <h4>快速入口</h4>
       <a href="#tickets">报名参会</a>
-      <a href="#deep">深研课选课</a>
-      <a href="#map">学习地图</a>
+      <a href="#deep">分论坛 / 深研课选课</a>
+      <a href="#passport">学习方式</a>
       <a href="#account">一键查询</a>
     </div>
     <div>
@@ -1484,13 +1574,31 @@
     });
   });
 
-  // Learning map toggle
-  document.querySelectorAll('.lmap-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('.lmap-btn').forEach(function(b){b.classList.remove('active');});
-      document.querySelectorAll('.route-panel').forEach(function(p){p.classList.remove('active');});
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.route).classList.add('active');
+  // Learning passport preview tabs
+  function activatePreview(buttons, panels, buttonKey, panelKey, value){
+    buttons.forEach(function(button){
+      var active = button.dataset[buttonKey] === value;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    panels.forEach(function(panel){
+      var active = panel.dataset[panelKey] === value;
+      panel.classList.toggle('active', active);
+      panel.hidden = !active;
+    });
+  }
+  var learningTabs = Array.from(document.querySelectorAll('[data-learning-view]'));
+  var learningPanels = Array.from(document.querySelectorAll('[data-learning-panel]'));
+  learningTabs.forEach(function(button){
+    button.addEventListener('click', function(){
+      activatePreview(learningTabs, learningPanels, 'learningView', 'learningPanel', button.dataset.learningView);
+    });
+  });
+  var organizationTabs = Array.from(document.querySelectorAll('[data-org-view]'));
+  var organizationPanels = Array.from(document.querySelectorAll('[data-org-panel]'));
+  organizationTabs.forEach(function(button){
+    button.addEventListener('click', function(){
+      activatePreview(organizationTabs, organizationPanels, 'orgView', 'orgPanel', button.dataset.orgView);
     });
   });
 
@@ -1518,12 +1626,12 @@
       },
       prep:{
         eyebrow:'会前准备 · 把四天学习安排明白',
-        copy:'选课、自评、学习地图会依次开放，平台会根据你的权益提示最需要完成的一步。',
-        agenda:'会前可先浏览并收藏议程；深研课资格会在选课入口按票种显示。'
+        copy:'选课、自评与学习护照会依次开放，平台会根据你的权益提示最需要完成的一步。',
+        agenda:'会前可先浏览并收藏议程；分论坛与场外深研课资格会在选课入口按票种显示。'
       },
       live:{
         eyebrow:'大会进行中 · 按今天的节奏入场学习',
-        copy:'现场签到、当日议程、学习地图、学习护照与方案展服务已按参会权益开放。',
+        copy:'现场签到、当日议程、学习护照与方案展服务已按参会权益开放。',
         agenda:'当天议程已开放，请根据票种和现场提醒安排参会。'
       },
       post:{
@@ -1565,9 +1673,9 @@
       }
     }
     function ticketRights(){
-      if(state.identity === 'main') return ['主论坛', '场内深研课', '方案展', '学习地图', '学习护照', '会后回放'];
-      if(state.identity === 'combo') return ['主论坛', '场内深研课', '场外深研课', '方案展', '学习地图', '学习护照', '会后回放'];
-      if(state.identity === 'expo') return ['方案展', '学习地图', '学习护照'];
+      if(state.identity === 'main') return ['主论坛', '分论坛', '方案展', '学习护照', '会后回放'];
+      if(state.identity === 'combo') return ['主论坛', '分论坛', '场外深研课', '方案展', '学习护照', '会后回放'];
+      if(state.identity === 'expo') return ['方案展', '学习护照'];
       if(state.identity === 'online') return ['线上直播', '会后回放'];
       if(state.identity === 'guest') return ['继续报名', '查看服务说明'];
       return ['浏览大会内容', '查看票种权益'];
@@ -1576,53 +1684,52 @@
       if(!isRegistered()){
         if(state.phase === 'post') return {primary:'购买线上学习', primaryHref:'#tickets', secondary:'查看大会回顾', secondaryHref:'#passport'};
         if(state.phase === 'live') return {primary:'线上参会', primaryHref:'#tickets', secondary:'查看现场议程', secondaryHref:'#agenda'};
-        return {primary:state.identity === 'guest' ? '完成报名' : '查看票种权益', primaryHref:'#tickets', secondary:state.identity === 'guest' ? '查看个人中心' : '登录后继续报名', secondaryHref:'#account'};
+        return {primary:state.identity === 'guest' ? '完成报名' : '查看票种权益', primaryHref:'#tickets', secondary:state.identity === 'guest' ? '进入一键查询' : '登录后继续报名', secondaryHref:'#account'};
       }
       if(state.phase === 'registration') return {primary:'查看参会订单', primaryHref:'#account', secondary:'查看票种权益', secondaryHref:'#tickets'};
       if(state.phase === 'prep'){
-        if(hasCourseRight() && !state.course) return {primary:'去选深研课', primaryHref:'#deep', secondary:'完成自评', secondaryHref:'#map'};
-        if(!state.assessment) return {primary:'完成自评', primaryHref:'#map', secondary:'查看选课信息', secondaryHref:'#deep'};
-        return {primary:'查看学习地图', primaryHref:'#map', secondary:'查看参会服务', secondaryHref:'#account'};
+        if(hasCourseRight() && !state.course) return {primary:'去选课', primaryHref:'#deep', secondary:'完成自评', secondaryHref:'#passport'};
+        if(!state.assessment) return {primary:'完成自评', primaryHref:'#passport', secondary:'查看选课信息', secondaryHref:'#deep'};
+        return {primary:'打开学习护照', primaryHref:'#passport', secondary:'查看参会服务', secondaryHref:'#account'};
       }
       if(state.phase === 'live'){
         if(state.identity === 'online') return {primary:'观看线上直播', primaryHref:'#agenda', secondary:'查看会后回放', secondaryHref:'#passport'};
         if(!state.checkin) return {primary:'现场签到', primaryHref:'#account', secondary:'查看今日议程', secondaryHref:'#agenda'};
         return {primary:'查看今日议程', primaryHref:'#agenda', secondary:'打开学习护照', secondaryHref:'#passport'};
       }
-      return {primary:state.identity === 'online' ? '查看课程回放' : '查看学习报告', primaryHref:'#passport', secondary:'回看学习地图', secondaryHref:'#map'};
+      return {primary:state.identity === 'online' ? '查看课程回放' : '查看学习成果', primaryHref:'#passport', secondary:'进入一键查询', secondaryHref:'#account'};
     }
     function getTasks(){
       if(state.identity === 'anonymous') return ['登录后可保存报名信息，并继续进入后续服务。', '先浏览票种与议程，选择适合自己的参会方式。'];
-      if(state.identity === 'guest') return ['完成报名与参会人信息填写，才会解锁对应服务。', '报名成功后，可在个人中心查询订单、酒店与发票。'];
+      if(state.identity === 'guest') return ['完成报名与参会人信息填写，才会解锁对应服务。', '报名成功后，可在一键查询中查看订单、酒店与发票。'];
       if(state.phase === 'registration') return ['确认参会人、订单与服务信息。', '会前准备开启后，平台将提示选课与自评入口。'];
       if(state.phase === 'prep'){
-        if(hasCourseRight() && !state.course) return ['先选择一门深研课，系统会保留你的票种权益。', '完成自评后，学习地图会切换为个性化线路。'];
-        if(!state.assessment) return ['完成自评，生成与你的学校画像匹配的学习地图。', '在个人中心确认酒店、发票和参会提醒。'];
-        return ['学习地图已可使用，可按推荐路线预习和收藏场次。', '在个人中心核对会前服务与参会人信息。'];
+        if(hasCourseRight() && !state.course) return [state.identity === 'combo' ? '选择每天参加的分论坛，并选择一个场外深研课。' : '选择每天参加的分论坛；如需场外深研课，可另行选购一个。', '完成 5 分钟自评后，生成个性化主路径。'];
+        if(!state.assessment) return ['完成自评，生成与你的真实问题相关的学习路径。', '在一键查询中确认酒店、发票和参会提醒。'];
+        return ['个性化主路径已生成并固定，可提前查看和收藏内容。', '自由学习会另列记录，不改变原有路径。'];
       }
       if(state.phase === 'live'){
         if(state.identity === 'online') return ['进入直播间观看当天内容，结束后可在会后回放。', '将感兴趣的主题加入个人学习清单。'];
-        if(!state.checkin) return ['先完成现场核验签到，再按今日议程进入会场。', '打开学习地图，规划主论坛与方案展的路线。'];
-        return ['按今日议程参会，并用学习护照记录所思所得。', '在方案展完成打卡任务，积累未来币。'];
+        if(!state.checkin) return ['先完成现场核验签到，再按今日议程进入会场。', '打开学习护照，查看自己的主路径与今日任务。'];
+        return ['按个人主路径参会，并在学习护照中完成任务与记录。', '主路径外的自由学习将单独保留，不改变原有安排。'];
       }
-      return ['查看已开放的回放、资料与个人参会记录。', state.identity === 'online' ? '继续完成线上课程学习。' : '把学习报告沉淀为下一步行动计划。'];
+      return ['查看已开放的回放、资料与个人学习报告。', state.identity === 'online' ? '继续完成线上课程学习。' : '与本校同行者共同推进学校 100 天行动。'];
     }
     function contextNotes(){
-      var map = '完成报名并登录后，学习地图会按票种开放。';
-      var passport = '报名后，学习护照会在大会期间按日期、场次与展位开放。';
+      var learning = '报名后，学习护照会按票种开放，并承接学习路径、任务记录、学习组织与成果。';
       var expo = '方案展票与主论坛票均可进入云涌集，具体以现场门禁为准。';
       var account = '登录后可查询订单、酒店、发票与参会服务进度。';
-      if(isRegistered() && !state.assessment && state.identity !== 'online') map = '完成自评后，学习地图会切换为你的个性化线路；当前仍可浏览官方推荐。';
-      if(state.assessment) map = '已完成自评。当前示例展示你的个性化学习线路，仍可手动切回官方推荐。';
+      if(isRegistered() && !state.assessment && state.identity !== 'online') learning = '完成 5 分钟自评后生成个性化主路径；主路径生成后保持不变。';
+      if(state.assessment) learning = '已完成自评，个性化主路径已固定。自由学习另行记录，不改变原有路径。';
       if(state.identity === 'online'){
-        map = '线上参会以直播与会后回放为主，不显示现场学习动线。';
+        learning = '线上参会以直播与会后回放为主，学习护照记录线上学习内容与进度。';
         expo = '线上参会不含现场方案展；会后可查看已开放的线上资料。';
       }
-      if(state.phase === 'live' && isOnsite()) passport = state.checkin ? '现场签到已完成，学习护照已开放：可按场次记录、打卡并积累未来币。' : '完成现场核验签到后，即可开始使用学习护照与现场打卡。';
-      if(state.phase === 'post') passport = '会后将按真实参会与记录生成学习报告，并开放对应的回放与资料。';
+      if(state.phase === 'live' && isOnsite()) learning = state.checkin ? '现场签到已完成。可按主路径学习，也可自由参与开放内容；两类记录分开保留。' : '完成现场核验签到后，即可使用学习护照查看路径、任务与学习组织。';
+      if(state.phase === 'post') learning = state.identity === 'online' ? '会后可继续查看回放、资料与线上学习记录。' : '会后将按真实参与生成个人学习报告，并与本校同行者共同推进学校 100 天行动。';
       if(state.identity === 'guest') account = '当前账号尚未报名：完成报名后才能查看订单、酒店、发票与参会服务。';
       if(state.identity === 'anonymous') account = '未登录状态仅展示公开内容；登录后可继续报名或查询已有订单。';
-      return {map:map, passport:passport, expo:expo, account:account};
+      return {learning:learning, expo:expo, account:account};
     }
     function updateUrl(){
       var url = new URL(window.location.href);
@@ -1641,7 +1748,7 @@
       var action = getAction();
       var notes = contextNotes();
       var status = [];
-      if(state.course) status.push('已选深研课');
+      if(state.course) status.push('已完成选课');
       if(state.assessment) status.push('已完成自评');
       if(state.checkin) status.push('已签到');
 
@@ -1660,8 +1767,7 @@
       setText('[data-state-description]', isRegistered() ? '你当前拥有的参会权益与完成状态，正在决定本页最优先呈现的内容与下一步入口。' : '当前以公开浏览和报名转化为主；完成登录、报名后，页面会自动切换到对应的参会服务。');
       setText('[data-state-next-title]', state.phase === 'live' ? '现在就做' : '下一步');
       setText('[data-state-agenda]', copy.agenda);
-      setText('[data-state-map]', notes.map);
-      setText('[data-state-passport]', notes.passport);
+      setText('[data-state-learning]', notes.learning);
       setText('[data-state-expo]', notes.expo);
       setText('[data-state-account]', notes.account);
 
@@ -1692,14 +1798,7 @@
       });
       setText('[data-demo-summary]', '当前：' + phaseNames[state.phase] + ' · ' + identityNames[state.identity] + (status.length ? ' · ' + status.join('、') : ' · 尚无完成状态'));
 
-      var mapRoute = state.assessment && state.identity !== 'online' ? 'personal' : 'official';
-      var routeButton = document.querySelector('[data-route="' + mapRoute + '"]');
-      var routePanel = document.getElementById(mapRoute);
-      if(routeButton && routePanel){
-        document.querySelectorAll('.lmap-btn,.route-panel').forEach(function(node){node.classList.remove('active');});
-        routeButton.classList.add('active');
-        routePanel.classList.add('active');
-      }
+      setText('[data-learning-path-status]', state.assessment ? '个性化主路径已生成，现已固定' : '完成 5 分钟自评后生成个性化主路径');
       updateUrl();
     }
 
