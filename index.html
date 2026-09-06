@@ -361,7 +361,7 @@
   .learning-system .kicker::before{background:var(--gold);}
   .learning-system .sec-desc{color:rgba(246,243,236,.72);max-width:760px;}
   .learning-system .demo-context-note{border:1px solid rgba(246,243,236,.18);background:rgba(246,243,236,.06);color:rgba(246,243,236,.78);}
-  .learning-principles{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:1px solid rgba(246,243,236,.2);border-bottom:1px solid rgba(246,243,236,.2);}
+  .learning-principles{display:grid;grid-template-columns:repeat(3,1fr);margin-top:44px;border-top:1px solid rgba(246,243,236,.2);border-bottom:1px solid rgba(246,243,236,.2);}
   .learning-principle{padding:24px 26px 26px 0;}
   .learning-principle:not(:first-child){border-left:1px solid rgba(246,243,236,.2);padding-left:26px;}
   .learning-principle b{display:block;color:var(--gold);font-size:15px;margin-bottom:8px;}
@@ -444,7 +444,6 @@
   @media(max-width:900px){
     .learning-principles{grid-template-columns:repeat(2,1fr);}
     .learning-principle:nth-child(3){border-left:0;border-top:1px solid rgba(246,243,236,.16);padding-left:0;}
-    .learning-principle:nth-child(4){border-top:1px solid rgba(246,243,236,.16);}
     .learning-journey{grid-template-columns:repeat(2,1fr);gap:28px 20px;}
     .journey-node::after{display:none;}
     .path-layout,.records-layout,.organization-shell,.outcomes-layout{grid-template-columns:1fr;}
@@ -1016,7 +1015,7 @@
       </div>
     </div>
   </div>
-  <div class="about-history">
+  <div class="about-history" data-page="home">
     <div class="wrap">
       <figure class="annual-timeline" aria-label="中国教育创新年会历届回顾，点击各届图标查看回顾">
         <div class="annual-timeline-scroll">
@@ -1277,23 +1276,23 @@
 <section id="deep" data-page="home">
   <div class="wrap">
     <div class="kicker">DEEP COURSES · 深研课</div>
-    <h2 class="sec-title">静水深流丨分论坛与场外深研课</h2>
+    <h2 class="sec-title">静水深流丨深研课</h2>
 
     <div class="deep-grid">
       <div class="deep-card in">
-        <h3>分论坛</h3>
-        <p class="sub">主论坛期间 · 小场域交流式深研</p>
+        <h3>小场域交流式深研课</h3>
+        <p class="sub">12月2日-3日 · 小班深度学习</p>
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>主论坛订单付款成功后，自动获得分论坛选课资格，无需另外付费</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>每位参会人每天最多选择一个分论坛参加，可按不同日期分别选择</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>每人每天限选1场，不同日期可分别选课</li>
         </ul>
       </div>
       <div class="deep-card out">
         <h3>场外深研课</h3>
-        <p class="sub">12月5日 · 走进学校现场全天访学</p>
+        <p class="sub">12月5日 · 走进学校专题深度研讨</p>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>每位参会人最多选择一个参加；组合票已含 1 个权益，仅报主论坛可单独选购</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>付费后支持换课一次：须先选定有名额的新课程，原课程名额自动释放</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>组合票包含1门场外深研课；仅购买主论坛的参会者，需另行选购后选课。</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>报名后可换课1次：选择仍有名额的新课程后，原课程名额自动释放。</li>
         </ul>
       </div>
     </div>
@@ -1304,23 +1303,23 @@
 <!-- ================= EXPO ================= -->
 <section id="expo" class="expo" data-page="home">
   <div class="wrap">
-    <div class="kicker">EXPO & AI STUDIO · 方案展与AI共创站</div>
+    <div class="kicker">EXPO · 方案展</div>
     <h2 class="sec-title">云涌集丨下一代学校创新解决方案展</h2>
     <p class="demo-context-note light" data-state-expo></p>
     <div class="expo-grid">
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
-        <h4>扫码连接方案</h4>
+        <h4>链接方案</h4>
         <p>每个展位配置专属二维码。查看方案详情、收藏资料、记录问题，也可以把现场交流和待跟进事项同步进学习护照。</p>
       </div>
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M8.5 9.5c0-1.4 1.6-2.5 3.5-2.5s3.5 1.1 3.5 2.5-1.6 2.5-3.5 2.5-3.5 1.1-3.5 2.5 1.6 2.5 3.5 2.5 3.5-1.1 3.5-2.5"/></svg></div>
-        <h4>道具集市</h4>
-        <p>在学习任务和现场互动中获得未来币，用于兑换开放的学习道具与部分产品。具体规则以现场公布为准。</p>
+        <h4>逛展攻略</h4>
+        <p>完成学习任务、参与现场互动，可获得“未来币”，用于兑换学习资源与指定产品。具体规则以现场公布为准。</p>
       </div>
       <div class="expo-card">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.2-2.6 5.6-.9.9-1.4 2-1.4 3.4H9c0-1.4-.5-2.5-1.4-3.4C6.2 13.2 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg></div>
-        <h4>AI 共创站</h4>
+        <h4>AI共创</h4>
         <p>现场体验蒲公英教育智库一体化平台。围绕学校真实问题调用专业智能体，形成可保存、可继续追问的方案建议。</p>
       </div>
     </div>
@@ -1336,27 +1335,25 @@
     <p class="demo-context-note" data-state-learning></p>
 
     <div class="learning-principles" aria-label="年会学习原则">
-      <div class="learning-principle"><b>没有标准路线，只有自己的路径</b><p>同一场年会，不同问题、不同身份和不同票种，将得到不同的学习安排。</p></div>
+      <div class="learning-principle"><b>有推荐路线，更有你的专属路径</b><p>完成自评测试，获得个性化参会路径推荐，更快找到值得参加的场次，组合出适合自己的学习安排。</p></div>
       <div class="learning-principle"><b>带着问题来，带着更好的问题走</b><p>年会不替你交出标准答案，四天学习帮助你看见问题、校准判断并找到同行者。</p></div>
       <div class="learning-principle"><b>知识接力</b><p>每个人带来的经验都会进入交流，个人所得也会回到班级、社区和学校团队。</p></div>
-      <div class="learning-principle"><b>主路径生成后保持不变</b><p>自由学习另列记录，不改变自评后生成的个性化学习路径。</p></div>
     </div>
 
     <div class="learning-journey" aria-label="完整学习过程">
       <div class="journey-node"><h3>带来一个真实问题</h3><p>报名后写下学校当前最需要解决的一件事，作为学习起点。</p></div>
-      <div class="journey-node"><h3>完成 5 分钟自评</h3><p>不超过 10 个问题，帮助系统理解你的关注方向和学习需要。</p></div>
+      <div class="journey-node"><h3>完成 5 分钟自评</h3><p>不帮助我们理解你的关注方向和学习需要</p></div>
       <div class="journey-node"><h3>生成个人学习路径</h3><p>结合自评、问题、内容标签与票种权益形成主路径，生成后不再更改。</p></div>
-      <div class="journey-node"><h3>在现场学习与记录</h3><p>沿主路径参与内容，也可自由学习。文字、照片、语音和扫码记录进入护照。</p></div>
-      <div class="journey-node"><h3>形成个人与学校行动</h3><p>会后获得个人学习报告，并与本校同行者共同生成学校 100 天行动。</p></div>
+      <div class="journey-node"><h3>学习与记录</h3><p>沿着推荐路径学习，也可自由探索。扫码输入语音、文字和照片，存入个人学习护照。</p></div>
+      <div class="journey-node"><h3>从个人收获走向学校行动</h3><p>会后获得个人学习报告，并与本校同行者共同生成学校 100 天行动。</p></div>
     </div>
 
     <div class="passport-stage" aria-label="学习护照交互预览">
       <div class="passport-stage-head">
         <div>
           <div class="eyebrow">学习护照</div>
-          <h3>一份贯穿会前、现场与会后的学习载体</h3>
+          <h3>一份贯穿会前、现场与会后的学习档案</h3>
         </div>
-        <div class="passport-account"><span>示例参会人</span><b>王老师 · 广州未来学校</b></div>
       </div>
 
       <div class="passport-tabs" role="tablist" aria-label="学习护照内容">
@@ -1367,15 +1364,15 @@
       </div>
 
       <div class="passport-panel active" role="tabpanel" data-learning-panel="path">
-        <div class="path-status"><b data-learning-path-status>个性化主路径已生成，现已固定</b><span>自由学习不会改变这条主路径</span></div>
+        <div class="path-status"><b data-learning-path-status>个性化主路径已生成</b><span>自由学习不会改变这条主路径</span></div>
         <div class="path-layout">
           <div class="main-path">
             <h4>我的主路径</h4>
-            <p>依据自评结果、核心问题、内容标签和票种权益生成。</p>
+            <p>依据自评结果、核心问题和享有权益生成。</p>
             <div class="path-line">
               <div class="path-stop"><b>主论坛：与我的问题建立共同坐标</b><span>全体共同学习内容</span></div>
-              <div class="path-stop"><b>分论坛与场外深研课：围绕关键问题深入讨论</b><span>按个人关注方向推荐，并按选课规则参加</span></div>
-              <div class="path-stop"><b>云涌集：寻找学校问题的解决方案</b><span>按问题与内容标签生成逛展建议</span></div>
+              <div class="path-stop"><b>深研课：围绕关键问题深入讨论</b><span>按个人关注方向推荐</span></div>
+              <div class="path-stop"><b>云涌集：寻找学校问题的解决方案</b><span>推荐逛展建议</span></div>
               <div class="path-stop"><b>回到学校：与团队共创 100 天行动</b><span>个人学习汇入学校共同任务</span></div>
             </div>
           </div>
@@ -1419,7 +1416,6 @@
               <button class="org-tab active" type="button" role="tab" aria-selected="true" data-org-view="class">普通班级</button>
               <button class="org-tab" type="button" role="tab" aria-selected="false" data-org-view="community">主题学习社区</button>
             </div>
-            <div class="org-choice-note">系统根据报名信息与学习安排完成归属。这里的切换仅用于预览两种页面状态。</div>
           </div>
           <div class="org-panels">
             <div class="org-panel active" role="tabpanel" data-org-panel="class">
@@ -1448,7 +1444,7 @@
         <div class="outcomes-layout">
           <div class="outcome-block">
             <h4>个人学习报告</h4>
-            <p>只基于真实参与、主动记录与完成的任务生成，不把推荐但未参加的内容计入成果。</p>
+            <p>只基于真实参与、主动记录与完成的任务生成。</p>
             <div class="outcome-list">
               <span>我的学习路径与参与记录</span>
               <span>重要问题、方法与同行者</span>
@@ -1457,11 +1453,11 @@
           </div>
           <div class="outcome-block school">
             <h4>学校 100 天行动</h4>
-            <p>每位参会者都代表一所学校。来自同一所学校的伙伴把个人学习汇总起来，共同生成本校的 100 天行动，而不是各自提交一份个人计划。</p>
+            <p>来自同一所学校的伙伴把个人学习汇总起来，共同生成专属于本校的 100 天行动计划。</p>
             <div class="outcome-list">
               <span>大会提供行动模板，学校团队共同确认问题、目标与分工</span>
-              <span>会后持续推进，在 100 天节点形成阶段性成果并公开展示</span>
-              <span>个人学习护照保留自己在学校行动中的任务与进展</span>
+              <span>形成学校可继续使用和复盘的行动记录</span>
+              <span>会后持续推进，在 100 天节点进行阶段性成果展示</span>
             </div>
           </div>
         </div>
@@ -1476,7 +1472,6 @@
     <div>
       <div class="kicker">ONE-CLICK QUERY · 一键查询</div>
       <h2 class="sec-title">一个手机号，<br>管住你在年会的所有事</h2>
-      <p class="sec-desc">以手机号为唯一身份，登录即自动关联你填写过的学校信息、发票信息、酒店信息与全部订单。换人参会时，新参会人登录后一键确认继承信息。</p>
       <p class="demo-context-note light" data-state-account></p>
       <div class="acct-feats" style="margin-top:30px;">
         <div class="feature-item">
@@ -1528,12 +1523,11 @@
   <div class="wrap foot-grid">
     <div>
       <div class="foot-logo"><span class="logo-mark">13</span>第十三届中国教育创新年会</div>
-      <p>无限游戏｜下一代学校。2026年12月1日–4日，中国广州。一个账号贯穿报名、现场与会后，让每一次参会都成为完整的深度学习旅程。</p>
     </div>
     <div>
       <h4>快速入口</h4>
       <a href="#tickets">报名参会</a>
-      <a href="#deep">分论坛 / 深研课选课</a>
+      <a href="#deep">深研课选课</a>
       <a href="#passport">学习方式</a>
       <a href="#account">一键查询</a>
     </div>
@@ -1549,6 +1543,28 @@
 </footer>
 
 <script>
+  (function(){
+    var historySection = document.querySelector('.about-history');
+    var aboutSection = document.querySelector('#about');
+    var footer = document.querySelector('footer');
+    var mobileLayout = window.matchMedia('(max-width:760px)');
+
+    function placeHistorySection(){
+      if(mobileLayout.matches){
+        footer.parentNode.insertBefore(historySection, footer);
+      }else{
+        aboutSection.appendChild(historySection);
+      }
+    }
+
+    if(mobileLayout.addEventListener){
+      mobileLayout.addEventListener('change', placeHistorySection);
+    }else{
+      mobileLayout.addListener(placeHistorySection);
+    }
+    placeHistorySection();
+  })();
+
   // Countdown to 2026-12-01 09:00
   var target = new Date('2026-12-01T09:00:00+08:00').getTime();
   function tick(){
@@ -1798,7 +1814,7 @@
       });
       setText('[data-demo-summary]', '当前：' + phaseNames[state.phase] + ' · ' + identityNames[state.identity] + (status.length ? ' · ' + status.join('、') : ' · 尚无完成状态'));
 
-      setText('[data-learning-path-status]', state.assessment ? '个性化主路径已生成，现已固定' : '完成 5 分钟自评后生成个性化主路径');
+      setText('[data-learning-path-status]', state.assessment ? '个性化主路径已生成' : '完成 5 分钟自评后生成个性化主路径');
       updateUrl();
     }
 
@@ -2001,6 +2017,11 @@
       });
       // 窗口回到顶部，避免从长页面切过去时停留位置奇怪
       if(page === 'account') window.scrollTo(0, 0);
+      // 从独立页切回首页时，目标锚点此前处于隐藏状态，需要在显示后重新定位
+      if(page === 'home' && location.hash){
+        var target = document.getElementById(location.hash.slice(1));
+        if(target) requestAnimationFrame(function(){ target.scrollIntoView(); });
+      }
       document.body.classList.toggle('on-account-page', page === 'account');
     }
     window.addEventListener('hashchange', render);
