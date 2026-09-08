@@ -462,6 +462,25 @@
   }
   .expo-card h4{font-size:18px;margin-bottom:8px;}
   .expo-card p{font-size:14px;color:var(--ink-soft);line-height:1.8;}
+  /* Preserve-mode addition: DESIGN_VARIANCE 4 / MOTION_INTENSITY 2 / VISUAL_DENSITY 4. */
+  .expo-callout{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;margin-top:30px;padding:30px 0 0;border-top:1px solid var(--line);}
+  .expo-callout h3{font-size:24px;font-weight:700;line-height:1.4;margin-bottom:8px;}
+  .expo-callout p{font-size:14px;line-height:1.8;color:var(--ink-soft);max-width:640px;}
+  .expo-callout-action{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .expo-apply-link{justify-content:center;white-space:nowrap;background:var(--blue);color:#fff;min-height:48px;gap:22px;}
+  .expo-apply-link:hover{background:var(--blue-deep);}
+  .expo-apply-link:active{transform:translateY(1px);}
+  .expo-apply-link:focus-visible{outline:3px solid var(--blue);outline-offset:4px;}
+  .expo-apply-link span[aria-hidden]{font-size:20px;font-weight:400;line-height:1;}
+  .expo-callout-action small{font-size:12px;color:var(--ink-soft);}
+  .expo-callout .expo-apply-status{grid-column:1/-1;padding:12px 16px;background:var(--paper);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;}
+  @media(max-width:760px){
+    .expo-callout{grid-template-columns:1fr;gap:20px;padding-top:24px;margin-top:24px;}
+    .expo-callout h3{font-size:22px;}
+    .expo-callout-action{align-items:stretch;}
+    .expo-callout-action small{text-align:center;}
+  }
+  @media(prefers-reduced-motion:reduce){.expo-apply-link{transition:none;}.expo-apply-link:active{transform:none;}}
 
   /* ===== Account / one-key ===== */
   .acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
@@ -1411,6 +1430,18 @@
         <p>现场体验蒲公英教育智库一体化平台。围绕学校真实问题调用专业智能体，形成可保存、可继续追问的方案建议。</p>
       </div>
     </div>
+    <div class="expo-callout" aria-labelledby="expo-callout-title">
+      <div>
+        <h3 id="expo-callout-title">学校创新方案征集</h3>
+        <p>有意参与云涌集方案展的学校，请填写学校基础信息与相关申请资料，后续由组委会联系沟通并审核。</p>
+      </div>
+      <div class="expo-callout-action">
+        <!-- 将已确认的飞书表单链接填入 data-form-url，按钮即在新窗口打开申请表。 -->
+        <a class="btn expo-apply-link" href="#expo-apply-status" data-expo-apply data-form-url="" aria-describedby="expo-apply-hint">我想加入 <span aria-hidden="true">↗</span></a>
+        <small id="expo-apply-hint">填写申请信息 · 后续沟通审核</small>
+      </div>
+      <p class="expo-apply-status" id="expo-apply-status" role="status" hidden></p>
+    </div>
   </div>
 </section>
 
@@ -1480,6 +1511,26 @@
 <script src="assets/account-model.js"></script>
 <script src="assets/account.js"></script>
 <script>
+  // 方案征集只跳转到飞书表单，不在官网收集或提交学校资料。
+  (function(){
+    var link=document.querySelector('[data-expo-apply]');
+    var note=document.getElementById('expo-apply-status');
+    var formUrl=link.dataset.formUrl.trim();
+    if(formUrl){
+      try{
+        var url=new URL(formUrl);
+        if(url.protocol!=='https:'||url.username||url.password)throw new Error('Invalid form URL');
+        link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';
+        return;
+      }catch(e){/* 无效配置使用预览提示，避免误跳转。 */}
+    }
+    link.addEventListener('click',function(event){
+      event.preventDefault();
+      note.hidden=false;
+      note.textContent='飞书征集表单链接待接入。当前为入口预览，不会提交申请。';
+    });
+  })();
+
   (function(){
     var historySection = document.querySelector('.about-history');
     var aboutSection = document.querySelector('#about');
