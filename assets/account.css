@@ -1,0 +1,76 @@
+/* Role-aware query hub; extends the existing site components without global resets. */
+.hub-demo{margin:0 0 28px;border:1px dashed var(--line);border-radius:12px;padding:12px 16px;color:var(--ink-soft);font-size:12px;}
+.hub-demo summary{cursor:pointer;min-height:24px;line-height:24px;}
+.hub-demo p{margin-top:12px;line-height:1.7;}
+.hub-role-options,.hub-filter,.hub-proxy-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+.hub-role-options button,.hub-filter button,.hub-proxy-tabs button{font:inherit;font-size:13px;padding:10px 16px;min-height:44px;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:#fff;cursor:pointer;}
+.hub-role-options button[aria-pressed=true],.hub-filter button[aria-pressed=true],.hub-proxy-tabs button[aria-pressed=true]{color:#fff;background:var(--ink);border-color:var(--ink);}
+.hub-area-tabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin:0 0 28px;}
+.hub-area-tabs button{border:0;border-bottom:3px solid transparent;background:none;color:var(--ink-soft);font:inherit;font-size:18px;font-weight:600;cursor:pointer;padding:0 0 15px;min-height:44px;}
+.hub-area-tabs button[aria-pressed=true]{color:var(--blue);border-bottom-color:var(--blue);}
+.hub-management-head{padding:30px 0 26px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line);}
+.hub-management-head h2{font-size:30px;letter-spacing:-.03em;margin:10px 0;}
+.hub-management-head p{font-size:14px;color:var(--ink-soft);line-height:1.8;}
+.hub-management-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line);padding:24px 0;gap:24px;}
+.hub-management-metrics a{display:flex;align-items:baseline;gap:12px;color:var(--ink);text-decoration:none;min-height:44px;}
+.hub-management-metrics a+a{border-left:1px solid var(--line);padding-left:24px;}
+.hub-management-metrics b{font-size:36px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;}
+.hub-management-metrics span{font-size:13px;color:var(--ink-soft);}
+.hub-management-metrics span:last-child{margin-left:auto;color:var(--blue);}
+.hub-managed-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.hub-person-card{display:flex;align-items:center;gap:14px;padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff;text-decoration:none;color:var(--ink);min-width:0;}
+.hub-person-card:hover{border-color:var(--blue);}
+.hub-person-mark{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--paper-deep);font-size:20px;}
+.hub-person-card h3{font-size:17px;margin-bottom:8px;}
+.hub-person-card small{font-weight:400;font-size:11px;border:1px solid var(--line);padding:3px 6px;border-radius:5px;}
+.hub-person-card p{font-size:12px;color:var(--ink-soft);line-height:1.8;overflow-wrap:anywhere;}
+.hub-person-arrow{margin-left:auto;font-size:12px;color:var(--blue);white-space:nowrap;}
+.hub-wallet-group .hub-wallet{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.hub-wallet-group .hub-wallet-actions{margin-top:0;}
+.hub-wallet-balance-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin:6px 0 12px;}
+.hub-wallet-balance-row .hub-balance{margin:0;}
+.hub-wallet [data-platform-recharge]{white-space:nowrap;padding:10px 18px;}
+.hub-wallet-group .hub-wallet p{font-size:12px;color:#655323;line-height:1.8;}
+.hub-target-picker{display:grid;gap:10px;font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
+.hub-target-picker select,.hub-course-form select{display:block;min-width:0;width:100%;min-height:48px;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;color:var(--ink);font:inherit;font-size:14px;}
+.hub-target-banner{display:flex;justify-content:space-between;align-items:center;gap:20px;border-left:4px solid var(--blue);padding:22px 24px;background:#e9ecff;border-radius:0 12px 12px 0;margin-bottom:24px;}
+.hub-target-banner span{font-size:12px;color:var(--ink-soft);}
+.hub-target-banner strong{display:block;font-size:24px;margin:8px 0;}
+.hub-target-banner p{font-size:13px;line-height:1.8;color:var(--ink-soft);}
+.hub-target-banner .hub-status{background:#fff;white-space:nowrap;color:var(--blue);}
+.hub-course-form{display:flex;align-items:flex-end;gap:12px;margin-top:22px;}
+.hub-course-form label{flex:1;min-width:0;display:grid;gap:8px;font-size:13px;color:var(--ink-soft);}
+.hub-course-form button{flex-shrink:0;}
+.hub-selection-confirm{border:1px solid #d7c9a6;background:#eee7d6;border-radius:14px;margin:14px 0 24px;padding:24px;}
+.hub-selection-confirm h3{font-size:17px;margin-bottom:12px;line-height:1.6;}
+.hub-selection-confirm p{font-size:13px;line-height:1.8;color:var(--ink-soft);}
+.hub-muted{margin-top:16px;}
+#account select:focus-visible,#account summary:focus-visible{outline:3px solid var(--gold);outline-offset:4px;}
+@media(max-width:760px){
+  .hub-managed-people{grid-template-columns:1fr;}
+  .hub-wallet-group .hub-wallet{grid-template-columns:1fr;gap:20px;}
+  .hub-management-metrics{gap:14px;}
+  .hub-management-metrics a{display:grid;grid-template-columns:1fr auto;gap:6px;}
+  .hub-management-metrics a+a{padding-left:14px;}
+  .hub-management-metrics span:nth-child(2){grid-column:1/-1;grid-row:2;}
+  .hub-management-metrics span:last-child{grid-column:2;grid-row:1;}
+}
+@media(max-width:600px){
+  .hub-demo{margin-bottom:22px;}
+  .hub-role-options{display:grid;grid-template-columns:1fr 1fr;}
+  .hub-role-options button{padding:10px 8px;font-size:12px;}
+  .hub-area-tabs{gap:22px;}
+  .hub-area-tabs button{font-size:16px;}
+  .hub-management-head{align-items:flex-start;flex-direction:column;gap:8px;padding-top:8px;}
+  .hub-management-head h2{font-size:26px;}
+  .hub-management-metrics b{font-size:30px;}
+  .hub-person-card{padding:18px 14px;gap:10px;flex-wrap:wrap;}
+  .hub-person-mark{width:38px;height:38px;font-size:18px;}
+  .hub-person-arrow{font-size:11px;}
+  .hub-target-banner{align-items:flex-start;padding:18px 16px;}
+  .hub-target-banner p{font-size:12px;}
+  .hub-proxy-tabs{gap:6px;}
+  .hub-proxy-tabs button{font-size:12px;padding:10px 12px;}
+  .hub-course-form{flex-direction:column;align-items:stretch;}
+  .hub-selection-confirm{padding:18px;}
+}

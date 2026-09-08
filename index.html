@@ -877,6 +877,7 @@
 
 </style>
 <link rel="stylesheet" href="assets/passport.css">
+<link rel="stylesheet" href="assets/account.css">
 </head>
 <body>
 
@@ -1476,6 +1477,8 @@
 
 <script src="assets/passport-model.js"></script>
 <script src="assets/passport.js"></script>
+<script src="assets/account-model.js"></script>
+<script src="assets/account.js"></script>
 <script>
   (function(){
     var historySection = document.querySelector('.about-history');
@@ -1524,138 +1527,7 @@
     });
   });
 
-  // 一键查询：所有个人数据均为预览样例，未连接登录、报名或兑换接口。
-  (function(){
-    var root = document.querySelector('[data-account-hub]');
-    var state = {identity:'combo', phase:'prep', course:true, assessment:true, checkin:false};
-    var names = {main:'主论坛', combo:'主论坛＋深研课', online:'线上参会', expo:'独立方案展'};
-    var phases = {registration:'报名期', prep:'会前准备', live:'会议进行', post:'会后'};
-    var prices = {main:'2,800', combo:'2,900', online:'1,560', expo:'300'};
-    var claimed = {}, redeemed = {}, notice = '', passportRoute = null;
-    var tasks = [
-      {id:'assessment', title:'完成学习自评', copy:'梳理关注方向，生成个人学习路径', coins:60},
-      {id:'record', title:'留下一条学习记录', copy:'用文字、照片或语音记录一次学习所得', coins:40},
-      {id:'relay', title:'参与一次知识接力', copy:'把收获分享给所在班级或主题学习社区', coins:80}
-    ];
-    var products = [
-      {id:'resource', title:'学校创新方案资料包', copy:'电子资料 · 兑换后在记录中查看', coins:100},
-      {id:'notebook', title:'年会学习笔记本', copy:'实物产品 · 兑换后查看领取状态', coins:180}
-    ];
-    function registered(){return Object.prototype.hasOwnProperty.call(names, state.identity);}
-    function forumRight(){return state.identity === 'main' || state.identity === 'combo';}
-    function onsite(){return registered() && state.identity !== 'online';}
-    function studyReady(){return registered() && window.EICCPassport.status().assessment;}
-    function stageOpen(){return state.phase !== 'registration';}
-    function coins(){
-      if(!registered()) return 0;
-      return 240 + tasks.reduce(function(n,t){return n + (claimed[t.id] ? t.coins : 0);},0) - products.reduce(function(n,p){return n + (redeemed[p.id] ? p.coins : 0);},0);
-    }
-    function status(text, ready){return '<span class="hub-status'+(ready?' ready':'')+'">'+text+'</span>';}
-    function link(key, text, cls){return '<a class="'+(cls||'hub-link')+'" href="#account/'+key+'">'+text+'</a>';}
-    function action(href, text, secondary, attrs){return '<a class="hub-button'+(secondary?' secondary':'')+'" href="'+href+'" '+(attrs||'')+'>'+text+'</a>';}
-    function box(title, content){return '<div class="hub-detail-box"><h2>'+title+'</h2>'+content+'</div>';}
-    function fields(rows){return '<dl>'+rows.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>';}).join('')+'</dl>';}
-    function card(key, title, content){return '<a class="hub-card" href="#account/'+key+'"><h3>'+title+'</h3>'+content+'</a>';}
-    function entry(title, copy, tail){return '<div class="hub-entry"><div><b>'+title+'</b><p>'+copy+'</p></div>'+(tail||'')+'</div>';}
-    function noData(title, copy, cta){return '<div class="hub-empty"><h2>'+title+'</h2><p>'+copy+'</p>'+(cta?'<div class="hub-detail-actions">'+cta+'</div>':'')+'</div>';}
-    function note(text){return '<div class="hub-notice">'+text+'</div>';}
-    function learningLink(view,text,textClass){return action('#account/'+(view==='records'?'passport':view),text);}
-    function overview(){
-      var member = registered(), forum = forumRight(), post = state.phase === 'post';
-      var seat = forum ? (stageOpen() ? 'A 区 · 08 排 · 16 座' : '座位待公布') : (state.identity === 'online' ? '线上参会，无需现场座位' : member ? '方案展通行，无主论坛座位' : '报名后查看座位');
-      var head = '<div class="hub-head"><div><h1>一键查询</h1><p>我的参会安排、学习与收获</p></div><span class="hub-preview">交互预览 · 示例数据</span></div>';
-      var top = '<div class="hub-top"><div class="hub-ticket"><div class="hub-label">我的报名'+status(member ? phases[state.phase] : state.identity === 'anonymous' ? '未登录' : '未报名')+'</div><h2>'+(member ? names[state.identity] : '从这里开启年会之旅')+'</h2><p>第十三届中国教育创新年会</p><p>2026.12.01–12.04 · 中国广州</p>'+(member?link('orders','查看报名与权益'):link('orders',state.identity==='anonymous'?'登录后查询':'查看报名入口'))+'</div><div class="hub-seat"><div class="hub-label">'+(state.identity==='online'?'我的线上参会':'我的座位与入场')+'</div><h2>'+seat+'</h2><p>'+(forum && stageOpen() ? (state.checkin?'已签到 · 请按座位号入座':'未签到 · 座位号为演示样例') : '按参会方式查看对应的入场信息')+'</p>'+link(state.identity==='online'?'replay':'seat',state.identity==='online'?'查看直播与回放':'查看入场信息')+'</div></div>';
-      var arr = '<div class="hub-group"><div class="hub-group-head"><h2>我的参会安排</h2><span>场次、选课与住宿</span></div><div class="hub-arrangements">';
-      arr += card('forum','我的分论坛',status(!member?'报名后查看':!forum?'当前权益不包含':state.course?'已选 2 场':'待选课',forum&&state.course)+'<p><b>12 月 2 日</b> · '+(forum&&state.course?'已选场次 A':'尚未选择')+'</p><p><b>12 月 3 日</b> · '+(forum&&state.course?'已选场次 B':'尚未选择')+'</p>');
-      arr += card('offsite','场外深研课',status(state.identity==='combo'?(state.course?'已选课':'已含权益 · 待选课'):forum?'尚未选购':member?'当前权益不包含':'报名后查看',state.identity==='combo'&&state.course)+'<p><b>12 月 5 日</b> · 学校现场研讨</p><p>'+(state.identity==='combo'&&state.course?'查看已选课程与出行安排':'每人最多选择 1 场参加')+'</p>');
-      arr += card('hotel','我的酒店',status(onsite()&&stageOpen()?'已预订':state.identity==='online'?'暂无预订':'待预订',onsite()&&stageOpen())+'<p>'+(onsite()&&stageOpen()?'<b>协议酒店 · 大床房</b><br>12 月 1 日入住 · 12 月 4 日离店':'查看酒店订单、入住及退房信息')+'</p>')+'</div></div>';
-      var learning = '<div class="hub-split"><div class="hub-group"><div class="hub-group-head"><h2>我的学习护照</h2><span>学习护照，收好每一份收获</span></div><div class="hub-learning">';
-      learning += card('path','我的学习路径','<p>'+(studyReady()?'已生成 · 查看我的学习安排':'完成自评，查看个人学习安排')+'</p>');
-      learning += card('passport','我的学习护照','<p>学习任务、个人记录与自由探索</p>');
-      learning += card('organization','我的学习组织','<p>'+(member?'查看班级或主题学习社区':'报名后查看所属学习组织')+'</p>');
-      learning += card('outcomes','我的学习成果','<p>'+(post?'查看个人报告与学校 100 天行动':'个人学习报告与学校 100 天行动')+'</p>')+'</div></div>';
-      learning += '<div class="hub-group"><div class="hub-group-head"><h2>年会币与兑换</h2>'+link('coins','收支明细')+'</div><div class="hub-wallet"><div class="hub-wallet-label">可用年会币</div><div class="hub-balance"><strong>'+coins()+'</strong><span>枚</span></div><p>做任务积累年会币，兑换方案与产品</p><div class="hub-wallet-actions">'+link('tasks','做任务赚币','')+link('exchange','去兑换','')+link('redemptions','我的兑换','')+link('favorites','收藏的方案','')+'</div></div></div></div>';
-      var services = '<div class="hub-group"><div class="hub-group-head"><h2>参会服务</h2></div><div class="hub-services">'+[['orders','全部订单'],['invoice','发票信息'],['replay','直播与回放'],['notices','大会通知'],['guide','会场与交通'],['profile','参会人信息'],['transfer','更换参会人'],['help','联系会务']].map(function(x){return link(x[0],x[1],'hub-service');}).join('')+'</div></div>';
-      return head + top + arr + learning + services;
-    }
-    var titles = {orders:'我的报名与订单',seat:'我的座位与入场',forum:'我的分论坛',offsite:'场外深研课',hotel:'我的酒店',path:'我的学习路径',passport:'我的学习护照',organization:'我的学习组织',outcomes:'我的学习成果',coins:'年会币收支',tasks:'做任务赚年会币',exchange:'兑换方案与产品',redemptions:'我的兑换',favorites:'收藏的方案',invoice:'发票信息',replay:'直播与回放',notices:'大会通知',guide:'会场与交通',profile:'参会人信息',transfer:'更换参会人',help:'联系会务'};
-    function details(key){
-      if(!registered() && ['guide','help','notices'].indexOf(key)===-1){
-        return noData(state.identity==='anonymous'?'登录后查看你的参会信息':'你还没有报名本届年会',state.identity==='anonymous'?'登录后，你的订单、选课、住宿与学习记录会在这里汇总。':'完成报名后，在这里查询所有参会安排。',state.identity==='anonymous'?'<button type="button" class="hub-button" data-hub-login>预览登录后状态</button>':action('#tickets','查看参会方式'));
-      }
-      switch(key){
-        case 'orders': return box('年会报名',fields([['参会方式',names[state.identity]],['订单状态','已支付（示例）'],['报名金额','¥'+prices[state.identity]+' / 人'],['订单编号','DEMO-EICC2026-001'],['参会权益',state.identity==='online'?'主论坛直播及回看、分论坛及场外深研课录播回看':state.identity==='expo'?'方案展通行、学习地图、学习护照与学习报告':'主论坛、每日分论坛选课、方案展、学习护照'+(state.identity==='combo'?'、1 门场外深研课':'')]])) + box('关联订单',entry('酒店住宿',onsite()&&stageOpen()?'协议酒店 · 大床房 · 3 晚':'暂无住宿订单',link('hotel','查看'))+entry('场外深研课',state.identity==='combo'?'已包含在报名权益内':'暂无独立订单',link('offsite','查看'))+entry('方案与产品兑换','领取信息与物流记录',link('redemptions','查看'))) + '<div class="hub-detail-actions">'+action('#account/invoice','查看发票',true)+'</div>';
-        case 'seat':
-          if(!onsite()) return noData('线上参会无需现场座位','可通过线上入口查看直播与回放。',action('#account/replay','查看线上参会'));
-          return box('入场信息',fields([['参会方式',names[state.identity]],['主论坛座位',forumRight()?(stageOpen()?'A 区 · 08 排 · 16 座（示例）':'待公布，分配后在此查看'):'当前参会权益不含主论坛座位'],['签到状态',state.checkin?'已签到（示例）':'未签到'],['现场通行',forumRight()?'主论坛与方案展':'方案展']]))+note('实际座位、会场及入场凭证以正式报名系统发布为准。此预览不生成可核验的入场码。')+'<div class="hub-detail-actions">'+action('#account/guide','查看会场与交通',true)+'</div>';
-        case 'forum':
-          if(!forumRight()) return noData('当前参会权益不包含现场分论坛',state.identity==='online'?'线上参会可查看开放后的录播回看。':'购买主论坛后获得每日分论坛选课资格。',action(state.identity==='online'?'#account/replay':'#tickets',state.identity==='online'?'查看回放权益':'查看参会方式'));
-          return ['12 月 2 日','12 月 3 日'].map(function(day,i){return box(day,fields([['选课状态',state.course?'已选课（示例）':'尚未选课'],['我的场次',state.course?'分论坛场次 '+(i===0?'A':'B')+'（示例）':'选择后显示课程名称'],['时间与地点','以选课通知为准']]))}).join('')+note('每人每天最多选择 1 场分论坛，不同日期可以分别选课。')+'<div class="hub-detail-actions">'+action('#deep','查看分论坛介绍')+'</div>';
-        case 'offsite':
-          if(!forumRight()) return noData('当前尚无场外深研课报名','查看场外深研课的参会方式与课程说明。',action('#deep','查看场外深研课'));
-          return box('12 月 5 日 · 场外深研课',fields([['选购状态',state.identity==='combo'?'报名权益已包含':'尚未选购'],['已选课程',state.identity==='combo'&&state.course?'学校现场专题研讨（示例）':'尚未选课'],['集合与出行','选课成功后查看课程通知']]))+note('每人最多选择 1 门场外深研课。仅购买主论坛的参会者，需另行选购后选课。')+'<div class="hub-detail-actions">'+action('#deep','查看课程说明')+'</div>';
-        case 'hotel': return onsite()&&stageOpen()?box('协议酒店 · 大床房（示例）',fields([['入住日期','2026 年 12 月 1 日'],['离店日期','2026 年 12 月 4 日 · 共 3 晚'],['预订状态','已确认（示例）'],['酒店地址','正式订单中展示所订酒店地址'],['入住凭证','正式预订成功后查看']]))+note('当前为住宿订单展示样例，酒店名称、地址及联系方式以实际预订为准。'):noData('暂无酒店订单','已预订的酒店、入住日期、房型和酒店联系方式将在这里显示。');
-        case 'path': case 'passport': case 'organization': case 'outcomes':
-          return '<div data-passport-mount></div>';
-        case 'coins': return box('可用余额 · '+coins()+' 枚',entry('学习任务累计奖励（示例）','示例账户期初收入','<small>+240</small>')+tasks.filter(function(t){return claimed[t.id];}).map(function(t){return entry(t.title,'本次演示已领取','<small>+'+t.coins+'</small>');}).join('')+products.filter(function(p){return redeemed[p.id];}).map(function(p){return entry(p.title,'本次演示已兑换','<small>−'+p.coins+'</small>');}).join(''))+'<div class="hub-detail-actions">'+action('#account/tasks','做任务赚币')+action('#account/redemptions','查看兑换记录',true)+'</div>';
-        case 'tasks': return box('完成任务，积累年会币',tasks.map(function(t){var done=window.EICCPassport.status().tasks[t.id];return entry(t.title,t.copy+' · 示例奖励 '+t.coins+' 枚',done?'<button class="hub-button'+(claimed[t.id]?' secondary':'')+'" type="button" data-hub-claim="'+t.id+'" '+(claimed[t.id]?'disabled':'')+'>'+(claimed[t.id]?'已领取':'模拟领取')+'</button>':learningLink(t.id==='assessment'?'path':t.id==='relay'?'organization':'records','去完成'));}).join(''))+note('完成状态来自这份学习护照的自评、记录与主动分享。奖励数值仅为旧版交互样例，不是正式规则；真实贡献核验、奖励发放和共创排名待接入。本页领奖与兑换记录刷新后重置。')+'<div class="hub-detail-actions">'+action('#account/exchange','用年会币去兑换',true)+'</div>';
-        case 'exchange': return box('可用年会币 · '+coins()+' 枚',products.map(function(p){var done = redeemed[p.id], enough = coins()>=p.coins;return entry(p.title,p.copy+' · '+p.coins+' 枚','<button type="button" class="hub-button" data-hub-redeem="'+p.id+'" '+(done||!enough?'disabled':'')+'>'+(done?'已兑换':enough?'模拟兑换':'余额不足')+'</button>');}).join(''))+note('商品与兑换价格均为示例，不会产生真实订单。兑换后可在“我的兑换”查看记录。')+'<div class="hub-detail-actions">'+action('#account/redemptions','查看我的兑换',true)+'</div>';
-        case 'redemptions':
-          var items = products.filter(function(p){return redeemed[p.id];});
-          return items.length?box('我的兑换记录',items.map(function(p){return entry(p.title,'已使用 '+p.coins+' 枚年会币 · '+(p.id==='resource'?'待领取电子资料':'待现场领取'),status('兑换成功',true));}).join(''))+note('正式兑换记录会展示电子资料入口、领取凭证或物流信息。此处为本次演示记录。'):noData('还没有兑换记录','兑换的方案、产品和领取进度都会保存在这里。',action('#account/exchange','去看看可兑换内容'));
-        case 'favorites': return box('我的方案收藏',entry('学校空间创新方案（示例）','收藏的方案资料、交流记录及后续联系入口',status('已收藏',true)))+'<div class="hub-detail-actions">'+action('#expo','查看方案展',true)+'</div>';
-        case 'invoice': return box('发票与开票资料',fields([['关联订单','年会报名 · '+names[state.identity]],['发票状态','待申请'],['发票抬头','尚未填写'],['发票金额','以实际支付订单为准']]))+note('正式页面将在此提供申请开票、查看发票和下载入口。预览不收集真实税号或开票资料。');
-        case 'replay': return state.identity==='expo'?noData('当前参会权益不含直播与回放','查看线上参会方式，可获得对应直播和回看内容。',action('#tickets','查看线上参会权益')):box('我的观看权益',fields([['主论坛',state.phase==='live'?'直播期间（预览）':state.phase==='post'?'回放开放阶段':'等待直播开放'],['分论坛与场外深研课','录播及回看'],['回看截止','2027 年 12 月 4 日'],['观看入口','正式开通后提供播放器入口']]))+'<div class="hub-detail-actions">'+action('#agenda','查看主论坛内容',true)+'</div>';
-        case 'notices': return box('参会提醒',entry('选课提醒','分论坛每人每天最多选择 1 场；场外深研课最多选择 1 场。')+entry('出行提醒','会场、座位与集合信息以个人报名和选课通知为准。'));
-        case 'guide': return box('会场与交通',fields([['会议城市','广州'],['主论坛','2026 年 12 月 1 日至 4 日'],['场外深研课','2026 年 12 月 5 日'],['具体会场','待组委会公布'],['交通路线','会场确定后提供地图与交通指引']]))+'<div class="hub-detail-actions">'+action('#account/seat','我的入场信息',true)+action('#account/hotel','我的酒店',true)+'</div>';
-        case 'profile': return box('参会人资料',fields([['姓名','参会老师（示例）'],['手机号','138****6666（示例）'],['学校','报名学校（示例）'],['参会方式',names[state.identity]]]))+note('正式登录后查看本人报名资料。本预览不保存个人信息。');
-        case 'transfer': return box('更换参会人',entry('更换时间','最晚 11 月 30 日，12 月 1 日 0 点起不可更换；仅可自行更换一次。')+entry('关联安排','主论坛换人后，关联的分论坛与场外深研课选课信息同步给新参会人。')+entry('重新选课','新参会人须先选新课，再释放原场次。')+entry('订单与发票','下单人、订单号、支付与发票信息不变。'))+note('正式报名系统开放后，可在此提交更换。预览不会更改参会人。');
-        case 'help': return box('需要哪方面的帮助？',entry('报名、支付与发票','查询对应订单后联系报名服务。',link('orders','查看订单'))+entry('选课与现场安排','查询已选场次及课程通知。',link('forum','查看选课'))+entry('酒店与入住','查询预订信息后联系住宿服务。',link('hotel','查看酒店')))+note('会务电话与服务二维码待组委会公布后接入。');
-      }
-      return '';
-    }
-    function render(focus){
-      var key = location.hash.slice('#account/'.length);
-      if(!location.hash.startsWith('#account/') || !Object.prototype.hasOwnProperty.call(titles,key)) key = '';
-      root.innerHTML = key ? '<div class="hub-detail"><a href="#account" class="hub-back">← 返回一键查询</a><div class="hub-head"><h1 tabindex="-1">'+titles[key]+'</h1><span class="hub-preview">示例数据</span></div><p class="hub-detail-intro">'+(registered()?names[state.identity]+' · '+phases[state.phase]:'登录报名后，在这里查看属于你的信息')+'</p>'+details(key)+'<p class="hub-feedback" role="status">'+notice+'</p></div>' : overview();
-      window.EICCPassport.mount(root.querySelector('[data-passport-mount]'), passportRoute!==key ? {path:'path',passport:'records',organization:'organization',outcomes:'outcomes'}[key] : null);
-      passportRoute=key;
-      if(focus && location.hash.indexOf('#account')===0){
-        var heading = root.querySelector('h1');
-        heading.setAttribute('tabindex','-1');
-        heading.focus({preventScroll:true});
-      }
-    }
-    window.addEventListener('hashchange',function(){notice='';render(true);});
-    window.addEventListener('eicc:passport-change',function(){render(false);});
-    window.addEventListener('eicc:demo-state',function(event){
-      if(state.identity!==event.detail.identity){claimed={};redeemed={};}
-      state = Object.assign({},event.detail);notice='';render(false);
-    });
-    window.addEventListener('eicc:registration-preview',function(event){
-      state={identity:event.detail.identity,phase:'prep',course:false,assessment:false,checkin:false};
-      claimed={};redeemed={};notice='';render(false);
-    });
-    root.addEventListener('click',function(event){
-      var button=event.target.closest('[data-hub-claim], [data-hub-redeem], [data-hub-login]');
-
-      if(!button || button.disabled) return;
-      if(button.hasAttribute('data-hub-login')){
-        state.identity='guest';
-        window.dispatchEvent(new CustomEvent('eicc:account-preview',{detail:{identity:'guest'}}));
-        render(true);return;
-      }
-      if(!registered()) return;
-      var claim = tasks.find(function(t){return t.id===button.dataset.hubClaim;});
-      var product = products.find(function(p){return p.id===button.dataset.hubRedeem;});
-      if(claim && !claimed[claim.id] && window.EICCPassport.status().tasks[claim.id]){claimed[claim.id]=true;notice='已模拟领取 '+claim.coins+' 枚年会币，可用余额 '+coins()+' 枚。';}
-      if(product && !redeemed[product.id] && coins()>=product.coins){redeemed[product.id]=true;notice='已模拟兑换“'+product.title+'”，可在“我的兑换”查看。剩余 '+coins()+' 枚。';}
-      render(false);
-      var feedback=root.querySelector('.hub-feedback');
-      if(feedback){feedback.setAttribute('tabindex','-1');feedback.focus({preventScroll:true});}
-    });
-    render(false);
-  }());
+  // 一键查询与身份预览由 assets/account.js 管理。
 
   // Demo state controller — only active when the preview is opened with ?demo=1.
   (function(){

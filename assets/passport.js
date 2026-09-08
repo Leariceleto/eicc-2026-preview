@@ -16,8 +16,9 @@
   function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function key(identity) {return 'eicc-passport-v1-' + identity;}
   function restore(identity) {try{return M.load(localStorage.getItem(key(identity)), identity);}catch(e){return null;}}
-  function registered() {return !!names[context.identity];}
+  function registered() {return context.canAttend!==false && !!names[context.identity];}
   function save(next, notice) {
+    if(!registered()) return;
     if(!M.load(JSON.stringify(next), context.identity)) {message='未保存：请检查必填内容与记录关联，必填项不能只输入空格。原有档案已保留。';render();return;}
     state = next; message = notice || '已保存到这份本地学习护照。';
     try { localStorage.setItem(key(context.identity), JSON.stringify(state)); }
@@ -35,7 +36,7 @@
   function empty(title,copy,action) {return '<div class="pp-empty"><h4>'+title+'</h4><p>'+copy+'</p>'+(action||'')+'</div>';}
   function setView(next) {view=tabs[next]?next:'path';render();}
   function render() {
-    root.innerHTML = '<div class="pp-toolbar"><span>'+ (state.mode==='sample'?'完整样例':'我的本地预览')+' · '+({registration:'报名期',prep:'会前准备',live:'会议进行',post:'会后'}[context.phase]||'会前准备')+' · 不提交真实信息</span><div class="pp-actions">'+button('paper','纸质护照入口','quiet small')+button('export','导出档案','quiet small')+button('reset','切换样例／空白护照','quiet small')+'</div></div>'+
+    root.innerHTML = '<div class="pp-toolbar"><span>'+ (state.mode==='sample'?'完整样例':'我的本地预览')+' · '+({registration:'报名期',prep:'会前准备',live:'会议进行',post:'会后'}[context.phase]||'会前准备')+' · 不提交真实信息</span><div class="pp-actions">'+button('paper','纸质护照入口','quiet small')+(registered()?button('export','导出档案','quiet small')+button('reset','切换样例／空白护照','quiet small'):'')+'</div></div>'+
       '<div class="pp-head"><span class="eyebrow">学习护照</span><h3>一份贯穿会前、现场与会后的学习档案</h3></div>'+
       '<div class="pp-tabs" role="tablist" aria-label="学习护照内容">'+Object.keys(tabs).map(function(t){return '<button type="button" id="pp-tab-'+t+'" class="pp-tab" role="tab" aria-controls="pp-panel" aria-selected="'+(view===t)+'" tabindex="'+(view===t?'0':'-1')+'" data-pp-action="view" data-value="'+t+'">'+tabs[t]+'</button>';}).join('')+'</div>'+
       '<div id="pp-panel" role="tabpanel" aria-labelledby="pp-tab-'+view+'">'+(!registered()?empty('报名后开启你的学习护照','学习路径、记录和成果都归入同一份档案。','<a class="pp-button" href="#tickets">查看参会方式</a>'):({path:pathView,records:recordsView,organization:organizationView,outcomes:outcomesView}[view])())+'</div>'+
@@ -147,7 +148,7 @@
   function action(name,el) {
     var id=el&&el.dataset.id;
     if(name==='view'){setView(el.dataset.value);return;}
-    if(!registered()&&['paper','reset'].indexOf(name)<0)return;
+    if(!registered()&&name!=='paper')return;
     if(name==='assessment')return assessmentDialog();
     if(name==='focus-session'&&state.path&&state.path.focusSession){var agendaButton=document.querySelector('[data-day="'+state.path.focusSession.dayId+'"]');if(agendaButton)agendaButton.click();location.hash='agenda';return;}
     if(name==='record')return recordDialog(el&&el.dataset.kind,el&&el.dataset.branch);
@@ -189,13 +190,16 @@
     message='';render();
   }
   window.addEventListener('eicc:demo-state',sync);
+  window.addEventListener('eicc:query-role',function(e){
+    closeDialog();context.canAttend=e.detail.canAttend;message='';render();
+  });
   window.addEventListener('eicc:registration-preview',function(e){context={identity:e.detail.identity,phase:'prep',assessment:false};state=M.create(context.identity,false);save(state,'报名预览完成，可以开始会前自评。');});
   window.addEventListener('hashchange',closeDialog);
   window.addEventListener('pagehide',stopRecording);
   window.EICCPassport={
     mount:function(host,nextView){(host||home).appendChild(root);if(nextView&&tabs[nextView])view=nextView;render();},
     show:setView,
-    status:function(){return {assessment:!!state.path,tasks:M.taskStatus(state),records:state.records.length};}
+    status:function(){return registered()?{assessment:!!state.path,tasks:M.taskStatus(state),records:state.records.length}:{assessment:false,tasks:{},records:0};}
   };
   render();
 }());
