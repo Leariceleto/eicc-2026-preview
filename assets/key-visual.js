@@ -32,12 +32,14 @@
       stage.hidden=value==='original';
       if(value==='original'){
         hero.insertBefore(controls,stage);
+        originalHost.appendChild(countdown);
         originalHost.insertBefore(actions,countdown);
         media.replaceChildren();
       }else{
         hero.appendChild(controls);
         media.replaceChildren(document.getElementById('key-visual-'+value).content.cloneNode(true));
         stage.appendChild(actions);
+        stage.appendChild(countdown);
       }
       controls.querySelectorAll('[data-visual-choice]').forEach(function(link){
         var url=new URL(location.href);
