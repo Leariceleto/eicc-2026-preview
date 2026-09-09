@@ -1,9 +1,9 @@
-/* Local art-direction comparison. Source artwork stays unchanged; no production selection is implied. */
+/* Default to the confirmed river artwork; explicit parameters retain design comparisons. */
 (function(){
   'use strict';
   var choices=['planet','river','original'];
   var selected=new URLSearchParams(location.search).get('visual');
-  if(choices.indexOf(selected)===-1)return;
+  if(choices.indexOf(selected)===-1)selected='river';
   document.documentElement.dataset.keyVisual=selected;
   document.addEventListener('DOMContentLoaded',function(){
     var hero=document.querySelector('.hero');
