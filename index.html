@@ -48,6 +48,7 @@
   .nav-inner{max-width:1180px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:26px;}
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;white-space:nowrap;}
   .logo-title-img{height:22px;width:auto;display:block;}
+  .nav-future-logo{display:block;width:auto;height:48px;filter:brightness(0);}
   .logo-mark{width:30px;height:30px;border-radius:9px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;}
   .nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;align-items:center;}
   .nav-links a{
@@ -777,6 +778,7 @@
     nav{top:0;}
     .nav-inner{height:56px;padding:0 12px;gap:8px;}
     .logo-title-img{height:16px;}
+    .nav-future-logo{height:40px;}
     .nav-links{gap:6px;flex-wrap:nowrap;margin-left:auto;}
     .nav-links a:not(.nav-cta){display:none;}
     .nav-gap{display:none;}
@@ -897,6 +899,8 @@
 </style>
 <link rel="stylesheet" href="assets/passport.css">
 <link rel="stylesheet" href="assets/account.css">
+<link rel="stylesheet" href="assets/key-visual.css">
+<script src="assets/key-visual.js"></script>
 </head>
 <body>
 
@@ -1029,7 +1033,7 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="logo"><img class="logo-title-img" src="assets/brand-title-gold.png" alt="中国教育创新年会"></div>
+    <div class="logo"><img class="nav-future-logo" src="assets/future-logo.png" width="1095" height="700" alt="未来"></div>
     <div class="nav-links">
       <a href="#about">大会概况</a>
       <a href="#tickets">票种权益</a>
@@ -1056,6 +1060,31 @@
 
 <!-- ================= HERO ================= -->
 <header class="hero" data-page="home">
+  <div class="key-visual-switch" data-visual-switch hidden>
+    <span>主视觉对比</span>
+    <div class="key-visual-options" aria-label="切换首页主视觉">
+      <a href="?visual=planet" data-visual-choice="planet">星球版</a>
+      <a href="?visual=river" data-visual-choice="river">长江黄河版</a>
+      <a href="?visual=original" data-visual-choice="original">原版</a>
+    </div>
+  </div>
+  <div class="key-visual-stage" data-visual-stage hidden>
+    <div class="key-visual-media" data-visual-media></div>
+  </div>
+  <template id="key-visual-planet">
+    <picture class="key-visual-picture" aria-hidden="true">
+      <source media="(max-width:760px)" srcset="assets/kv-planet-mobile.webp">
+      <img src="assets/kv-planet-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
+    </picture>
+  </template>
+  <template id="key-visual-river">
+    <!-- Original artboards: page 5 on desktop, page 4 on mobile; viewport sizing matches the planet variant. -->
+    <picture class="key-visual-river-picture" aria-hidden="true">
+      <source media="(max-width:760px)" srcset="assets/kv-river-web-mobile.webp" width="1080" height="1920">
+      <img src="assets/kv-river-web-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/04</span><span>中国 · 广州</span></div>
+  </template>
   <div class="hero-grid-lines"></div>
   <div class="wrap">
     <div class="hero-eyebrow"><span class="dot"></span><span data-state-eyebrow>报名通道现已开启 · 中国基础教育年度风向标</span></div>
@@ -1082,7 +1111,7 @@
       </a>
       <a class="btn btn-ghost" data-state-secondary href="#passport" data-state-secondary-label>了解学习方式</a>
     </div>
-    <div class="countdown" id="countdown">
+    <div class="countdown" id="countdown" role="timer" aria-label="距离年会开幕的倒计时">
       <div class="cd-cell"><b id="cd-d">--</b><span>天</span></div>
       <div class="cd-cell"><b id="cd-h">--</b><span>时</span></div>
       <div class="cd-cell"><b id="cd-m">--</b><span>分</span></div>
@@ -1467,7 +1496,8 @@
       <div class="journey-node"><h3>从个人收获走向学校行动</h3><p>会后获得个人学习报告，并与本校同行者共同生成学校 100 天行动。</p></div>
     </div>
 
-    <div data-passport-home>
+    <!-- 首页学习护照交互预览暂不公开；完整设计并确认后移除 hidden。一键查询内的原型不受影响。 -->
+    <div data-passport-home hidden>
       <div id="passport-app" class="passport-stage pp-app" aria-label="学习护照交互预览"></div>
       <noscript>启用 JavaScript 后可体验学习路径、记录、知识接力与学校行动。</noscript>
     </div>
