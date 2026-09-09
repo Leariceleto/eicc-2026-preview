@@ -72,11 +72,62 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .ticket .btn-ghost{background:transparent;border-color:var(--brand-secondary);color:var(--brand-accent);}
 .ticket .btn-ghost:hover{background:var(--surface-hover);}
 .ticket-note{color:var(--text-secondary);}
-/* Agenda belongs to its designer. Freeze its existing local token values. */
-#agenda{--paper:#F6F3EC;--paper-deep:#EFEAE0;--ink:#17160F;--ink-soft:#4A4739;--line:rgba(23,22,15,.12);--blue:#2743E0;--blue-deep:#1B30AC;--coral:#FF4B2A;--gold:#C99B3F;--green:#1F9D66;--radius:18px;background:#F6F3EC;}
-#agenda .kicker{font-size:13px;letter-spacing:.18em;font-weight:600;margin-bottom:18px;color:var(--blue);}
-#agenda .kicker::before{height:2px;background:var(--blue);}
-#agenda{color:#17160F;}
+/* Agenda: information-first programme. Variance 3 / motion 1 / density 8.
+   Keep date switching, flat session groups and source order; no decorative cards.
+   Sticky date bar sits below the existing navigation (65px desktop / 57px mobile). */
+#agenda{background:var(--bg-primary);color:var(--text-primary);scroll-margin-top:80px;}
+#agenda .sec-title{font-family:var(--display);font-size:40px;font-weight:600;line-height:1.35;}
+#agenda .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:32px 0 24px;padding:8px 0;background:var(--bg-primary);border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:5;}
+#agenda .tab{min-height:52px;padding:12px 16px;border:0;border-radius:4px;background:transparent;color:var(--text-secondary);font-family:var(--ui);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;transition:background-color .15s,color .15s;}
+#agenda .tab:hover{background:var(--surface-hover);color:var(--brand-accent);}
+#agenda .tab.active{background:var(--brand-secondary);color:#FFFFFF;}
+#agenda .tab:focus-visible{outline:2px solid var(--brand-accent);outline-offset:2px;}
+#agenda .agenda-panel.active{animation:none;}
+#agenda .day-theme{margin:0 0 8px;padding:20px 24px;border:0;border-left:3px solid var(--brand-secondary);border-radius:0;background:var(--bg-secondary);}
+#agenda .day-theme b{font-family:var(--ui);font-size:23px;line-height:1.5;font-weight:600;}
+#agenda .day-theme span{display:block;margin-top:5px;color:var(--text-secondary);font-size:14px;line-height:1.7;}
+#agenda .agenda-item{grid-template-columns:148px minmax(0,1fr);gap:28px;padding:28px 0;border-bottom:1px solid var(--border);}
+#agenda .agenda-item .time{color:var(--brand-accent);padding-top:3px;}
+#agenda .time h3{margin:0;font-family:var(--ui);font-size:16px;font-weight:600;line-height:1.65;}
+#agenda .agenda-item>div{min-width:0;}
+#agenda .agenda-item h4{margin:0 0 4px;font-family:var(--ui);font-size:22px;font-weight:600;line-height:1.5;}
+#agenda .agenda-item p{font-size:14px;line-height:1.7;color:var(--text-secondary);}
+#agenda .talks{margin-top:16px;gap:0;}
+#agenda .talks:first-child{margin-top:0;}
+#agenda .talks li{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:24px;padding:13px 0;font-size:16px;line-height:1.7;color:var(--text-primary);border-bottom:1px solid var(--divider);}
+#agenda .talks li:first-child{padding-top:0;}
+#agenda .talks li:last-child{padding-bottom:0;border-bottom:0;}
+#agenda .talks li::before{display:none;}
+#agenda .talks .talk-no-speaker{grid-template-columns:minmax(0,1fr);}
+#agenda .talk-title{font-weight:500;overflow-wrap:anywhere;}
+#agenda .talk-format{display:block;margin-bottom:3px;color:var(--brand-accent);font-size:12px;font-weight:600;line-height:1.5;}
+#agenda .talk-speaker{min-width:0;}
+#agenda .talks li .who{display:block;color:var(--text-primary);font-size:14px;font-weight:600;white-space:normal;overflow-wrap:anywhere;}
+#agenda .speaker-role{display:block;margin-top:2px;font-size:13px;line-height:1.65;color:var(--text-secondary);overflow-wrap:anywhere;}
+#agenda .agenda-update-note{margin-top:20px;font-size:13px;line-height:1.7;color:var(--text-tertiary);}
+@media(max-width:900px){
+ #agenda .agenda-item{grid-template-columns:118px minmax(0,1fr);gap:20px;}
+ #agenda .talks li{grid-template-columns:minmax(0,1fr);gap:6px;}
+ #agenda .talk-speaker .who{display:inline;margin-right:10px;}
+ #agenda .speaker-role{display:inline;}
+ #agenda .speaker-role+.speaker-role{display:block;}
+}
+@media(max-width:760px){
+ #agenda{scroll-margin-top:72px;}
+ #agenda .sec-title{font-size:28px;line-height:1.4;}
+ #agenda .tabs{top:56px;margin:24px 0 20px;padding:6px 0;}
+ #agenda .tab{min-height:48px;padding:10px 4px;font-size:15px;}
+ #agenda .day-theme{padding:16px;}
+ #agenda .day-theme b{font-size:18px;line-height:1.65;}
+ #agenda .day-theme span{font-size:13px;}
+ #agenda .agenda-item{grid-template-columns:minmax(0,1fr);gap:12px;padding:24px 0;}
+ #agenda .agenda-item .time{padding:0;}
+ #agenda .time h3{font-size:14px;}
+ #agenda .agenda-item h4{font-size:20px;}
+ #agenda .talks{margin-top:14px;}
+ #agenda .talks li{font-size:15px;padding:14px 0;}
+}
+@media(prefers-reduced-motion:reduce){#agenda .tab{transition:none;}}
 /* Deep courses: contrast by ink and warm paper, not blue versus orange. */
 .deep-card{border-radius:6px;padding:36px 32px;border:1px solid var(--border);}
 .deep-card.in{background:var(--brand-secondary);color:#FFFFFF;border-color:var(--brand-secondary);}

@@ -901,7 +901,7 @@
 <link rel="stylesheet" href="assets/account.css">
 <link rel="stylesheet" href="assets/key-visual.css">
 <script src="assets/key-visual.js?v=20260909-river-default"></script>
-<link rel="stylesheet" href="assets/brand-visual.css?v=20260909-warm-r2">
+<link rel="stylesheet" href="assets/brand-visual.css?v=20260909-agenda-r3">
 </head>
 <body>
 
@@ -1268,124 +1268,189 @@
     <div class="kicker">MAIN FORUM · 主论坛</div>
     <h2 class="sec-title">无限游戏｜下一代学校</h2>
 
-    <div class="tabs">
-      <button class="tab active" data-day="d1">12月1日</button>
-      <button class="tab" data-day="d2">12月2日</button>
-      <button class="tab" data-day="d3">12月3日</button>
-      <button class="tab" data-day="d4">12月4日</button>
+    <div class="tabs" role="group" aria-label="选择议程日期">
+      <button type="button" class="tab active" id="agenda-tab-d1" data-day="d1" aria-controls="d1" aria-pressed="true">12月1日</button>
+      <button type="button" class="tab" id="agenda-tab-d2" data-day="d2" aria-controls="d2" aria-pressed="false">12月2日</button>
+      <button type="button" class="tab" id="agenda-tab-d3" data-day="d3" aria-controls="d3" aria-pressed="false">12月3日</button>
+      <button type="button" class="tab" id="agenda-tab-d4" data-day="d4" aria-controls="d4" aria-pressed="false">12月4日</button>
     </div>
 
-    <div class="agenda-panel active" id="d1">
+    <!-- Content source: Feishu ZZerd1662oSp1TxEo11cGe4OnSe, revision 5294, retrieved 2026-09-09.
+         Preserve published order and pending titles; omit internal status notes. No session start times were supplied. -->
+    <div class="agenda-panel active" id="d1" role="region" aria-labelledby="agenda-tab-d1">
       <div class="day-theme"><b>水穷处，云起时</b><span>单一分数的极限，蓬勃生命的起点</span></div>
-      <div class="agenda-item"><div class="time">年会艺术表达</div><div><span class="label label-expo">展览</span><h4>年会艺术表达</h4>
+      <div class="agenda-item"><div class="time"><h3>年会艺术表达</h3></div><div>
         <ul class="talks">
-          <li><b>未来学习中心的十种样态</b>——2026当代教育设计展</li>
-          <li><b>创造自我的“过渡空间”</b>——儿童艺术展、学生课程节、教育影像展</li>
-          <li><b>生生不息</b> + 用餐时间</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">主论坛开幕式</div><div><span class="label label-main">开幕</span><h4>主论坛开幕式</h4>
+          <li class="talk-no-speaker"><span class="talk-title">未来学习中心的十种样态——2026当代教育设计展</span></li>
+          <li class="talk-no-speaker"><span class="talk-title">创造自我的“过渡空间”——儿童艺术展&amp;学生课程节&amp;教育影像展</span></li>
+          <li class="talk-no-speaker"><span class="talk-title">生生不息+用餐时间</span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>主论坛开幕式</h3></div><div>
         <ul class="talks">
-          <li>沉浸式戏剧《当一个孩子，在无限游戏中生生不息》——<span class="who">叶逊谦</span>（戏剧导演、臻爱戏剧教育研究院院长）</li>
-          <li>音乐诗诵《学校，是这个世界最动人的命运变奏曲》</li>
-          <li>探马来报《第十三届中国教育创新年会手搓大会指南》——<span class="who">沈祖芸</span>（中国新学校研究会副会长、学校战略咨询专家）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">主办方致辞</div><div><span class="label label-main">致辞</span><h4>主办方致辞</h4>
+          <li><span class="talk-title"><span class="talk-format">沉浸式戏剧</span>当一个孩子，在无限游戏中生生不息</span><span class="talk-speaker"><span class="who">叶逊谦</span><span class="speaker-role">戏剧导演、戏剧教育家、臻爱戏剧教育研究院院长</span><span class="speaker-role">广州方圆实验小学</span></span></li>
+          <li class="talk-no-speaker"><span class="talk-title"><span class="talk-format">音乐诗诵</span>学校，是这个世界最动人的命运变奏曲</span></li>
+          <li><span class="talk-title"><span class="talk-format">探马来报</span>第十三届中国教育创新年会手搓大会指南</span><span class="talk-speaker"><span class="who">沈祖芸</span><span class="speaker-role">中国新学校研究会副会长，学校战略咨询专家</span></span></li>
+          <li class="talk-no-speaker"><span class="talk-title">年会主题视频</span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>主办方致辞</h3></div><div>
         <ul class="talks">
-          <li>主办方致辞《让游戏继续——致下一代学校的同行者》——<span class="who">李斌</span>（蒲公英教育智库理事长、新校长传媒总编辑）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">地方教育领导致辞</div><div><span class="label label-main">致辞</span><h4>地方教育领导致辞</h4>
-        <ul class="talks"><li>《以一座城市为课堂，AI赋能教育的广州答卷》</li></ul></div></div>
-      <div class="agenda-item"><div class="time">专家报告</div><div><span class="label label-main">报告</span><h4>专家报告</h4>
+          <li><span class="talk-title">让游戏继续——致下一代学校的同行者</span><span class="talk-speaker"><span class="who">李斌</span><span class="speaker-role">蒲公英教育智库理事长，新校长传媒总编辑</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>地方教育领导致辞</h3></div><div>
         <ul class="talks">
-          <li>《数智时代，学校新形态的中国探索》——<span class="who">李永智</span>（中国教育科学研究院党委书记、院长）</li>
-          <li>《AI赢不了的那场游戏》——<span class="who">熊辉</span>（香港科技大学（广州）协理副校长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">校长说</div><div><span class="label label-main">报告</span><h4>校长说</h4><ul class="talks"><li>主题待定——<span class="who">卢志文</span>（中国陶行知研究会副会长，翔宇教育集团、杭州新教育实验学校总校长）</li></ul></div></div>
-      <div class="agenda-item"><div class="time">学生说</div><div><span class="label label-main">分享</span><h4>学生说</h4><ul class="talks"><li>《我渴望的学习生活，究竟长什么样？》——<span class="who">学生代表</span></li></ul></div></div>
-      <div class="agenda-item"><div class="time">参会者议程</div><div><span class="label label-main">互动</span><h4>参会者议程</h4><ul class="talks"><li>两难问题</li></ul></div></div>
-      <div class="agenda-item"><div class="time">联合倡议</div><div><span class="label label-main">倡议</span><h4>联合倡议</h4><ul class="talks"><li>《2026“教育的底线”联合倡议书》——<span class="who">刘坚</span>（北京师范大学中国教育创新研究院院长）</li></ul></div></div>
+          <li><span class="talk-title">以一座城市为课堂，AI赋能教育的广州答卷</span><span class="talk-speaker"><span class="who">陈敏生</span><span class="speaker-role">广州市教育局党委书记、局长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>专家报告</h3></div><div>
+        <ul class="talks">
+          <li><span class="talk-title">数智时代，学校新形态的中国探索</span><span class="talk-speaker"><span class="who">李永智</span><span class="speaker-role">中国教育科学研究院党委书记、院长</span></span></li>
+          <li><span class="talk-title">AI赢不了的那场游戏</span><span class="talk-speaker"><span class="who">熊辉</span><span class="speaker-role">香港科技大学（广州）协理副校长</span></span></li>
+          <li><span class="talk-title">全球坐标：下一代学校的生态迁移与共同挑战</span><span class="talk-speaker"><span class="who">安德烈亚斯·施莱歇尔</span><span class="speaker-role">经济合作与发展组织教育与技能司司长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>老校长说</h3></div><div>
+        <ul class="talks">
+          <li><span class="talk-title">做了三十多年校长，我对下一代学校的想象开始“从心所欲”</span><span class="talk-speaker"><span class="who">卢志文</span><span class="speaker-role">中国陶行知研究会副会长，北京新学年教育理事长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>新学生说</h3></div><div>
+        <ul class="talks">
+          <li><span class="talk-title">我渴望的学习生活，究竟长什么样？</span><span class="talk-speaker"><span class="who">叶语沛</span><span class="speaker-role">重庆市铜梁中学学生</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
+        <ul class="talks">
+          <li class="talk-no-speaker"><span class="talk-title">当我们面对两难问题时</span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>联合倡议</h3></div><div>
+        <ul class="talks">
+          <li><span class="talk-title">2026“教育的底线”联合倡议书</span><span class="talk-speaker"><span class="who">刘坚</span><span class="speaker-role">北京师范大学中国教育创新研究院院长</span></span></li>
+        </ul>
+      </div></div>
     </div>
 
-    <div class="agenda-panel" id="d2">
-      <div class="day-theme"><b>游戏的人</b><span>只有当人是完全意义上的人，他才懂得游戏</span></div>
-      <div class="agenda-item"><div class="time">下一代学生</div><div><span class="label label-main">主论坛</span><h4>游戏的人</h4>
+    <div class="agenda-panel" id="d2" role="region" aria-labelledby="agenda-tab-d2">
+      <div class="day-theme"><b>游戏的人 / 游戏即创造 / 舞蹈与混沌</b><span>下一代学生 · 下一代学习 · 下一代课程</span></div>
+      <div class="agenda-item"><div class="time"><h3>下一代学生</h3></div><div>
+        <h4>游戏的人</h4>
+        <p>只有当人是完全意义上的人，他才懂得游戏</p>
         <ul class="talks">
-          <li>《工具学不会的能力，是下一代学生的"进化姿态"》——<span class="who">席酉民</span>（西交利物浦大学执行校长）</li>
-          <li>《志于道，据于德，依于仁，游于艺……》——<span class="who">俞正强</span>（金华师范学校附属小学党总支书记）</li>
-          <li>《什么是我们该培养的，什么是我们该放下的？》——<span class="who">许凌可</span>（重庆德普外国语学校校长）</li>
-          <li>《把游戏还给孩子——下一代学生的"自治"与"自育"》——<span class="who">马骉</span>（杭州华附教育集团总校长）</li>
-          <li>《有限处扎根，无限处生长》——<span class="who">肖诗坚</span>（田字格公益创始人、田字格实验学校总校长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">下一代学习</div><div><span class="label label-main">主论坛</span><h4>游戏即创造</h4><p>在“学生自主性”和“认知复杂性”中，重构学习</p>
+          <li><span class="talk-title">志于道，据于德，依于仁，游于艺......</span><span class="talk-speaker"><span class="who">俞正强</span><span class="speaker-role">金华师范学校附属小学党总支书记</span></span></li>
+          <li><span class="talk-title">什么是我们该培养的，什么是我们该放下的？</span><span class="talk-speaker"><span class="who">许凌可</span><span class="speaker-role">重庆德普外国语学校校长</span></span></li>
+          <li><span class="talk-title">把游戏还给孩子——下一代学生的&quot;自治&quot;与&quot;自育&quot;</span><span class="talk-speaker"><span class="who">马骉</span><span class="speaker-role">华东师范大学附属杭州学校教育集团总校长</span></span></li>
+          <li><span class="talk-title">有限处扎根，无限处生长</span><span class="talk-speaker"><span class="who">肖诗坚</span><span class="speaker-role">田字格公益创始人，田字格实验学校总校长</span></span></li>
+          <li><span class="talk-title">工具学不会的能力，是下一代学生的&quot;进化姿态&quot;</span><span class="talk-speaker"><span class="who">席酉民</span><span class="speaker-role">西交利物浦大学执行校长，英国利物浦大学副校长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>下一代学习</h3></div><div>
+        <h4>游戏即创造</h4>
+        <p>在&quot;学生自主性&quot;和&quot;认知复杂性&quot;中，重构学习</p>
         <ul class="talks">
-          <li>《AI参与的下一代学习——六种状态与多元学习图景》——<span class="who">张治</span>（华东师范大学智能教育实验室主任）</li>
-          <li>《谢家湾学校小班化教学的20年探索》——<span class="who">刘希娅</span>（重庆谢家湾学校党委书记）</li>
-          <li>《从书院到 X 院，让学习者穿行在“没有答案”的地方》——<span class="who">黄慧</span>（温州中学附属初中校长）</li>
-          <li>《以创为中心，一所普通公办校的"全域贯通学习"》——<span class="who">李美庆</span>（宁波大学附属甬江科创实验学校执行校长）</li>
-          <li>《为了学习的合作——假如课堂不再教，孩子们究竟怎么做》——<span class="who">郑杰</span>（上海市实验学校嘉定新城分校执行校长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">下一代课程</div><div><span class="label label-main">主论坛</span><h4>舞蹈与混沌</h4><p>人必须拥有混沌，才能孕育一颗舞蹈的星辰</p>
+          <li><span class="talk-title">谢家湾学校小班化教学的20年探索</span><span class="talk-speaker"><span class="who">刘希娅</span><span class="speaker-role">重庆谢家湾学校党委书记，教育部教育强国建设战略咨询委员会委员</span></span></li>
+          <li><span class="talk-title">从书院到 X 院，让学习者穿行在&quot;没有答案&quot;的地方</span><span class="talk-speaker"><span class="who">黄慧</span><span class="speaker-role">温州中学附属初中校长</span></span></li>
+          <li><span class="talk-title">以创为中心，一所普通公办校的“全域贯通学习”</span><span class="talk-speaker"><span class="who">李美庆</span><span class="speaker-role">宁波大学附属甬江科创实验学校执行校长</span></span></li>
+          <li><span class="talk-title">为了学习的合作——假如课堂不再教，孩子们究竟怎么做</span><span class="talk-speaker"><span class="who">郑杰</span><span class="speaker-role">上海市实验学校嘉定新城分校党支部书记、执行校长</span></span></li>
+          <li><span class="talk-title">AI参与的下一代学习——六种状态与多元学习图景</span><span class="talk-speaker"><span class="who">张治</span><span class="speaker-role">华东师范大学智能教育实验室主任</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>下一代课程</h3></div><div>
+        <h4>舞蹈与混沌</h4>
+        <p>人必须拥有混沌，才能孕育一颗舞蹈的星辰</p>
         <ul class="talks">
-          <li>《从“有什么课”到“走过什么学程”，是下一代课程的必然转向》——<span class="who">朱则光</span>（北京第一实验学校）</li>
-          <li>《让课程成为一条没有终点的路——TUMO 如何定义“学习路径”》——<span class="who">Asyia Kazmi</span></li>
-          <li>《以大师之作，重新串联整个世界》——<span class="who">白连涛</span>（滨州经济技术开发区渤海实验学校总校长）</li>
-          <li>《十二年，一条永不中断的"课程河流"》——<span class="who">王志江</span>（开封市贞元学校校长）</li>
-          <li>《好的教育是森林的样子，好的课程是儿童的样子》——<span class="who">张乐</span>（蒲公英教育智库学校内涵建设研究院执行院长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">参会者议程</div><div><span class="label label-main">互动</span><h4>参会者议程</h4><p>10分钟</p></div></div>
+          <li><span class="talk-title">从&quot;有什么课&quot;到&quot;走过什么学程&quot;，是下一代课程的必然转向</span><span class="talk-speaker"><span class="who">朱则光</span><span class="speaker-role">北京十一盟校K12学习蓝图研究院院长，北京第一实验学校副校长</span></span></li>
+          <li><span class="talk-title">人工智能时代的学校课程，我们的三个转变</span><span class="talk-speaker"><span class="who">郑琰</span><span class="speaker-role">上海虹口区第二中心小学党支部书记、校长</span></span></li>
+          <li><span class="talk-title">以大师之作，重新串联整个世界</span><span class="talk-speaker"><span class="who">白连涛</span><span class="speaker-role">魏桥国科教育集团滨州渤海实验学校总校长</span></span></li>
+          <li><span class="talk-title">十二年，一条永不中断的“课程河流”</span><span class="talk-speaker"><span class="who">王志江</span><span class="speaker-role">开封市贞元学校校长</span></span></li>
+          <li><span class="talk-title">题目待定</span><span class="talk-speaker"><span class="who">陈丽霞</span><span class="speaker-role">广州天河区华阳小学党委书记</span></span></li>
+          <li><span class="talk-title">好的教育是森林的样子，好的课程是儿童的样子</span><span class="talk-speaker"><span class="who">张乐</span><span class="speaker-role">蒲公英教育智库学校内涵建设研究院执行院长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
+        <ul class="talks">
+          <li class="talk-no-speaker"><span class="talk-title">“没听够”议程</span></li>
+        </ul>
+      </div></div>
     </div>
 
-    <div class="agenda-panel" id="d3">
-      <div class="day-theme"><b>游刃有余</b><span>它不发光，它让学习真正发生，课堂自然生长</span></div>
-      <div class="agenda-item"><div class="time">下一代技术</div><div><span class="label label-main">主论坛</span><h4>游刃有余</h4>
+    <div class="agenda-panel" id="d3" role="region" aria-labelledby="agenda-tab-d3">
+      <div class="day-theme"><b>游刃有余 / 身游、心游、神游 / 从容无待，光行不止</b><span>下一代技术 · 下一代校园 · 下一代教师</span></div>
+      <div class="agenda-item"><div class="time"><h3>下一代技术</h3></div><div>
+        <h4>游刃有余</h4>
+        <p>它不发光，它让学习真正发生，课堂自然生长</p>
         <ul class="talks">
-          <li>《让技术成为思维生长的介质——智慧学习空间的新加坡实践》——<span class="who">洪化清</span>（上海外国语大学 / 南洋理工大学教授、博士生导师）</li>
-          <li>《不足20位教师的云南乡村学校，AI如何为高质量教学托底》——<span class="who">李若谷</span>（云南大理凯风教育研究院）</li>
-          <li>《用AI，把教师可外包的能力外包出去》</li>
-          <li>《在最薄的土壤，长出最前沿的范式——一所乡镇中学的AI突围》——<span class="who">杨天亮</span>（安徽省阜南亲情学校校长，北京中教智源教育创新研究院院长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">下一代校园</div><div><span class="label label-main">主论坛</span><h4>身游、心游、神游</h4><p>一座会呼吸、可学习、能游戏的场域</p>
+          <li><span class="talk-title">让技术成为思维生长的介质——智慧学习空间的新加坡实践</span><span class="talk-speaker"><span class="who">洪化清</span><span class="speaker-role">上海外国语大学/南洋理工大学教授、博士生导师</span></span></li>
+          <li><span class="talk-title">AI不只是一门课程，是所有学科共同的“地下水”</span><span class="talk-speaker"><span class="who">管杰</span><span class="speaker-role">北京市第十二中学校长</span></span></li>
+          <li><span class="talk-title">20位教师的云南乡村学校，AI如何为高质量教学托底</span><span class="talk-speaker"><span class="who">陈一帆</span><span class="speaker-role">云南大理凯风教育研究院院长</span></span></li>
+          <li><span class="talk-title">在最薄的土壤，长出最前沿的范式——一所乡镇中学的AI突围</span><span class="talk-speaker"><span class="who">杨天亮</span><span class="speaker-role">安徽省阜南亲情学校校长</span></span></li>
+          <li><span class="talk-title">技术进校十年，一所百年名校做对了什么，拒绝了什么</span><span class="talk-speaker"><span class="who">李蓓</span><span class="speaker-role">成都实验小学教育集团总校长</span></span></li>
+          <li><span class="talk-title">每天只上两小时课，剩下的时间，学校才真正开始</span><span class="talk-speaker"><span class="who">MacKenzie Price</span><span class="speaker-role">美国阿尔法学校Alpha School联合创始人</span></span></li>
+          <li><span class="talk-title">好的技术让好奇心生长——下一代学校的体验设计</span><span class="talk-speaker"><span class="who">快刀青衣</span><span class="speaker-role">得到联合创始人，产品与技术体验操盘手</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>下一代校园</h3></div><div>
+        <h4>身游、心游、神游</h4>
+        <p>一座会呼吸、可学习、能游戏的场域</p>
         <ul class="talks">
-          <li>《穿越场景的成长和通过艺术的教育》——<span class="who">张莉</span>（蒲公英教育智库联合创始人、DETT教育设计研究院执行院长）</li>
-          <li>《把校园嵌进科技园，让所有场所，承载每一种学习》——<span class="who">吴凤琴</span>（北京海淀未来学校党支部书记、执行校长）</li>
-          <li>《在无限游戏的校园，让自己成为世界里的一点美好》——<span class="who">石磊</span>（中山市五桂山桂南学校校长）</li>
-          <li>《以结构谋功能——下一代学校的空间语法》——<span class="who">叶翠微</span>（湘湖未来学校创校校长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">下一代教师</div><div><span class="label label-main">主论坛</span><h4>从容无待，光行不止</h4><p>不是教得更累，是陪孩子“再生一程”的人</p>
+          <li><span class="talk-title">穿越场景的成长和通过艺术的教育</span><span class="talk-speaker"><span class="who">张莉</span><span class="speaker-role">蒲公英教育智库联合创始人，DETT教育设计研究院执行院长</span></span></li>
+          <li><span class="talk-title">把校园嵌进科技园，让所有场所，承载每一种学习</span><span class="talk-speaker"><span class="who">吴凤琴</span><span class="speaker-role">北京海淀未来学校党支部书记、执行校长</span></span></li>
+          <li><span class="talk-title">在无限游戏的校园，让自己成为世界里的一点美好</span><span class="talk-speaker"><span class="who">石磊</span><span class="speaker-role">中山市五桂山桂南学校校长</span></span></li>
+          <li><span class="talk-title">让校园伟大——下一代学校的空间语法</span><span class="talk-speaker"><span class="who">叶翠微</span><span class="speaker-role">湘湖未来学校创校校长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>下一代教师</h3></div><div>
+        <h4>从容无待，光行不止</h4>
+        <p>不是教得更累，是陪孩子“再生一程”的人</p>
         <ul class="talks">
-          <li>《下一代学校，如何重塑上一代教师？》——<span class="who">宋萑</span>（北京师范大学教育学部部长、教师教育研究中心教授）</li>
-          <li>《放下那场叫高分的游戏，陪孩子"再生一程"》——<span class="who">郑腾飞</span>（深圳明湾学校中小学学部校长）</li>
-          <li>《教师是谁？智能时代我们共同的"本体之问"》——<span class="who">李海林</span>（上海新纪元双语学校校长）</li>
-          <li>《十五年办学生涯，发现管理的尽头是"共生"》——<span class="who">庄惠芬</span>（常州武进区星河实验小学教育集团总校长）</li>
-          <li>《从"行政科层"走向"关键育人结果共同体"》——<span class="who">陈罡</span>（云谷学校小学部校长）</li>
-          <li>《从教学技能到生命状态，未来教师的八个自我生长》——<span class="who">赵桂霞</span>（齐鲁名校长，蒲公英教育智库学术顾问）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">参会者议程</div><div><span class="label label-main">互动</span><h4>参会者议程</h4><p>10分钟</p></div></div>
+          <li><span class="talk-title">下一代学校，如何重塑上一代教师？</span><span class="talk-speaker"><span class="who">宋萑</span><span class="speaker-role">北京师范大学教育学部部长、教师教育研究中心教授</span></span></li>
+          <li><span class="talk-title">放下那场叫高分的游戏，陪孩子“再生一程”</span><span class="talk-speaker"><span class="who">侯明飞</span><span class="speaker-role">深圳罗湖未来学校教育集团总校长</span></span></li>
+          <li><span class="talk-title">教师是谁？智能时代我们共同的“本体之问”</span><span class="talk-speaker"><span class="who">李海林</span><span class="speaker-role">上海新纪元双语学校校长</span></span></li>
+          <li><span class="talk-title">十五年办学生涯，发现管理的尽头是“共生”</span><span class="talk-speaker"><span class="who">庄惠芬</span><span class="speaker-role">常州武进区星河实验小学教育集团总校长</span></span></li>
+          <li><span class="talk-title">从&quot;行政科层&quot;走向&quot;关键育人结果共同体&quot;</span><span class="talk-speaker"><span class="who">陈罡</span><span class="speaker-role">云谷学校小学部校长</span></span></li>
+          <li><span class="talk-title">教学技能背后的生命状态——未来教师的八个自我生长</span><span class="talk-speaker"><span class="who">赵桂霞</span><span class="speaker-role">齐鲁名校长，蒲公英教育智库学术顾问</span></span></li>
+          <li><span class="talk-title">让情感投入成为下一代学校的基础建设</span><span class="talk-speaker"><span class="who">田俊</span><span class="speaker-role">北京市十一学校校长</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
+        <ul class="talks">
+          <li class="talk-no-speaker"><span class="talk-title"><span class="talk-format">10分钟</span>参会者“没听够”议程</span></li>
+        </ul>
+      </div></div>
     </div>
 
-    <div class="agenda-panel" id="d4">
+    <div class="agenda-panel" id="d4" role="region" aria-labelledby="agenda-tab-d4">
       <div class="day-theme"><b>无限游戏</b><span>有限游戏以取胜为目的，无限游戏以延续游戏为目的</span></div>
-      <div class="agenda-item"><div class="time">下一代学校</div><div><span class="label label-main">主论坛</span><h4>下一代学校</h4>
+      <div class="agenda-item"><div class="time"><h3>下一代学校</h3></div><div>
         <ul class="talks">
-          <li>主题待定——<span class="who">MacKenzie Price</span>（阿尔法学校 Alpha School 创始人）</li>
-          <li>《从赛场到生态：一所让每个孩子按自己样子生长的学校》——<span class="who">俞国娣</span>（杭州崇文世纪城教育集团总校长）</li>
-          <li>《从围墙到世界：一所打开边界、与真实世界融通的学校》——<span class="who">鲁江</span>（深圳明德实验学校（集团）党委书记）</li>
-          <li>《从远方到此刻：一所让童年实现精神愉悦、记忆美好的学校》——<span class="who">刘慧</span>（张家港市实验小学教育集团总校长）</li>
-          <li>《从学习到生活：一所探索文化共生、家校共育、师生自组织的学校》——<span class="who">王伟</span>（北京市海嘉学校理事长）</li>
-          <li>《从他评到自评：一个教育行政区域的生态重塑开局之路》——<span class="who">李海达</span>（宁波市北仑区教育局党委书记、局长）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">他山之石</div><div><span class="label label-main">对话</span><h4>企业家、科学家、哲学家眼中的下一代学校</h4><p>轮流上场讲，结束后在主持人的引导下对谈，最后生成画像，分别邀请三个角色对话式演讲，AI画像，即时呈现。</p>
+          <li><span class="talk-title">从赛场到生态：一所让每个孩子按自己样子生长的学校</span><span class="talk-speaker"><span class="who">俞国娣</span><span class="speaker-role">杭州崇文世纪城教育集团总校长、杭州理想教育集团总校长</span></span></li>
+          <li><span class="talk-title">从围墙到世界：一所打开边界、与真实世界融通的学校</span><span class="talk-speaker"><span class="who">鲁江</span><span class="speaker-role">深圳明德实验学校（集团）党委书记，香港中文大学（深圳）附属明德高级中学校长</span></span></li>
+          <li><span class="talk-title">从学习到生活：一所探索文化共生、家校共育、师生自组织的学校</span><span class="talk-speaker"><span class="who">王伟</span><span class="speaker-role">北京海嘉学校理事长</span></span></li>
+          <li><span class="talk-title">从远方到此刻：一所让童年实现精神愉悦、记忆美好的学校</span><span class="talk-speaker"><span class="who">刘慧</span><span class="speaker-role">张家港市实验小学党委书记，张家港市实验小学教育集团总校长</span></span></li>
+          <li><span class="talk-title">从管理到涌现：一所自然而然长出内部秩序和蓬勃创造力的学校</span><span class="talk-speaker"><span class="who">万玮</span><span class="speaker-role">上海平和教育集团总经理、上海市民办平和学校总校长、上海青浦平和双语学校总校长</span></span></li>
+          <li><span class="talk-title">从他评到自评：一个教育行政区域的生态重塑开局之路</span><span class="talk-speaker"><span class="who">李海达</span><span class="speaker-role">宁波市北仑区教育局党委书记、局长</span></span></li>
+          <li><span class="talk-title">在AI突飞猛进的世界，让学习者拥抱一条持续进步的“学习路径”</span><span class="talk-speaker"><span class="who">Asyia Kazmi</span><span class="speaker-role">世界教育创新峰会（WISE）首席执行官</span></span></li>
+          <li><span class="talk-title">孩子们能在科技馆兴奋地呆一整天——下一代学校该向场馆学什么？</span><span class="talk-speaker"><span class="who">倪闽景</span><span class="speaker-role">上海科技馆馆长</span></span></li>
+          <li><span class="talk-title">AI背景下，全球最顶尖大学的录取方向与培养趋势</span><span class="talk-speaker"><span class="who">高喆生（Robert Christensen）</span><span class="speaker-role">TMGEN董事长兼首席执行官</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
         <ul class="talks">
-          <li><span class="who">倪闽景</span>（上海科技馆馆长）× <span class="who">郑泉水</span>（深圳零一学院创始院长、中国科学院院士）× <span class="who">快刀青衣</span>（得到联合创始人）</li>
-        </ul></div></div>
-      <div class="agenda-item"><div class="time">参会者议程</div><div><span class="label label-main">互动</span><h4>《学生眼中的下一代学校》临场报告</h4><p>学生作为观察团组团参会，并制作发布临场报告。</p></div></div>
-      <div class="agenda-item"><div class="time">游戏继续</div><div><span class="label label-main">闭幕</span><h4>游戏继续</h4><p>光是宇宙中最远的奔赴，从未抵达，从未停下</p>
+          <li><span class="talk-title">《学生眼中的下一代学校》临场报告</span><span class="talk-speaker"><span class="who">2026中国学生创新节学生代表</span></span></li>
+        </ul>
+      </div></div>
+      <div class="agenda-item"><div class="time"><h3>游戏继续</h3></div><div>
+        <p>光是宇宙中最远的奔赴，从未抵达，从未停下</p>
         <ul class="talks">
-          <li>特别报告《重新发明学校——能力是如何生成的？》——<span class="who">李希贵</span>（北京第一实验学校校长、中国新学校研究会会长）</li>
-          <li>年度风向标《下一代学校的心力觉醒、认知纵深与方法自由》——<span class="who">李斌</span>（蒲公英教育智库理事长、新校长传媒总编辑）</li>
-          <li><b>学校 100 天行动启动</b></li>
-        </ul></div></div>
+          <li><span class="talk-title"><span class="talk-format">特别报告</span>重新发明学校——能力是如何生成的？</span><span class="talk-speaker"><span class="who">李希贵</span><span class="speaker-role">北京第一实验学校校长，中国新学校研究会会长</span></span></li>
+          <li><span class="talk-title"><span class="talk-format">年度风向标</span>下一代学校的心力觉醒、认知纵深与方法自由</span><span class="talk-speaker"><span class="who">李斌</span><span class="speaker-role">蒲公英教育智库理事长，新校长传媒总编辑</span></span></li>
+          <li class="talk-no-speaker"><span class="talk-title">100天行动计划发布仪式</span></li>
+        </ul>
+      </div></div>
     </div>
+    <p class="agenda-update-note">议程持续更新，具体时间及安排以最终公布为准。</p>
   </div>
 </section>
 
@@ -1600,11 +1665,15 @@
   tick(); setInterval(tick, 1000);
 
   // Agenda tabs
-  document.querySelectorAll('.tab').forEach(function(btn){
+  document.querySelectorAll('#agenda .tab').forEach(function(btn){
     btn.addEventListener('click', function(){
-      document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active');});
-      document.querySelectorAll('.agenda-panel').forEach(function(p){p.classList.remove('active');});
+      document.querySelectorAll('#agenda .tab').forEach(function(b){
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed','false');
+      });
+      document.querySelectorAll('#agenda .agenda-panel').forEach(function(p){p.classList.remove('active');});
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed','true');
       document.getElementById(btn.dataset.day).classList.add('active');
     });
   });
