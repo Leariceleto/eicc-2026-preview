@@ -40,6 +40,8 @@ html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-grid-lines{d
 /* Both variants use the same viewport-bounded stage; never let the river image set its height. */
 .key-visual-river-picture,.key-visual-river-picture img{display:block;position:absolute;inset:0;width:100%;height:100%;}
 .key-visual-river-picture img{object-fit:cover;object-position:center;}
+/* Original outlined lettering, independently scaled; the background keeps its existing cover geometry. */
+.key-visual-river-lettering{--kv-lettering-scale:.85;display:block;position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(var(--kv-lettering-scale));transform-origin:center;pointer-events:none;}
 .key-visual-river-date{position:absolute;z-index:1;left:0;right:0;bottom:160px;display:flex;justify-content:center;align-items:center;gap:28px;padding:0 20px;margin:0;color:#f6f3ec;font-size:clamp(16px,1.55vw,24px);font-family:"Songti SC","STSong",serif;text-shadow:0 2px 8px rgba(0,0,0,.65);}
 .key-visual-river-date span+span{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:.82em;font-weight:700;}
 /* Keep the semantic heading available; the live timer now overlays the artwork itself. */
@@ -64,6 +66,7 @@ html:is([data-key-visual="planet"],[data-key-visual="river"]) .cd-cell span{font
   .key-visual-stage .hero-actions .btn{min-width:0;width:auto;flex:1;max-width:200px;font-size:14px;padding:13px 12px;}
   /* The portrait artwork already contains the date and city. */
   .key-visual-river-date{display:none;}
+  .key-visual-river-lettering{display:none;}
   /* Fill the phone viewport proportionally; crop only the portrait's side background. */
   .key-visual-river-picture img{object-fit:cover;}
   /* Buttons above the embedded date; live countdown below it, all on the same artwork. */

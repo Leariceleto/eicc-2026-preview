@@ -899,7 +899,7 @@
 </style>
 <link rel="stylesheet" href="assets/passport.css">
 <link rel="stylesheet" href="assets/account.css">
-<link rel="stylesheet" href="assets/key-visual.css">
+<link rel="stylesheet" href="assets/key-visual.css?v=20260910-lettering">
 <script src="assets/key-visual.js?v=20260909-river-default"></script>
 <link rel="stylesheet" href="assets/brand-visual.css?v=20260909-agenda-r3">
 </head>
@@ -1079,11 +1079,12 @@
     </picture>
   </template>
   <template id="key-visual-river">
-    <!-- Original artboards: page 5 on desktop, page 4 on mobile; viewport sizing matches the planet variant. -->
+    <!-- Desktop artboard 5 exported as original background + lettering layers; CSS controls lettering scale only. Mobile artboard 4 is unchanged. -->
     <picture class="key-visual-river-picture" aria-hidden="true">
       <source media="(max-width:760px)" srcset="assets/kv-river-web-mobile.webp" width="1080" height="1920">
-      <img src="assets/kv-river-web-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
+      <img src="assets/kv-river-web-background-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
     </picture>
+    <img class="key-visual-river-lettering" src="assets/kv-river-web-lettering-desktop.svg" width="2560" height="1440" alt="" aria-hidden="true" decoding="async">
     <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/04</span><span>中国 · 广州</span></div>
   </template>
   <div class="hero-grid-lines"></div>

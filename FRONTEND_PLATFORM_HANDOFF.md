@@ -4,6 +4,8 @@
 
 ## 2026-09-09 视觉更新
 
+**2026-09-10 PC 首页主文字比例微调：** 长江黄河版桌面主视觉从原 AI 第 5 画板导出背景与文字两层，文字保持原始矢量轮廓，仅通过 `.key-visual-river-lettering` 的 `--kv-lettering-scale:.85` 等比缩小 15%，中心位置不变。新资源为 `kv-river-web-background-desktop.webp` 与 `kv-river-web-lettering-desktop.svg`；原合成图保留作参照，不覆盖设计师源文件。背景覆盖方式、首屏高度、日期、按钮和倒计时不变；760px 以下继续使用原手机合成图并隐藏独立文字层。后续调整文字比例只改该 CSS 变量。层导出脚本保留于 `scripts/export-river-layers.py`，网站运行无需 Python 或 AI 源文件。
+
 **首页默认入口修正：** 不带 `visual` 参数（或参数为空、无效）时默认显示已确认的长江黄河主视觉，PC 与手机一致。保留显式参数用于设计对照；适配时不要让无参数首页回退到旧版。
 
 本次将确认后的暖褐视觉建议版同步到官网预览。新增 `assets/brand-visual.css`，由 `index.html` 在原样式之后加载；须随完整仓库一并拉取。
