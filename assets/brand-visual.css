@@ -139,6 +139,7 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 /* Expo: existing three informational cells become connected, flat reading regions.
    Decorative path has no category, state, data, or click target. */
 .expo{background:var(--bg-secondary);}
+.expo .sec-desc{max-width:none;}
 /* Exhibition labels: equal-weight source headings, no category interaction. */
 .expo-topic-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;list-style:none;margin:28px 0 0;padding:0;}
 .expo-topic-list li{position:relative;min-width:0;padding:18px 18px 20px;background:var(--bg-primary);border:0;border-radius:2px;}
