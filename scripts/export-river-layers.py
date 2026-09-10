@@ -1,7 +1,8 @@
 """Export existing AI/PDF artwork layers, without redrawing or changing source geometry.
 
 Usage: uv run --with pymupdf --with pypdf --with pillow python scripts/export-river-layers.py SOURCE.ai
-Only desktop artboard 5 is separated. Display scale belongs to CSS, not these assets.
+Add --full to export the complete desktop artboard 5 losslessly, without layer separation.
+Otherwise only desktop artboard 5 is separated. Display scale belongs to CSS, not these assets.
 """
 import io
 import sys
@@ -15,8 +16,56 @@ from pypdf.generic import ContentStream, NameObject
 source = Path(sys.argv[1])
 assets = Path(__file__).resolve().parents[1] / 'assets'
 reader = PdfReader(source)
+if '--mobile-no-date' in sys.argv[2:]:
+    original = pymupdf.open(source)
+    white_paths = [p for p in original[3].get_drawings() if p.get('fill') == (1, 1, 1)]
+    date_paths = {i for i, p in enumerate(white_paths) if p['rect'].y0 > 1500}
+    assert len(white_paths) == 380 and len(date_paths) == 21
+    writer = PdfWriter()
+    writer.add_page(reader.pages[3])
+    target = writer.pages[0]
+    stream = ContentStream(target.get_contents(), writer)
+    rgb, stack, white_index = (0, 0, 0), [], 0
+    for i, (operands, operator) in enumerate(stream.operations):
+        if operator == b'q':
+            stack.append(rgb)
+        elif operator == b'Q':
+            rgb = stack.pop()
+        elif operator == b'rg':
+            rgb = tuple(float(x) for x in operands)
+        if operator in (b'f', b'f*') and rgb == (1, 1, 1):
+            if white_index in date_paths:
+                stream.operations[i] = ([], b'n')
+            white_index += 1
+    assert white_index == len(white_paths)
+    target[NameObject('/Contents')] = writer._add_object(stream)
+    buffer = io.BytesIO()
+    writer.write(buffer)
+    edited = pymupdf.open(stream=buffer.getvalue(), filetype='pdf')
+    pix = edited[0].get_pixmap(alpha=False)
+    base = original[3].get_pixmap(alpha=False)
+    image = Image.frombytes('RGB', (pix.width, pix.height), pix.samples)
+    before = Image.frombytes('RGB', (base.width, base.height), base.samples)
+    delta = ImageChops.difference(image, before)
+    bbox = delta.getbbox()
+    assert bbox and bbox[1] >= 1687 and bbox[3] <= 1715, bbox
+    image.save(assets / 'kv-river-web-mobile-no-date.webp', format='WEBP', lossless=True, method=6)
+    print({'removed_date_paths': len(date_paths), 'changed_bounds': bbox, 'rest_unchanged': True})
+    sys.exit(0)
+
 page = reader.pages[4]
 assert tuple(float(x) for x in page.mediabox)[2:] == (2560, 1440)
+
+if '--full' in sys.argv[2:]:
+    original = pymupdf.open(source)
+    pix = original[4].get_pixmap(alpha=False)
+    output = assets / 'kv-river-web-desktop.webp'
+    pix.pil_save(str(output), format='WEBP', lossless=True, method=6)
+    exported = Image.open(output).convert('RGB')
+    rendered = Image.frombytes('RGB', (pix.width, pix.height), pix.samples)
+    assert ImageChops.difference(exported, rendered).getbbox() is None
+    print({'artboard': 5, 'size': [pix.width, pix.height], 'lossless_pixel_match': True})
+    sys.exit(0)
 
 
 def extract(white_layer):

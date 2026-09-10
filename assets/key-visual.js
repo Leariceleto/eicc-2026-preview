@@ -12,7 +12,6 @@
     var media=hero.querySelector('[data-visual-media]');
     var originalHost=hero.querySelector('.wrap');
     var actions=hero.querySelector('.hero-actions');
-    var countdown=hero.querySelector('.countdown');
     var nav=document.querySelector('body>nav');
     var navObserver;
     function watchNavigation(){
@@ -32,14 +31,12 @@
       stage.hidden=value==='original';
       if(value==='original'){
         hero.insertBefore(controls,stage);
-        originalHost.appendChild(countdown);
-        originalHost.insertBefore(actions,countdown);
+        originalHost.appendChild(actions);
         media.replaceChildren();
       }else{
         hero.appendChild(controls);
         media.replaceChildren(document.getElementById('key-visual-'+value).content.cloneNode(true));
         stage.appendChild(actions);
-        stage.appendChild(countdown);
       }
       controls.querySelectorAll('[data-visual-choice]').forEach(function(link){
         var url=new URL(location.href);

@@ -147,13 +147,6 @@
   .btn-ghost:hover{border-color:#fff;background:rgba(246,243,236,.08);}
   .btn-dark{background:var(--ink);color:#fff;}
   .btn-dark:hover{background:var(--blue);}
-  .countdown{display:flex;gap:12px;margin-top:52px;flex-wrap:wrap;}
-  .cd-cell{
-    min-width:88px;text-align:center;border:1px solid rgba(246,243,236,.2);
-    border-radius:14px;padding:14px 10px;background:rgba(246,243,236,.05);
-  }
-  .cd-cell b{display:block;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;}
-  .cd-cell span{font-size:12px;color:rgba(246,243,236,.6);letter-spacing:.12em;}
 
   /* ===== About ===== */
   #about{padding:0;background:var(--paper);scroll-margin-top:96px;}
@@ -803,9 +796,6 @@
     .hero-meta .chip{padding:10px 14px;font-size:12.5px;width:100%;}
     .hero-actions{margin-top:30px;}
     .hero-actions .btn{width:100%;justify-content:center;padding:15px 20px;}
-    .countdown{margin-top:34px;gap:8px;}
-    .cd-cell{min-width:0;flex:1;max-width:96px;padding:12px 6px;}
-    .cd-cell b{font-size:24px;}
 
     /* --- 大会概况：前言 --- */
     .about-preface{background-position:60% center;}
@@ -899,8 +889,8 @@
 </style>
 <link rel="stylesheet" href="assets/passport.css">
 <link rel="stylesheet" href="assets/account.css">
-<link rel="stylesheet" href="assets/key-visual.css?v=20260910-lettering">
-<script src="assets/key-visual.js?v=20260909-river-default"></script>
+<link rel="stylesheet" href="assets/key-visual.css?v=20260910-native-extension-restored">
+<script src="assets/key-visual.js?v=20260910-no-countdown"></script>
 <link rel="stylesheet" href="assets/brand-visual.css?v=20260909-agenda-r3">
 </head>
 <body>
@@ -1079,13 +1069,12 @@
     </picture>
   </template>
   <template id="key-visual-river">
-    <!-- Desktop artboard 5 exported as original background + lettering layers; CSS controls lettering scale only. Mobile artboard 4 is unchanged. -->
+    <!-- Restored full fifth AI artboard, without cropping or independent lettering scaling. -->
     <picture class="key-visual-river-picture" aria-hidden="true">
-      <source media="(max-width:760px)" srcset="assets/kv-river-web-mobile.webp" width="1080" height="1920">
-      <img src="assets/kv-river-web-background-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
+      <source media="(max-width:760px)" srcset="assets/kv-river-web-mobile-no-date.webp" width="1080" height="1920">
+      <img src="assets/kv-river-web-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
     </picture>
-    <img class="key-visual-river-lettering" src="assets/kv-river-web-lettering-desktop.svg" width="2560" height="1440" alt="" aria-hidden="true" decoding="async">
-    <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/04</span><span>中国 · 广州</span></div>
+    <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/05</span><span>中国 · 广州</span></div>
   </template>
   <div class="hero-grid-lines"></div>
   <div class="wrap">
@@ -1096,7 +1085,7 @@
     <div class="hero-meta">
       <div class="chip">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        2026年12月1日 – 12月4日
+        2026年12月1日 – 12月5日
       </div>
       <div class="chip">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1112,12 +1101,6 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="btn btn-ghost" data-state-secondary href="#passport" data-state-secondary-label>了解学习方式</a>
-    </div>
-    <div class="countdown" id="countdown" role="timer" aria-label="距离年会开幕的倒计时">
-      <div class="cd-cell"><b id="cd-d">--</b><span>天</span></div>
-      <div class="cd-cell"><b id="cd-h">--</b><span>时</span></div>
-      <div class="cd-cell"><b id="cd-m">--</b><span>分</span></div>
-      <div class="cd-cell"><b id="cd-s">--</b><span>秒</span></div>
     </div>
   </div>
 </header>
@@ -1153,42 +1136,7 @@
       </div>
     </div>
   </div>
-  <div class="about-history" data-page="home">
-    <div class="wrap">
-      <figure class="annual-timeline" aria-label="中国教育创新年会历届回顾，点击各届图标查看回顾">
-        <div class="annual-timeline-scroll">
-          <div class="annual-timeline-map">
-            <img src="assets/annual-history.jpg?v=2" alt="2014年至2025年中国教育创新年会历程图">
-            <a class="annual-year-link" style="--x:6.35%;--hit-y:19.5%;--hit-w:8%;--hit-h:18%;" href="https://mp.weixin.qq.com/s/Q6Akyi-wHAEqoWXp6me0tg" target="_blank" rel="noopener noreferrer" title="查看2014年重庆年会回顾"><span class="sr-only">查看2014年重庆年会回顾</span></a>
-            <a class="annual-year-link" style="--x:13.18%;--hit-y:18.9%;--hit-w:8%;--hit-h:19%;" href="https://mp.weixin.qq.com/s/1tilXwX3XlrOq_O1vrSELQ" target="_blank" rel="noopener noreferrer" title="查看2015年深圳年会回顾"><span class="sr-only">查看2015年深圳年会回顾</span></a>
-            <a class="annual-year-link" style="--x:23.29%;--hit-y:19.4%;--hit-w:8%;--hit-h:20%;" href="https://mp.weixin.qq.com/s/jb_bV6o3ydKjrxivi1Urvg" target="_blank" rel="noopener noreferrer" title="查看2016年上海年会回顾"><span class="sr-only">查看2016年上海年会回顾</span></a>
-            <a class="annual-year-link" style="--x:17.5%;--hit-y:31.7%;--hit-w:9%;--hit-h:21%;" href="https://mp.weixin.qq.com/s/V_53HIuihhUnTsXvLj1Xjg" target="_blank" rel="noopener noreferrer" title="查看2017年杭州年会回顾"><span class="sr-only">查看2017年杭州年会回顾</span></a>
-            <a class="annual-year-link" style="--x:28.46%;--hit-y:29.7%;--hit-w:9%;--hit-h:22%;" href="https://mp.weixin.qq.com/s/px-tugScN3ufHIXttWE4bg" target="_blank" rel="noopener noreferrer" title="查看2018年南京年会回顾"><span class="sr-only">查看2018年南京年会回顾</span></a>
-            <a class="annual-year-link" style="--x:38.18%;--hit-y:27.8%;--hit-w:10%;--hit-h:23%;" href="https://mp.weixin.qq.com/s/YESj_IBDx-JTCmfE-5UTCQ" target="_blank" rel="noopener noreferrer" title="查看2019年成都年会回顾"><span class="sr-only">查看2019年成都年会回顾</span></a>
-            <a class="annual-year-link" style="--x:47.61%;--hit-y:32%;--hit-w:10%;--hit-h:26%;" href="https://mp.weixin.qq.com/s/NtgfN4vlyYm44cCe-iVGOA" target="_blank" rel="noopener noreferrer" title="查看2020年重庆年会回顾"><span class="sr-only">查看2020年重庆年会回顾</span></a>
-            <a class="annual-year-link" style="--x:25.39%;--hit-y:46.5%;--hit-w:12%;--hit-h:28%;" href="https://mp.weixin.qq.com/s/G1qzru5ZR8eaaGp5qrEjqQ" target="_blank" rel="noopener noreferrer" title="查看2021年重庆年会回顾"><span class="sr-only">查看2021年重庆年会回顾</span></a>
-            <a class="annual-year-link" style="--x:40.52%;--hit-y:54.2%;--hit-w:13%;--hit-h:30%;" href="https://mp.weixin.qq.com/s/lgBuVIw3dazq3r7QPKTwPw" target="_blank" rel="noopener noreferrer" title="查看2022年重庆年会回顾"><span class="sr-only">查看2022年重庆年会回顾</span></a>
-            <a class="annual-year-link" style="--x:55.46%;--hit-y:53.8%;--hit-w:14%;--hit-h:31%;" href="https://mp.weixin.qq.com/s/JdYlhU5uPtksZl-2hpl15Q" target="_blank" rel="noopener noreferrer" title="查看2023年深圳年会回顾"><span class="sr-only">查看2023年深圳年会回顾</span></a>
-            <a class="annual-year-link" style="--x:72.37%;--hit-y:53.7%;--hit-w:15%;--hit-h:34%;" href="https://mp.weixin.qq.com/s/wKJK432nhufPL-MM4nRVrg" target="_blank" rel="noopener noreferrer" title="查看2024年厦门年会回顾"><span class="sr-only">查看2024年厦门年会回顾</span></a>
-            <a class="annual-year-link" style="--x:88.38%;--hit-y:51.2%;--hit-w:16%;--hit-h:39%;" href="https://mp.weixin.qq.com/s/BHA5yXVPcV8guAF4p_fR9w" target="_blank" rel="noopener noreferrer" title="查看2025年杭州年会回顾"><span class="sr-only">查看2025年杭州年会回顾</span></a>
-          </div>
-        </div>
-        <div class="annual-timeline-mobile" aria-label="2014年至2025年中国教育创新年会历程">
-          <img src="assets/annual-history-mobile-v3.png" alt="2014年至2025年中国教育创新年会手机端历程图">
-          <a class="annual-mobile-year" style="--x:19.5%;--y:7.2%;" href="https://mp.weixin.qq.com/s/Q6Akyi-wHAEqoWXp6me0tg" target="_blank" rel="noopener noreferrer" title="查看2014年重庆年会回顾"><span class="sr-only">查看2014年重庆年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:47.4%;--y:9.5%;" href="https://mp.weixin.qq.com/s/1tilXwX3XlrOq_O1vrSELQ" target="_blank" rel="noopener noreferrer" title="查看2015年深圳年会回顾"><span class="sr-only">查看2015年深圳年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:68.8%;--y:17.8%;" href="https://mp.weixin.qq.com/s/jb_bV6o3ydKjrxivi1Urvg" target="_blank" rel="noopener noreferrer" title="查看2016年上海年会回顾"><span class="sr-only">查看2016年上海年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:30.8%;--y:26%;" href="https://mp.weixin.qq.com/s/V_53HIuihhUnTsXvLj1Xjg" target="_blank" rel="noopener noreferrer" title="查看2017年杭州年会回顾"><span class="sr-only">查看2017年杭州年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:63.3%;--y:32%;" href="https://mp.weixin.qq.com/s/px-tugScN3ufHIXttWE4bg" target="_blank" rel="noopener noreferrer" title="查看2018年南京年会回顾"><span class="sr-only">查看2018年南京年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:44.7%;--y:41%;" href="https://mp.weixin.qq.com/s/YESj_IBDx-JTCmfE-5UTCQ" target="_blank" rel="noopener noreferrer" title="查看2019年成都年会回顾"><span class="sr-only">查看2019年成都年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:69%;--y:48.5%;" href="https://mp.weixin.qq.com/s/NtgfN4vlyYm44cCe-iVGOA" target="_blank" rel="noopener noreferrer" title="查看2020年重庆年会回顾"><span class="sr-only">查看2020年重庆年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:29.7%;--y:57%;" href="https://mp.weixin.qq.com/s/G1qzru5ZR8eaaGp5qrEjqQ" target="_blank" rel="noopener noreferrer" title="查看2021年重庆年会回顾"><span class="sr-only">查看2021年重庆年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:60.8%;--y:66%;" href="https://mp.weixin.qq.com/s/lgBuVIw3dazq3r7QPKTwPw" target="_blank" rel="noopener noreferrer" title="查看2022年重庆年会回顾"><span class="sr-only">查看2022年重庆年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:30.7%;--y:75.9%;" href="https://mp.weixin.qq.com/s/JdYlhU5uPtksZl-2hpl15Q" target="_blank" rel="noopener noreferrer" title="查看2023年深圳年会回顾"><span class="sr-only">查看2023年深圳年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:63.8%;--y:82%;" href="https://mp.weixin.qq.com/s/wKJK432nhufPL-MM4nRVrg" target="_blank" rel="noopener noreferrer" title="查看2024年厦门年会回顾"><span class="sr-only">查看2024年厦门年会回顾</span></a>
-          <a class="annual-mobile-year" style="--x:40%;--y:91.2%;" href="https://mp.weixin.qq.com/s/BHA5yXVPcV8guAF4p_fR9w" target="_blank" rel="noopener noreferrer" title="查看2025年杭州年会回顾"><span class="sr-only">查看2025年杭州年会回顾</span></a>
-        </div>
-      </figure>
+  <div class="wrap">
       <div class="state-surface" aria-live="polite">
         <div class="state-overview">
           <div class="state-label">当前预览</div>
@@ -1198,68 +1146,6 @@
         </div>
         <div class="state-next"><b data-state-next-title>下一步</b><ul data-state-next-list></ul></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= TICKETS ================= -->
-<section id="tickets" class="tickets" data-page="home">
-  <div class="wrap">
-    <div class="kicker">TICKETS · 票种权益</div>
-    <h2 class="sec-title">四类票种，权益一目了然</h2>
-
-    <div class="ticket-grid">
-      <div class="ticket hot" data-ticket-card="main">
-        <div class="tag">大多数参会者选择</div>
-        <h3>主论坛<span class="ticket-state">当前选择</span></h3>
-        <div class="price">¥2800<small> /人</small></div>
-        <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛全程参会（含选座）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展通行权益（1号展厅）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛选课资格（每天每人最多选择 1 个）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习护照与个性化学习路径</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报 1 个场外深研课</li>
-        </ul>
-        <a class="btn btn-primary" href="#account" data-open-registration="main">报名主论坛</a>
-      </div>
-
-      <div class="ticket" data-ticket-card="combo">
-        <h3>主论坛＋深研课<span class="ticket-state">当前选择</span></h3>
-        <div class="price">¥2900<small> /人</small></div>
-        <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛全部权益</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含 1 个场外深研课权益（每人最多选择 1 个）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛每天每人最多选择 1 个</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛结束后一天的小场域深度学习</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课付费后支持一次换课</li>
-        </ul>
-        <a class="btn btn-ghost" href="#deep" data-open-registration="combo">报名主论坛＋深研课</a>
-      </div>
-      <div class="ticket" data-ticket-card="online">
-        <h3>线上参会<span class="ticket-state">当前选择</span></h3>
-        <div class="price">¥1560<small> /人</small></div>
-        <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>第十三届中国教育创新年会主论坛直播及回看、各分论坛及场外深研课分享内容录播及回看；回看截止至 2027 年 12 月 4 日</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>团队报名：满 10 人赠 1人，满 20 人享 8 折，满 50 人享 7 折</li>
-        </ul>
-        <a class="btn btn-ghost" href="#account" data-open-registration="online">报名线上参会</a>
-      </div>
-      <div class="ticket" data-ticket-card="expo">
-        <h3>独立方案展<span class="ticket-state">当前选择</span></h3>
-        <div class="price">¥300<small> /人</small></div>
-        <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展展厅通行（1号展厅）</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
-          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
-          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含分论坛及场外深研课选课资格</li>
-        </ul>
-        <a class="btn btn-ghost" href="#account" data-open-registration="expo">购买方案展</a>
-      </div>
-    </div>
-
-    <p class="ticket-note">* 各票种价格、退款规则、参会牌及门禁识别方式以最终业务配置为准。主论坛票及组合票均包含方案展通行权益；仅购买独立方案展票的参会人不可进入主论坛。</p>
   </div>
 </section>
 
@@ -1455,6 +1341,67 @@
   </div>
 </section>
 
+<!-- ================= TICKETS ================= -->
+<section id="tickets" class="tickets" data-page="home">
+  <div class="wrap">
+    <div class="kicker">TICKETS · 票种权益</div>
+    <h2 class="sec-title">四类票种，权益一目了然</h2>
+
+    <div class="ticket-grid">
+      <div class="ticket hot" data-ticket-card="main">
+        <div class="tag">大多数参会者选择</div>
+        <h3>主论坛<span class="ticket-state">当前选择</span></h3>
+        <div class="price">¥2800<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛全程参会（含选座）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展通行权益（1号展厅）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛选课资格（每天每人最多选择 1 个）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习护照与个性化学习路径</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报 1 个场外深研课</li>
+        </ul>
+        <a class="btn btn-primary" href="#account" data-open-registration="main">报名主论坛</a>
+      </div>
+
+      <div class="ticket" data-ticket-card="combo">
+        <h3>主论坛＋深研课<span class="ticket-state">当前选择</span></h3>
+        <div class="price">¥2900<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛全部权益</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含 1 个场外深研课权益（每人最多选择 1 个）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛每天每人最多选择 1 个</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛结束后一天的小场域深度学习</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课付费后支持一次换课</li>
+        </ul>
+        <a class="btn btn-ghost" href="#deep" data-open-registration="combo">报名主论坛＋深研课</a>
+      </div>
+      <div class="ticket" data-ticket-card="online">
+        <h3>线上参会<span class="ticket-state">当前选择</span></h3>
+        <div class="price">¥1560<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>第十三届中国教育创新年会主论坛直播及回看、各分论坛及场外深研课分享内容录播及回看；回看截止至 2027 年 12 月 4 日</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>团队报名：满 10 人赠 1人，满 20 人享 8 折，满 50 人享 7 折</li>
+        </ul>
+        <a class="btn btn-ghost" href="#account" data-open-registration="online">报名线上参会</a>
+      </div>
+      <div class="ticket" data-ticket-card="expo">
+        <h3>独立方案展<span class="ticket-state">当前选择</span></h3>
+        <div class="price">¥300<small> /人</small></div>
+        <ul>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展展厅通行（1号展厅）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含分论坛及场外深研课选课资格</li>
+        </ul>
+        <a class="btn btn-ghost" href="#account" data-open-registration="expo">购买方案展</a>
+      </div>
+    </div>
+
+    <p class="ticket-note">* 各票种价格、退款规则、参会牌及门禁识别方式以最终业务配置为准。主论坛票及组合票均包含方案展通行权益；仅购买独立方案展票的参会人不可进入主论坛。</p>
+  </div>
+</section>
+
 <!-- ================= GUESTS（暂时隐藏，恢复时改回 display 或删除下面 style 属性，并把导航里的 #guests 链接加回来） ================= -->
 <section id="guests" class="guests" style="display:none;" data-page="home" data-force-hidden>
   <div class="wrap">
@@ -1628,42 +1575,6 @@
     });
   })();
 
-  (function(){
-    var historySection = document.querySelector('.about-history');
-    var aboutSection = document.querySelector('#about');
-    var footer = document.querySelector('footer');
-    var mobileLayout = window.matchMedia('(max-width:760px)');
-
-    function placeHistorySection(){
-      if(mobileLayout.matches){
-        footer.parentNode.insertBefore(historySection, footer);
-      }else{
-        aboutSection.appendChild(historySection);
-      }
-    }
-
-    if(mobileLayout.addEventListener){
-      mobileLayout.addEventListener('change', placeHistorySection);
-    }else{
-      mobileLayout.addListener(placeHistorySection);
-    }
-    placeHistorySection();
-  })();
-
-  // Countdown to 2026-12-01 09:00
-  var target = new Date('2026-12-01T09:00:00+08:00').getTime();
-  function tick(){
-    var now = Date.now(), diff = Math.max(0, target - now);
-    var d = Math.floor(diff/86400000),
-        h = Math.floor(diff%86400000/3600000),
-        m = Math.floor(diff%3600000/60000),
-        s = Math.floor(diff%60000/1000);
-    document.getElementById('cd-d').textContent = d;
-    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
-  }
-  tick(); setInterval(tick, 1000);
 
   // Agenda tabs
   document.querySelectorAll('#agenda .tab').forEach(function(btn){

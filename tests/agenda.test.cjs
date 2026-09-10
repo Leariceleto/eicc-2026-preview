@@ -7,6 +7,14 @@ const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
 const agenda = html.match(/<section id="agenda"[\s\S]*?<\/section>/)[0];
 const panels = [...agenda.matchAll(/<div class="agenda-panel(?: active)?" id="(d[1-4])"([\s\S]*?)(?=<div class="agenda-panel|<p class="agenda-update-note")/g)];
 
+test('主论坛日程移到大会概况之后，历程图及手机重排逻辑移除', () => {
+  const ids = [...html.matchAll(/<section id="([^"]+)"/g)].map(m => m[1]);
+  assert.deepEqual(ids.slice(0, 3), ['about', 'agenda', 'tickets']);
+  assert.equal(ids.filter(id => id === 'agenda').length, 1);
+  assert.doesNotMatch(html, /class="about-history"|class="annual-timeline"|placeHistorySection|src="assets\/annual-history/);
+  assert.match(html, /class="history-video-slot"/);
+});
+
 test('四天议程与源文档 revision 5294 的条目数一致', () => {
   assert.deepEqual(panels.map(p => p[1]), ['d1', 'd2', 'd3', 'd4']);
   assert.deepEqual(panels.map(p => (p[2].match(/<li[ >]/g) || []).length), [16, 17, 19, 13]);
