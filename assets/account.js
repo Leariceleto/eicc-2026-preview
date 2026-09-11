@@ -88,12 +88,12 @@
     if(!account.loggedIn)return head+noData('登录后查询参会与报名信息','使用本人账号登录，查看自己的参会安排或经办的报名。',button('预览登录后状态','data-hub-login'));
     var navigation=buyer&&registered()?'<nav class="hub-area-tabs" aria-label="一键查询工作区">'+[['personal','我的参会'],['managed','我经办的报名']].map(function(x){return '<button type="button" data-hub-area="'+x[0]+'" aria-pressed="'+(area===x[0])+'">'+x[1]+'</button>';}).join('')+'</nav>':'';
     var content=buyer&&(area==='managed'||!registered())?managedOverview():personalOverview();
-    var services=[['notices','大会通知'],['guide','会场与交通'],['help','联系会务']];
+    var services=[['notices','大会通知'],['guide','服务信息'],['help','联系会务']];
     if(registered())services.unshift(['profile','本人参会资料'],['replay','直播与回放']);
     if(buyer)services.unshift(['orders','我经办的订单'],['invoice','订单发票']);
     return head+navigation+content+wallet()+'<div class="hub-group"><div class="hub-group-head"><h2>更多服务</h2></div><div class="hub-services">'+services.map(function(x){return link(x[0],x[1],'hub-service');}).join('')+'</div></div>';
   }
-  var titles = {registration:'我的报名与权益',managed:'我经办的参会人',proxy:'办理参会安排',orders:'我经办的订单',seat:'我的座位与入场',forum:'我的分论坛',offsite:'场外深研课',hotel:'我的酒店',path:'我的学习路径',passport:'我的学习护照',organization:'我的学习组织',outcomes:'我的学习成果',coins:'未来币收支',recharge:'充值未来币',tasks:'做任务赚未来币',exchange:'兑换方案与产品',redemptions:'我的兑换',favorites:'收藏的方案',invoice:'发票信息',replay:'直播与回放',notices:'大会通知',guide:'会场与交通',profile:'参会人信息',transfer:'更换参会人',help:'联系会务'};
+  var titles = {registration:'我的报名与权益',managed:'我经办的参会人',proxy:'办理参会安排',orders:'我经办的订单',seat:'我的座位与入场',forum:'我的分论坛',offsite:'场外深研课',hotel:'我的酒店',path:'我的学习路径',passport:'我的学习护照',organization:'我的学习组织',outcomes:'我的学习成果',coins:'未来币收支',recharge:'充值未来币',tasks:'做任务赚未来币',exchange:'兑换方案与产品',redemptions:'我的兑换',favorites:'收藏的方案',invoice:'发票信息',replay:'直播与回放',notices:'大会通知',guide:'服务信息',profile:'参会人信息',transfer:'更换参会人',help:'联系会务'};
   var routeParams = new URLSearchParams();
   function personPicker(){
     return '<label class="hub-target-picker">选择经办的参会人<select data-hub-target><option value="">请选择参会人</option>'+M.managed(account).map(function(p){return '<option value="'+p.id+'" '+(targetId===p.id?'selected':'')+'>'+esc(p.name)+' · '+names[p.ticket]+' · '+M.orderStates[M.orderFor(account,p).status]+' · '+p.orderId+'</option>';}).join('')+'</select></label>';
@@ -157,6 +157,94 @@
     if(tab==='transfer')body=M.active(account,p)?box('更换参会人',entry('当前参会人',esc(p.name)+' · '+esc(p.phone))+entry('对应报名',names[p.ticket]+' · '+p.orderId)+entry('可衔接的内容','对应的参会资格与允许转移的选课安排；住宿是否可转移以实际预订规则为准。')+entry('保持不变','下单人、订单号、支付及发票归属。')+entry('不会转移','原参会人的学习护照、个人学习报告、未来币余额与兑换记录。'))+note('最晚 11 月 30 日可申请更换，具体规则以正式系统为准。本页只展示办理范围，不收集新参会人的真实资料、不提交更换。'):noData('当前报名不能更换参会人','待支付、已取消或已退款的报名不提供此操作。');
     return picker+targetBanner(p)+'<nav class="hub-proxy-tabs" aria-label="代办事项">'+tabs.map(function(t){return '<button type="button" data-hub-proxy-tab="'+t[0]+'" aria-pressed="'+(tab===t[0])+'">'+t[1]+'</button>';}).join('')+'</nav>'+body+note('代办范围仅含报名与参会安排。对方的个人学习护照、报告和钱包由其本人账号查看。');
   }
+  // 服务信息同步自飞书参会指南 revision 549；保留原文，统一文字配色。
+  function serviceInformation(){
+    return `<div class="hub-service-information">
+<section class="hub-detail-box"><h2>签到信息  </h2>
+<p><b>一、签到时间及地点</b></p>
+<p>签到时间：12月1日 9:00-19:30</p>
+<p>签到地点：广州空港博览中心</p>
+<p><b>二、如何签到</b></p>
+<p>1.前往签到处的任一通道，告知工作人员参会人的姓名或学校即可。工作人员将为您进行电子签到。</p>
+<p>2.签到时工作人员将为您发放参会资料袋与入场标签，标签上将标注参会人的姓名、座位区域及入场二维码，请将标签粘至参会牌上。</p>
+<p>3.入场时请在闸机处扫描二维码，有序入场。</p>
+<p>4.同一学校的参会者可由任一参会代表代为集体签到。</p>
+<p><b>三、注意事项</b></p>
+<p>1.会议期间请妥善保管您的参会资料袋与参会牌，遗失不补。</p>
+<p>2.参会期间请全程佩戴您的参会牌。</p>
+<p>3.如有需要行李寄存的参会者，可在签到处办理行李寄存服务，离开时请携带好您的行李及随身物品。</p>
+<p>4. 入场与活动安排：</p>
+<p><b>12月1日的入场时间为</b><b>13:30，下午16:45将举行艺术展开幕式</b><b>。</b>    </p>
+<p>对于提前抵达的老师，我们建议您前往酒店办理入住手续并稍作休息。</p>
+<p>入场时间开始后，老师们可按照指示有序入场。</p>
+<p>5.会议期间，会场签到处设有常驻工作人员，为您解答各类问题。</p>
+<p><b>四、天气提示</b></p>
+<p>会议期间广州天气温暖舒适，气温约在14-22℃左右（会场气温约24℃），建议各位参会嘉宾内着短袖、衬衫，携带薄外套、针织衫即可。</p>
+<p>广州市白云区每日天气播报：</p>
+<p>12月1日：14-22℃</p>
+<p>12月2日：13-21℃</p>
+<p>12月3日：14-21℃</p>
+<p>12月4日：14-21℃</p>
+<p>12月5日：13-21℃</p>
+</section>
+<section class="hub-detail-box"><h2>会场信息 </h2>
+<p>第十三届中国教育创新年会将在广州空港博览中心1.2号场馆内举行。</p>
+<p>广州空港博览中心位于<b>广州市白云区迎宾大道1108号</b>，地处广州空港经济区核心，距广州白云国际机场约3公里。 该中心是广州规划建设的国际性专业展贸平台，总建筑面积约25.35万平方米，规划建设12个展厅，室内展览面积超过10万平方米，具有单层无柱、大跨度、荷载能力强等特点，是可举办大型工业展的展馆。</p>
+<a href="assets/service-venue.png" target="_blank" rel="noopener" aria-label="查看原图：广州空港博览中心"><img src="assets/service-venue.png" alt="广州空港博览中心" width="828" height="533" loading="lazy"></a></section>
+<section class="hub-detail-box"><h2>住宿信息</h2>
+<a href="assets/service-hotels.png" target="_blank" rel="noopener" aria-label="查看原图：年会合作酒店信息"><img src="assets/service-hotels.png" alt="年会合作酒店信息" width="3680" height="2360" loading="lazy"></a><p><b>预定须知：</b></p>
+<p><b>一、预定方式：</b></p>
+<p>酒店预定均通过网上进行，不接受线下预定。</p>
+<p>方式1：会议报名时可同时预定酒店 或 在年会报名直接点击 “酒店预定”</p>
+<p>方式2：通过“新师途”平台预定（扫描上图二维码）</p>
+<p><b>二、订单有效期：</b></p>
+<p>酒店预定以订单支付成功为准，未能在有效期内支付的订单，预定无效。如仍需预定，请重新下单支付。</p>
+<p><b>三、订单取消/修改：</b></p>
+<p>住宿订单支付完成后，如需取消或修改订单，请于2026年11月23日24:00前登录第十三届中国教育创新年会官网-个人中心-我的订单，提交房间调整申请。因酒店已预留房间，订单逾期后将不能取消或修改，已缴纳的住宿费（含住宿定金）酒店将无法退还。</p>
+<p><b>四、发票事宜：</b></p>
+<p>住宿费用由重庆市蒲公英未来科技有限公司代收，住宿发票由入住酒店提供，离店前请在酒店前台开取。</p>
+<p><b>五、入住方式：</b></p>
+<p>预定成功后，凭预定人姓名和电话在酒店前台办理入住，具体入住流程按酒店要求执行。</p>
+<div class="hub-service-qr"><div><a href="assets/service-hotel-booking.png" target="_blank" rel="noopener" aria-label="查看原图：预定酒店"><img src="assets/service-hotel-booking.png" alt="预定酒店" width="1091" height="1089" loading="lazy"></a><p>预定酒店</p>
+</div><div><a href="assets/service-travel-assistant.jpg" target="_blank" rel="noopener" aria-label="查看原图：差旅助手二维码"><img src="assets/service-travel-assistant.jpg" alt="差旅助手二维码" width="2048" height="2048" loading="lazy"></a><p>差旅助手19122810591</p>
+</div><div><a href="assets/service-hotel-assistant.jpg" target="_blank" rel="noopener" aria-label="查看原图：酒店助手二维码"><img src="assets/service-hotel-assistant.jpg" alt="酒店助手二维码" width="2048" height="2048" loading="lazy"></a><p>酒店助手19946967625</p>
+</div></div></section>
+<section class="hub-detail-box"><h2>餐饮信息</h2>
+<p>第十三届中国教育创新年会主体活动期间，组委会将为所有参会人员提供12.1日晚餐，以及12.2-4日午餐。</p>
+<p>餐饮将送至您的座位，请您享用完毕后，将餐盒自觉放置于指定的回收区域，共同维护会场的整洁与舒适环境。</p>
+</section>
+<section class="hub-detail-box"><h2><b>交通信息</b></h2>
+<p>广州空港博览中心位于广州市白云区迎宾大道1108号，交通便利。</p>
+<p>出行提示：请按机票所示航站楼选择对应路线。以下步行距离、总用时及打车费用为出行参考，实际以会场开放入口、实时路况、导航及平台报价或出租车计价器为准。</p>
+<p><b><em>广州白云国际机场T2航站楼</em></b></p>
+<p><b>方式一：乘坐地铁3号线</b></p>
+<p>从3号线机场北2号航站楼站进站，搭乘体育西路方向，高增站B口出站，共计2站，步行1.6公里至广州空港博览中心，总计约32分钟。</p>
+<p><b>方式二：乘坐出租车或网约车</b></p>
+<p>提前网约车或在出租车点打车，约5.3公里，预计9分钟，约18元。</p>
+<p><b><em>广州白云国际机场T3航站楼</em></b></p>
+<p><b>方式一：乘坐免费接驳公交（空港2线支线）</b></p>
+<p>抵达T3航站楼后，按现场指引前往一楼交通中心，在空港2线支线乘车点上车，乘至高增地铁站。该线路免费，单程约15分钟，高峰时段约5分钟一班，平峰时段约10分钟一班。T3航站楼往高增地铁站运营时间为6:35—22:40。抵达高增站后，无需再乘地铁，可按导航步行前往广州空港博览中心；</p>
+<p><b>方式二：乘坐出租车或网约车</b></p>
+<p>按T3航站楼现场标识前往出租车候车区，或在网约车平台选择T3对应上车点，目的地设置为“广州空港博览中心（广州市白云区迎宾大道1108号）”。上车前核对会场入口；实际里程、车程和费用以实时导航、平台报价或出租车计价器为准。</p>
+<p><b><em>广州北站</em></b></p>
+<p><b>方式一：乘坐地铁9号线</b></p>
+<p>从9号线广州北站进站，搭乘高增方向，高增站B口出站，共计8站，步行1.6公里至广州空港博览中心，总计约52分钟。</p>
+<p><b>方式二：打车</b></p>
+<p>提前网约车或在出租车点打车，11.8公里，预计23分钟，约35元。</p>
+<p><b><em>广州白云站</em></b></p>
+<p><b>方式一：打车</b></p>
+<p>推荐提前网约车或在出租车点打车，25.5公里，预计30分钟，约76元。</p>
+<p><b><em>广州东站</em></b></p>
+<p><b>方式一：乘坐地铁3号线</b></p>
+<p>从3号线广州东站进站，搭乘机场北 （2号航站楼）方向，高增站B口出站，共计10站，步行1.6公里至广州空港博览中心，总计约58分钟。</p>
+<p><b>方式二：打车</b></p>
+<p>提前网约车或在出租车点打车，36公里，预计41分钟，约109元</p>
+<p><b><em>广州南站</em></b></p>
+<p><b>方式一：打车</b></p>
+<p>推荐提前网约车或在出租车点打车，51.8公里，预计57分钟，约159元</p>
+</section>
+</div>`;
+  }
   function details(key){
     if(!M.canOpen(account,key)){
       if(!account.loggedIn)return noData('请先登录','登录后按当前账号与报名记录查询。',button('预览登录后状态','data-hub-login'));
@@ -174,7 +262,7 @@
       case 'registration': return box('我的参会权益',fields([['参会人','我本人 · 138****6666（示例）'],['参会方式',names[state.identity]],['报名状态','有效报名（示例）'],['参会权益',state.identity==='online'?'主论坛直播及回看、分论坛及场外深研课录播回看':state.identity==='expo'?'方案展通行、学习护照与学习报告':'主论坛、每日分论坛选课、方案展、学习护照'+(state.identity==='combo'?'、1 场场外深研课':'')]]))+'<div class="hub-detail-actions">'+action('#account/forum','查看本人选课',true)+action('#account/hotel','查看本人住宿',true)+'</div>';
       case 'seat':
         if(!onsite()) return noData('线上参会无需现场座位','可通过线上入口查看直播与回放。',action('#account/replay','查看线上参会'));
-        return box('入场信息',fields([['参会方式',names[state.identity]],['主论坛座位',forumRight()?(stageOpen()?'A 区 · 08 排 · 16 座（示例）':'待公布，分配后在此查看'):'当前参会权益不含主论坛座位'],['签到状态',state.checkin?'已签到（示例）':'未签到'],['现场通行',forumRight()?'主论坛与方案展':'方案展']]))+note('实际座位、会场及入场凭证以正式报名系统发布为准。此预览不生成可核验的入场码。')+'<div class="hub-detail-actions">'+action('#account/guide','查看会场与交通',true)+'</div>';
+        return box('入场信息',fields([['参会方式',names[state.identity]],['主论坛座位',forumRight()?(stageOpen()?'A 区 · 08 排 · 16 座（示例）':'待公布，分配后在此查看'):'当前参会权益不含主论坛座位'],['签到状态',state.checkin?'已签到（示例）':'未签到'],['现场通行',forumRight()?'主论坛与方案展':'方案展']]))+note('实际座位、会场及入场凭证以正式报名系统发布为准。此预览不生成可核验的入场码。')+'<div class="hub-detail-actions">'+action('#account/guide','查看服务信息',true)+'</div>';
       case 'forum': return courseContent(M.self(account),'forum',false);
       case 'offsite': return courseContent(M.self(account),'offsite',false);
       case 'hotel': return onsite()&&stageOpen()?box('协议酒店 · 大床房（示例）',fields([['入住日期','2026 年 12 月 1 日'],['离店日期','2026 年 12 月 4 日 · 共 3 晚'],['预订状态','已确认（示例）'],['酒店地址','正式订单中展示所订酒店地址'],['入住凭证','正式预订成功后查看']]))+note('当前为住宿订单展示样例，酒店名称、地址及联系方式以实际预订为准。'):noData('暂无酒店订单','已预订的酒店、入住日期、房型和酒店联系方式将在这里显示。');
@@ -192,7 +280,7 @@
       case 'invoice': return invoiceContent();
       case 'replay': return state.identity==='expo'?noData('当前参会权益不含直播与回放','查看线上参会方式，可获得对应直播和回看内容。',action('#tickets','查看线上参会权益')):box('我的观看权益',fields([['主论坛',state.phase==='live'?'直播期间（预览）':state.phase==='post'?'回放开放阶段':'等待直播开放'],['分论坛与场外深研课','录播及回看'],['回看截止','2027 年 12 月 4 日'],['观看入口','正式开通后提供播放器入口']]))+'<div class="hub-detail-actions">'+action('#agenda','查看主论坛内容',true)+'</div>';
       case 'notices': return box('参会提醒',entry('选课提醒','分论坛每人每天最多选择 1 场；场外深研课最多选择 1 场。')+entry('出行提醒','会场、座位与集合信息以个人报名和选课通知为准。'));
-      case 'guide': return box('会场与交通',fields([['会议城市','广州'],['主论坛','2026 年 12 月 1 日至 4 日'],['场外深研课','2026 年 12 月 5 日'],['具体会场','待组委会公布'],['交通路线','会场确定后提供地图与交通指引']]))+'<div class="hub-detail-actions">'+action('#account/seat','我的入场信息',true)+action('#account/hotel','我的酒店',true)+'</div>';
+      case 'guide': return serviceInformation();
       case 'profile': return box('参会人资料',fields([['姓名','参会老师（示例）'],['手机号','138****6666（示例）'],['学校','报名学校（示例）'],['参会方式',names[state.identity]]]))+note('正式登录后查看本人报名资料。本预览不保存个人信息。');
       case 'transfer': return proxyContent(true);
       case 'help': return box('需要哪方面的帮助？',entry('报名、支付与发票','查询对应订单后联系报名服务。',link('orders','查看订单'))+entry('选课与现场安排','查询已选场次及课程通知。',link('forum','查看选课'))+entry('酒店与入住','查询预订信息后联系住宿服务。',link('hotel','查看酒店')))+note('会务电话与服务二维码待组委会公布后接入。');

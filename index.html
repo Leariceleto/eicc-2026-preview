@@ -888,7 +888,7 @@
 
 </style>
 <link rel="stylesheet" href="assets/passport.css">
-<link rel="stylesheet" href="assets/account.css">
+<link rel="stylesheet" href="assets/account.css?v=20260911-service">
 <link rel="stylesheet" href="assets/key-visual.css?v=20260910-native-extension-restored">
 <script src="assets/key-visual.js?v=20260910-no-countdown"></script>
 <link rel="stylesheet" href="assets/brand-visual.css?v=20260910-expo-copy-width">
@@ -1553,7 +1553,7 @@
 <script src="assets/passport-model.js"></script>
 <script src="assets/passport.js"></script>
 <script src="assets/account-model.js"></script>
-<script src="assets/account.js"></script>
+<script src="assets/account.js?v=20260911-service"></script>
 <script>
   // 方案征集只跳转到飞书表单，不在官网收集或提交学校资料。
   (function(){
@@ -1987,6 +1987,17 @@
   // ===== Hash router: #account 是独立页，其余锚点属于首页 =====
   (function(){
     var PAGES = ['home', 'account'];
+    var previousHash = location.hash;
+    var overviewScroll = 0;
+    var scrollFrame = null;
+    var defaultScrollRestoration = history.scrollRestoration;
+    function isOverview(hash){return hash === '#account' || hash === '#account/';}
+    function rememberOverview(){
+      // hash 已改变但旧页面尚未重绘时，不把浏览器的锚点跳转记为原位置。
+      if(isOverview(previousHash) && location.hash === previousHash) overviewScroll = window.scrollY;
+    }
+    window.addEventListener('scroll', rememberOverview, {passive:true});
+    document.addEventListener('click', rememberOverview, true);
     function currentPage(){
       var h = location.hash || '';
       if(h.indexOf('#account') === 0) return 'account';
@@ -1994,19 +2005,27 @@
     }
     function render(){
       var page = currentPage();
+      var fromHash = previousHash;
+      var toHash = location.hash;
+      previousHash = toHash;
+      if(scrollFrame !== null) cancelAnimationFrame(scrollFrame);
+      // 查询页自行恢复位置，避免浏览器的历史恢复与重绘后的定位互相覆盖。
+      if('scrollRestoration' in history) history.scrollRestoration = page === 'account' ? 'manual' : defaultScrollRestoration;
       document.querySelectorAll('[data-page]').forEach(function(node){
         // 手动隐藏的板块（如嘉宾）带 data-force-hidden，路由不得覆盖其 display
         if(node.dataset.forceHidden !== undefined) return;
         node.style.display = (node.dataset.page === page) ? '' : 'none';
       });
-      // 窗口回到顶部，避免从长页面切过去时停留位置奇怪
-      if(page === 'account') requestAnimationFrame(function(){
-        if(currentPage() === 'account') window.scrollTo({top:0,behavior:'instant'});
+      // 详情从顶部阅读；返回总览时，恢复进入卡片前的位置。
+      var returnToOverview = isOverview(toHash) && fromHash.indexOf('#account/') === 0;
+      var targetScroll = returnToOverview ? overviewScroll : 0;
+      if(page === 'account') scrollFrame = requestAnimationFrame(function(){
+        if(location.hash === toHash) window.scrollTo({top:targetScroll,behavior:'instant'});
       });
       // 从独立页切回首页时，目标锚点此前处于隐藏状态，需要在显示后重新定位
       if(page === 'home' && location.hash){
         var target = document.getElementById(location.hash.slice(1));
-        if(target) requestAnimationFrame(function(){ target.scrollIntoView(); });
+        if(target) scrollFrame = requestAnimationFrame(function(){ if(location.hash === toHash) target.scrollIntoView(); });
       }
       document.body.classList.toggle('on-account-page', page === 'account');
     }
