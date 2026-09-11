@@ -14,11 +14,11 @@ test('countdown is removed from every homepage variant and no update loop remain
   assert.match(source, /originalHost\.appendChild\(actions\)/);
 });
 
-test('desktop river hero restores the full fifth artboard in a viewport-height stage', () => {
+test('desktop PC2 hero uses expanded artwork in a viewport-height stage', () => {
   const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
   const css = fs.readFileSync(path.join(__dirname, '../assets/key-visual.css'), 'utf8');
   const template = html.match(/<template id="key-visual-river">([\s\S]*?)<\/template>/)[1];
-  assert.match(template, /kv-river-web-desktop\.webp" width="2560" height="1440"/);
+  assert.match(template, /hero-pc2-16x9\.png" width="3840" height="2160"/);
   assert.doesNotMatch(template, /kv-river-designer-pc/);
   assert.doesNotMatch(template, /key-visual-river-lettering|background-desktop/);
   const desktop = css.split('@media(max-width:760px)')[0];
@@ -27,16 +27,17 @@ test('desktop river hero restores the full fifth artboard in a viewport-height s
   assert.doesNotMatch(desktop, /aspect-ratio:8 \/ 3|min-height:37\.5vw/);
   const mobile = css.split('@media(max-width:760px)')[1];
   assert.match(mobile, /\.key-visual-river-picture img\{object-fit:cover;\}/);
-  assert.match(template, /media="\(max-width:760px\)" srcset="assets\/kv-river-web-mobile-no-date\.webp"/);
+  assert.match(template, /media="\(max-width:760px\)" srcset="assets\/hero-mobile-20260911\.png"/);
   assert.match(template, /2026\.12\/01 - 12\/05/);
 });
 
-test('restored full artboard uses the approved native side extension on wide desktop only', () => {
-  const css = fs.readFileSync(path.join(__dirname, '../assets/key-visual.css'), 'utf8');
-  assert.match(css, /@media\(min-width:761px\) and \(min-aspect-ratio:16\/9\)\{\s*html\[data-key-visual="river"\] \.key-visual-media::before\{[^}]*kv-river-web-native-extended-desktop\.webp[^}]*center\/auto 100% no-repeat/);
-  assert.doesNotMatch(css, /kv-river-web-extended-desktop\.png|kv-river-designer-pc/);
-  assert.ok(fs.existsSync(path.join(__dirname, '../assets/kv-river-web-desktop.webp')));
-  assert.ok(fs.existsSync(path.join(__dirname, '../assets/kv-river-web-native-extended-desktop.webp')));
+test('both existing variants use their respective PC artwork', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  for (const [variant, number] of [['planet', 1], ['river', 2]]) {
+    const template = html.split('<template id="key-visual-' + variant + '">')[1].split('</template>')[0];
+    assert.ok(template.includes('assets/hero-pc' + number + '-16x9.png'));
+    assert.ok(fs.existsSync(path.join(__dirname, '../assets/hero-pc' + number + '-16x9.png')));
+  }
 });
 
 for (const [search, expected] of [

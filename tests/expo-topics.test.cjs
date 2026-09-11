@@ -20,5 +20,5 @@ test('移除三块逛展说明，卡点列表后保留征集入口', () => {
   assert.ok(expo.indexOf('class="expo-topic-list"') < expo.indexOf('class="expo-callout"'));
   assert.doesNotMatch(expo, /expo-grid|expo-card|链接方案|逛展攻略|AI共创/);
   assert.ok(expo.includes('我想加入'));
-  assert.match(expo, /data-form-url=""/);
+  assert.match(expo, /data-form-url="https:\/\/ofhkcifg40\.feishu\.cn\/share\/base\/form\/shrcnC9GaNzjFnmkajtQs6hBAy4\?from=navigation"/);
 });

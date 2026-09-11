@@ -889,9 +889,10 @@
 </style>
 <link rel="stylesheet" href="assets/passport.css">
 <link rel="stylesheet" href="assets/account.css?v=20260911-service">
-<link rel="stylesheet" href="assets/key-visual.css?v=20260910-native-extension-restored">
-<script src="assets/key-visual.js?v=20260910-no-countdown"></script>
-<link rel="stylesheet" href="assets/brand-visual.css?v=20260910-expo-copy-width">
+<link rel="stylesheet" href="assets/key-visual.css?v=20260911-mobile-updated">
+<script src="assets/key-visual.js?v=20260911-mobile-updated"></script>
+<link rel="stylesheet" href="assets/brand-visual.css?v=20260912-bronze-release">
+<link rel="stylesheet" href="assets/frontend-aligned.css?v=20260912-bronze-release">
 </head>
 <body>
 
@@ -1053,8 +1054,8 @@
   <div class="key-visual-switch" data-visual-switch hidden>
     <span>主视觉对比</span>
     <div class="key-visual-options" aria-label="切换首页主视觉">
-      <a href="?visual=planet" data-visual-choice="planet">星球版</a>
-      <a href="?visual=river" data-visual-choice="river">长江黄河版</a>
+      <a href="?visual=planet" data-visual-choice="planet">主视觉PC1</a>
+      <a href="?visual=river" data-visual-choice="river">主视觉PC2</a>
       <a href="?visual=original" data-visual-choice="original">原版</a>
     </div>
   </div>
@@ -1063,15 +1064,15 @@
   </div>
   <template id="key-visual-planet">
     <picture class="key-visual-picture" aria-hidden="true">
-      <source media="(max-width:760px)" srcset="assets/kv-planet-mobile.webp">
-      <img src="assets/kv-planet-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
+      <source media="(max-width:760px)" srcset="assets/hero-mobile-20260911.png" width="4500" height="8000">
+      <img src="assets/hero-pc1-16x9.png" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
     </picture>
   </template>
   <template id="key-visual-river">
-    <!-- Restored full fifth AI artboard, without cropping or independent lettering scaling. -->
+    <!-- Updated PC2 artwork; retain the existing mobile source. -->
     <picture class="key-visual-river-picture" aria-hidden="true">
-      <source media="(max-width:760px)" srcset="assets/kv-river-web-mobile-no-date.webp" width="1080" height="1920">
-      <img src="assets/kv-river-web-desktop.webp" width="2560" height="1440" alt="" fetchpriority="high" decoding="async">
+      <source media="(max-width:760px)" srcset="assets/hero-mobile-20260911.png" width="4500" height="8000">
+      <img src="assets/hero-pc2-16x9.png" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
     </picture>
     <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/05</span><span>中国 · 广州</span></div>
   </template>
@@ -1480,7 +1481,7 @@
       </div>
       <div class="expo-callout-action">
         <!-- 将已确认的飞书表单链接填入 data-form-url，按钮即在新窗口打开申请表。 -->
-        <a class="btn expo-apply-link" href="#expo-apply-status" data-expo-apply data-form-url="" aria-describedby="expo-apply-hint">我想加入 <span aria-hidden="true">↗</span></a>
+        <a class="btn expo-apply-link" href="#expo-apply-status" data-expo-apply data-form-url="https://ofhkcifg40.feishu.cn/share/base/form/shrcnC9GaNzjFnmkajtQs6hBAy4?from=navigation" aria-describedby="expo-apply-hint">我想加入 <span aria-hidden="true">↗</span></a>
         <small id="expo-apply-hint">提交申请后，组委会将与您沟通确认</small>
       </div>
       <p class="expo-apply-status" id="expo-apply-status" role="status" hidden></p>
@@ -1553,7 +1554,7 @@
 <script src="assets/passport-model.js"></script>
 <script src="assets/passport.js"></script>
 <script src="assets/account-model.js"></script>
-<script src="assets/account.js?v=20260911-service"></script>
+<script src="assets/account.js?v=20260911-aligned-da11507"></script>
 <script>
   // 方案征集只跳转到飞书表单，不在官网收集或提交学校资料。
   (function(){

@@ -71,3 +71,15 @@ html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-meta .chip:l
   html[data-key-visual="river"] .key-visual-stage .hero-actions .btn{min-height:44px;padding:10px 12px;}
 }
 @media(prefers-reduced-motion:reduce){.key-visual-stage .btn{transition:none;transform:none!important;}}
+/* Fill the desktop viewport with the expanded 16:9 artwork. */
+@media(min-width:761px){
+  html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero{--kv-base:#03070e;}
+  html[data-key-visual="river"] .key-visual-media::before{content:none;}
+  .key-visual-picture img,.key-visual-river-picture img{object-fit:cover;object-position:center;}
+}
+
+/* The supplied mobile artwork already includes the date and venue. */
+@media(max-width:760px){
+  .key-visual-river-date{display:none;}
+  .key-visual-stage .hero-actions{top:80%;}
+}

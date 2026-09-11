@@ -3,13 +3,13 @@
    All DOM, text, artwork, route, field and event structures remain unchanged.
    Legacy token names are bridged for this standalone preview. Scope tokens to components when adapting into the platform. */
 :root{
- --brand-primary:#1A1F22;--brand-secondary:#826D5E;--brand-accent:#695545;
+ --brand-primary:#1A1F22;--brand-secondary:#A57C60;--brand-accent:#A57C60;
  --bg-primary:#F6F3EC;--bg-secondary:#ECE7DF;--bg-dark:#111719;
  --surface:#FCFAF6;--surface-hover:#EFE8DE;
  --text-primary:#1A1F22;--text-secondary:#56524C;--text-tertiary:#706B63;--text-inverse:#F6F3EC;
  --border:#D6CEC3;--divider:#E0DAD1;
  --paper:var(--bg-primary);--paper-deep:var(--bg-secondary);--ink:var(--text-primary);--ink-soft:var(--text-secondary);
- --blue:var(--brand-accent);--blue-deep:#514338;--gold:#826D5E;--coral:var(--brand-accent);--green:#37644E;
+ --blue:var(--brand-accent);--blue-deep:#89644C;--gold:#A57C60;--coral:var(--brand-accent);--green:#37644E;
  --line:var(--border);--radius:6px;
  --display:"Songti SC","STSong","Noto Serif SC",serif;
  --ui:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
@@ -22,7 +22,7 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .nav-links a:hover{background:var(--surface-hover);color:var(--brand-accent);}
 .nav-cta{border-radius:6px!important;}
 .nav-cta.acct{background:var(--brand-accent);}
-.nav-cta.acct:hover{background:#514338!important;}
+.nav-cta.acct:hover{background:#89644C!important;}
 .mobile-menu{background:var(--surface);backdrop-filter:none;border-radius:0 0 8px 8px;box-shadow:0 12px 30px rgba(26,31,34,.1);}
 .mobile-menu a,.nav-burger{border-radius:6px;}
 .key-visual-stage .btn{border-radius:6px;}
@@ -38,7 +38,7 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 :is(#tickets,#deep,#expo,#passport) h2.sec-title{font-family:var(--display);font-size:40px;font-weight:600;line-height:1.35;letter-spacing:.005em;}
 .btn{border-radius:6px;font-weight:600;}
 .btn-primary,.btn-dark{background:var(--brand-accent);color:var(--text-inverse);}
-.btn-primary:hover,.btn-dark:hover{background:#514338;transform:none;}
+.btn-primary:hover,.btn-dark:hover{background:#89644C;transform:none;}
 /* Opening transition: the same photo remains, read as a faint documentary ground. */
 .about-preface{background-color:var(--bg-primary);color:var(--text-primary);}
 .about-preface::before{background:linear-gradient(90deg,rgba(246,243,236,.97),rgba(246,243,236,.88));}
@@ -174,7 +174,7 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .expo-callout h3{font-size:24px;font-weight:600;}
 .expo-callout p{font-size:15px;line-height:1.8;}
 .expo-apply-link{background:var(--brand-accent);border-radius:6px;}
-.expo-apply-link:hover{background:#514338;}
+.expo-apply-link:hover{background:#89644C;}
 /* The learning-method introduction is the second dark visual emphasis, not a SaaS feature wall. */
 .learning-system{background:var(--brand-primary);}
 .learning-system .kicker,.learning-principle b,.journey-node::before{color:#D7C8B7;}
@@ -276,7 +276,7 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .signup-field label{font-size:14px;font-weight:600;}
 .signup-field label em,.signup-error{color:#A34B3F;}
 .signup-field input.invalid,.signup-field select.invalid{border-color:#A34B3F;}
-.signup-field input:focus,.signup-field select:focus{border-color:var(--brand-accent);box-shadow:0 0 0 3px rgba(105,85,69,.15);}
+.signup-field input:focus,.signup-field select:focus{border-color:var(--brand-accent);box-shadow:0 0 0 3px rgba(165,124,96,.15);}
 .signup-choice.active{color:var(--brand-accent);border-color:var(--brand-secondary);background:var(--surface-hover);}
 .signup-actions .btn-ghost{background:var(--surface);border-color:var(--brand-secondary);}
 /* Footer is a reading buffer, not a third consecutive black panel. */

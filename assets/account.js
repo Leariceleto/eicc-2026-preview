@@ -75,23 +75,62 @@
     learning+=card('passport','我的学习护照','<p>学习任务、个人记录与自由探索</p>');
     learning+=card('organization','我的学习组织','<p>查看班级或主题学习社区</p>');
     learning+=card('outcomes','我的学习成果','<p>个人学习报告与学校 100 天行动</p>')+'</div></div>';
-    return top+arr+learning;
+    var detailRows=[['参会人',p.name],['单位',p.school||'--'],['联系电话',p.phone],['主论坛座位',seat],['报名订单',p.orderId],['场外深研课',M.courseName(account,p.id,'offsite')]];
+    top='<div class="hub-section"><div class="hub-section-head"><div><h2>我的参会信息</h2><p>本人报名、座位与入场状态</p></div><span class="hub-section-hint">第十三届中国教育创新年会</span></div><div class="personal-card"><div class="personal-main"><div><span class="personal-label">我的报名</span><h3>'+names[state.identity]+'</h3><p>第十三届中国教育创新年会</p><p>2026.12.01–12.04 · 中国广州</p></div><span class="personal-checkin">'+phases[state.phase]+' · '+(state.checkin?'已签到':'尚未签到')+'</span></div><div class="personal-details">'+detailRows.map(function(r){return '<div><span class="detail-label">'+r[0]+'</span><div class="detail-value">'+esc(r[1])+'</div></div>';}).join('')+'</div></div></div>';
+    return top+arr;
   }
   function managedOverview(){
     var people=M.managed(account), active=people.filter(function(p){return M.active(account,p);});
     return '<div class="hub-management-head"><div><span class="hub-label">我经办的报名</span><h2>为同事安排好每一程</h2><p>查订单、核对参会人，分别办理选课与住宿查询。</p></div>'+link('orders','查看全部订单')+'</div><div class="hub-management-metrics">'+
       [['orders',M.orders(account).length,'报名订单'],['managed',active.length,'有效参会人'],['orders?status=pending',M.orders(account).filter(function(o){return o.status==='pending';}).length,'待支付订单']].map(function(x){return '<a href="#account/'+x[0]+'"><b>'+x[1]+'</b><span>'+x[2]+'</span><span aria-hidden="true">↗</span></a>';}).join('')+'</div><div class="hub-group"><div class="hub-group-head"><h2>参会人安排</h2>'+link('managed','查看全部参会人')+'</div><div class="hub-managed-people">'+active.map(function(p){return '<a class="hub-person-card" href="#account/proxy?person='+p.id+'"><span class="hub-person-mark" aria-hidden="true">'+esc(p.name.slice(0,1))+'</span><div><h3>'+esc(p.name)+(p.userId===account.userId?' <small>本人</small>':'')+'</h3><p>'+names[p.ticket]+' · '+esc(p.phone)+'</p><p>'+esc(p.orderId)+'</p></div><span class="hub-person-arrow">代办详情 ↗</span></a>';}).join('')+'</div></div>';
   }
+  // 展示布局来自前端年会分支 da11507；继续使用本地样例，不调用业务接口。
+  function orderAction(type,label,o,p,variant){
+    return '<button type="button" class="order-btn '+(variant||'')+'" data-order-action="'+type+'" data-order-id="'+o.id+'" data-person-id="'+(p?p.id:'')+'">'+label+'</button>';
+  }
+  function alignedOrders(){
+    return '<div class="hub-section"><div class="hub-section-head"><div><h2>我经办的订单</h2><p>订单信息和参会人直接展示，操作就在对应订单上完成</p></div><span class="hub-section-hint">按下单时间倒序</span></div><div class="orders">'+M.orders(account).map(function(o){
+      var people=M.managed(account).filter(function(p){return p.orderId===o.id;});
+      var actions=o.status==='paid'?orderAction('invoice','查看发票',o)+orderAction('refund','申请退款',o):o.status==='pending'?orderAction('cancel','取消订单',o,null,'danger')+orderAction('pay','立即支付',o,null,'primary'):o.status==='refunded'?orderAction('invoice','查看发票',o)+orderAction('refundProgress','退款进度',o):'';
+      return '<article class="order-card"><div class="order-head"><div><span class="order-code">订单号 · '+o.id+'</span><h3>第十三届中国教育创新年会</h3></div><span class="order-status '+o.status+'">'+M.orderStates[o.status]+'</span></div><div class="order-summary">'+[[o.status==='pending'?'待付金额':'实付金额','¥'+o.amount.toLocaleString()+'（示例）'],['参会人数',people.length+' 人'],['支付方式',o.payType||'--'],['下单时间',o.date||'--']].map(function(r){return '<div><span class="summary-label">'+r[0]+'</span><span class="summary-value">'+esc(r[1])+'</span></div>';}).join('')+'</div><div class="order-attendees">'+people.map(function(p){return '<div class="order-attendee"><div class="person-name">'+esc(p.name)+(p.userId===account.userId?'<small>本人</small>':'')+'</div><div class="person-meta">'+esc(p.phone)+'</div><div class="person-ticket">'+names[p.ticket]+'</div>'+(o.status==='paid'?orderAction('edit','修改参会人',o,p):'')+'</div>';}).join('')+'</div>'+(actions?'<div class="order-actions">'+actions+'</div>':'')+'</article>';
+    }).join('')+'</div></div>';
+  }
+  function openOrderDialog(trigger){
+    var type=trigger.dataset.orderAction,o=M.orders(account).find(function(x){return x.id===trigger.dataset.orderId;});
+    if(!o)return;
+    var people=M.managed(account).filter(function(p){return p.orderId===o.id;}),p=people.find(function(x){return x.id===trigger.dataset.personId;});
+    var titles={edit:'修改参会人',invoice:'订单发票',refund:'申请退款',refundProgress:'退款进度',cancel:'取消订单',pay:'立即支付'};
+    var content='';
+    if(type==='edit'&&p)content=[['name','参会人姓名',p.name],['phone','联系电话',p.phone],['school','单位/学校',p.school||'']].map(function(r){return '<div class="field"><label for="order-'+r[0]+'">'+r[1]+'</label><input id="order-'+r[0]+'" name="'+r[0]+'" value="'+esc(r[2])+'"></div>';}).join('');
+    else if(type==='refund')content='<div class="check-list">'+people.map(function(x,i){return '<label class="check-row"><input type="checkbox" name="people" value="'+x.id+'" '+(!i?'checked':'')+'>'+esc(x.name)+' · '+names[x.ticket]+'</label>';}).join('')+'</div><div class="field"><label for="order-reason">退款原因</label><textarea id="order-reason" name="reason" rows="3" required></textarea></div>';
+    else if(type==='invoice')content=fields([['订单号',o.id],['开票金额','¥'+o.amount.toLocaleString()+'（示例）'],['发票状态','发票预览，无真实票据']]);
+    else if(type==='refundProgress')content=fields([['当前状态',M.orderStates[o.status]],['退款人员',people.map(function(x){return x.name;}).join('、')],['金额','¥'+o.amount.toLocaleString()+'（示例）']]);
+    else content='<p class="dialog-text">'+(type==='cancel'?'确认取消此待支付订单？仅改变本页示例状态。':'正式页面在此进入统一收银台；原型只演示，不发起支付。')+'</p>';
+    var dialog=document.createElement('dialog');dialog.className='hub-dialog';dialog.setAttribute('aria-labelledby','order-dialog-title');
+    var confirms={edit:'保存修改',invoice:'预览下载',refund:'提交申请',refundProgress:'知道了',cancel:'确认取消',pay:'模拟进入收银台'};
+    dialog.innerHTML='<form><div class="dialog-head"><div><h2 id="order-dialog-title">'+titles[type]+'</h2><p>'+o.id+' · 原地操作</p></div><button type="button" class="dialog-close" aria-label="关闭">×</button></div><div class="dialog-body">'+content+'<p class="dialog-note" role="status">交互演示，不提交、不付款；刷新后恢复示例数据。</p></div><div class="dialog-actions"><button type="button" class="order-btn" data-close>取消</button><button class="order-btn primary" type="submit">'+confirms[type]+'</button></div></form>';
+    root.appendChild(dialog);dialog.showModal();
+    function close(){dialog.close();}
+    dialog.querySelector('.dialog-close').onclick=close;dialog.querySelector('[data-close]').onclick=close;
+    dialog.addEventListener('close',function(){dialog.remove();if(trigger.isConnected)trigger.focus({preventScroll:true});});
+    dialog.querySelector('form').onsubmit=function(event){event.preventDefault();var data=new FormData(event.target);
+      if(type==='refund'&&!data.getAll('people').length){dialog.querySelector('.dialog-note').textContent='请至少选择一位参会人。';return;}
+      if(type==='edit'&&p){p.name=String(data.get('name')).trim()||p.name;p.phone=String(data.get('phone')).trim()||p.phone;p.school=String(data.get('school')).trim()||p.school;}
+      if(type==='cancel')o.status='cancelled';
+      var y=window.scrollY;close();render(false);window.scrollTo({top:y,behavior:'instant'});
+      var feedback=root.querySelector('.hub-preview');if(feedback)feedback.textContent='已完成演示 · 未提交真实业务';
+      var target=root.querySelector('[data-order-id="'+o.id+'"]');if(target)target.focus({preventScroll:true});
+    };
+  }
   function overview(){
     var buyer=M.orders(account).length>0;
     var head='<div class="hub-head"><div><h1>一键查询</h1><p>参会信息与经办事项，都在这里</p></div><span class="hub-preview">交互预览 · 示例数据</span></div>'+previewControls();
     if(!account.loggedIn)return head+noData('登录后查询参会与报名信息','使用本人账号登录，查看自己的参会安排或经办的报名。',button('预览登录后状态','data-hub-login'));
-    var navigation=buyer&&registered()?'<nav class="hub-area-tabs" aria-label="一键查询工作区">'+[['personal','我的参会'],['managed','我经办的报名']].map(function(x){return '<button type="button" data-hub-area="'+x[0]+'" aria-pressed="'+(area===x[0])+'">'+x[1]+'</button>';}).join('')+'</nav>':'';
-    var content=buyer&&(area==='managed'||!registered())?managedOverview():personalOverview();
+    var content=(registered()?personalOverview():buyer?'':personalOverview())+(buyer?alignedOrders():'');
     var services=[['notices','大会通知'],['guide','服务信息'],['help','联系会务']];
     if(registered())services.unshift(['profile','本人参会资料'],['replay','直播与回放']);
     if(buyer)services.unshift(['orders','我经办的订单'],['invoice','订单发票']);
-    return head+navigation+content+wallet()+'<div class="hub-group"><div class="hub-group-head"><h2>更多服务</h2></div><div class="hub-services">'+services.map(function(x){return link(x[0],x[1],'hub-service');}).join('')+'</div></div>';
+    return head+content+wallet()+'<div class="hub-group"><div class="hub-group-head"><h2>更多服务</h2></div><div class="hub-services">'+services.map(function(x){return link(x[0],x[1],'hub-service');}).join('')+'</div></div>';
   }
   var titles = {registration:'我的报名与权益',managed:'我经办的参会人',proxy:'办理参会安排',orders:'我经办的订单',seat:'我的座位与入场',forum:'我的分论坛',offsite:'场外深研课',hotel:'我的酒店',path:'我的学习路径',passport:'我的学习护照',organization:'我的学习组织',outcomes:'我的学习成果',coins:'未来币收支',recharge:'充值未来币',tasks:'做任务赚未来币',exchange:'兑换方案与产品',redemptions:'我的兑换',favorites:'收藏的方案',invoice:'发票信息',replay:'直播与回放',notices:'大会通知',guide:'服务信息',profile:'参会人信息',transfer:'更换参会人',help:'联系会务'};
   var routeParams = new URLSearchParams();
@@ -283,7 +322,13 @@
       case 'guide': return serviceInformation();
       case 'profile': return box('参会人资料',fields([['姓名','参会老师（示例）'],['手机号','138****6666（示例）'],['学校','报名学校（示例）'],['参会方式',names[state.identity]]]))+note('正式登录后查看本人报名资料。本预览不保存个人信息。');
       case 'transfer': return proxyContent(true);
-      case 'help': return box('需要哪方面的帮助？',entry('报名、支付与发票','查询对应订单后联系报名服务。',link('orders','查看订单'))+entry('选课与现场安排','查询已选场次及课程通知。',link('forum','查看选课'))+entry('酒店与入住','查询预订信息后联系住宿服务。',link('hotel','查看酒店')))+note('会务电话与服务二维码待组委会公布后接入。');
+      case 'help': return box('现场参会报名咨询',
+        entry('罗老师','19196310527（微信同号）',action('tel:19196310527','拨打电话',true))+
+        entry('胡老师','17784040799（微信同号）',action('tel:17784040799','拨打电话',true))+
+        entry('赵老师','19923944023（微信同号）',action('tel:19923944023','拨打电话',true)))+
+        box('差旅与酒店咨询',
+        entry('周老师 · 差旅助手','19122810591（微信同号）',action('tel:19122810591','拨打电话',true))+
+        entry('赵老师 · 酒店助手','19946967625（微信同号）',action('tel:19946967625','拨打电话',true)));
     }
     return '';
   }
@@ -363,6 +408,7 @@
   root.addEventListener('click',function(event){
     var b=event.target.closest('button');
     if(!b||b.disabled)return;
+    if(b.hasAttribute('data-order-action')){openOrderDialog(b);return;}
     if(b.hasAttribute('data-hub-role')){setRole(b.dataset.hubRole);return;}
     if(b.hasAttribute('data-hub-area')){area=b.dataset.hubArea;pendingChoice=null;render(false);root.querySelector('[data-hub-area="'+area+'"]').focus({preventScroll:true});return;}
     if(b.hasAttribute('data-hub-order-filter')){
