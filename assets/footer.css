@@ -1,0 +1,47 @@
+/* Preserve the supplied logos and QR pixels using clipped views of one source image. */
+.annual-footer { background: #ECE7DF !important; padding: 64px 32px 24px; }
+.annual-footer-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: minmax(240px,1.65fr) minmax(260px,1.2fr) minmax(200px,1fr) minmax(150px,.75fr); gap: 40px; align-items: start; }
+.annual-footer-brand { padding-top: 14px; }
+.footer-art { position: relative; display: block; width: 100%; aspect-ratio: var(--w) / var(--h); overflow: hidden; }
+.footer-art img { position: absolute; width: calc(2048 / var(--w) * 100%); max-width: none; height: auto; left: calc(var(--x) / var(--w) * -100%); top: calc(var(--y) / var(--h) * -100%); }
+.annual-footer-brand .footer-art { max-width: 390px; }
+.annual-footer .annual-footer-group { padding: 0; display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 24px; }
+.annual-footer-group h2 { margin: 0; display: flex; align-items: center; gap: 10px; writing-mode: vertical-rl; font-family: var(--display); font-size: 24px; font-weight: 400; line-height: 1.1; color: #826D5E; letter-spacing: .08em; }
+.annual-footer-group h2::after { content: ""; display: block; width: 1px; min-height: 54px; flex: 1; background: #B6A597; }
+.annual-footer-organizer-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; padding-top: 24px; }
+.annual-footer-organizer-list h3 { font-size: 15px; font-weight: 400; line-height: 1.4; color: #826D5E; margin-bottom: 18px; white-space: nowrap; text-align: center; }
+.annual-footer .footer-host-logo { width: 64px; max-width: 100%; margin: 0 auto; }
+.annual-footer .footer-organizer-logo { width: 50px; max-width: 100%; margin: 0 auto; }
+.annual-footer .footer-curator-logo { width: 65px; max-width: 100%; margin: 0 auto; }
+.annual-footer-contact > div { padding-top: 24px; }
+.annual-footer .annual-footer-contact p { color: #826D5E !important; font-size: 15px; line-height: 1.8; }
+.annual-footer .annual-footer-phone { color: #826D5E !important; font-size: clamp(20px,1.65vw,28px); line-height: 1.5; font-style: italic; white-space: nowrap; margin: 5px 0 12px; }
+.annual-footer .annual-footer-phone:hover { color: #695545 !important; text-decoration: underline; }
+.annual-footer-qr-list { display: grid; gap: 12px; }
+.annual-footer-qr-list figure { display: flex; align-items: center; gap: 8px; margin: 0; }
+.annual-footer-qr-list .footer-art { width: 88px; flex: 0 0 88px; }
+.annual-footer-qr-list figcaption { writing-mode: vertical-rl; color: #826D5E; font-size: 13px; line-height: 1.2; }
+.annual-footer .copyright { margin: 40px auto 0; max-width: 1600px; border-color: #D6CEC3 !important; line-height: 1.8; }
+@media(max-width:1150px) {
+  .annual-footer-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 40px 56px; max-width: 900px; }
+  .annual-footer-brand { align-self: center; }
+  .annual-footer .annual-footer-phone { font-size: 26px; }
+  .annual-footer-qr-list { grid-template-columns: repeat(2,max-content); gap: 24px; }
+  .annual-footer-qr-list .footer-art { width: 96px; flex-basis: 96px; }
+}
+@media(max-width:640px) {
+  .annual-footer { padding: 40px 24px 24px; }
+  .annual-footer-grid { grid-template-columns: minmax(0,1fr); gap: 32px; max-width: 420px; }
+  .annual-footer-brand { padding-top: 0; margin-bottom: 4px; }
+  .annual-footer-brand .footer-art { max-width: 340px; }
+  .annual-footer .annual-footer-group { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .annual-footer-group h2 { writing-mode: horizontal-tb; font-size: 22px; gap: 16px; }
+  .annual-footer-group h2::after { width: auto; min-height: 0; height: 1px; }
+  .annual-footer-organizer-list { padding-top: 0; gap: 28px; }
+  .annual-footer-organizer-list h3 { margin-bottom: 12px; }
+  .annual-footer-contact > div { padding-top: 0; }
+  .annual-footer-qr-list { gap: 30px; }
+  .annual-footer-qr-list .footer-art { width: 112px; flex-basis: 112px; }
+  .annual-footer .copyright { margin-top: 32px; font-size: 11px; text-wrap: pretty; }
+}
+@media(max-width:360px) { .annual-footer-qr-list { gap: 16px; } .annual-footer-qr-list .footer-art { width: 100px; flex-basis: 100px; } }
