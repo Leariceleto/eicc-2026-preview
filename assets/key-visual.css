@@ -83,3 +83,9 @@ html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-meta .chip:
   .key-visual-river-date{display:none;}
   .key-visual-stage .hero-actions{top:80%;}
 }
+
+/* Desktop-only native vector title; the existing mobile picture is unchanged. */
+.key-visual-pc-lettering{display:none;}
+@media(min-width:761px){
+  .key-visual-pc-lettering{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;}
+}

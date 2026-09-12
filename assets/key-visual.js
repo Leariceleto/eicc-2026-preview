@@ -3,7 +3,7 @@
   'use strict';
   var choices=['planet','river','river-previous','original'];
   var selected=new URLSearchParams(location.search).get('visual');
-  if(choices.indexOf(selected)===-1)selected='river';
+  if(choices.indexOf(selected)===-1)selected='river-previous';
   document.documentElement.dataset.keyVisual=selected;
   document.addEventListener('DOMContentLoaded',function(){
     var hero=document.querySelector('.hero');

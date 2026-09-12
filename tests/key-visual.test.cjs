@@ -41,10 +41,10 @@ test('both existing variants use their respective PC artwork', () => {
 });
 
 for (const [search, expected] of [
-  ['', 'river'],
-  ['?queryRole=buyer', 'river'],
-  ['?visual=', 'river'],
-  ['?visual=unknown', 'river'],
+  ['', 'river-previous'],
+  ['?queryRole=buyer', 'river-previous'],
+  ['?visual=', 'river-previous'],
+  ['?visual=unknown', 'river-previous'],
   ['?visual=river', 'river'],
   ['?visual=river-previous', 'river-previous'],
   ['?visual=planet', 'planet'],
