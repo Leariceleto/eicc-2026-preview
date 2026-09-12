@@ -48,7 +48,7 @@
 .hub-course-form{display:flex;align-items:flex-end;gap:12px;margin-top:22px;}
 .hub-course-form label{flex:1;min-width:0;display:grid;gap:8px;font-size:13px;color:var(--ink-soft);}
 .hub-course-form button{flex-shrink:0;}
-.hub-selection-confirm{border:1px solid #d7c9a6;background:#eee7d6;border-radius:14px;margin:14px 0 24px;padding:24px;}
+.hub-selection-confirm{border:1px solid var(--brand-accent);background:var(--surface-hover);border-radius:14px;margin:14px 0 24px;padding:24px;}
 .hub-selection-confirm h3{font-size:17px;margin-bottom:12px;line-height:1.6;}
 .hub-selection-confirm p{font-size:13px;line-height:1.8;color:var(--ink-soft);}
 .hub-muted{margin-top:16px;}

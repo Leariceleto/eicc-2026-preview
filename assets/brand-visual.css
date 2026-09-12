@@ -177,10 +177,10 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .expo-apply-link:hover{background:#89644C;}
 /* The learning-method introduction is the second dark visual emphasis, not a SaaS feature wall. */
 .learning-system{background:var(--brand-primary);}
-.learning-system .kicker,.learning-principle b,.journey-node::before{color:#D7C8B7;}
-.learning-system .kicker::before{background:#D7C8B7;}
-.learning-principle b{font-size:17px;font-weight:600;}
-.learning-principle p,.journey-node p{font-size:15px;line-height:1.85;color:#C5BDB3;}
+.learning-system .kicker,.journey-node::before{color:var(--brand-accent);}
+.learning-system .kicker::before{background:var(--brand-accent);}
+.learning-principle b{font-size:17px;font-weight:600;color:var(--text-inverse);}
+.learning-principle p,.journey-node p{font-size:15px;line-height:1.85;color:var(--text-inverse);}
 .learning-principles{margin-top:48px;border-color:#555857;}
 .learning-principle{padding-top:28px;padding-bottom:28px;}
 .learning-principle:not(:first-child){border-color:#555857;}
@@ -250,14 +250,14 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .pp-button.quiet{border-color:var(--brand-secondary);}
 .pp-link{font-size:14px;}
 .pp-pill{background:var(--bg-secondary);border-color:var(--border);color:var(--brand-accent);border-radius:3px;}
-.pp-pill.gold{background:#EEE6D9;border-color:#CFC0A6;color:#766039;}
+.pp-pill.gold{background:var(--surface-hover);border-color:var(--brand-accent);color:var(--brand-accent);}
 .pp-pill.green{background:#E8EFE9;border-color:#C4D2C8;color:#37644E;}
 .pp-checklist>div>.pp-progress{background:var(--bg-secondary);border-color:var(--brand-secondary);color:var(--brand-accent);}
 .pp-post{background:var(--surface);border-radius:6px;border-color:var(--border);}
 .pp-record{padding-top:24px;padding-bottom:24px;}
 .pp-record-body{font-size:15px;line-height:1.85;}
 .pp-quote{border-left-color:var(--brand-secondary);background:var(--surface-hover);}
-.pp-notice{background:#F2EDE3;border-color:#D6C7AB;color:#69583B;}
+.pp-notice{background:var(--surface-hover);border-color:var(--brand-accent);color:var(--text-secondary);}
 .pp-form :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),select,textarea),.pp-filters select{border-color:var(--brand-secondary);border-radius:6px;background:var(--surface);}
 /* Registration: brand steps back. Real success and errors keep muted semantic colors. */
 .signup-dialog{background:var(--bg-primary);border-radius:10px;box-shadow:0 20px 60px rgba(26,31,34,.2);}

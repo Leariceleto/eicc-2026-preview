@@ -755,11 +755,11 @@
 .hub-feedback {
   margin-top: 24px;
   padding: 16px;
-  background: #fff9ed;
-  border: 1px solid #d7c9a6;
+  background: var(--surface-hover);
+  border: 1px solid var(--brand-accent);
   border-radius: 12px;
   font-size: 15px;
-  color: #655323;
+  color: var(--text-secondary);
 }
 
 .hub-muted {
@@ -893,8 +893,8 @@
 }
 
 .hub-selection-confirm {
-  border: 1px solid #d7c9a6;
-  background: #eee7d6;
+  border: 1px solid var(--brand-accent);
+  background: var(--surface-hover);
   border-radius: 14px;
   margin: 14px 0 24px;
   padding: 24px;
@@ -1205,7 +1205,7 @@
 
       &:focus {
         border-color: #A57C60;
-        box-shadow: 0 0 0 3px rgba(139, 118, 102, 0.12);
+        box-shadow: 0 0 0 3px rgba(165, 124, 96, 0.12);
       }
     }
   }
@@ -1737,7 +1737,7 @@
 
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 
-.kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.12em; font-weight: 600; color: #D7C8B7; text-transform: uppercase; margin-bottom: 20px; &::before { content: ''; width: 26px; height: 1px; background: #D7C8B7; } }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.12em; font-weight: 600; color: var(--brand-accent); text-transform: uppercase; margin-bottom: 20px; &::before { content: ''; width: 26px; height: 1px; background: var(--brand-accent); } }
 .sec-title { font-family: "Songti SC", "STSong", "Noto Serif SC", serif; font-size: 40px; line-height: 1.35; font-weight: 600; letter-spacing: 0.005em; margin-bottom: 14px; color: #F6F3EC; }
 
 
@@ -1746,17 +1746,17 @@
 .learning-principles { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 48px; border-top: 1px solid #555857; border-bottom: 1px solid #555857; }
 .learning-principle { padding: 28px 26px 28px 0;
   &:not(:first-child) { border-left: 1px solid #555857; padding-left: 26px; }
-  b { display: block; color: #D7C8B7; font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-  p { font-size: 15px; line-height: 1.85; color: #C5BDB3; }
+  b { display: block; color: var(--text-inverse); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  p { font-size: 15px; line-height: 1.85; color: var(--text-inverse); }
 }
 
 .learning-journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 64px 0 24px; counter-reset: journey; }
 .journey-node { position: relative; padding: 44px 20px 0 0; counter-increment: journey;
-  &::before { content: counter(journey, decimal-leading-zero); position: absolute; top: 0; left: 0; color: #D7C8B7; font-size: 13px; font-weight: 800; letter-spacing: 0.12em; }
+  &::before { content: counter(journey, decimal-leading-zero); position: absolute; top: 0; left: 0; color: var(--brand-accent); font-size: 13px; font-weight: 800; letter-spacing: 0.12em; }
   &::after { content: ''; position: absolute; top: 10px; left: 34px; right: 16px; height: 1px; background: #77756D; }
   &:last-child::after { display: none; }
   h3 { font-size: 18px; font-weight: 600; line-height: 1.45; margin-bottom: 7px; }
-  p { font-size: 15px; line-height: 1.85; color: #C5BDB3; }
+  p { font-size: 15px; line-height: 1.85; color: var(--text-inverse); }
 }
 
 /* ===== 学习护照：直接渲染 PassportApp 组件（样式复用全局 passport.css 的 pp-* 规则） ===== */
