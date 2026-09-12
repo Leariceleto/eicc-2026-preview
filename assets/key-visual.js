@@ -1,7 +1,7 @@
 /* Default to the confirmed river artwork; explicit parameters retain design comparisons. */
 (function(){
   'use strict';
-  var choices=['planet','river','original'];
+  var choices=['planet','river','river-previous','original'];
   var selected=new URLSearchParams(location.search).get('visual');
   if(choices.indexOf(selected)===-1)selected='river';
   document.documentElement.dataset.keyVisual=selected;

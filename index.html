@@ -889,8 +889,8 @@
 </style>
 <link rel="stylesheet" href="assets/passport.css">
 <link rel="stylesheet" href="assets/account.css?v=20260911-service">
-<link rel="stylesheet" href="assets/key-visual.css?v=20260911-mobile-updated">
-<script src="assets/key-visual.js?v=20260911-mobile-updated"></script>
+<link rel="stylesheet" href="assets/key-visual.css?v=20260912-pc2-compare">
+<script src="assets/key-visual.js?v=20260912-pc2-compare"></script>
 <link rel="stylesheet" href="assets/brand-visual.css?v=20260912-bronze-release">
 <link rel="stylesheet" href="assets/frontend-aligned.css?v=20260912-bronze-release">
 <link rel="stylesheet" href="assets/footer.css?v=20260912">
@@ -1025,7 +1025,6 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="logo"><img class="nav-future-logo" src="assets/future-logo.png" width="1095" height="700" alt="未来"></div>
     <div class="nav-links">
       <a href="#about">大会概况</a>
       <a href="#tickets">票种权益</a>
@@ -1056,7 +1055,8 @@
     <span>主视觉对比</span>
     <div class="key-visual-options" aria-label="切换首页主视觉">
       <a href="?visual=planet" data-visual-choice="planet">主视觉PC1</a>
-      <a href="?visual=river" data-visual-choice="river">主视觉PC2</a>
+      <a href="?visual=river" data-visual-choice="river">主视觉PC2（新版）</a>
+      <a href="?visual=river-previous" data-visual-choice="river-previous">主视觉PC2（上一版）</a>
       <a href="?visual=original" data-visual-choice="original">原版</a>
     </div>
   </div>
@@ -1073,7 +1073,15 @@
     <!-- Updated PC2 artwork; retain the existing mobile source. -->
     <picture class="key-visual-river-picture" aria-hidden="true">
       <source media="(max-width:760px)" srcset="assets/hero-mobile-20260911.png" width="4500" height="8000">
-      <img src="assets/hero-pc2-16x9.png" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
+      <img src="assets/hero-pc2-16x9.png?v=designer-20260912" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/05</span><span>中国 · 广州</span></div>
+  </template>
+  <template id="key-visual-river-previous">
+    <!-- Previous PC2 artwork retained for comparison. -->
+    <picture class="key-visual-river-picture" aria-hidden="true">
+      <source media="(max-width:760px)" srcset="assets/hero-mobile-20260911.png" width="4500" height="8000">
+      <img src="assets/hero-pc2-previous-16x9.png" width="3840" height="2160" alt="" fetchpriority="high" decoding="async">
     </picture>
     <div class="key-visual-river-date" aria-hidden="true"><span>2026.12/01 - 12/05</span><span>中国 · 广州</span></div>
   </template>

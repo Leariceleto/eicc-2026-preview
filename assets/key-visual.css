@@ -10,21 +10,21 @@
 .key-visual-options a:focus-visible{outline:2px solid #2743e0;outline-offset:2px;}
 html[data-key-visual="original"] .hero{padding-top:0;}
 html[data-key-visual="original"] .hero>.wrap{padding-top:70px;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero{--kv-base:#211a33;background:var(--kv-base);padding:0;color:#fff;}
-html[data-key-visual="river"] .hero{--kv-base:#071014;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero{--kv-base:#211a33;background:var(--kv-base);padding:0;color:#fff;}
+html[data-key-visual^="river"] .hero{--kv-base:#071014;}
 /* Keep the sticky navigation in its original DOM location and overlap the artwork only on home. */
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-future-logo{filter:none;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body:not(.on-account-page)>nav{margin-bottom:-65px;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page)>nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent;box-shadow:none;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-links>a:not(.nav-cta){color:#f6f3ec;text-shadow:0 1px 5px rgba(0,0,0,.7);}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-links>a:not(.nav-cta):hover{background:rgba(255,255,255,.14);}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-cta[data-open-registration]{background:#f6f3ec;color:#17160f!important;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-cta[data-open-registration]:hover{background:#e6e3db!important;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-burger{background:transparent;border-color:rgba(246,243,236,.5);}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-burger span{background:#f6f3ec;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-links :focus-visible{outline:2px solid #e8c36a;outline-offset:3px;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero::before,
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-grid-lines{display:none;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-future-logo{filter:none;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body:not(.on-account-page)>nav{margin-bottom:-65px;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page)>nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent;box-shadow:none;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-links>a:not(.nav-cta){color:#f6f3ec;text-shadow:0 1px 5px rgba(0,0,0,.7);}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-links>a:not(.nav-cta):hover{background:rgba(255,255,255,.14);}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-cta[data-open-registration]{background:#f6f3ec;color:#17160f!important;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-cta[data-open-registration]:hover{background:#e6e3db!important;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-burger{background:transparent;border-color:rgba(246,243,236,.5);}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-burger span{background:#f6f3ec;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) body.kv-nav-over-hero:not(.on-account-page) .nav-links :focus-visible{outline:2px solid #e8c36a;outline-offset:3px;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero::before,
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-grid-lines{display:none;}
 /* The artwork owns the first screen; comparison and content start below it. */
 .key-visual-stage{position:relative;isolation:isolate;height:100vh;height:100dvh;overflow:hidden;}
 .key-visual-media,.key-visual-picture,.key-visual-picture img{display:block;position:absolute;inset:0;width:100%;height:100%;}
@@ -43,20 +43,20 @@ html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-grid-lines{d
 /* Restore the previously approved native extension, not a generated or stretched backdrop.
    The opaque original remains on top; both layers share the same artwork scale. */
 @media(min-width:761px) and (min-aspect-ratio:16/9){
-  html[data-key-visual="river"] .key-visual-media::before{content:"";position:absolute;inset:0;background:url("kv-river-web-native-extended-desktop.webp") center/auto 100% no-repeat;pointer-events:none;}
+  html[data-key-visual^="river"] .key-visual-media::before{content:"";position:absolute;inset:0;background:url("kv-river-web-native-extended-desktop.webp") center/auto 100% no-repeat;pointer-events:none;}
 }
 .key-visual-river-date{position:absolute;z-index:1;left:0;right:0;bottom:116px;display:flex;justify-content:center;align-items:center;gap:28px;padding:0 20px;margin:0;color:#f6f3ec;font-size:clamp(16px,1.55vw,24px);font-family:"Songti SC","STSong",serif;text-shadow:0 2px 8px rgba(0,0,0,.65);}
 .key-visual-river-date span+span{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:.82em;font-weight:700;}
 /* Keep the semantic heading available to assistive technology. */
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero>.wrap{position:static;height:0;padding:0;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero h1,
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero [data-state-theme],
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-meta{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0!important;}
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero [data-state-copy],
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-eyebrow,
-html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-meta .chip:last-child{display:none!important;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero>.wrap{position:static;height:0;padding:0;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero h1,
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero [data-state-theme],
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-meta{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0!important;}
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero [data-state-copy],
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-eyebrow,
+html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-meta .chip:last-child{display:none!important;}
 @media(max-width:760px){
-  html:is([data-key-visual="planet"],[data-key-visual="river"]) body:not(.on-account-page)>nav{margin-bottom:-57px;}
+  html:is([data-key-visual="planet"],[data-key-visual^="river"]) body:not(.on-account-page)>nav{margin-bottom:-57px;}
   .key-visual-switch{min-height:48px;gap:8px;padding:7px 10px;font-size:11px;}
   .key-visual-options{gap:0;}
   .key-visual-options a{padding:7px 10px;font-size:12px;}
@@ -67,14 +67,14 @@ html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero-meta .chip:l
   /* Fill the phone viewport proportionally; crop only the portrait's side background. */
   .key-visual-river-picture img{object-fit:cover;}
   /* Keep buttons above the portrait date. */
-  html[data-key-visual="river"] .key-visual-stage .hero-actions{margin:0;}
-  html[data-key-visual="river"] .key-visual-stage .hero-actions .btn{min-height:44px;padding:10px 12px;}
+  html[data-key-visual^="river"] .key-visual-stage .hero-actions{margin:0;}
+  html[data-key-visual^="river"] .key-visual-stage .hero-actions .btn{min-height:44px;padding:10px 12px;}
 }
 @media(prefers-reduced-motion:reduce){.key-visual-stage .btn{transition:none;transform:none!important;}}
 /* Fill the desktop viewport with the expanded 16:9 artwork. */
 @media(min-width:761px){
-  html:is([data-key-visual="planet"],[data-key-visual="river"]) .hero{--kv-base:#03070e;}
-  html[data-key-visual="river"] .key-visual-media::before{content:none;}
+  html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero{--kv-base:#03070e;}
+  html[data-key-visual^="river"] .key-visual-media::before{content:none;}
   .key-visual-picture img,.key-visual-river-picture img{object-fit:cover;object-position:center;}
 }
 

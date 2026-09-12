@@ -14,11 +14,11 @@ test('countdown is removed from every homepage variant and no update loop remain
   assert.match(source, /originalHost\.appendChild\(actions\)/);
 });
 
-test('desktop PC2 hero uses expanded artwork in a viewport-height stage', () => {
+test('desktop PC2 hero uses supplied artwork in a viewport-height stage', () => {
   const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
   const css = fs.readFileSync(path.join(__dirname, '../assets/key-visual.css'), 'utf8');
   const template = html.match(/<template id="key-visual-river">([\s\S]*?)<\/template>/)[1];
-  assert.match(template, /hero-pc2-16x9\.png" width="3840" height="2160"/);
+  assert.match(template, /hero-pc2-16x9\.png\?v=designer-20260912" width="3840" height="2160"/);
   assert.doesNotMatch(template, /kv-river-designer-pc/);
   assert.doesNotMatch(template, /key-visual-river-lettering|background-desktop/);
   const desktop = css.split('@media(max-width:760px)')[0];
@@ -46,6 +46,7 @@ for (const [search, expected] of [
   ['?visual=', 'river'],
   ['?visual=unknown', 'river'],
   ['?visual=river', 'river'],
+  ['?visual=river-previous', 'river-previous'],
   ['?visual=planet', 'planet'],
   ['?visual=original', 'original'],
 ]) {
