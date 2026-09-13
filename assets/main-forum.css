@@ -37,3 +37,6 @@
  #deep .program-deep{margin-top:32px;padding:16px;}
  #deep .deep-coming-soon{margin-top:32px;padding:48px 20px;}
 }
+
+#agenda h2.program-intro-title{font-family:"Songti SC","STSong","Noto Serif SC",serif;font-size:40px;font-weight:600;line-height:1.35;letter-spacing:.005em;margin-bottom:14px;}
+@media(max-width:860px){#agenda h2.program-intro-title{font-size:30px;line-height:1.35;}}
