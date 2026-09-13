@@ -7,9 +7,9 @@
   if (!root || !M) return;
   var context = {identity:'combo', phase:'prep', assessment:true};
   var tabs = {path:'我的学习路径', records:'学习任务与记录', organization:'我的学习组织', outcomes:'学习成果'};
-  var kinds = {forum:'主论坛',subforum:'分论坛',offsite:'场外深研课',expo:'方案展交流',fishbowl:'鱼缸对话',evening:'晚自习 · 交个朋友',ai:'AI共创',paper:'纸质笔记',other:'其他学习'};
+  var kinds = {forum:'年会议程',subforum:'分论坛',offsite:'场外深研课',expo:'方案展交流',fishbowl:'鱼缸对话',evening:'晚自习 · 交个朋友',ai:'AI共创',paper:'纸质笔记',other:'其他学习'};
   var communityThemes = ['下一代学生','下一代学习','下一代课程','下一代技术','下一代校园','下一代教师','下一代学校'];
-  var names = {main:'主论坛',combo:'主论坛＋深研课',expo:'独立方案展',online:'线上参会'};
+  var names = {main:'年会议程',combo:'年会议程＋深研课',expo:'独立方案展',online:'线上参会'};
   var days = ['12-01','12-02','12-03','12-04','12-05'];
   var view = 'path', day = '12-01', filter = 'all', message = '', modal = null, recorder = null, stream = null, recordingTimer = null, attachment = null, audioPending = false;
   var state = restore(context.identity) || M.create(context.identity, true);
@@ -47,7 +47,7 @@
     if(!route) return '<div class="pp-grid">'+card('从你带来的问题开始','<p>完成一份简短自评，生成与你的关注方向及参会权益相符的学习路径。</p><div class="pp-actions">'+button('assessment','开始自评')+'</div><p class="pp-help">本预览用 5 项输入演示流程，正式问卷由内容团队确认。不打分，不贴人格标签。</p>')+card('也可以先看、先记','<p>暂未自评不会挡住已有权益内的学习。你可以先查看公开内容，留下自己的记录。</p><div class="pp-actions"><a class="pp-button secondary" href="'+(context.identity==='online'?'#account/replay':context.identity==='expo'?'#expo':'#agenda')+'">查看学习内容</a>'+jump('records','开始记录')+'</div>','blue')+'</div>';
     var free = state.records.filter(function(r){return r.branch==='free';});
     return '<div class="pp-summary"><div><span class="pp-help">我带来的真实问题</span><b>'+esc(route.question)+'</b><p>关注方向：'+esc(route.focus)+' · '+esc(names[context.identity])+'</p></div>'+pill('学习路径已生成')+'</div><div class="pp-grid">'+
-      card('我的学习地图','<p class="pp-help">以会前自评为起点；方案展可在开放时段穿插探索，不要求依次打卡。</p>'+(route.focusSession?'<div class="pp-quote"><b>与你的关注方向相关</b><p>'+esc(route.focusSession.date)+' · '+esc(route.focusSession.title)+'</p>'+button('focus-session','查看对应主论坛内容','quiet small')+'</div>':'')+'<div class="pp-route">'+route.stops.map(function(s,i){return '<div class="pp-stop"><span class="pp-step">'+String(i+1).padStart(2,'0')+'</span><div><b>'+esc(s.title)+'</b><p>'+esc(s.copy)+'</p><div class="pp-actions">'+(s.href?'<a class="pp-link" href="'+esc(s.href)+'">查看内容 ↗</a>':'')+button('record','留一条记录','quiet small','data-kind="'+esc(s.kind||'other')+'"')+'</div></div></div>';}).join('')+'</div><p class="pp-help">这里的推荐不代替正式选课；分论坛每天最多 1 场，场外深研课最多 1 场。</p>')+
+      card('我的学习地图','<p class="pp-help">以会前自评为起点；方案展可在开放时段穿插探索，不要求依次打卡。</p>'+(route.focusSession?'<div class="pp-quote"><b>与你的关注方向相关</b><p>'+esc(route.focusSession.date)+' · '+esc(route.focusSession.title)+'</p>'+button('focus-session','查看对应年会议程内容','quiet small')+'</div>':'')+'<div class="pp-route">'+route.stops.map(function(s,i){return '<div class="pp-stop"><span class="pp-step">'+String(i+1).padStart(2,'0')+'</span><div><b>'+esc(s.title)+'</b><p>'+esc(s.copy)+'</p><div class="pp-actions">'+(s.href?'<a class="pp-link" href="'+esc(s.href)+'">查看内容 ↗</a>':'')+button('record','留一条记录','quiet small','data-kind="'+esc(s.kind||'other')+'"')+'</div></div></div>';}).join('')+'</div><p class="pp-help">这里的推荐不代替正式选课；分论坛每天最多 1 场，场外深研课最多 1 场。</p>')+
       '<div>'+card('自由学习也有自己的位置','<p>临时遇到的人、讨论与方案，可以单独记录。</p><div class="pp-actions">'+button('record','记录一次自由探索','secondary','data-branch="free"')+'</div><div class="pp-list">'+(free.length?free.slice(-3).map(function(r){return '<div><b>'+esc(r.title)+'</b><p>'+esc(kinds[r.kind]||r.kind)+' · '+esc(r.day)+'</p></div>';}).join(''):'<p>还没有自由学习记录。</p>')+'</div>','blue')+card('把每一次学习带回来','<div class="pp-metrics"><div><b>'+state.records.length+'</b><span>学习记录</span></div><div><b>'+free.length+'</b><span>自由探索</span></div><div><b>'+state.org.posts.filter(function(p){return p.source==='self';}).length+'</b><span>知识接力</span></div></div><div class="pp-actions">'+jump('records','查看任务与记录')+button('assessment-read','查看自评','quiet small')+'</div>')+'</div></div>';
   }
   function recordMarkup(r, compact) {
@@ -150,14 +150,14 @@
     if(name==='view'){setView(el.dataset.value);return;}
     if(!registered()&&name!=='paper')return;
     if(name==='assessment')return assessmentDialog();
-    if(name==='focus-session'&&state.path&&state.path.focusSession){var agendaButton=document.querySelector('[data-day="'+state.path.focusSession.dayId+'"]');if(agendaButton)agendaButton.click();location.hash='agenda';return;}
+    if(name==='focus-session'&&state.path&&state.path.focusSession){var agendaTarget=document.getElementById(state.path.focusSession.dayId);location.hash=agendaTarget?agendaTarget.id:'agenda';return;}
     if(name==='record')return recordDialog(el&&el.dataset.kind,el&&el.dataset.branch);
     if(name==='daily')return dailyDialog();
     if(name==='relay')return relayDialog();
     if(name==='plan')return planDialog();
     if(name==='solution')return solutionDialog(id);
     if(name==='report')return openDialog('我的个人学习报告',reportHTML());
-    if(name==='themes')return openDialog('七个主题侧面 · 共创任务预览','<p>会议讨论确定以大会的七个主题侧面组织共创，每个主题社区共同形成一份大会报告。</p><p class="pp-help">以下按当前主论坛主题呈现；正式任务书、参与名额与入驻嘉宾待公布，不在此更改报名归属。</p><div class="pp-list">'+communityThemes.map(function(theme){return '<div><b>'+theme+'</b><p>围绕这一主题，整理大会观点、同伴经验与新的问题，共创主题报告。</p></div>';}).join('')+'</div>');
+    if(name==='themes')return openDialog('七个主题侧面 · 共创任务预览','<p>会议讨论确定以大会的七个主题侧面组织共创，每个主题社区共同形成一份大会报告。</p><p class="pp-help">以下按当前年会议程主题呈现；正式任务书、参与名额与入驻嘉宾待公布，不在此更改报名归属。</p><div class="pp-list">'+communityThemes.map(function(theme){return '<div><b>'+theme+'</b><p>围绕这一主题，整理大会观点、同伴经验与新的问题，共创主题报告。</p></div>';}).join('')+'</div>');
     if(name==='assessment-read')return openDialog('我的会前自评',state.assessment?'<div class="pp-list">'+Object.keys(state.assessment).map(function(k){return '<p><b>'+esc(({school:'学校',role:'工作角色',focus:'关注方向',question:'真实问题',need:'希望获得'})[k]||k)+'</b><br>'+esc(state.assessment[k])+'</p>';}).join('')+'</div>':empty('尚未填写','完成自评后，在这里查看学习起点。'));
     if(name==='share'){save(M.shareRecord(state,id),'已选择这条记录进入知识接力（本地预览）。');return;}
     if(name==='like'){save(M.toggleLike(state,id),'已更新本地点赞，不会自动发放奖励。');return;}
@@ -171,11 +171,11 @@
     if(name==='export-plan'){var p=state.plan;download('学校100天行动计划.md','# '+p.school+' · 100 天行动计划（本地草稿）\n\n问题：'+p.problem+'\n目标：'+p.goal+'\n分工：'+p.owner+'\n\n'+p.steps.map(function(s){return '## '+s.day+' 天\n'+s.action+'\n成果依据：'+s.evidence;}).join('\n\n')+'\n\n'+p.updates.map(function(u){return u.date+' '+u.text;}).join('\n'));return;}
     if(name==='reset')return openDialog('选择体验方式',form('<p>会覆盖当前票种的本地护照。其他票种预览不受影响，已有内容可先导出备份。</p>'+label('体验方式','<select name="mode"><option value="personal">从空白护照开始</option><option value="sample">查看完整样例</option></select>')+'<label class="pp-check"><input type="checkbox" required>确认替换当前本地草稿</label>','确认切换'),function(fd){var next=M.create(context.identity,value(fd,'mode')==='sample');view='path';closeDialog();save(next,'已切换体验方式。');});
     if(name==='vote'){
-      openDialog('主论坛返场投票 · 交互样例','<p>演讲结束时扫描嘉宾 PPT 二维码参与投票，当日得票最高的嘉宾返场分享 10 分钟。</p><p class="pp-help">本预览用 A／B 代表示例候选人，只记录本机选择，不代表真实投票规则、嘉宾或票数。</p><div class="pp-actions">'+['a','b'].map(function(c){return '<button type="button" class="pp-button secondary" data-vote="'+c+'">'+(state.ballots&&state.ballots[day]===c?'已选择 · ':'选择 · ')+'嘉宾 '+c.toUpperCase()+'（样例）</button>';}).join('')+'</div>');
+      openDialog('年会议程返场投票 · 交互样例','<p>演讲结束时扫描嘉宾 PPT 二维码参与投票，当日得票最高的嘉宾返场分享 10 分钟。</p><p class="pp-help">本预览用 A／B 代表示例候选人，只记录本机选择，不代表真实投票规则、嘉宾或票数。</p><div class="pp-actions">'+['a','b'].map(function(c){return '<button type="button" class="pp-button secondary" data-vote="'+c+'">'+(state.ballots&&state.ballots[day]===c?'已选择 · ':'选择 · ')+'嘉宾 '+c.toUpperCase()+'（样例）</button>';}).join('')+'</div>');
       modal.querySelectorAll('[data-vote]').forEach(function(b){b.addEventListener('click',function(){var next=structuredClone(state);next.ballots=next.ballots||{};next.ballots[day]=b.dataset.vote;closeDialog();save(next,'已记录返场选择样例；未提交真实投票。');});});return;
     }
     if(name==='paper'||name==='scan'){
-      openDialog(name==='paper'?'纸质护照，与线上档案相连':'选择你的学习场景','<p class="pp-help">纸质手册提供统一地图、场次与笔记区，扫码进入自己的线上护照。本预览用按钮代替正式二维码。</p><div class="pp-board">'+[['path','个性化学习地图'],['paper','拍照补录纸质笔记'],['expo','记录展位交流'],['relay','进入班级／社区共创'],['daily','整理每日小结'],['report','查看学习报告'],['fishbowl','鱼缸对话记录'],['evening','晚自习 · 交个朋友'],['ai','AI共创体验记录'],['vote','主论坛返场投票']].map(function(x){return '<button type="button" class="pp-button secondary" data-entry="'+x[0]+'">'+x[1]+'</button>';}).join('')+'</div><div class="pp-list"><p><b>鱼缸对话</b><br>在指定交流区追问、认识同行，愿意留下的收获可记为自由学习。</p><p><b>晚自习 · 交个朋友</b><br>在组委会合作酒店开展，面向通过组委会预订相应酒店的参会者；可交流、交朋友，也可做学校内部复盘，不设强制学术任务。</p><p><b>AI共创</b><br>现场体验一体化平台的智能体等能力，愿意保留的成果可进入自己的学习记录。</p></div>');
+      openDialog(name==='paper'?'纸质护照，与线上档案相连':'选择你的学习场景','<p class="pp-help">纸质手册提供统一地图、场次与笔记区，扫码进入自己的线上护照。本预览用按钮代替正式二维码。</p><div class="pp-board">'+[['path','个性化学习地图'],['paper','拍照补录纸质笔记'],['expo','记录展位交流'],['relay','进入班级／社区共创'],['daily','整理每日小结'],['report','查看学习报告'],['fishbowl','鱼缸对话记录'],['evening','晚自习 · 交个朋友'],['ai','AI共创体验记录'],['vote','年会议程返场投票']].map(function(x){return '<button type="button" class="pp-button secondary" data-entry="'+x[0]+'">'+x[1]+'</button>';}).join('')+'</div><div class="pp-list"><p><b>鱼缸对话</b><br>在指定交流区追问、认识同行，愿意留下的收获可记为自由学习。</p><p><b>晚自习 · 交个朋友</b><br>在组委会合作酒店开展，面向通过组委会预订相应酒店的参会者；可交流、交朋友，也可做学校内部复盘，不设强制学术任务。</p><p><b>AI共创</b><br>现场体验一体化平台的智能体等能力，愿意保留的成果可进入自己的学习记录。</p></div>');
       modal.querySelectorAll('[data-entry]').forEach(function(b){b.addEventListener('click',function(){var entry=b.dataset.entry;closeDialog();if(entry==='path')setView('path');else if(['paper','expo','fishbowl','evening','ai'].indexOf(entry)>-1)recordDialog(entry,['fishbowl','evening','ai'].indexOf(entry)>-1?'free':undefined);else action(entry);});});return;
     }
   }

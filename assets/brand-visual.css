@@ -21,8 +21,8 @@ body>nav{background:var(--bg-primary);backdrop-filter:none;-webkit-backdrop-filt
 .nav-links a{font-weight:600;border-radius:6px;}
 .nav-links a:hover{background:var(--surface-hover);color:var(--brand-accent);}
 .nav-cta{border-radius:6px!important;}
-.nav-cta.acct{background:var(--brand-accent);}
-.nav-cta.acct:hover{background:#89644C!important;}
+.nav-cta.acct,.nav-cta[data-open-registration]{background:var(--brand-accent);}
+.nav-cta.acct:hover,.nav-cta[data-open-registration]:hover{background:#89644C!important;}
 .mobile-menu{background:var(--surface);backdrop-filter:none;border-radius:0 0 8px 8px;box-shadow:0 12px 30px rgba(26,31,34,.1);}
 .mobile-menu a,.nav-burger{border-radius:6px;}
 .key-visual-stage .btn{border-radius:6px;}

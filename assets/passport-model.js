@@ -64,11 +64,11 @@
     var forumCopy = focusSession ? '根据你的关注方向，可重点关注「' + focusSession.title + '」，记录与本校问题有关的理解。' : '带着会前问题参与共同学习，记录与本校情境有关的观点。';
     function stop(key, title, copy, kind, href){ stops.push({id:key,title:title,copy:copy,kind:kind,href:href}); }
     if(identity === 'online'){
-      stop('online-forum','主论坛直播与回看',forumCopy + ' 在直播与回看入口观看对应内容。','forum','#account/replay');
+      stop('online-forum','年会议程直播与回看',forumCopy + ' 在直播与回看入口观看对应内容。','forum','#account/replay');
       stop('online-recording','分论坛与场外深研课录播','从已开放的录播中选择与关注方向相关的内容，留下自己的理解与后续问题。','subforum','#account/replay');
     }else{
       if(identity !== 'expo'){
-        stop('forum','主论坛',forumCopy,'forum','#agenda');
+        stop('forum','年会议程',forumCopy,'forum','#agenda');
         stop('subforum','分论坛','在已选分论坛中比较做法与实施条件，围绕共同问题深入讨论；每天最多选择一场。','subforum','#account/forum');
       }
       stop('expo','云涌集 · 方案展','围绕“' + answers.focus + '”寻找学校创新方案，记录适用条件与需要向方案方核实的问题。','expo','#expo');
@@ -87,7 +87,7 @@
     state = completeAssessment(state,{question:'怎样让学生在真实问题中更主动地学习？',focus:'学生学习',need:'了解可以在学校小范围试行的做法',school:'示例学校',role:'学校教师'});
     state.org.theme = '学生主动学习（主题示例）';
     var samples = identity === 'online' ? [
-      {id:'sample-record-1',day:'12-01',kind:'forum',title:'先听学生怎样描述问题',text:'看主论坛时，我记下了一个提醒：设计活动前，可以先问学生想解决什么，而不急着给他们一份任务单。',branch:'main',question:'学生提出的问题，怎样转化为能一起推进的任务？',nextStep:'回校后先访谈几位学生，保留他们原来的表达。'},
+      {id:'sample-record-1',day:'12-01',kind:'forum',title:'先听学生怎样描述问题',text:'看年会议程时，我记下了一个提醒：设计活动前，可以先问学生想解决什么，而不急着给他们一份任务单。',branch:'main',question:'学生提出的问题，怎样转化为能一起推进的任务？',nextStep:'回校后先访谈几位学生，保留他们原来的表达。'},
       {id:'sample-record-2',day:'12-02',kind:'subforum',title:'为小范围试行留出复盘时间',text:'从录播里记下的方法需要放回本校情境再判断。我想先把实施条件列清楚，再和同事讨论。',branch:'main',question:'我们能先从哪个小任务开始？',nextStep:'和本校伙伴一起列出可试行的条件。'},
       {id:'sample-record-3',day:'12-02',kind:'other',title:'一次延伸阅读带来的追问',text:'顺着今天的问题，额外读了一份资料。我还不能判断它是否适合学校，先把疑问记下来。',branch:'free',question:'怎样观察学生是否真正参与了决策？',nextStep:''}
     ] : [

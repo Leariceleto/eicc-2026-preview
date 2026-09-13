@@ -18,7 +18,7 @@
     if(!explicitRole) account=M.create('none','combo',false);
     account.loggedIn=initialIdentity!=='anonymous';
   }
-  var names = {main:'主论坛', combo:'主论坛＋深研课', online:'线上参会', expo:'独立方案展'};
+  var names = {main:'年会议程', combo:'年会议程＋深研课', online:'线上参会', expo:'独立方案展'};
   var phases = {registration:'报名期', prep:'会前准备', live:'会议进行', post:'会后'};
   var prices = {main:'2,800', combo:'2,900', online:'1,560', expo:'300'};
   var claimed = {}, redeemed = {}, notice = '', passportRoute = null;
@@ -64,7 +64,7 @@
   function personalOverview(){
     if(!registered())return noData('还没有本人的参会报名','可以为自己报名，也可以为学校同事办理报名。已有代报名记录的参会者，请使用报名时填写的本人账号查询。',action('#tickets','查看参会方式')+action('#account/help','联系会务',true));
     var p=M.self(account), forum=forumRight(), selections=account.selections[p.id];
-    var seat=forum?(stageOpen()?'A 区 · 08 排 · 16 座':'座位待公布'):state.identity==='online'?'线上参会，无需现场座位':'方案展通行，无主论坛座位';
+    var seat=forum?(stageOpen()?'A 区 · 08 排 · 16 座':'座位待公布'):state.identity==='online'?'线上参会，无需现场座位':'方案展通行，无年会议程座位';
     var top='<div class="hub-top"><div class="hub-ticket"><div class="hub-label">我的报名'+status(phases[state.phase])+'</div><h2>'+names[state.identity]+'</h2><p>第十三届中国教育创新年会</p><p>2026.12.01–12.04 · 中国广州</p>'+link('registration','查看我的参会权益')+'</div><div class="hub-seat"><div class="hub-label">'+(state.identity==='online'?'我的线上参会':'我的座位与入场')+'</div><h2>'+seat+'</h2><p>'+(forum&&stageOpen()?(state.checkin?'已签到（示例）':'未签到 · 座位号为演示样例'):'按本人参会权益查看对应信息')+'</p>'+link(state.identity==='online'?'replay':'seat',state.identity==='online'?'查看直播与回放':'查看入场信息')+'</div></div>';
     var arr='<div class="hub-group"><div class="hub-group-head"><h2>我的参会安排</h2><span>选课、出行与住宿</span></div><div class="hub-arrangements">';
     arr+=card('forum','我的分论坛',status(forum?((selections['12-02']?1:0)+(selections['12-03']?1:0))+' 天已选':'当前权益不包含',forum&&!!selections['12-02'])+'<p>'+M.courseName(account,p.id,'12-02')+'</p><p>'+M.courseName(account,p.id,'12-03')+'</p>');
@@ -75,7 +75,7 @@
     learning+=card('passport','我的学习护照','<p>学习任务、个人记录与自由探索</p>');
     learning+=card('organization','我的学习组织','<p>查看班级或主题学习社区</p>');
     learning+=card('outcomes','我的学习成果','<p>个人学习报告与学校 100 天行动</p>')+'</div></div>';
-    var detailRows=[['参会人',p.name],['单位',p.school||'--'],['联系电话',p.phone],['主论坛座位',seat],['报名订单',p.orderId],['场外深研课',M.courseName(account,p.id,'offsite')]];
+    var detailRows=[['参会人',p.name],['单位',p.school||'--'],['联系电话',p.phone],['年会议程座位',seat],['报名订单',p.orderId],['场外深研课',M.courseName(account,p.id,'offsite')]];
     top='<div class="hub-section"><div class="hub-section-head"><div><h2>我的参会信息</h2><p>本人报名、座位与入场状态</p></div><span class="hub-section-hint">第十三届中国教育创新年会</span></div><div class="personal-card"><div class="personal-main"><div><span class="personal-label">我的报名</span><h3>'+names[state.identity]+'</h3><p>第十三届中国教育创新年会</p><p>2026.12.01–12.04 · 中国广州</p></div><span class="personal-checkin">'+phases[state.phase]+' · '+(state.checkin?'已签到':'尚未签到')+'</span></div><div class="personal-details">'+detailRows.map(function(r){return '<div><span class="detail-label">'+r[0]+'</span><div class="detail-value">'+esc(r[1])+'</div></div>';}).join('')+'</div></div></div>';
     return top+arr;
   }
@@ -156,7 +156,7 @@
   function courseContent(p,kind,proxy){
     if(!M.active(account,p))return noData('当前没有有效选课权益','此报名为'+M.orderStates[M.orderFor(account,p).status]+'，可查询记录，不能选课。');
     if(kind==='forum'&&!M.hasForum(p))return noData('当前参会权益不包含现场分论坛','线上参会可按权益观看开放后的录播；独立方案展不含分论坛选课。');
-    if(kind==='offsite'&&p.ticket!=='combo')return noData('尚未获得场外深研课选课资格','仅购买主论坛的参会者，需另行选购后选课。',action('#deep','查看场外深研课说明'));
+    if(kind==='offsite'&&p.ticket!=='combo')return noData('尚未获得场外深研课选课资格','仅购买年会议程的参会者，需另行选购后选课。',action('#deep','查看场外深研课说明'));
     return (kind==='forum'?M.dates:['offsite']).map(function(d){return selectionBox(p,d,proxy);}).join('')+note('场次名称均为交互示例，不代表正式议程、余量或真实选课结果。');
   }
   function managedList(){
@@ -190,7 +190,7 @@
     var tabs=[['registration','参会资料'],['forum','分论坛'],['offsite','场外深研课'],['hotel','酒店'],['transfer','更换参会人']];
     var tab=forceTransfer?'transfer':proxyTab;
     var body='';
-    if(tab==='registration')body=box('参会信息',fields([['参会人',esc(p.name)+' · '+esc(p.phone)],['参会方式',names[p.ticket]],['报名状态',M.orderStates[M.orderFor(account,p).status]],['座位信息',M.active(account,p)&&M.hasForum(p)?(stageOpen()?'A 区 · 示例座位，正式分配后公布':'待公布'):'当前没有主论坛座位'],['关联订单',link('orders?order='+p.orderId,p.orderId)]]));
+    if(tab==='registration')body=box('参会信息',fields([['参会人',esc(p.name)+' · '+esc(p.phone)],['参会方式',names[p.ticket]],['报名状态',M.orderStates[M.orderFor(account,p).status]],['座位信息',M.active(account,p)&&M.hasForum(p)?(stageOpen()?'A 区 · 示例座位，正式分配后公布':'待公布'):'当前没有年会议程座位'],['关联订单',link('orders?order='+p.orderId,p.orderId)]]));
     if(tab==='forum'||tab==='offsite')body=courseContent(p,tab,true);
     if(tab==='hotel')body=p.hotel&&M.active(account,p)?box('住宿安排（示例）',fields([['入住人',esc(p.name)],['酒店与房型','协议酒店 · 大床房'],['入住日期','12 月 1 日至 12 月 4 日'],['预订状态','已确认（示例）']])):noData('暂无住宿安排','该参会人当前没有有效的关联住宿预订。');
     if(tab==='transfer')body=M.active(account,p)?box('更换参会人',entry('当前参会人',esc(p.name)+' · '+esc(p.phone))+entry('对应报名',names[p.ticket]+' · '+p.orderId)+entry('可衔接的内容','对应的参会资格与允许转移的选课安排；住宿是否可转移以实际预订规则为准。')+entry('保持不变','下单人、订单号、支付及发票归属。')+entry('不会转移','原参会人的学习护照、个人学习报告、未来币余额与兑换记录。'))+note('最晚 11 月 30 日可申请更换，具体规则以正式系统为准。本页只展示办理范围，不收集新参会人的真实资料、不提交更换。'):noData('当前报名不能更换参会人','待支付、已取消或已退款的报名不提供此操作。');
@@ -298,10 +298,10 @@
           '<div class="hub-detail-actions">'+action(platformRechargeUrl||platformMemberCenterUrl,platformRechargeUrl?'前往充值':'打开一体化平台会员中心',false,'target="_blank" rel="noopener noreferrer"')+action('#account/coins','返回未来币收支',true)+'</div>';
       case 'managed': return managedList();
       case 'proxy': return proxyContent(false);
-      case 'registration': return box('我的参会权益',fields([['参会人','我本人 · 138****6666（示例）'],['参会方式',names[state.identity]],['报名状态','有效报名（示例）'],['参会权益',state.identity==='online'?'主论坛直播及回看、分论坛及场外深研课录播回看':state.identity==='expo'?'方案展通行、学习护照与学习报告':'主论坛、每日分论坛选课、方案展、学习护照'+(state.identity==='combo'?'、1 场场外深研课':'')]]))+'<div class="hub-detail-actions">'+action('#account/forum','查看本人选课',true)+action('#account/hotel','查看本人住宿',true)+'</div>';
+      case 'registration': return box('我的参会权益',fields([['参会人','我本人 · 138****6666（示例）'],['参会方式',names[state.identity]],['报名状态','有效报名（示例）'],['参会权益',state.identity==='online'?'年会议程直播及回看、分论坛及场外深研课录播回看':state.identity==='expo'?'方案展通行、学习护照与学习报告':'年会议程、每日分论坛选课、方案展、学习护照'+(state.identity==='combo'?'、1 场场外深研课':'')]]))+'<div class="hub-detail-actions">'+action('#account/forum','查看本人选课',true)+action('#account/hotel','查看本人住宿',true)+'</div>';
       case 'seat':
         if(!onsite()) return noData('线上参会无需现场座位','可通过线上入口查看直播与回放。',action('#account/replay','查看线上参会'));
-        return box('入场信息',fields([['参会方式',names[state.identity]],['主论坛座位',forumRight()?(stageOpen()?'A 区 · 08 排 · 16 座（示例）':'待公布，分配后在此查看'):'当前参会权益不含主论坛座位'],['签到状态',state.checkin?'已签到（示例）':'未签到'],['现场通行',forumRight()?'主论坛与方案展':'方案展']]))+note('实际座位、会场及入场凭证以正式报名系统发布为准。此预览不生成可核验的入场码。')+'<div class="hub-detail-actions">'+action('#account/guide','查看服务信息',true)+'</div>';
+        return box('入场信息',fields([['参会方式',names[state.identity]],['年会议程座位',forumRight()?(stageOpen()?'A 区 · 08 排 · 16 座（示例）':'待公布，分配后在此查看'):'当前参会权益不含年会议程座位'],['签到状态',state.checkin?'已签到（示例）':'未签到'],['现场通行',forumRight()?'年会议程与方案展':'方案展']]))+note('实际座位、会场及入场凭证以正式报名系统发布为准。此预览不生成可核验的入场码。')+'<div class="hub-detail-actions">'+action('#account/guide','查看服务信息',true)+'</div>';
       case 'forum': return courseContent(M.self(account),'forum',false);
       case 'offsite': return courseContent(M.self(account),'offsite',false);
       case 'hotel': return onsite()&&stageOpen()?box('协议酒店 · 大床房（示例）',fields([['入住日期','2026 年 12 月 1 日'],['离店日期','2026 年 12 月 4 日 · 共 3 晚'],['预订状态','已确认（示例）'],['酒店地址','正式订单中展示所订酒店地址'],['入住凭证','正式预订成功后查看']]))+note('当前为住宿订单展示样例，酒店名称、地址及联系方式以实际预订为准。'):noData('暂无酒店订单','已预订的酒店、入住日期、房型和酒店联系方式将在这里显示。');
@@ -317,7 +317,7 @@
         return items.length?box('我的兑换记录',items.map(function(p){return entry(p.title,'已使用 '+p.coins+' 枚未来币 · '+(p.id==='resource'?'待领取电子资料':'待现场领取'),status('兑换成功',true));}).join(''))+note('正式兑换记录会展示电子资料入口、领取凭证或物流信息。此处为本次演示记录。'):noData('还没有兑换记录','兑换的方案、产品和领取进度都会保存在这里。',action('#account/exchange','去看看可兑换内容'));
       case 'favorites': return box('我的方案收藏',entry('学校空间创新方案（示例）','收藏的方案资料、交流记录及后续联系入口',status('已收藏',true)))+'<div class="hub-detail-actions">'+action('#expo','查看方案展',true)+'</div>';
       case 'invoice': return invoiceContent();
-      case 'replay': return state.identity==='expo'?noData('当前参会权益不含直播与回放','查看线上参会方式，可获得对应直播和回看内容。',action('#tickets','查看线上参会权益')):box('我的观看权益',fields([['主论坛',state.phase==='live'?'直播期间（预览）':state.phase==='post'?'回放开放阶段':'等待直播开放'],['分论坛与场外深研课','录播及回看'],['回看截止','2027 年 12 月 4 日'],['观看入口','正式开通后提供播放器入口']]))+'<div class="hub-detail-actions">'+action('#agenda','查看主论坛内容',true)+'</div>';
+      case 'replay': return state.identity==='expo'?noData('当前参会权益不含直播与回放','查看线上参会方式，可获得对应直播和回看内容。',action('#tickets','查看线上参会权益')):box('我的观看权益',fields([['年会议程',state.phase==='live'?'直播期间（预览）':state.phase==='post'?'回放开放阶段':'等待直播开放'],['分论坛与场外深研课','录播及回看'],['回看截止','2027 年 12 月 4 日'],['观看入口','正式开通后提供播放器入口']]))+'<div class="hub-detail-actions">'+action('#agenda','查看年会议程内容',true)+'</div>';
       case 'notices': return box('参会提醒',entry('选课提醒','分论坛每人每天最多选择 1 场；场外深研课最多选择 1 场。')+entry('出行提醒','会场、座位与集合信息以个人报名和选课通知为准。'));
       case 'guide': return serviceInformation();
       case 'profile': return box('参会人资料',fields([['姓名','参会老师（示例）'],['手机号','138****6666（示例）'],['学校','报名学校（示例）'],['参会方式',names[state.identity]]]))+note('正式登录后查看本人报名资料。本预览不保存个人信息。');

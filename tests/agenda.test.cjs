@@ -2,40 +2,49 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-
-const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+const root = path.join(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const source = JSON.parse(fs.readFileSync(path.join(root, 'content/main-forum-20260913.json'), 'utf8'));
 const agenda = html.match(/<section id="agenda"[\s\S]*?<\/section>/)[0];
-const panels = [...agenda.matchAll(/<div class="agenda-panel(?: active)?" id="(d[1-4])"([\s\S]*?)(?=<div class="agenda-panel|<p class="agenda-update-note")/g)];
+const deep = html.match(/<section id="deep"[\s\S]*?<\/section>/)[0];
+const onsite = deep.slice(deep.indexOf('<div class="program-body program-deep"'), deep.indexOf('<div class="deep-coming-soon"'));
+const program = agenda + onsite;
+const normalize = text => text.replace(/\s+/g, '');
+const decode = text => text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#x27;/g, "'");
 
-test('主论坛日程移到大会概况之后，历程图及手机重排逻辑移除', () => {
+test('年会议程保持年会概况之后、票种之前的唯一板块', () => {
   const ids = [...html.matchAll(/<section id="([^"]+)"/g)].map(m => m[1]);
   assert.deepEqual(ids.slice(0, 3), ['about', 'agenda', 'tickets']);
   assert.equal(ids.filter(id => id === 'agenda').length, 1);
-  assert.doesNotMatch(html, /class="about-history"|class="annual-timeline"|placeHistorySection|src="assets\/annual-history/);
-  assert.match(html, /class="history-video-slot"/);
 });
 
-test('四天议程与源文档 revision 5294 的条目数一致', () => {
-  assert.deepEqual(panels.map(p => p[1]), ['d1', 'd2', 'd3', 'd4']);
-  assert.deepEqual(panels.map(p => (p[2].match(/<li[ >]/g) || []).length), [16, 17, 19, 13]);
-  assert.equal((agenda.match(/class="agenda-panel active"/g) || []).length, 1);
+test('PDF 指定首尾范围的全部文字按原顺序进入年会议程和场内深研课，不含打印杂项', () => {
+  const paragraphs = [...program.matchAll(/<p(?: [^>]*)?>([\s\S]*?)<\/p>/g)].map(m => decode(m[1].replace(/<[^>]+>/g, '')));
+  assert.equal(source.raw_text_blocks[0], '生命是有限的。');
+  assert.equal(source.raw_text_blocks.at(-1), '北京市海淀工读学校');
+  assert.equal(normalize(paragraphs.join('')), normalize(source.raw_text_blocks.join('')));
+  assert.doesNotMatch(program, /此为临时预览链接|tempkey=|revision 5294/);
 });
 
-test('新版嘉宾归属、顺序及待定内容保留，旧报告不混入', () => {
-  const [d1, d2, d3, d4] = panels.map(p => p[2]);
-  for (const name of ['陈敏生', '安德烈亚斯·施莱歇尔', '叶语沛']) assert.ok(d1.includes(name));
-  assert.ok(d2.indexOf('俞正强') < d2.indexOf('席酉民'));
-  assert.ok(d2.includes('题目待定') && d2.includes('陈丽霞') && d2.includes('郑琰'));
-  for (const name of ['陈一帆', '侯明飞', '田俊', 'MacKenzie Price', '快刀青衣']) assert.ok(d3.includes(name));
-  for (const name of ['万玮', 'Asyia Kazmi', '高喆生', '2026中国学生创新节学生代表']) assert.ok(d4.includes(name));
-  for (const text of ['李若谷', '郑腾飞', 'TUMO', '他山之石', '用AI，把教师可外包的能力外包出去', '同意']) assert.ok(!agenda.includes(text));
-  assert.ok(!d2.includes('10分钟'));
-  assert.ok(d3.includes('10分钟'));
+test('全部议程图按原顺序引用且本地资源齐全', () => {
+  // The duplicate section title was removed at the user's request.
+  const images = source.items.filter(i => i.kind === 'image').slice(1);
+  assert.equal(images.length, 46);
+  assert.doesNotMatch(agenda, /program-section-heading/);
+  assert.deepEqual([...program.matchAll(/<img src="([^"]+)"/g)].map(m => m[1]), images.map(i => i.src));
+  images.forEach(i => assert.ok(fs.statSync(path.join(root, i.src)).size > 0, i.src));
 });
 
-test('日期按钮保留原锚点并暴露选中状态', () => {
-  for (let n = 1; n <= 4; n++) {
-    assert.ok(agenda.includes('data-day="d' + n + '" aria-controls="d' + n + '" aria-pressed="' + (n === 1) + '"'));
-    assert.ok(agenda.includes('aria-labelledby="agenda-tab-d' + n + '"'));
+test('全部议程连续展示，移除日期切换并保留学习护照锚点', () => {
+  assert.doesNotMatch(agenda, /data-day=|agenda-tab-|agenda-panel|class="tabs"/);
+  for (let n = 1; n <= 4; n++) assert.ok(agenda.includes('class="program-body" id="d' + n + '"'));
+  assert.doesNotMatch(agenda, /program-deep|场内深研课|北京市海淀工读学校/);
+  assert.match(agenda, /42\.webp[\s\S]*program-end-rule/);
+  assert.ok(onsite.includes('没有坏孩子，只有走不下去的路——专门学校的教育转化方法论'));
+  for (const id of ['deep-onsite', 'deep-offsite']) {
+    assert.ok(deep.includes('href="#' + id + '"'));
+    assert.ok(deep.includes('aria-controls="' + id + '"'));
+    assert.ok(deep.includes('id="' + id + '" data-deep-panel'));
   }
+  assert.match(deep, /id="deep-offsite"[^>]*hidden><p>精彩待续<\/p>/);
 });

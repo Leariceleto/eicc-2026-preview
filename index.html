@@ -249,8 +249,6 @@
     font-size:14.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.2s;
   }
   .tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
-  .agenda-panel{display:none;}
-  .agenda-panel.active{display:block;animation:fade .35s;}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .agenda-item{
     display:grid;grid-template-columns:160px 1fr;gap:26px;padding:26px 0;
@@ -797,7 +795,7 @@
     .hero-actions{margin-top:30px;}
     .hero-actions .btn{width:100%;justify-content:center;padding:15px 20px;}
 
-    /* --- 大会概况：前言 --- */
+    /* --- 年会概况：前言 --- */
     .about-preface{background-position:60% center;}
     .preface-main{padding:48px 0 52px;}
     .preface-stats{gap:0;}
@@ -805,7 +803,7 @@
     .preface-right{margin-top:2px;}
     .history-video-placeholder .play-label{font-size:12.5px;}
 
-    /* --- 大会概况：历程图（移动端单屏路线图） --- */
+    /* --- 年会概况：历程图（移动端单屏路线图） --- */
     .about-history{padding:52px 0 40px;}
     .annual-timeline-scroll{display:none;}
     .annual-timeline-mobile{display:block;position:relative;width:100%;max-width:420px;margin:0 auto;overflow:hidden;}
@@ -891,7 +889,8 @@
 <link rel="stylesheet" href="assets/account.css?v=20260912-color-audit">
 <link rel="stylesheet" href="assets/key-visual.css?v=20260913-mobile-order">
 <script src="assets/key-visual.js?v=20260912-pc2-previous-sized"></script>
-<link rel="stylesheet" href="assets/brand-visual.css?v=20260912-learning-white">
+<link rel="stylesheet" href="assets/brand-visual.css?v=20260913-nav-signup">
+<link rel="stylesheet" href="assets/main-forum.css?v=20260913-deep-panels">
 <link rel="stylesheet" href="assets/frontend-aligned.css?v=20260912-learning-white">
 <link rel="stylesheet" href="assets/footer.css?v=20260912">
 </head>
@@ -928,7 +927,7 @@
             <h4>线上参会报名页面提示：</h4>
             <ol>
               <li>线上参会包含：1个学习账号，登录“中国教育创新年会官网”电脑网页端 <strong>(官网待填)</strong> 或一体化平台手机端可同步观看会议内容；回看截止至2027年12月5日。</li>
-              <li>线上参会内容包括：第十三届中国教育创新年会主论坛直播及回看、各分论坛及场外深研课分享内容录播及回看。</li>
+              <li>线上参会内容包括：第十三届中国教育创新年会年会议程直播及回看、各分论坛及场外深研课分享内容录播及回看。</li>
               <li>线上会议为虚拟内容服务，<strong>一经购买成功，概不退换，敬请谅解。</strong></li>
               <li>缴费成功视为报名成功。</li>
             </ol>
@@ -936,13 +935,13 @@
         </aside>
         <div class="signup-session-list" data-signup-sessions>
           <button class="signup-session active" type="button" data-signup-session="main">
-            <span class="signup-radio"></span><span><strong>（现场参会）主论坛</strong><p>含主论坛、分论坛与方案展通行；分论坛每天每人最多选择一个参加，场外深研课需单独购买。</p></span><span class="signup-price">¥2800</span>
+            <span class="signup-radio"></span><span><strong>（现场参会）年会议程</strong><p>含年会议程、分论坛与方案展通行；分论坛每天每人最多选择一个参加，场外深研课需单独购买。</p></span><span class="signup-price">¥2800</span>
           </button>
           <button class="signup-session" type="button" data-signup-session="combo">
-            <span class="signup-radio"></span><span><strong>（现场参会）主论坛 ＋ 深研课</strong><p>在主论坛权益基础上包含 1 个场外深研课权益；分论坛每天每人最多选择一个，场外深研课每人最多选择一个。</p></span><span class="signup-price">¥2900</span>
+            <span class="signup-radio"></span><span><strong>（现场参会）年会议程 ＋ 深研课</strong><p>在年会议程权益基础上包含 1 个场外深研课权益；分论坛每天每人最多选择一个，场外深研课每人最多选择一个。</p></span><span class="signup-price">¥2900</span>
           </button>
           <button class="signup-session" type="button" data-signup-session="expo">
-            <span class="signup-radio"></span><span><strong>（现场参会）独立方案展</strong><p>含方案展通行、学习护照中的方案展学习路线与学习报告；不可进入主论坛，不含分论坛、场外深研课与回放。</p></span><span class="signup-price">¥300</span>
+            <span class="signup-radio"></span><span><strong>（现场参会）独立方案展</strong><p>含方案展通行、学习护照中的方案展学习路线与学习报告；不可进入年会议程，不含分论坛、场外深研课与回放。</p></span><span class="signup-price">¥300</span>
           </button>
           <button class="signup-session" type="button" data-signup-session="online">
             <span class="signup-radio"></span><span><strong>（线上参会）年会线上学习</strong><p>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容；回看截止至 2027 年 12 月 4 日。</p></span><span class="signup-price">¥1560</span>
@@ -953,7 +952,7 @@
 
       <section class="signup-step" data-signup-step="2">
         <h3>填写参会人信息</h3>
-        <div class="signup-form-meta"><span data-signup-session-name>（现场参会）主论坛</span><b>1号参会人</b></div>
+        <div class="signup-form-meta"><span data-signup-session-name>（现场参会）年会议程</span><b>1号参会人</b></div>
         <div class="signup-form-grid" novalidate>
           <div class="signup-field wide"><label for="signup-name">姓名<em>*</em></label><input id="signup-name" data-signup-field="name" type="text" autocomplete="name"><span class="signup-error" data-signup-error="name"></span></div>
           <div class="signup-field"><label for="signup-phone">手机号<em>*</em></label><input id="signup-phone" data-signup-field="phone" type="tel" inputmode="numeric" autocomplete="tel"><span class="signup-error" data-signup-error="phone"></span></div>
@@ -967,8 +966,8 @@
 
       <section class="signup-step" data-signup-step="3">
         <div class="signup-order">
-          <div class="signup-order-card"><h4>已选场次</h4><div class="order-brand">2026 第十三届</div><h5>中国教育创新年会</h5><p>CHINA EDUCATION INNOVATION</p><div class="signup-order-price"><span data-signup-order-name>（现场参会）主论坛</span><br><span data-signup-order-price>¥2800</span> × 1</div></div>
-          <div class="signup-pay-panel"><b>场次：<span data-signup-order-session>（现场参会）主论坛</span></b><div class="signup-choice-label">支付方式</div><div class="signup-choice-row"><button class="signup-choice active" type="button" data-signup-payment="online">微信/支付宝支付 ✓</button><button class="signup-choice" type="button" data-signup-payment="bank">对公转账/银行支付</button></div><div class="signup-choice-label">发票信息</div><div class="signup-choice-row"><button class="signup-choice active" type="button" data-signup-invoice="none">不需要发票 ✓</button><button class="signup-choice" type="button" data-signup-invoice="electronic">电子发票</button></div></div>
+          <div class="signup-order-card"><h4>已选场次</h4><div class="order-brand">2026 第十三届</div><h5>中国教育创新年会</h5><p>CHINA EDUCATION INNOVATION</p><div class="signup-order-price"><span data-signup-order-name>（现场参会）年会议程</span><br><span data-signup-order-price>¥2800</span> × 1</div></div>
+          <div class="signup-pay-panel"><b>场次：<span data-signup-order-session>（现场参会）年会议程</span></b><div class="signup-choice-label">支付方式</div><div class="signup-choice-row"><button class="signup-choice active" type="button" data-signup-payment="online">微信/支付宝支付 ✓</button><button class="signup-choice" type="button" data-signup-payment="bank">对公转账/银行支付</button></div><div class="signup-choice-label">发票信息</div><div class="signup-choice-row"><button class="signup-choice active" type="button" data-signup-invoice="none">不需要发票 ✓</button><button class="signup-choice" type="button" data-signup-invoice="electronic">电子发票</button></div></div>
         </div>
         <div class="signup-invoice-fields signup-form-grid" data-signup-invoice-fields>
           <div class="signup-field"><label for="signup-invoice-title">发票抬头<em>*</em></label><input id="signup-invoice-title" data-signup-field="invoiceTitle" type="text" placeholder="可复用历史发票信息"><span class="signup-error" data-signup-error="invoiceTitle"></span></div>
@@ -980,7 +979,7 @@
       </section>
 
       <section class="signup-step" data-signup-step="4">
-        <div class="signup-success"><div class="signup-success-mark">✓</div><h3>报名成功</h3><p>已完成「<span data-signup-success-name>（现场参会）主论坛</span>」报名，可继续完成会前准备。</p><div class="signup-success-actions"><button class="signup-hotel" type="button"><span><b>预定酒店</b><span>为参会提供就近住宿预订</span></span><i>›</i></button><button class="btn btn-primary" type="button" data-signup-view>查看我的报名</button><button class="btn btn-ghost" type="button" data-signup-close>返回年会首页</button></div></div>
+        <div class="signup-success"><div class="signup-success-mark">✓</div><h3>报名成功</h3><p>已完成「<span data-signup-success-name>（现场参会）年会议程</span>」报名，可继续完成会前准备。</p><div class="signup-success-actions"><button class="signup-hotel" type="button"><span><b>预定酒店</b><span>为参会提供就近住宿预订</span></span><i>›</i></button><button class="btn btn-primary" type="button" data-signup-view>查看我的报名</button><button class="btn btn-ghost" type="button" data-signup-close>返回年会首页</button></div></div>
       </section>
     </div>
   </div>
@@ -1006,8 +1005,8 @@
     <div class="demo-options">
       <button class="demo-option" type="button" data-demo-identity="anonymous">未登录</button>
       <button class="demo-option" type="button" data-demo-identity="guest">已登录未报名</button>
-      <button class="demo-option" type="button" data-demo-identity="main">主论坛</button>
-      <button class="demo-option" type="button" data-demo-identity="combo">主论坛＋深研课</button>
+      <button class="demo-option" type="button" data-demo-identity="main">年会议程</button>
+      <button class="demo-option" type="button" data-demo-identity="combo">年会议程＋深研课</button>
       <button class="demo-option" type="button" data-demo-identity="expo">独立方案展</button>
       <button class="demo-option" type="button" data-demo-identity="online">线上参会</button>
     </div>
@@ -1026,9 +1025,9 @@
 <nav>
   <div class="nav-inner">
     <div class="nav-links">
-      <a href="#about">大会概况</a>
+      <a href="#about">年会概况</a>
+      <a href="#agenda">年会议程</a>
       <a href="#tickets">票种权益</a>
-      <a href="#agenda">主论坛</a>
       <a href="#deep">深研课</a>
       <a href="#expo">方案展</a>
       <a href="#passport">学习方式</a>
@@ -1040,9 +1039,9 @@
   </div>
   <div class="mobile-menu" data-mobile-menu>
     <a href="#account" class="mm-cta">一键查询</a>
-    <a href="#about">大会概况</a>
+    <a href="#about">年会概况</a>
+    <a href="#agenda">年会议程</a>
     <a href="#tickets">票种权益</a>
-    <a href="#agenda">主论坛</a>
     <a href="#deep">深研课</a>
     <a href="#expo">方案展</a>
     <a href="#passport">学习方式</a>
@@ -1151,7 +1150,7 @@
       <div class="state-surface" aria-live="polite">
         <div class="state-overview">
           <div class="state-label">当前预览</div>
-          <h3 data-state-title>主论坛＋深研课 · 会前准备</h3>
+          <h3 data-state-title>年会议程＋深研课 · 会前准备</h3>
           <p data-state-description>已报名参会人正在完成选课、自评与个人学习路径的会前准备。</p>
           <div class="state-permissions" data-state-permissions></div>
         </div>
@@ -1163,192 +1162,148 @@
 <!-- ================= AGENDA ================= -->
 <section id="agenda" data-page="home">
   <div class="wrap">
-    <div class="kicker">MAIN FORUM · 主论坛</div>
-    <h2 class="sec-title">无限游戏｜下一代学校</h2>
-
-    <div class="tabs" role="group" aria-label="选择议程日期">
-      <button type="button" class="tab active" id="agenda-tab-d1" data-day="d1" aria-controls="d1" aria-pressed="true">12月1日</button>
-      <button type="button" class="tab" id="agenda-tab-d2" data-day="d2" aria-controls="d2" aria-pressed="false">12月2日</button>
-      <button type="button" class="tab" id="agenda-tab-d3" data-day="d3" aria-controls="d3" aria-pressed="false">12月3日</button>
-      <button type="button" class="tab" id="agenda-tab-d4" data-day="d4" aria-controls="d4" aria-pressed="false">12月4日</button>
+    <div class="kicker">CONFERENCE AGENDA · 年会议程</div>
+    <!-- Source: user-supplied WeChat print PDF, 2026-09-13, pages 3–30 inclusive. -->
+    <article class="program-intro"><p>生命是有限的。</p>
+<p>有生有长，有终有尽。这不是缺陷，是生命之所以珍贵而有重量的原因。</p>
+<p>但精神可以是无界的。一个人在有限的生命里，最需要的成长，是学会拥抱“无限游戏”的精神：不执于某一局胜负，不困于某一次抵达，永远向世界保持着“可以再启一程、再绽放一次”的能力与精神。</p>
+<p>当一所学校决定，让一个有限的生命，去经历一场无限探索的游戏——她不必追问终点何在，只帮助学习者在复杂的挑战中，永远葆有持续生长的动力；她无需承诺必然通关，只陪伴一个又一个的孩子，在万象纷呈里，生生不息。</p>
+<p>这所学校的名字，叫“下一代学校”。</p>
+<p>下一代学校，是教会孩子用有限生命玩无限游戏的地方。</p>
+<p>当毕业典礼云散、考试成绩揭晓、录取通知收到，“游戏”似乎已经结束。可是，学习并未结束，挑战从未结束，一个人成为自己的旅程，没有结束。</p>
+<p>是时候重新理解这场游戏的规则了：“有限的游戏”以取胜为目的，“无限的游戏”以延续为目的；“有限的玩家”在边界内部游戏，“无限的玩家”不断与边界本身游戏。</p>
+<p>亲爱的教育同仁，当AI以不可逆转的加速度重塑文明的河床与流向，传统教育的那些有限游戏，正一个接一个抵达它们的终局。而真正的教育，那场关乎生命意义、关乎文明延续、关乎立德树人、关乎人之为人的无限游戏，才刚刚露出它辽阔的地平线。</p>
+<p>本届年会，我们邀您以“无限游戏”为精神坐标，以“下一代学校”为行动指向，开启一场从底层心智到顶层设计的教育重构。</p>
+<p>什么是无限游戏的教育？</p>
+<p>它不以单一分数决定胜负，而以每一个生命的持续生长定义价值。在无限游戏的校园里，没有被淘汰的失败者，只有尚未看见的可能性；</p>
+<p>它不以零和博弈消耗能量，而以“个性化的相互依存、协作中的彼此独立”搭建生态。当学校成为森林般的共生系统，你的独特、你的卓越将不再是我的威胁，而是异质同构的进化阶梯；</p>
+<p>在这场游戏里，学习的结果如天地间所有美好一般，大都缓缓而来，那些渴望在进程中不断打怪升级的学习者，必须首先学会“给成长以岁月”的“长期主义”；</p>
+<p>在这样的学校，AI的未来不在于孵化更孤独的“先知”，而在于构建更丰富的社交系统；生命的意义不在于存储更多已知的答案，而在于寻找并解答未知的秘密；师生不以确定性为安全感，而以“在不确定世界里创造更好的自己”为新常态……</p>
+<p>是的，我们相信，此时此刻中国教育正在发生一场伟大而安静的转向——从“有限游戏”的焦虑，走向“无限游戏”的从容。</p>
+<p>“以教育理念、体系、制度、内容、方法、治理现代化为基本路径，以支撑引领中国式现代化为核心功能，办好人民满意的教育……努力让每个孩子都有人生出彩的机会”（习近平）。亲爱的教育同仁，这不是理论的浪漫，而是教育强国、文明进化的必然。</p>
+<p>为此，我们需要的不只是更高效的工具，更是一种全新的心智模式：放下“赢在起跑线”的有限执念，拥抱“生长即意义”的无限信念，从培养工业时代“标准化、成品式的人才”，走向培养在未知领域快速建立认知框架，跨越边界整合资源，面对失败持续迭代的“全面而又个性发展的人”。</p>
+<p>承载这份历史使命的学校，我们称之为“下一代学校”。她将首先从根基处回应一个时代的教育探索：当AI成为基础设施，学校何以为学校？当知识不再稀缺，教师何以为教师？当未来不可预测，学习何以为学习？她将一系列根本问题抛向下一代办学者，拷问着学校管理团队是否已确立顶层共识，以及，是否能做好底层设计——</p>
+<p>单一分数的极限，如何化为蓬勃生命的起点？</p>
+<p>基于“学生自主性”和“认知复杂性”，我们如何设计学习？</p>
+<p>技术如何让学习更真实地发生，课堂更自然地生长？</p>
+<p>课程如何串联整个世界，并长成儿童的样子？</p>
+<p>校园如何成为一座会呼吸、可学习、能游戏的场域？</p>
+<p>教师如何从“有限游戏的裁判”，走下讲台成为“无限游戏的同行者”？</p>
+<p>当升学仍然重要，时间同样有限，学校如何不被单一评价吞没，实现“鱼与熊掌兼得”……</p>
+<p>亲爱的教育同仁，当世界级的波峰浪谷从“百年一遇”变得“年年都遇”，愿我们不要温和地走入这个时代，要学会躬而就之，凿而通之，导而利之，战而胜之。</p>
+<p>2026年12月，南国广州，期待与您相遇，以思考的纵深与行动的具体，共同临摹下一代学校全新的样子！</p>
+<p><strong>第十三届中国教育创新年会组委会</strong></p></article>
+    <div class="program-daily">
+    <div class="program-body" id="d1">
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/02.webp" alt="12月1日，星期二" width="1080" height="401" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/03.webp" alt="12月1日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/04.webp" alt="年会艺术表达" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">未来学习中心的十种样态——2026当代教育设计展</p></div>
+<div class="program-entry"><p class="program-topic">创造自我的“过渡空间”——儿童艺术展&amp;学生创新节&amp;教育影像展</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/05.webp" alt="沉浸式戏剧" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">当一个孩子，在无限游戏中生生不息</p><p class="program-speaker">叶逊谦（戏剧导演、戏剧教育家、臻爱戏剧教育研究院院长）广州方圆实验小学</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/06.webp" alt="音乐诗诵" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">学校，是这个世界最动人的命运变奏曲</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/07.webp" alt="探马来报" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">第十三届中国教育创新年会手搓大会指南</p><p class="program-speaker">沈祖芸（中国新学校研究会副会长，学校战略咨询专家）</p></div>
+<div class="program-entry"><p class="program-topic">年会主题视频</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/08.webp" alt="主办方致辞" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">让游戏继续——致下一代学校的同行者</p><p class="program-speaker">李斌（蒲公英教育智库理事长，新校长传媒总编辑）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/09.webp" alt="地方教育领导致辞" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/10.webp" alt="专家报告" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">数智时代，学校新形态的中国探索</p><p class="program-speaker">李永智（中国教育科学研究院党委书记、院长）</p></div>
+<div class="program-entry"><p class="program-topic">AI赢不了的那场游戏</p><p class="program-speaker">熊辉（香港科技大学（广州）协理副校长）</p></div>
+<div class="program-entry"><p class="program-topic">全球坐标：下一代学校的生态迁移与共同挑战</p><p class="program-speaker">安德烈亚斯·施莱歇尔（经济合作与发展组织教育与技能司司长）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/11.webp" alt="老校长说" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">做了三十多年校长，我对下一代学校的想象开始“从心所欲”</p><p class="program-speaker">卢志文（中国陶行知研究会副会长，北京新学年教育理事长）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/12.webp" alt="新学生说" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">我渴望的学习生活，究竟长什么样？</p><p class="program-speaker">叶语沛（重庆市铜梁中学学生）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/13.webp" alt="参会者议程" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">当我们面对两难问题时</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/14.webp" alt="联合倡议" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">2026“教育的底线”联合倡议书</p><p class="program-speaker">刘坚（北京师范大学中国教育创新研究院院长）</p></div>
     </div>
-
-    <!-- Content source: Feishu ZZerd1662oSp1TxEo11cGe4OnSe, revision 5294, retrieved 2026-09-09.
-         Preserve published order and pending titles; omit internal status notes. No session start times were supplied. -->
-    <div class="agenda-panel active" id="d1" role="region" aria-labelledby="agenda-tab-d1">
-      <div class="day-theme"><b>水穷处，云起时</b><span>单一分数的极限，蓬勃生命的起点</span></div>
-      <div class="agenda-item"><div class="time"><h3>年会艺术表达</h3></div><div>
-        <ul class="talks">
-          <li class="talk-no-speaker"><span class="talk-title">未来学习中心的十种样态——2026当代教育设计展</span></li>
-          <li class="talk-no-speaker"><span class="talk-title">创造自我的“过渡空间”——儿童艺术展&amp;学生课程节&amp;教育影像展</span></li>
-          <li class="talk-no-speaker"><span class="talk-title">生生不息+用餐时间</span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>主论坛开幕式</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title"><span class="talk-format">沉浸式戏剧</span>当一个孩子，在无限游戏中生生不息</span><span class="talk-speaker"><span class="who">叶逊谦</span><span class="speaker-role">戏剧导演、戏剧教育家、臻爱戏剧教育研究院院长</span><span class="speaker-role">广州方圆实验小学</span></span></li>
-          <li class="talk-no-speaker"><span class="talk-title"><span class="talk-format">音乐诗诵</span>学校，是这个世界最动人的命运变奏曲</span></li>
-          <li><span class="talk-title"><span class="talk-format">探马来报</span>第十三届中国教育创新年会手搓大会指南</span><span class="talk-speaker"><span class="who">沈祖芸</span><span class="speaker-role">中国新学校研究会副会长，学校战略咨询专家</span></span></li>
-          <li class="talk-no-speaker"><span class="talk-title">年会主题视频</span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>主办方致辞</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">让游戏继续——致下一代学校的同行者</span><span class="talk-speaker"><span class="who">李斌</span><span class="speaker-role">蒲公英教育智库理事长，新校长传媒总编辑</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>地方教育领导致辞</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">以一座城市为课堂，AI赋能教育的广州答卷</span><span class="talk-speaker"><span class="who">陈敏生</span><span class="speaker-role">广州市教育局党委书记、局长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>专家报告</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">数智时代，学校新形态的中国探索</span><span class="talk-speaker"><span class="who">李永智</span><span class="speaker-role">中国教育科学研究院党委书记、院长</span></span></li>
-          <li><span class="talk-title">AI赢不了的那场游戏</span><span class="talk-speaker"><span class="who">熊辉</span><span class="speaker-role">香港科技大学（广州）协理副校长</span></span></li>
-          <li><span class="talk-title">全球坐标：下一代学校的生态迁移与共同挑战</span><span class="talk-speaker"><span class="who">安德烈亚斯·施莱歇尔</span><span class="speaker-role">经济合作与发展组织教育与技能司司长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>老校长说</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">做了三十多年校长，我对下一代学校的想象开始“从心所欲”</span><span class="talk-speaker"><span class="who">卢志文</span><span class="speaker-role">中国陶行知研究会副会长，北京新学年教育理事长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>新学生说</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">我渴望的学习生活，究竟长什么样？</span><span class="talk-speaker"><span class="who">叶语沛</span><span class="speaker-role">重庆市铜梁中学学生</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
-        <ul class="talks">
-          <li class="talk-no-speaker"><span class="talk-title">当我们面对两难问题时</span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>联合倡议</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">2026“教育的底线”联合倡议书</span><span class="talk-speaker"><span class="who">刘坚</span><span class="speaker-role">北京师范大学中国教育创新研究院院长</span></span></li>
-        </ul>
-      </div></div>
+    <div class="program-body" id="d2">
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/15.webp" alt="12月2日，星期三" width="1080" height="400" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/16.webp" alt="12月2日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/17.webp" alt="下一代学生" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">志于道，据于德，依于仁，游于艺......</p><p class="program-speaker">俞正强（金华师范学校附属小学党总支书记）</p></div>
+<div class="program-entry"><p class="program-topic">什么是我们该培养的，什么是我们该放下的？</p><p class="program-speaker">许凌可（重庆德普外国语学校校长）</p></div>
+<div class="program-entry"><p class="program-topic">把游戏还给孩子——下一代学生的“自治”与“自育”</p><p class="program-speaker">马骉（华东师范大学附属杭州学校教育集团总校长）</p></div>
+<div class="program-entry"><p class="program-topic">有限处扎根，无限处生长</p><p class="program-speaker">肖诗坚（田字格公益创始人，田字格实验学校总校长）</p></div>
+<div class="program-entry"><p class="program-topic">工具学不会的能力，是下一代学生的“进化姿态”</p><p class="program-speaker">席酉民（西交利物浦大学执行校长，英国利物浦大学副校长）</p></div>
+<figure class="program-art program-art-divider"><img src="assets/main-forum-20260913/18.webp" alt="" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/19.webp" alt="12月2日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/20.webp" alt="下一代学习" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">谢家湾学校小班化教学的20年探索</p><p class="program-speaker">刘希娅（重庆谢家湾学校党委书记，教育部教育强国建设战略咨询委员会委员）</p></div>
+<div class="program-entry"><p class="program-topic">从书院到 X 院，让学习者穿行在“没有答案”的地方</p><p class="program-speaker">黄慧（温州中学附属初中校长）</p></div>
+<div class="program-entry"><p class="program-topic">以创为中心，一所普通公办校的“全域贯通学习”</p><p class="program-speaker">李美庆（宁波大学附属甬江科创实验学校执行校长）</p></div>
+<div class="program-entry"><p class="program-topic">为了学习的合作——假如课堂不再教，孩子们究竟怎么做</p><p class="program-speaker">郑杰（上海市实验学校嘉定新城分校党支部书记、执行校长）</p></div>
+<div class="program-entry"><p class="program-topic">AI参与的下一代学习——六种状态与多元学习图景</p><p class="program-speaker">张治（华东师范大学智能教育实验室主任）</p></div>
+<figure class="program-art program-art-divider"><img src="assets/main-forum-20260913/21.webp" alt="" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/22.webp" alt="12月2日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/23.webp" alt="下一代课程" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">从“有什么课”到“走过什么学程”，是下一代课程的必然转向</p><p class="program-speaker">朱则光（北京十一盟校K12学习蓝图研究院院长，北京第一实验学校副校长）</p></div>
+<div class="program-entry"><p class="program-topic">人工智能时代的学校课程，我们的三个转变</p><p class="program-speaker">郑琰（上海虹口区第二中心小学党支部书记、校长 ）</p></div>
+<div class="program-entry"><p class="program-topic">以大师之作，重新串联整个世界</p><p class="program-speaker">白连涛（魏桥国科教育集团滨州渤海实验学校总校长）</p></div>
+<div class="program-entry"><p class="program-topic">十二年，一条永不中断的“课程河流”</p><p class="program-speaker">王志江（开封市贞元学校校长）</p></div>
+<div class="program-entry"><p class="program-topic">一场课改如何在一所普通公办小学里，活过二十五年？</p><p class="program-speaker">陈丽霞（广州天河区华阳小学党委书记）</p></div>
+<div class="program-entry"><p class="program-topic">好的教育是森林的样子，好的课程是儿童的样子</p><p class="program-speaker">张乐（蒲公英教育智库学校内涵建设研究院执行院长）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/24.webp" alt="“没听够”议程" width="1080" height="250" loading="lazy" decoding="async"></figure>
     </div>
-
-    <div class="agenda-panel" id="d2" role="region" aria-labelledby="agenda-tab-d2">
-      <div class="day-theme"><b>游戏的人 / 游戏即创造 / 舞蹈与混沌</b><span>下一代学生 · 下一代学习 · 下一代课程</span></div>
-      <div class="agenda-item"><div class="time"><h3>下一代学生</h3></div><div>
-        <h4>游戏的人</h4>
-        <p>只有当人是完全意义上的人，他才懂得游戏</p>
-        <ul class="talks">
-          <li><span class="talk-title">志于道，据于德，依于仁，游于艺......</span><span class="talk-speaker"><span class="who">俞正强</span><span class="speaker-role">金华师范学校附属小学党总支书记</span></span></li>
-          <li><span class="talk-title">什么是我们该培养的，什么是我们该放下的？</span><span class="talk-speaker"><span class="who">许凌可</span><span class="speaker-role">重庆德普外国语学校校长</span></span></li>
-          <li><span class="talk-title">把游戏还给孩子——下一代学生的&quot;自治&quot;与&quot;自育&quot;</span><span class="talk-speaker"><span class="who">马骉</span><span class="speaker-role">华东师范大学附属杭州学校教育集团总校长</span></span></li>
-          <li><span class="talk-title">有限处扎根，无限处生长</span><span class="talk-speaker"><span class="who">肖诗坚</span><span class="speaker-role">田字格公益创始人，田字格实验学校总校长</span></span></li>
-          <li><span class="talk-title">工具学不会的能力，是下一代学生的&quot;进化姿态&quot;</span><span class="talk-speaker"><span class="who">席酉民</span><span class="speaker-role">西交利物浦大学执行校长，英国利物浦大学副校长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>下一代学习</h3></div><div>
-        <h4>游戏即创造</h4>
-        <p>在&quot;学生自主性&quot;和&quot;认知复杂性&quot;中，重构学习</p>
-        <ul class="talks">
-          <li><span class="talk-title">谢家湾学校小班化教学的20年探索</span><span class="talk-speaker"><span class="who">刘希娅</span><span class="speaker-role">重庆谢家湾学校党委书记，教育部教育强国建设战略咨询委员会委员</span></span></li>
-          <li><span class="talk-title">从书院到 X 院，让学习者穿行在&quot;没有答案&quot;的地方</span><span class="talk-speaker"><span class="who">黄慧</span><span class="speaker-role">温州中学附属初中校长</span></span></li>
-          <li><span class="talk-title">以创为中心，一所普通公办校的“全域贯通学习”</span><span class="talk-speaker"><span class="who">李美庆</span><span class="speaker-role">宁波大学附属甬江科创实验学校执行校长</span></span></li>
-          <li><span class="talk-title">为了学习的合作——假如课堂不再教，孩子们究竟怎么做</span><span class="talk-speaker"><span class="who">郑杰</span><span class="speaker-role">上海市实验学校嘉定新城分校党支部书记、执行校长</span></span></li>
-          <li><span class="talk-title">AI参与的下一代学习——六种状态与多元学习图景</span><span class="talk-speaker"><span class="who">张治</span><span class="speaker-role">华东师范大学智能教育实验室主任</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>下一代课程</h3></div><div>
-        <h4>舞蹈与混沌</h4>
-        <p>人必须拥有混沌，才能孕育一颗舞蹈的星辰</p>
-        <ul class="talks">
-          <li><span class="talk-title">从&quot;有什么课&quot;到&quot;走过什么学程&quot;，是下一代课程的必然转向</span><span class="talk-speaker"><span class="who">朱则光</span><span class="speaker-role">北京十一盟校K12学习蓝图研究院院长，北京第一实验学校副校长</span></span></li>
-          <li><span class="talk-title">人工智能时代的学校课程，我们的三个转变</span><span class="talk-speaker"><span class="who">郑琰</span><span class="speaker-role">上海虹口区第二中心小学党支部书记、校长</span></span></li>
-          <li><span class="talk-title">以大师之作，重新串联整个世界</span><span class="talk-speaker"><span class="who">白连涛</span><span class="speaker-role">魏桥国科教育集团滨州渤海实验学校总校长</span></span></li>
-          <li><span class="talk-title">十二年，一条永不中断的“课程河流”</span><span class="talk-speaker"><span class="who">王志江</span><span class="speaker-role">开封市贞元学校校长</span></span></li>
-          <li><span class="talk-title">题目待定</span><span class="talk-speaker"><span class="who">陈丽霞</span><span class="speaker-role">广州天河区华阳小学党委书记</span></span></li>
-          <li><span class="talk-title">好的教育是森林的样子，好的课程是儿童的样子</span><span class="talk-speaker"><span class="who">张乐</span><span class="speaker-role">蒲公英教育智库学校内涵建设研究院执行院长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
-        <ul class="talks">
-          <li class="talk-no-speaker"><span class="talk-title">“没听够”议程</span></li>
-        </ul>
-      </div></div>
+    <div class="program-body" id="d3">
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/25.webp" alt="12月3日，星期四" width="1080" height="400" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/26.webp" alt="12月3日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/27.webp" alt="下一代技术" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">让技术成为思维生长的介质——智慧学习空间的新加坡实践</p><p class="program-speaker">洪化清（上海外国语大学/南洋理工大学教授、博士生导师）</p></div>
+<div class="program-entry"><p class="program-topic">AI不只是一门课程，是所有学科共同的“地下水”</p><p class="program-speaker">管杰（北京市第十二中学校长）</p></div>
+<div class="program-entry"><p class="program-topic">20位教师的云南乡村学校，AI如何为高质量教学托底</p><p class="program-speaker">陈一帆（云南大理凯风教育研究院院长）</p></div>
+<div class="program-entry"><p class="program-topic">在最薄的土壤，长出最前沿的范式——一所乡镇中学的AI突围</p><p class="program-speaker">杨天亮（安徽省阜南亲情学校校长）</p></div>
+<div class="program-entry"><p class="program-topic">技术进校十年，一所百年名校做对了什么，拒绝了什么</p><p class="program-speaker">李蓓（成都实验小学教育集团总校长）</p></div>
+<div class="program-entry"><p class="program-topic">好的技术让好奇心生长——下一代学校的体验设计</p><p class="program-speaker">快刀青衣（得到联合创始人，产品与技术体验操盘手）</p></div>
+<figure class="program-art program-art-divider"><img src="assets/main-forum-20260913/28.webp" alt="" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/29.webp" alt="12月3日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/30.webp" alt="下一代校园" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">穿越场景的成长和通过艺术的教育</p><p class="program-speaker">张莉（蒲公英教育智库联合创始人，DETT教育设计研究院执行院长）</p></div>
+<div class="program-entry"><p class="program-topic">把校园嵌进科技园，让所有场所，承载每一种学习</p><p class="program-speaker">吴凤琴（北京海淀未来学校党支部书记、执行校长）</p></div>
+<div class="program-entry"><p class="program-topic">在无限游戏的校园，让自己成为世界里的一点美好</p><p class="program-speaker">石磊（中山市五桂山桂南学校校长）</p></div>
+<div class="program-entry"><p class="program-topic">让校园伟大——下一代学校的空间语法</p><p class="program-speaker">叶翠微（湘湖未来学校创校校长）</p></div>
+<figure class="program-art program-art-divider"><img src="assets/main-forum-20260913/31.webp" alt="" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/32.webp" alt="12月3日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/33.webp" alt="下一代教师" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">下一代学校，如何重塑上一代教师？</p><p class="program-speaker">宋萑（北京师范大学教育学部部长、教师教育研究中心教授）</p></div>
+<div class="program-entry"><p class="program-topic">放下那场叫高分的游戏，陪孩子“再生一程”</p><p class="program-speaker">侯明飞（深圳罗湖未来学校教育集团总校长）</p></div>
+<div class="program-entry"><p class="program-topic">教师是谁？智能时代我们共同的“本体之问”</p><p class="program-speaker">李海林（上海新纪元双语学校校长）</p></div>
+<div class="program-entry"><p class="program-topic">十五年办学生涯，发现管理的尽头是“共生”</p><p class="program-speaker">庄惠芬（常州武进区星河实验小学教育集团总校长）</p></div>
+<div class="program-entry"><p class="program-topic">从“行政科层”走向“关键育人结果共同体”</p><p class="program-speaker">陈罡（云谷学校小学部校长）</p></div>
+<div class="program-entry"><p class="program-topic">教学技能背后的生命状态——未来教师的八个自我生长</p><p class="program-speaker">赵桂霞（齐鲁名校长，蒲公英教育智库学术顾问）</p></div>
+<div class="program-entry"><p class="program-topic">让情感投入成为下一代学校的基础建设</p><p class="program-speaker">田俊（北京市十一学校校长）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/34.webp" alt="“没听够”议程" width="1080" height="250" loading="lazy" decoding="async"></figure>
     </div>
-
-    <div class="agenda-panel" id="d3" role="region" aria-labelledby="agenda-tab-d3">
-      <div class="day-theme"><b>游刃有余 / 身游、心游、神游 / 从容无待，光行不止</b><span>下一代技术 · 下一代校园 · 下一代教师</span></div>
-      <div class="agenda-item"><div class="time"><h3>下一代技术</h3></div><div>
-        <h4>游刃有余</h4>
-        <p>它不发光，它让学习真正发生，课堂自然生长</p>
-        <ul class="talks">
-          <li><span class="talk-title">让技术成为思维生长的介质——智慧学习空间的新加坡实践</span><span class="talk-speaker"><span class="who">洪化清</span><span class="speaker-role">上海外国语大学/南洋理工大学教授、博士生导师</span></span></li>
-          <li><span class="talk-title">AI不只是一门课程，是所有学科共同的“地下水”</span><span class="talk-speaker"><span class="who">管杰</span><span class="speaker-role">北京市第十二中学校长</span></span></li>
-          <li><span class="talk-title">20位教师的云南乡村学校，AI如何为高质量教学托底</span><span class="talk-speaker"><span class="who">陈一帆</span><span class="speaker-role">云南大理凯风教育研究院院长</span></span></li>
-          <li><span class="talk-title">在最薄的土壤，长出最前沿的范式——一所乡镇中学的AI突围</span><span class="talk-speaker"><span class="who">杨天亮</span><span class="speaker-role">安徽省阜南亲情学校校长</span></span></li>
-          <li><span class="talk-title">技术进校十年，一所百年名校做对了什么，拒绝了什么</span><span class="talk-speaker"><span class="who">李蓓</span><span class="speaker-role">成都实验小学教育集团总校长</span></span></li>
-          <li><span class="talk-title">每天只上两小时课，剩下的时间，学校才真正开始</span><span class="talk-speaker"><span class="who">MacKenzie Price</span><span class="speaker-role">美国阿尔法学校Alpha School联合创始人</span></span></li>
-          <li><span class="talk-title">好的技术让好奇心生长——下一代学校的体验设计</span><span class="talk-speaker"><span class="who">快刀青衣</span><span class="speaker-role">得到联合创始人，产品与技术体验操盘手</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>下一代校园</h3></div><div>
-        <h4>身游、心游、神游</h4>
-        <p>一座会呼吸、可学习、能游戏的场域</p>
-        <ul class="talks">
-          <li><span class="talk-title">穿越场景的成长和通过艺术的教育</span><span class="talk-speaker"><span class="who">张莉</span><span class="speaker-role">蒲公英教育智库联合创始人，DETT教育设计研究院执行院长</span></span></li>
-          <li><span class="talk-title">把校园嵌进科技园，让所有场所，承载每一种学习</span><span class="talk-speaker"><span class="who">吴凤琴</span><span class="speaker-role">北京海淀未来学校党支部书记、执行校长</span></span></li>
-          <li><span class="talk-title">在无限游戏的校园，让自己成为世界里的一点美好</span><span class="talk-speaker"><span class="who">石磊</span><span class="speaker-role">中山市五桂山桂南学校校长</span></span></li>
-          <li><span class="talk-title">让校园伟大——下一代学校的空间语法</span><span class="talk-speaker"><span class="who">叶翠微</span><span class="speaker-role">湘湖未来学校创校校长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>下一代教师</h3></div><div>
-        <h4>从容无待，光行不止</h4>
-        <p>不是教得更累，是陪孩子“再生一程”的人</p>
-        <ul class="talks">
-          <li><span class="talk-title">下一代学校，如何重塑上一代教师？</span><span class="talk-speaker"><span class="who">宋萑</span><span class="speaker-role">北京师范大学教育学部部长、教师教育研究中心教授</span></span></li>
-          <li><span class="talk-title">放下那场叫高分的游戏，陪孩子“再生一程”</span><span class="talk-speaker"><span class="who">侯明飞</span><span class="speaker-role">深圳罗湖未来学校教育集团总校长</span></span></li>
-          <li><span class="talk-title">教师是谁？智能时代我们共同的“本体之问”</span><span class="talk-speaker"><span class="who">李海林</span><span class="speaker-role">上海新纪元双语学校校长</span></span></li>
-          <li><span class="talk-title">十五年办学生涯，发现管理的尽头是“共生”</span><span class="talk-speaker"><span class="who">庄惠芬</span><span class="speaker-role">常州武进区星河实验小学教育集团总校长</span></span></li>
-          <li><span class="talk-title">从&quot;行政科层&quot;走向&quot;关键育人结果共同体&quot;</span><span class="talk-speaker"><span class="who">陈罡</span><span class="speaker-role">云谷学校小学部校长</span></span></li>
-          <li><span class="talk-title">教学技能背后的生命状态——未来教师的八个自我生长</span><span class="talk-speaker"><span class="who">赵桂霞</span><span class="speaker-role">齐鲁名校长，蒲公英教育智库学术顾问</span></span></li>
-          <li><span class="talk-title">让情感投入成为下一代学校的基础建设</span><span class="talk-speaker"><span class="who">田俊</span><span class="speaker-role">北京市十一学校校长</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
-        <ul class="talks">
-          <li class="talk-no-speaker"><span class="talk-title"><span class="talk-format">10分钟</span>参会者“没听够”议程</span></li>
-        </ul>
-      </div></div>
+    <div class="program-body" id="d4">
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/35.webp" alt="12月4日，星期五" width="1080" height="401" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/36.webp" alt="12月4日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/37.webp" alt="下一代学校" width="1080" height="233" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">从赛场到生态：一所让每个孩子按自己样子生长的学校</p><p class="program-speaker">俞国娣（杭州崇文世纪城教育集团总校长、杭州理想教育集团总校长）</p></div>
+<div class="program-entry"><p class="program-topic">从围墙到世界：一所打开边界、与真实世界融通的学校</p><p class="program-speaker">鲁江（深圳明德实验学校（集团）党委书记，香港中文大学（深圳）附属明德高级中学校长）</p></div>
+<div class="program-entry"><p class="program-topic">从学习到生活：一所探索文化共生、家校共育、师生自组织的学校</p><p class="program-speaker">王伟（北京海嘉学校理事长）</p></div>
+<div class="program-entry"><p class="program-topic">从远方到此刻：一所让童年实现精神愉悦、记忆美好的学校</p><p class="program-speaker">刘慧（张家港市实验小学党委书记，张家港市实验小学教育集团总校长）</p></div>
+<div class="program-entry"><p class="program-topic">从管理到涌现：一所自然而然长出内部秩序和蓬勃创造力的学校</p><p class="program-speaker">万玮（上海平和教育集团总经理、上海市民办平和学校总校长、上海青浦平和双语学校总校长）</p></div>
+<div class="program-entry"><p class="program-topic">从他评到自评：一个教育行政区域的生态重塑开局之路</p><p class="program-speaker">李海达（宁波市北仑区教育局党委书记、局长）</p></div>
+<div class="program-entry"><p class="program-topic">在AI突飞猛进的世界，让学习者拥抱一条持续进步的“学习路径”</p><p class="program-speaker">Asyia Kazmi（世界教育创新峰会WISE首席执行官）</p></div>
+<div class="program-entry"><p class="program-topic">孩子们能在科技馆兴奋地待一整天——下一代学校该向场馆学什么？</p><p class="program-speaker">倪闽景（上海科技馆馆长）</p></div>
+<div class="program-entry"><p class="program-topic">AI背景下，全球最顶尖大学的录取方向与培养趋势</p><p class="program-speaker">高喆生Robert Christensen（TMGEN董事长兼首席执行官）</p></div>
+<div class="program-entry"><p class="program-topic">参会者议程：《学生眼中的下一代学校》临场报告</p><p class="program-speaker">2026中国学生创新节学生代表</p></div>
+<figure class="program-art program-art-divider"><img src="assets/main-forum-20260913/38.webp" alt="" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/39.webp" alt="12月4日年会议程主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/40.webp" alt="特别报告" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">重新发明学校——“能力”是如何生成的？</p><p class="program-speaker">李希贵（北京第一实验学校校长，中国新学校研究会会长）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/41.webp" alt="年度风向标" width="1080" height="250" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">下一代学校的心力觉醒、认知纵深与方法自由</p><p class="program-speaker">李斌（蒲公英教育智库理事长，新校长传媒总编辑）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/42.webp" alt="年会官方咨询 400-9973-669" width="1080" height="456" loading="lazy" decoding="async"></figure>
     </div>
-
-    <div class="agenda-panel" id="d4" role="region" aria-labelledby="agenda-tab-d4">
-      <div class="day-theme"><b>无限游戏</b><span>有限游戏以取胜为目的，无限游戏以延续游戏为目的</span></div>
-      <div class="agenda-item"><div class="time"><h3>下一代学校</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">从赛场到生态：一所让每个孩子按自己样子生长的学校</span><span class="talk-speaker"><span class="who">俞国娣</span><span class="speaker-role">杭州崇文世纪城教育集团总校长、杭州理想教育集团总校长</span></span></li>
-          <li><span class="talk-title">从围墙到世界：一所打开边界、与真实世界融通的学校</span><span class="talk-speaker"><span class="who">鲁江</span><span class="speaker-role">深圳明德实验学校（集团）党委书记，香港中文大学（深圳）附属明德高级中学校长</span></span></li>
-          <li><span class="talk-title">从学习到生活：一所探索文化共生、家校共育、师生自组织的学校</span><span class="talk-speaker"><span class="who">王伟</span><span class="speaker-role">北京海嘉学校理事长</span></span></li>
-          <li><span class="talk-title">从远方到此刻：一所让童年实现精神愉悦、记忆美好的学校</span><span class="talk-speaker"><span class="who">刘慧</span><span class="speaker-role">张家港市实验小学党委书记，张家港市实验小学教育集团总校长</span></span></li>
-          <li><span class="talk-title">从管理到涌现：一所自然而然长出内部秩序和蓬勃创造力的学校</span><span class="talk-speaker"><span class="who">万玮</span><span class="speaker-role">上海平和教育集团总经理、上海市民办平和学校总校长、上海青浦平和双语学校总校长</span></span></li>
-          <li><span class="talk-title">从他评到自评：一个教育行政区域的生态重塑开局之路</span><span class="talk-speaker"><span class="who">李海达</span><span class="speaker-role">宁波市北仑区教育局党委书记、局长</span></span></li>
-          <li><span class="talk-title">在AI突飞猛进的世界，让学习者拥抱一条持续进步的“学习路径”</span><span class="talk-speaker"><span class="who">Asyia Kazmi</span><span class="speaker-role">世界教育创新峰会（WISE）首席执行官</span></span></li>
-          <li><span class="talk-title">孩子们能在科技馆兴奋地呆一整天——下一代学校该向场馆学什么？</span><span class="talk-speaker"><span class="who">倪闽景</span><span class="speaker-role">上海科技馆馆长</span></span></li>
-          <li><span class="talk-title">AI背景下，全球最顶尖大学的录取方向与培养趋势</span><span class="talk-speaker"><span class="who">高喆生（Robert Christensen）</span><span class="speaker-role">TMGEN董事长兼首席执行官</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>参会者议程</h3></div><div>
-        <ul class="talks">
-          <li><span class="talk-title">《学生眼中的下一代学校》临场报告</span><span class="talk-speaker"><span class="who">2026中国学生创新节学生代表</span></span></li>
-        </ul>
-      </div></div>
-      <div class="agenda-item"><div class="time"><h3>游戏继续</h3></div><div>
-        <p>光是宇宙中最远的奔赴，从未抵达，从未停下</p>
-        <ul class="talks">
-          <li><span class="talk-title"><span class="talk-format">特别报告</span>重新发明学校——能力是如何生成的？</span><span class="talk-speaker"><span class="who">李希贵</span><span class="speaker-role">北京第一实验学校校长，中国新学校研究会会长</span></span></li>
-          <li><span class="talk-title"><span class="talk-format">年度风向标</span>下一代学校的心力觉醒、认知纵深与方法自由</span><span class="talk-speaker"><span class="who">李斌</span><span class="speaker-role">蒲公英教育智库理事长，新校长传媒总编辑</span></span></li>
-          <li class="talk-no-speaker"><span class="talk-title">100天行动计划发布仪式</span></li>
-        </ul>
-      </div></div>
     </div>
-    <p class="agenda-update-note">议程持续更新，具体时间及安排以最终公布为准。</p>
+    <hr class="program-end-rule">
   </div>
 </section>
 
@@ -1361,36 +1316,36 @@
     <div class="ticket-grid">
       <div class="ticket hot" data-ticket-card="main">
         <div class="tag">大多数参会者选择</div>
-        <h3>主论坛<span class="ticket-state">当前选择</span></h3>
+        <h3>年会议程<span class="ticket-state">当前选择</span></h3>
         <div class="price">¥2800<small> /人</small></div>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛全程参会（含选座）</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>年会议程全程参会（含选座）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展通行权益（1号展厅）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛选课资格（每天每人最多选择 1 个）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>学习护照与个性化学习路径</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>可付费加报 1 个场外深研课</li>
         </ul>
-        <a class="btn btn-primary" href="#account" data-open-registration="main">报名主论坛</a>
+        <a class="btn btn-primary" href="#account" data-open-registration="main">报名年会议程</a>
       </div>
 
       <div class="ticket" data-ticket-card="combo">
-        <h3>主论坛＋深研课<span class="ticket-state">当前选择</span></h3>
+        <h3>年会议程＋深研课<span class="ticket-state">当前选择</span></h3>
         <div class="price">¥2900<small> /人</small></div>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含主论坛全部权益</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含年会议程全部权益</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>包含 1 个场外深研课权益（每人最多选择 1 个）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>分论坛每天每人最多选择 1 个</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>主论坛结束后一天的小场域深度学习</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>年会议程结束后一天的小场域深度学习</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>场外深研课付费后支持一次换课</li>
         </ul>
-        <a class="btn btn-ghost" href="#deep" data-open-registration="combo">报名主论坛＋深研课</a>
+        <a class="btn btn-ghost" href="#deep" data-open-registration="combo">报名年会议程＋深研课</a>
       </div>
       <div class="ticket" data-ticket-card="online">
         <h3>线上参会<span class="ticket-state">当前选择</span></h3>
         <div class="price">¥1560<small> /人</small></div>
         <ul>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>1 个学习账号，进入蒲公英教育智库一体化平台可同步观看会议内容</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>第十三届中国教育创新年会主论坛直播及回看、各分论坛及场外深研课分享内容录播及回看；回看截止至 2027 年 12 月 4 日</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>第十三届中国教育创新年会年会议程直播及回看、各分论坛及场外深研课分享内容录播及回看；回看截止至 2027 年 12 月 4 日</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>团队报名：满 10 人赠 1人，满 20 人享 8 折，满 50 人享 7 折</li>
         </ul>
         <a class="btn btn-ghost" href="#account" data-open-registration="online">报名线上参会</a>
@@ -1402,14 +1357,14 @@
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展展厅通行（1号展厅）</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>方案展打卡与未来币任务</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F9D66" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>未来币市集消费</li>
-          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入主论坛（2号展厅）</li>
+          <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不可进入年会议程（2号展厅）</li>
           <li class="no"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>不含分论坛及场外深研课选课资格</li>
         </ul>
         <a class="btn btn-ghost" href="#account" data-open-registration="expo">购买方案展</a>
       </div>
     </div>
 
-    <p class="ticket-note">* 各票种价格、退款规则、参会牌及门禁识别方式以最终业务配置为准。主论坛票及组合票均包含方案展通行权益；仅购买独立方案展票的参会人不可进入主论坛。</p>
+    <p class="ticket-note">* 各票种价格、退款规则、参会牌及门禁识别方式以最终业务配置为准。年会议程票及组合票均包含方案展通行权益；仅购买独立方案展票的参会人不可进入年会议程。</p>
   </div>
 </section>
 
@@ -1440,24 +1395,76 @@
     <h2 class="sec-title">静水深流丨深研课</h2>
 
     <div class="deep-grid">
-      <div class="deep-card in">
+      <a class="deep-card in" href="#deep-onsite" data-deep-choice="deep-onsite" aria-label="小场域交流式深研课" aria-controls="deep-onsite" aria-expanded="false">
         <h3>小场域交流式深研课</h3>
         <p class="sub">12月2日-3日 · 小班深度学习</p>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>主论坛订单付款成功后，自动获得分论坛选课资格，无需另外付费</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>年会议程订单付款成功后，自动获得分论坛选课资格，无需另外付费</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>每人每天限选1场，不同日期可分别选课</li>
         </ul>
-      </div>
-      <div class="deep-card out">
+      </a>
+      <a class="deep-card out" href="#deep-offsite" data-deep-choice="deep-offsite" aria-label="场外深研课" aria-controls="deep-offsite" aria-expanded="false">
         <h3>场外深研课</h3>
         <p class="sub">12月5日 · 走进学校专题深度研讨</p>
         <ul>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>组合票包含1门场外深研课；仅购买主论坛的参会者，需另行选购后选课。</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>组合票包含1门场外深研课；仅购买年会议程的参会者，需另行选购后选课。</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>报名后可换课1次：选择仍有名额的新课程后，原课程名额自动释放。</li>
         </ul>
-      </div>
+      </a>
     </div>
 
+    <div class="program-body program-deep" id="deep-onsite" data-deep-panel tabindex="-1" role="region" aria-label="场内深研课" hidden>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/43.webp" alt="场内深研课" width="1080" height="951" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-divider"><img src="assets/main-forum-20260913/44.webp" alt="" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-poster"><img src="assets/main-forum-20260913/45.webp" alt="场内深研课主题海报" width="1080" height="1480" loading="lazy" decoding="async"></figure>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/46.webp" alt="12月2日场内深研课" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">学校转型的日常难题（一）</p><p class="program-speaker">李希贵（北京第一实验学校校长，中国新学校研究会会长）沈祖芸（中国新学校研究会副会长，学校战略咨询专家）</p></div>
+<div class="program-entry"><p class="program-topic">种子课：把最有生长力的种子种下去，让它自己长</p><p class="program-speaker">金华师范学校附属小学</p></div>
+<div class="program-entry"><p class="program-topic">当家校育人“取舍”不一致，学校靠什么达成一致行动？</p><p class="program-speaker">重庆德普外国语学校</p></div>
+<div class="program-entry"><p class="program-topic">自治不是放手，是学会搭脚手架——学生自治的可操作地图</p><p class="program-speaker">华东师范大学附属杭州学校教育集团</p></div>
+<div class="program-entry"><p class="program-topic">师资流动、家庭缺位下，乡村学生靠什么托住学习？</p><p class="program-speaker">田字格实验学校</p></div>
+<div class="program-entry"><p class="program-topic">下一代学生的能力图谱如何落地在学校现场</p><p class="program-speaker">西交利物浦大学附属学校</p></div>
+<div class="program-entry"><p class="program-topic">难的不是班小，是让每个孩子被看见的系统能力</p><p class="program-speaker">重庆谢家湾学校</p></div>
+<div class="program-entry"><p class="program-topic">在初中，“没有答案”与“要考试”之间的现实张力如何化解</p><p class="program-speaker">温州中学附属初中</p></div>
+<div class="program-entry"><p class="program-topic">创建下一代学校没有“参照系”，为什么说统筹推进胜过盲目突围？</p><p class="program-speaker">宁波大学附属甬江科创实验学校</p></div>
+<div class="program-entry"><p class="program-topic">课堂不教了，老师做什么</p><p class="program-speaker">上海市实验学校嘉定新城分校</p></div>
+<div class="program-entry"><p class="program-topic">把学习还给学生——学程化课程的设计与运转</p><p class="program-speaker">北京第一实验学校</p></div>
+<div class="program-entry"><p class="program-topic">AI长进课程后，小学课程目标、学习任务与学科协同如何重构？</p><p class="program-speaker">上海虹口区第二中心小学</p></div>
+<div class="program-entry"><p class="program-topic">以“大师经典”为入口的学科课程如何常态化落地？</p><p class="program-speaker">魏桥国科教育集团滨州渤海实验学校</p></div>
+<div class="program-entry"><p class="program-topic">一套续跑12年的长周期课程，怎么做到“改而不断”？</p><p class="program-speaker">开封市贞元学校</p></div>
+<div class="program-entry"><p class="program-topic">先学后教，然后呢——当学生真的在课前学会了</p><p class="program-speaker">广州市天河区华阳小学</p></div>
+<div class="program-entry"><p class="program-topic">让课程长成儿童的样子，儿童立场与国家课标如何对齐</p><p class="program-speaker">蒲公英教育智库学校内涵建设研究院</p></div>
+<div class="program-entry"><p class="program-topic">“校长的职业觉醒”私董会</p><p class="program-speaker">李海林（上海新纪元双语学校校长）陈   罡（云谷学校小学部校长）</p></div>
+<div class="program-entry"><p class="program-topic">成熟学校如何“二次生长”？</p><p class="program-speaker">杭州新教育实验中学</p></div>
+<div class="program-entry"><p class="program-topic">详解学校里正在多样化诞生的“主题学习社区”</p><p class="program-speaker">DETT教育设计研究院</p></div>
+<div class="program-entry"><p class="program-topic">AI进校的十个真相——来自学校最新实践的经验与教训</p><p class="program-speaker">李斌（蒲公英教育智库理事长，新校长传媒总编辑）周妮（蒲公英教育智库培训部总经理）刘小潋（蒲公英教育中国教育创新年会总经理）</p></div>
+<div class="program-entry"><p class="program-topic">“学生创新节”里的课程艺术</p><p class="program-speaker">陈艺匀（蒲公英学生发展研究院执行院长）杨雪（学习技术学博士，手账艺术家）白巧变（上海市闵行区平南小学教师）陈静（智研家游戏化设计师）砍二爷（怪兽部落创始人）周慧星（童筑文化活动总监）崔慕涵（导演、编剧、音乐剧制片人）</p></div>
+<div class="program-entry"><p class="program-topic">有限游戏结束了——民办教育“十五五”生存样本报告</p><p class="program-speaker">叶翠微（湘湖未来学校创校校长）林捷冬（福州至一华伦教育集团总校长）张美如 （佛山市顺德区美辰学校党支部书记、校长）樊瑞 （北京培文国际教育集团总校长、广州培文外国语学校校长）</p></div>
+<figure class="program-art program-art-heading-art"><img src="assets/main-forum-20260913/47.webp" alt="12月3日场内深研课" width="1080" height="238" loading="lazy" decoding="async"></figure>
+<div class="program-entry"><p class="program-topic">学校转型的日常难题（二）</p><p class="program-speaker">李希贵（北京第一实验学校校长，中国新学校研究会会长）沈祖芸（中国新学校研究会副会长，学校战略咨询专家）</p></div>
+<div class="program-entry"><p class="program-topic">把一个“未来学习中心”放在教学楼，学校究竟改变了什么？</p><p class="program-speaker">洪化清（上海外国语大学/南洋理工大学教授、博士生导师）DETT教育设计研究院</p></div>
+<div class="program-entry"><p class="program-topic">地下水不会自己流进田里——AI渗入每一门学科的校本工程</p><p class="program-speaker">北京市第十二中学</p></div>
+<div class="program-entry"><p class="program-topic">在小规模村小，AI托底学科课程的最优设计</p><p class="program-speaker">云南大理凯风教育研究院</p></div>
+<div class="program-entry"><p class="program-topic">乡镇中学的AI突围：从“贫瘠土壤”到“前沿范式”的路径复盘</p><p class="program-speaker">安徽省阜南亲情学校</p></div>
+<div class="program-entry"><p class="program-topic">装上了，不等于用起来：从试点到日常的十年探索</p><p class="program-speaker">成都实验小学教育集团</p></div>
+<div class="program-entry"><p class="program-topic">“从校园到社区”的制度底座与空间协同</p><p class="program-speaker">北京海淀未来学校</p></div>
+<div class="program-entry"><p class="program-topic">让校园成为“游戏场”——美学生态校园的运营日常</p><p class="program-speaker">中山市五桂山桂南学校</p></div>
+<div class="program-entry"><p class="program-topic">在常态化的公办学校，如何推动教师完成专业转型？</p><p class="program-speaker">深圳罗湖未来学校教育集团</p></div>
+<div class="program-entry"><p class="program-topic">中国学生分级阅读体系，我们可以走到哪一步？</p><p class="program-speaker">李海林（上海新纪元双语学校校长）蒲公英教育智库学生发展研究院</p></div>
+<div class="program-entry"><p class="program-topic">学校共生型组织，我们如何搭建？</p><p class="program-speaker">常州武进区星河实验小学教育集团</p></div>
+<div class="program-entry"><p class="program-topic">以“育人结果”重组学校，云谷学校怎么做？</p><p class="program-speaker">云谷学校</p></div>
+<div class="program-entry"><p class="program-topic">在蓬勃的情感与深刻的理性之间，十一学校的老师们如何生长？</p><p class="program-speaker">北京市十一学校</p></div>
+<div class="program-entry"><p class="program-topic">一所学校的生态化改造全景</p><p class="program-speaker">杭州崇文世纪城教育集团、杭州理想教育集团</p></div>
+<div class="program-entry"><p class="program-topic">拆掉围墙之后——学校与真实世界融通的可持续清单</p><p class="program-speaker">深圳明德实验学校（集团）</p></div>
+<div class="program-entry"><p class="program-topic">低管控、弱评价、高自主，学校为什么没有失序？</p><p class="program-speaker">北京海嘉学校</p></div>
+<div class="program-entry"><p class="program-topic">童年美学的日常落地</p><p class="program-speaker">张家港市实验小学教育集团</p></div>
+<div class="program-entry"><p class="program-topic">学校长出秩序与创造力的四个条件</p><p class="program-speaker">上海平和教育集团</p></div>
+<div class="program-entry"><p class="program-topic">区域教育评价改革的推进机制</p><p class="program-speaker">宁波市北仑区</p></div>
+<div class="program-entry"><p class="program-topic">教育创新如何确保高质量？从认可走向证据与影响力</p><p class="program-speaker">WISE世界教育创新峰会</p></div>
+<div class="program-entry"><p class="program-topic">大规模因材施教，初高中怎么改？</p><p class="program-speaker">蒲公英教育智库学校内涵建设研究院</p></div>
+<div class="program-entry"><p class="program-topic">没有坏孩子，只有走不下去的路——专门学校的教育转化方法论</p><p class="program-speaker">北京市海淀工读学校</p></div>
+    </div>
+    <div class="deep-coming-soon" id="deep-offsite" data-deep-panel tabindex="-1" role="region" aria-label="场外深研课" hidden><p>精彩待续</p></div>
   </div>
 </section>
 
@@ -1565,10 +1572,11 @@
   <div class="copyright">© 2026 蒲公英教育智库 · 中国教育创新年会组委会（本页面为设计预览版，非正式官网）</div>
 </footer>
 
-<script src="assets/passport-model.js"></script>
-<script src="assets/passport.js"></script>
-<script src="assets/account-model.js"></script>
-<script src="assets/account.js?v=20260911-aligned-da11507"></script>
+<script src="assets/deep-courses.js?v=20260913"></script>
+<script src="assets/passport-model.js?v=20260913-agenda-labels"></script>
+<script src="assets/passport.js?v=20260913-continuous-agenda"></script>
+<script src="assets/account-model.js?v=20260913-agenda-labels"></script>
+<script src="assets/account.js?v=20260913-agenda-labels"></script>
 <script>
   // 方案征集只跳转到飞书表单，不在官网收集或提交学校资料。
   (function(){
@@ -1591,21 +1599,7 @@
   })();
 
 
-  // Agenda tabs
-  document.querySelectorAll('#agenda .tab').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('#agenda .tab').forEach(function(b){
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed','false');
-      });
-      document.querySelectorAll('#agenda .agenda-panel').forEach(function(p){p.classList.remove('active');});
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed','true');
-      document.getElementById(btn.dataset.day).classList.add('active');
-    });
-  });
-
-  // 一键查询与身份预览由 assets/account.js 管理。
+  // 一键查询与身份预览由 assets/account.js?v=20260913-agenda-labels 管理。
 
   // Demo state controller — only active when the preview is opened with ?demo=1.
   (function(){
@@ -1613,7 +1607,7 @@
     if(params.get('demo') !== '1') return;
 
     var phaseNames = {registration:'报名期', prep:'会前准备', live:'会议进行', post:'会后'};
-    var identityNames = {anonymous:'未登录', guest:'已登录未报名', main:'主论坛', combo:'主论坛＋深研课', expo:'独立方案展', online:'线上参会'};
+    var identityNames = {anonymous:'未登录', guest:'已登录未报名', main:'年会议程', combo:'年会议程＋深研课', expo:'独立方案展', online:'线上参会'};
     var phases = Object.keys(phaseNames);
     var identities = Object.keys(identityNames);
     var state = {
@@ -1678,8 +1672,8 @@
       }
     }
     function ticketRights(){
-      if(state.identity === 'main') return ['主论坛', '分论坛', '方案展', '学习护照', '会后回放'];
-      if(state.identity === 'combo') return ['主论坛', '分论坛', '场外深研课', '方案展', '学习护照', '会后回放'];
+      if(state.identity === 'main') return ['年会议程', '分论坛', '方案展', '学习护照', '会后回放'];
+      if(state.identity === 'combo') return ['年会议程', '分论坛', '场外深研课', '方案展', '学习护照', '会后回放'];
       if(state.identity === 'expo') return ['方案展', '学习护照'];
       if(state.identity === 'online') return ['线上直播', '会后回放'];
       if(state.identity === 'guest') return ['继续报名', '查看服务说明'];
@@ -1722,7 +1716,7 @@
     }
     function contextNotes(){
       var learning = '报名后，学习护照会按票种开放，并承接学习路径、任务记录、学习组织与成果。';
-      var expo = '方案展票与主论坛票均可进入云涌集，具体以现场门禁为准。';
+      var expo = '方案展票与年会议程票均可进入云涌集，具体以现场门禁为准。';
       var account = '登录后可查询订单、酒店、发票与参会服务进度。';
       if(isRegistered() && !state.assessment && state.identity !== 'online') learning = '完成 5 分钟自评后生成个性化主路径；主路径生成后保持不变。';
       if(state.assessment) learning = '已完成自评，个性化主路径已固定。自由学习另行记录，不改变原有路径。';
@@ -1840,8 +1834,8 @@
     var layer = document.querySelector('[data-signup-layer]');
     var signup = {step:1, session:'main', payment:'online', invoice:'none'};
     var sessions = {
-      main:{name:'（现场参会）主论坛', price:'¥2800'},
-      combo:{name:'（现场参会）主论坛 ＋ 深研课', price:'¥2900'},
+      main:{name:'（现场参会）年会议程', price:'¥2800'},
+      combo:{name:'（现场参会）年会议程 ＋ 深研课', price:'¥2900'},
       expo:{name:'（现场参会）独立方案展', price:'¥300'},
       online:{name:'（线上参会）年会线上学习', price:'¥1560'}
     };

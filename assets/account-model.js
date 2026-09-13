@@ -5,7 +5,7 @@
 }(typeof window !== 'undefined' ? window : this, function() {
   'use strict';
   var roles = {none:'已登录未报名', buyer:'下单人', attendee:'仅参会人', both:'下单人＋参会人'};
-  var tickets = {main:'主论坛', combo:'主论坛＋深研课', online:'线上参会', expo:'独立方案展'};
+  var tickets = {main:'年会议程', combo:'年会议程＋深研课', online:'线上参会', expo:'独立方案展'};
   var orderStates = {paid:'已支付', pending:'待支付', cancelled:'已取消', refunded:'已退款'};
   var dates = ['12-02','12-03'];
   var courses = {

@@ -71,7 +71,7 @@ test('分论坛每天一场、不同日期独立；更改某人某天不影响�
   assert.deepEqual(s.selections.li,{'12-02':'forum-2-a'});
   assert.deepEqual(s.selections.self,{});
 });
-test('场外深研课最多一场，主论坛单独购买者未选购不能直接选课', () => {
+test('场外深研课最多一场，年会议程单独购买者未选购不能直接选课', () => {
   const s=M.create('buyer','combo',false);
   assert.equal(M.choose(s,'lin','offsite','offsite-a',true).ok,true);
   assert.equal(M.choose(s,'lin','offsite','offsite-b',true).ok,true);
