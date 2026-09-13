@@ -60,13 +60,12 @@ html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-meta .chip:
   .key-visual-switch{min-height:48px;gap:8px;padding:7px 10px;font-size:11px;}
   .key-visual-options{gap:0;}
   .key-visual-options a{padding:7px 10px;font-size:12px;}
-  .key-visual-stage .hero-actions{top:78%;bottom:auto;gap:10px;}
+  .key-visual-stage .hero-actions{top:calc(79% + 44px);bottom:auto;gap:10px;}
   .key-visual-stage .hero-actions .btn{min-width:0;width:auto;flex:1;max-width:200px;font-size:14px;padding:13px 12px;}
-  /* Date is live text; keep its original portrait-artwork position as cover scales. */
-  .key-visual-river-date{top:calc(50% + max(38.6dvh,68.6222vw));bottom:auto;transform:translateY(-50%);gap:14px;font-size:clamp(10px,2.8vw,15px);white-space:nowrap;}
+  .key-visual-river-date{top:79%;bottom:auto;gap:14px;font-size:15px;line-height:24px;white-space:nowrap;}
   /* Fill the phone viewport proportionally; crop only the portrait's side background. */
   .key-visual-river-picture img{object-fit:cover;}
-  /* Keep buttons above the portrait date. */
+  /* Place both entry points after the live date. */
   html[data-key-visual^="river"] .key-visual-stage .hero-actions{margin:0;}
   html[data-key-visual^="river"] .key-visual-stage .hero-actions .btn{min-height:44px;padding:10px 12px;}
 }
@@ -78,14 +77,19 @@ html:is([data-key-visual="planet"],[data-key-visual^="river"]) .hero-meta .chip:
   .key-visual-picture img,.key-visual-river-picture img{object-fit:cover;object-position:center;}
 }
 
-/* The supplied mobile artwork already includes the date and venue. */
+/* Mobile: title artwork, live date/venue, then the two entry points.
+   Fade out the baked-in date below the title; retain the original source asset. */
 @media(max-width:760px){
-  .key-visual-river-date{display:none;}
-  .key-visual-stage .hero-actions{top:80%;}
+  html:is([data-key-visual="planet"],[data-key-visual^="river"]) .key-visual-stage{height:max(100svh,177.7778vw,640px);}
+  .key-visual-picture img,.key-visual-river-picture img{
+    -webkit-mask-image:linear-gradient(to bottom,#000 77%,transparent 86%);
+    mask-image:linear-gradient(to bottom,#000 77%,transparent 86%);
+  }
 }
 
 /* Desktop-only native vector title; the existing mobile picture is unchanged. */
 .key-visual-pc-lettering{display:none;}
 @media(min-width:761px){
+  .key-visual-picture + .key-visual-river-date{display:none;}
   .key-visual-pc-lettering{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;}
 }
