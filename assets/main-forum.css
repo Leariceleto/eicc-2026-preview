@@ -2,7 +2,7 @@
 #agenda{background:#fff;}
 :is(#agenda,#deep) .program-intro,:is(#agenda,#deep) .program-body{max-width:760px;margin-left:auto;margin-right:auto;}
 :is(#agenda,#deep) .program-intro{margin-top:36px;margin-bottom:48px;}
-:is(#agenda,#deep) .program-intro p{margin:0 0 22px;font-size:16px;line-height:2;color:var(--text-primary);overflow-wrap:anywhere;}
+:is(#agenda,#deep) .program-intro p{margin:0 0 22px;font-size:18px;line-height:2;color:var(--text-primary);overflow-wrap:anywhere;}
 :is(#agenda,#deep) .program-art{margin:24px 0 0;}
 :is(#agenda,#deep) .program-art img{display:block;width:100%;height:auto;}
 :is(#agenda,#deep) .program-art-poster{max-width:420px;margin:40px auto 24px;}
@@ -14,7 +14,7 @@
 
 @media(max-width:760px){
  :is(#agenda,#deep) .program-intro{margin-top:24px;margin-bottom:32px;}
- :is(#agenda,#deep) .program-intro p{font-size:15px;line-height:1.95;margin-bottom:20px;}
+ :is(#agenda,#deep) .program-intro p{font-size:17px;line-height:1.95;margin-bottom:20px;}
  :is(#agenda,#deep) .program-art-poster{max-width:340px;margin-top:28px;}
  :is(#agenda,#deep) .program-topic{font-size:16px;}
  :is(#agenda,#deep) .program-speaker{font-size:14px;}
