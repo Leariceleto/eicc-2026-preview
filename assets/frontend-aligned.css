@@ -1803,3 +1803,16 @@
 #account .hub-card::after{content:none;}
 #account .hub-detail-box p{line-height:1.9;}
 @media(max-width:760px){#account{padding:24px 0 100px;}#account>.wrap{padding:0 20px;}#account .hub-detail{padding:10px 0;}#about .preface-main{padding:56px 20px;}}
+
+/* 学习方式：五项完整表述，以编号、标题、正文形成清晰阅读顺序。 */
+#passport .learning-methods { list-style: none; margin: 48px 0 0; padding: 0; border-top: 1px solid #555857; }
+#passport .learning-method { display: grid; grid-template-columns: 40px minmax(0, 0.85fr) minmax(0, 1.35fr); gap: 32px; align-items: start; padding: 32px 0; border-bottom: 1px solid #555857; }
+#passport .learning-method-number { padding-top: 5px; color: #C7B6A5; font-size: 14px; font-weight: 600; letter-spacing: 0.12em; }
+#passport .learning-method h3 { margin: 0; color: #F6F3EC; font-size: 23px; font-weight: 600; line-height: 1.6; text-wrap: pretty; }
+#passport .learning-method p { margin: 0; color: #D6D2CA; font-size: 16px; line-height: 1.95; }
+@media (max-width: 760px) {
+  #passport .learning-methods { margin-top: 32px; }
+  #passport .learning-method { grid-template-columns: 28px minmax(0, 1fr); gap: 12px 16px; padding: 26px 0; }
+  #passport .learning-method h3 { font-size: 20px; line-height: 1.6; }
+  #passport .learning-method p { grid-column: 2; font-size: 16px; line-height: 1.9; }
+}
